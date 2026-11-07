@@ -4,12 +4,11 @@ import {
   readLimitedJson,
   validatePublicJsonRequest,
 } from "@/lib/apiSecurity";
-import { asPlainText, asSheetText, quoteSheetName } from "@/lib/security";
-import { createSheetsClient, ensureSheetWithHeader } from "@/lib/googleSheets";
+import { asPlainText } from "@/lib/security";
+import { callAppsScript } from "@/lib/appsScriptBridge";
 
 export const runtime = "nodejs";
 const maxRequestBytes = 12 * 1024;
-const sheetName = "Kirtan Safari Registrations";
 
 type RegistrationPayload = {
   fullName?: unknown;
@@ -28,17 +27,6 @@ const attendanceDays = new Set([
   "Saturday 29 August",
   "Sunday 30 August",
 ]);
-
-const registrationHeader = [
-  "Timestamp",
-  "Full Name",
-  "Email",
-  "Phone Number",
-  "Days Attending",
-  "No. of People",
-  "How They Heard About Us",
-  "Wants Future Updates",
-];
 
 export async function POST(request: NextRequest) {
   try {
@@ -88,36 +76,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Please enter a valid phone number." }, { status: 400 });
     }
 
-    const { sheets, spreadsheetId } = createSheetsClient({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      missingMessage: "Google Sheets registration backend is not configured.",
-    });
-
-    await ensureSheetWithHeader({
-      sheets,
-      spreadsheetId,
-      sheetName,
-      header: registrationHeader,
-    });
-
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: quoteSheetName(sheetName),
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [
-          [
-            new Date().toISOString(),
-            asSheetText(fullName),
-            asSheetText(email),
-            asSheetText(phone),
-            selectedDays.map(asSheetText).join(", "),
-            validPeopleCount,
-            asSheetText(hearAbout),
-            wantsUpdates,
-          ],
-        ],
-      },
+    await callAppsScript("kirtan.register", {
+      fullName,
+      email,
+      phone,
+      days: selectedDays,
+      peopleCount: validPeopleCount,
+      hearAbout,
+      wantsUpdates,
     });
 
     return NextResponse.json({ ok: true });

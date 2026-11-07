@@ -1,6 +1,5 @@
-import { google } from "googleapis";
-import { createHash } from "crypto";
-import { asSheetText } from "@/lib/security";
+import { createHash } from "node:crypto";
+import { callAppsScript } from "@/lib/appsScriptBridge";
 
 export const PUSH_SHEET_NAME = "PushSubscriptions";
 const pushEndpointLocks = new Set<string>();
@@ -14,126 +13,26 @@ export type PushSubscriptionRecord = {
   noticeboardEnabled: boolean;
 };
 
-type PushSheetRef = {
-  spreadsheetId: string;
-  sheetId: number;
-};
+export async function listPushSubscriptions(): Promise<{ record: PushSubscriptionRecord }[]> {
+  const result = await callAppsScript<{ records: PushSubscriptionRecord[] }>("push.list", {});
+  if (!Array.isArray(result?.records)) throw new Error("Invalid push subscription response.");
 
-function getAuth() {
-  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
-
-  if (!clientEmail || !rawPrivateKey) {
-    throw new Error("Push subscription backend is not configured.");
-  }
-
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/g, "\n");
-
-  return new google.auth.JWT({
-    email: clientEmail,
-    key: privateKey,
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
-}
-
-function getSpreadsheetId() {
-  return (
-    process.env.PUSH_SUBSCRIPTIONS_SHEET_ID ||
-    process.env.CONTACT_SHEET_ID ||
-    ""
-  );
-}
-
-function getSheets() {
-  return google.sheets({ version: "v4", auth: getAuth() });
-}
-
-export async function ensurePushSheet(): Promise<PushSheetRef> {
-  const spreadsheetId = getSpreadsheetId();
-
-  if (!spreadsheetId) {
-    throw new Error("Push subscription backend is not configured.");
-  }
-
-  const sheets = getSheets();
-
-  const metadata = await sheets.spreadsheets.get({
-    spreadsheetId,
-    fields: "sheets.properties(sheetId,title)",
-  });
-
-  const existing = metadata.data.sheets?.find(
-    (sheet) => sheet.properties?.title === PUSH_SHEET_NAME
-  );
-
-  if (existing?.properties?.sheetId != null) {
-    return { spreadsheetId, sheetId: existing.properties.sheetId };
-  }
-
-  const added = await sheets.spreadsheets.batchUpdate({
-    spreadsheetId,
-    requestBody: {
-      requests: [
-        {
-          addSheet: {
-            properties: { title: PUSH_SHEET_NAME },
-          },
-        },
-      ],
-    },
-  });
-
-  return {
-    spreadsheetId,
-    sheetId: added.data.replies?.[0]?.addSheet?.properties?.sheetId ?? 0,
-  };
-}
-
-export async function listPushSubscriptions(): Promise<
-  { record: PushSubscriptionRecord; rowNumber: number }[]
-> {
-  const { spreadsheetId } = await ensurePushSheet();
-  const sheets = getSheets();
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${PUSH_SHEET_NAME}!A:G`,
-  });
-
-  const rows = response.data.values ?? [];
-  const records: { record: PushSubscriptionRecord; rowNumber: number }[] = [];
-
-  rows.forEach((row, index) => {
-    const [createdAt, endpoint, p256dh, auth, userAgent, calendarEnabled, noticeboardEnabled] = row;
-
-    if (
-      typeof endpoint === "string" &&
-      endpoint.startsWith("https://") &&
-      typeof p256dh === "string" &&
-      p256dh.length > 0 &&
-      typeof auth === "string" &&
-      auth.length > 0
-    ) {
-      records.push({
-        record: {
-          createdAt: typeof createdAt === "string" ? createdAt : "",
-          endpoint,
-          keys: { p256dh, auth },
-          userAgent: typeof userAgent === "string" ? userAgent : "",
-          calendarEnabled: calendarEnabled === true || calendarEnabled === "TRUE",
-          noticeboardEnabled: noticeboardEnabled === true || noticeboardEnabled === "TRUE",
-        },
-        rowNumber: index + 1,
-      });
-    }
-  });
-
-  return records;
+  return result.records
+    .filter((record) =>
+      typeof record?.endpoint === "string" &&
+      record.endpoint.startsWith("https://") &&
+      typeof record.keys?.p256dh === "string" &&
+      typeof record.keys?.auth === "string"
+    )
+    .map((record) => ({ record }));
 }
 
 export async function countPushSubscriptions(): Promise<number> {
-  const records = await listPushSubscriptions();
-  return records.length;
+  const result = await callAppsScript<{ count: number }>("push.count", {});
+  if (!Number.isSafeInteger(result?.count) || result.count < 0) {
+    throw new Error("Invalid push subscription count.");
+  }
+  return result.count;
 }
 
 export async function upsertPushSubscription(input: {
@@ -145,82 +44,20 @@ export async function upsertPushSubscription(input: {
   noticeboardEnabled?: boolean;
 }): Promise<boolean> {
   const lockKey = createHash("sha256").update(input.endpoint).digest("hex");
-  if (pushEndpointLocks.has(lockKey)) {
-    return false;
-  }
+  if (pushEndpointLocks.has(lockKey)) return false;
 
   pushEndpointLocks.add(lockKey);
   try {
-    const records = await listPushSubscriptions();
-    const existing = records.find(({ record }) => record.endpoint === input.endpoint);
-
-    const { spreadsheetId } = await ensurePushSheet();
-    const sheets = getSheets();
-    const values = [
-      new Date().toISOString(),
-      input.endpoint,
-      input.p256dh,
-      input.auth,
-      asSheetText(input.userAgent),
-      input.calendarEnabled ?? existing?.record.calendarEnabled ?? false,
-      input.noticeboardEnabled ?? existing?.record.noticeboardEnabled ?? false,
-    ];
-
-    if (existing) {
-      await sheets.spreadsheets.values.update({
-        spreadsheetId,
-        range: `${PUSH_SHEET_NAME}!A${existing.rowNumber}:G${existing.rowNumber}`,
-        valueInputOption: "USER_ENTERED",
-        requestBody: { values: [values] },
-      });
-      return false;
-    }
-
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: `${PUSH_SHEET_NAME}!A:G`,
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [
-          values,
-        ],
-      },
-    });
-
-    return true;
+    const result = await callAppsScript<{ created: boolean }>("push.upsert", input);
+    if (typeof result?.created !== "boolean") throw new Error("Invalid push subscription response.");
+    return result.created;
   } finally {
     pushEndpointLocks.delete(lockKey);
   }
 }
 
 export async function removePushSubscription(endpoint: string): Promise<boolean> {
-  const records = await listPushSubscriptions();
-  const match = records.find(({ record }) => record.endpoint === endpoint);
-
-  if (!match) {
-    return false;
-  }
-
-  const { spreadsheetId, sheetId } = await ensurePushSheet();
-  const sheets = getSheets();
-
-  await sheets.spreadsheets.batchUpdate({
-    spreadsheetId,
-    requestBody: {
-      requests: [
-        {
-          deleteDimension: {
-            range: {
-              sheetId,
-              dimension: "ROWS",
-              startIndex: match.rowNumber - 1,
-              endIndex: match.rowNumber,
-            },
-          },
-        },
-      ],
-    },
-  });
-
-  return true;
+  const result = await callAppsScript<{ removed: boolean }>("push.remove", { endpoint });
+  if (typeof result?.removed !== "boolean") throw new Error("Invalid push removal response.");
+  return result.removed;
 }
