@@ -18,7 +18,8 @@
     "verify:pwa": "node scripts/verify-pwa.mjs",
     "baseline:lighthouse": "node scripts/lighthouse-baseline.mjs",
     "send-push": "node --env-file=.env.local scripts/send-push.mjs",
-    "images:optimize": "node scripts/optimize-images.mjs"
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "check:release": "npm run lint && npm run test:festival && npm run verify:pwa && npm run build"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.0",

@@ -187,8 +187,8 @@ export default function HKTCNairobiPage() {
             <div className="grid gap-4">
               <div className="overflow-hidden card-surface shadow-card">
                 <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
-                  src="/images/hktc/hktc-nairobi-kirtan-class.jpg"
-                  alt="HKTC Nairobi students leading kirtan and class"
+                  src="/images/leadership/govinda-prem-prabhu-outdoors.jpg"
+                  alt="Govinda Prem Prabhu outdoors"
                   className="h-full w-full object-cover"
                 />
               </div>

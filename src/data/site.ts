@@ -477,7 +477,7 @@ export const leadership = [
     name: "Departmental Service",
     title: "Distributed Temple Coordination",
     description: "ISKCON Nairobi now runs through a departmental service model, with responsibilities shared across education, worship, kirtan, outreach, hospitality, festivals, and administration.",
-    image: "/images/leadership/govinda-prem-prabhu-web.jpg",
+    image: "/images/leadership/govinda-prem-prabhu-outdoors.jpg",
   },
   {
     name: "Resident Teaching",
@@ -501,7 +501,7 @@ export const leadershipProfiles = [
     name: "Govinda Prem Prabhu",
     role: "Regional Secretary, Hare Krishna Training Centre",
     category: "Regional & Educational Leadership",
-    image: "/images/leadership/govinda-prem-prabhu-web.jpg",
+    image: "/images/leadership/govinda-prem-prabhu-portrait.jpg",
     summary: "Regional Secretary and key leader of the Hare Krishna Training Centre.",
     details: "Govinda Prem Prabhu serves as Regional Secretary and leads HKTC, guiding student education, devotional training, and regional coordination.",
   },
