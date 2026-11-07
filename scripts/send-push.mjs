@@ -1,9 +1,5 @@
 import webpush from "web-push";
-import googleapis from "googleapis";
-
-const { google } = googleapis;
-
-const PUSH_SHEET_NAME = "PushSubscriptions";
+import { createHmac, randomBytes } from "node:crypto";
 
 function arg(name) {
   const flag = `--${name}`;
@@ -17,22 +13,28 @@ function arg(name) {
   return value && !value.startsWith("--") ? value : undefined;
 }
 
-function getSheets() {
-  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
-
-  if (!clientEmail || !rawPrivateKey) {
-    return null;
+// Same signed envelope as src/lib/appsScriptBridge.ts for this standalone Node command.
+async function callBridge(action, data) {
+  const rawUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
+  const secret = process.env.GOOGLE_APPS_SCRIPT_SECRET;
+  if (!rawUrl || !secret || secret.length < 32) {
+    throw new Error("Missing GOOGLE_APPS_SCRIPT_URL or GOOGLE_APPS_SCRIPT_SECRET.");
   }
-
-  const privateKey = rawPrivateKey.replace(/\\n/g, "\n");
-  const auth = new google.auth.JWT({
-    email: clientEmail,
-    key: privateKey,
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  const url = new URL(rawUrl);
+  if (url.origin !== "https://script.google.com" ||
+      !/^\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url.pathname) || url.search) {
+    throw new Error("Invalid Apps Script URL.");
+  }
+  const payload = JSON.stringify({ timestamp: Date.now(), nonce: randomBytes(16).toString("hex"), action, data });
+  const signature = createHmac("sha256", secret).update(payload).digest("hex");
+  const response = await fetch(url, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ payload, signature }), signal: AbortSignal.timeout(20_000),
   });
-
-  return google.sheets({ version: "v4", auth });
+  if (!response.ok) throw new Error(`Sheets bridge returned HTTP ${response.status}.`);
+  const result = await response.json();
+  if (result?.success !== true) throw new Error(`Sheets bridge rejected ${action}.`);
+  return result.data;
 }
 
 async function main() {
@@ -49,7 +51,6 @@ async function main() {
   const vapidPublicKey = process.env.VAPID_PUBLIC_KEY;
   const vapidPrivateKey = process.env.VAPID_PRIVATE_KEY;
   const vapidSubject = process.env.VAPID_SUBJECT;
-  const spreadsheetId = process.env.PUSH_SUBSCRIPTIONS_SHEET_ID || process.env.CONTACT_SHEET_ID;
   const confirmed = process.argv.includes("--confirm");
   const dryRun = process.argv.includes("--dry-run");
 
@@ -60,24 +61,8 @@ async function main() {
     process.exit(2);
   }
 
-  if (!spreadsheetId) {
-    console.error(
-      "Missing PUSH_SUBSCRIPTIONS_SHEET_ID or CONTACT_SHEET_ID. Check your env file."
-    );
-    process.exit(2);
-  }
-
   if (!confirmed && !dryRun) {
     console.error("Refusing to broadcast without --confirm. Use --dry-run to preview.");
-    process.exit(2);
-  }
-
-  const sheets = getSheets();
-
-  if (!sheets) {
-    console.error(
-      "Missing GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_PRIVATE_KEY. Check your env file."
-    );
     process.exit(2);
   }
 
@@ -104,38 +89,8 @@ async function main() {
 
   webpush.setVapidDetails(vapidSubject, vapidPublicKey, vapidPrivateKey);
 
-  const metadata = await sheets.spreadsheets.get({
-    spreadsheetId,
-    fields: "sheets.properties(sheetId,title)",
-  });
-
-  let sheetId = metadata.data.sheets?.find(
-    (sheet) => sheet.properties?.title === PUSH_SHEET_NAME
-  )?.properties?.sheetId;
-
-  if (sheetId == null) {
-    const added = await sheets.spreadsheets.batchUpdate({
-      spreadsheetId,
-      requestBody: {
-        requests: [
-          {
-            addSheet: {
-              properties: { title: PUSH_SHEET_NAME },
-            },
-          },
-        ],
-      },
-    });
-
-    sheetId = added.data.replies?.[0]?.addSheet?.properties?.sheetId ?? 0;
-  }
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${PUSH_SHEET_NAME}!A:E`,
-  });
-
-  const rows = response.data.values ?? [];
+  const { records: rows } = await callBridge("push.list", {});
+  if (!Array.isArray(rows)) throw new Error("Invalid push subscription response.");
   let sent = 0;
   let pruned = 0;
   let skippedDuplicate = 0;
@@ -143,7 +98,9 @@ async function main() {
   const seenEndpoints = new Set();
 
   for (let i = 0; i < rows.length; i += 1) {
-    const [, endpoint, p256dh, authKey] = rows[i];
+    const { endpoint, keys } = rows[i];
+    const p256dh = keys?.p256dh;
+    const authKey = keys?.auth;
 
     if (
       typeof endpoint !== "string" ||
@@ -181,23 +138,7 @@ async function main() {
 
       if (status === 404 || status === 410) {
         pruned += 1;
-        await sheets.spreadsheets.batchUpdate({
-          spreadsheetId,
-          requestBody: {
-            requests: [
-              {
-                deleteDimension: {
-                  range: {
-                    sheetId,
-                    dimension: "ROWS",
-                    startIndex: i,
-                    endIndex: i + 1,
-                  },
-                },
-              },
-            ],
-          },
-        });
+        await callBridge("push.remove", { endpoint });
         console.log(`pruned (${status}): ${endpoint.slice(0, 60)}...`);
         continue;
       }

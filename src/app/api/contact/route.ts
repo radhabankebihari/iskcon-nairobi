@@ -4,8 +4,8 @@ import {
   readLimitedJson,
   validatePublicJsonRequest,
 } from "@/lib/apiSecurity";
-import { asPlainText, asSheetText, quoteSheetName } from "@/lib/security";
-import { createSheetsClient, ensureSheetWithHeader } from "@/lib/googleSheets";
+import { asPlainText } from "@/lib/security";
+import { callAppsScript } from "@/lib/appsScriptBridge";
 
 export const runtime = "nodejs";
 const maxRequestBytes = 16 * 1024;
@@ -20,24 +20,6 @@ type ContactPayload = {
   formType?: unknown;
   website?: unknown;
 };
-
-const contactHeader = [
-  "Timestamp",
-  "First Name",
-  "Last Name",
-  "Email",
-  "Phone",
-  "Subject",
-  "Message",
-];
-
-function sheetNameForContact(formType: string, subject: string) {
-  if (formType === "guest-house-enquiry" || subject === "Guest House Booking") {
-    return "Guest House Enquiries";
-  }
-
-  return "Contact Us";
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -78,36 +60,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Please enter a valid phone number." }, { status: 400 });
     }
 
-    const { sheets, spreadsheetId } = createSheetsClient({
-      spreadsheetId: process.env.CONTACT_SHEET_ID,
-      missingMessage: "Google Sheets contact backend is not configured.",
-    });
-    const sheetName = sheetNameForContact(formType, subject);
-
-    await ensureSheetWithHeader({
-      sheets,
-      spreadsheetId,
-      sheetName,
-      header: contactHeader,
-    });
-
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: quoteSheetName(sheetName),
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [
-          [
-            new Date().toISOString(),
-            asSheetText(firstName),
-            asSheetText(lastName),
-            asSheetText(email),
-            asSheetText(phone),
-            asSheetText(subject),
-            asSheetText(message),
-          ],
-        ],
-      },
+    await callAppsScript("contact.submit", {
+      firstName,
+      lastName,
+      email,
+      phone,
+      subject,
+      message,
+      formType: formType === "guest-house-enquiry" || subject === "Guest House Booking"
+        ? "guest-house-enquiry"
+        : "contact-us",
     });
 
     return NextResponse.json({ ok: true });

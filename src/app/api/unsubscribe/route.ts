@@ -5,7 +5,6 @@ import {
   validatePublicJsonRequest,
 } from "@/lib/apiSecurity";
 import {
-  ensurePushSheet,
   removePushSubscription,
 } from "@/lib/pushSubscriptions";
 
@@ -52,7 +51,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Invalid endpoint." }, { status: 400 });
     }
 
-    await ensurePushSheet();
     await removePushSubscription(endpoint);
 
     return NextResponse.json({ ok: true });

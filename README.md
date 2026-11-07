@@ -7,7 +7,7 @@ Production Next.js website for ISKCON Nairobi / Sri Sri Radha Bankebihari Temple
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- Google Sheets API for contact, festival registration, and notification subscriptions
+- Client-owned Google Apps Script bridge for forms, analytics, and notification subscriptions
 - Web Push / PWA support
 - Vercel deployment
 
@@ -38,12 +38,10 @@ Never commit real secrets to the repository. Keep local values in `.env.local` a
 Required server-side variables:
 
 ```env
-GOOGLE_SERVICE_ACCOUNT_EMAIL=
-GOOGLE_PRIVATE_KEY=
-GOOGLE_SHEET_ID=
-CONTACT_SHEET_ID=
-ANALYTICS_SHEET_ID=
+GOOGLE_APPS_SCRIPT_URL=
+GOOGLE_APPS_SCRIPT_SECRET=
 PUSH_SUBSCRIBER_COUNT_TOKEN=
+CRON_SECRET=
 VAPID_PUBLIC_KEY=
 VAPID_PRIVATE_KEY=
 VAPID_SUBJECT=
@@ -52,15 +50,14 @@ VAPID_SUBJECT=
 Optional variable:
 
 ```env
-PUSH_SUBSCRIPTIONS_SHEET_ID=
-ANALYTICS_SHEET_ID=
+ANALYTICS_DISABLED=
 ```
 
-If `PUSH_SUBSCRIPTIONS_SHEET_ID` is not set, push subscriptions are stored in a `PushSubscriptions` tab inside the contact spreadsheet. This is intentional for the current setup.
+All sheet-backed data lives in tabs of the client-owned spreadsheet. The server signs each request to its Apps Script Web app with `GOOGLE_APPS_SCRIPT_SECRET`; never expose this secret or the deployment URL in browser code. See `docs/TEMPLE_SHEET_CUTOVER.md` for deployment and migration.
 
 Calendar reminders are sent by the protected Vercel Cron route at 07:00 Africa/Nairobi time. Set `CRON_SECRET` in Vercel; Vercel sends it to `/api/cron/calendar-reminders` as a bearer token. The route sends only to subscriptions with calendar reminders enabled and records completed event deliveries in the `PushDeliveryLog` tab to prevent duplicate broadcasts. Browser timers must not be used for scheduled reminders because mobile operating systems suspend closed apps.
 
-If `ANALYTICS_SHEET_ID` is not set, page-open and app-install analytics are stored in a `WebsiteAnalytics` tab inside the contact spreadsheet.
+Page-open and app-install analytics are stored in the `WebsiteAnalytics` tab. Local development does not write analytics.
 
 Public client variable:
 
@@ -74,9 +71,9 @@ Only values prefixed with `NEXT_PUBLIC_` are exposed to browser code. Do not pla
 
 - `.env*`, `.vercel`, PEM files, logs, and generated build output are ignored by git.
 - Public API routes reject cross-origin JSON requests, enforce request size limits, apply rate limiting, and validate input server-side.
-- Google Sheet writes escape formula-leading characters before using `USER_ENTERED`.
+- Apps Script sheet writes escape formula-leading characters.
 - Production responses return generic errors to users while detailed errors stay in server logs.
-- The service account should only be shared with the exact spreadsheets this site needs.
+- The Apps Script project and spreadsheet should be owned by the temple account. The shared secret stays in Apps Script properties and server environment variables.
 
 ## Push Notifications
 

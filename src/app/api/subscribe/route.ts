@@ -10,7 +10,6 @@ import {
 import { asPlainText } from "@/lib/security";
 import {
   countPushSubscriptions,
-  ensurePushSheet,
   upsertPushSubscription,
 } from "@/lib/pushSubscriptions";
 
@@ -100,7 +99,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Invalid push subscription." }, { status: 400 });
     }
 
-    await ensurePushSheet();
     await upsertPushSubscription({
       endpoint,
       p256dh,
@@ -131,7 +129,6 @@ export async function GET(request: NextRequest) {
       requireBearerToken(request, process.env.PUSH_SUBSCRIBER_COUNT_TOKEN);
     if (blocked) return blocked;
 
-    await ensurePushSheet();
     const count = await countPushSubscriptions();
     return NextResponse.json({ count });
   } catch (error) {
