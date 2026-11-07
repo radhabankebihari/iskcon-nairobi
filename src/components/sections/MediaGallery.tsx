@@ -164,7 +164,6 @@ export default function MediaGallery() {
             key={image.src}
             type="button"
             onClick={() => setSelected(index)}
-            aria-label={`View photograph: ${image.caption}`}
             className="group mb-4 block w-full break-inside-avoid overflow-hidden border border-temple-sand bg-white text-left transition-colors hover:border-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             <Image

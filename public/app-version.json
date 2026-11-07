@@ -1,11 +1,12 @@
 {
-  "version": "1.1.4",
-  "name": "Responsive Layout Correction",
-  "publishedAt": "2026-11-04",
+  "version": "1.2.0",
+  "name": "Calendar, Giving, and Design Refresh",
+  "publishedAt": "2026-11-07",
   "updateMode": "silent",
-  "summary": "The temple name, navigation subtitle, and donation cards now keep their intended proportions across screen sizes.",
+  "summary": "The 2027 Vaishnava calendar with descriptions, simpler M-Pesa giving, refreshed pages and imagery, and more reliable reminders.",
   "highlights": [
-    "The temple name stays on one line on phones and larger screens",
-    "Donation card actions now align consistently"
+    "Every 2026 and 2027 observance with a short description and fasting times",
+    "Give by M-Pesa from the donate page and each cause page",
+    "Calendar reminders reach each device once"
   ]
 }

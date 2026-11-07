@@ -9,7 +9,7 @@
  * Bump CACHE_VERSION whenever this policy or the precache list changes.
  * See docs/PWA_GUIDE.md before editing this file.
  */
-const CACHE_VERSION = "iskcon-nairobi-v7";
+const CACHE_VERSION = "iskcon-nairobi-v8";
 const UPDATE_MODE = "silent";
 const CACHE_PREFIX = "iskcon-nairobi-";
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -53,6 +53,108 @@ function subscriptionKeyToBase64Url(key) {
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
+}
+
+/* Push device state, shared with the page through IndexedDB.
+ * Keep the database, store, and keys in step with src/lib/pushDeviceStore.ts:
+ * - "deviceId": this browser's random device ID
+ * - "sync": { endpoint, calendar, noticeboard, syncedAt } from the last server sync
+ * - "shown": { [reminder id]: time first shown } so a repeat is recognised
+ */
+const PUSH_DB_NAME = "iskcon-push";
+const PUSH_DB_VERSION = 1;
+const PUSH_STORE = "kv";
+const DEVICE_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+const SHOWN_MEMORY_MS = 30 * 24 * 60 * 60 * 1000;
+const SHOWN_MEMORY_LIMIT = 200;
+
+function openPushDb() {
+  return new Promise((resolve) => {
+    try {
+      const request = indexedDB.open(PUSH_DB_NAME, PUSH_DB_VERSION);
+      request.onupgradeneeded = () => {
+        if (!request.result.objectStoreNames.contains(PUSH_STORE)) {
+          request.result.createObjectStore(PUSH_STORE);
+        }
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(null);
+      request.onblocked = () => resolve(null);
+    } catch {
+      resolve(null);
+    }
+  });
+}
+
+async function pushDbGet(key) {
+  const db = await openPushDb();
+  if (!db) return undefined;
+  try {
+    return await new Promise((resolve) => {
+      const request = db.transaction(PUSH_STORE, "readonly").objectStore(PUSH_STORE).get(key);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(undefined);
+    });
+  } finally {
+    db.close();
+  }
+}
+
+async function pushDbSet(key, value) {
+  const db = await openPushDb();
+  if (!db) return;
+  try {
+    await new Promise((resolve) => {
+      const transaction = db.transaction(PUSH_STORE, "readwrite");
+      transaction.objectStore(PUSH_STORE).put(value, key);
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => resolve();
+      transaction.onabort = () => resolve();
+    });
+  } finally {
+    db.close();
+  }
+}
+
+/**
+ * Records a reminder as shown and reports whether this device has shown it
+ * before. The read and write share one readwrite transaction, which IndexedDB
+ * runs one at a time, so two copies arriving together cannot both count as new.
+ */
+async function rememberShown(id) {
+  if (!id) return false;
+
+  const db = await openPushDb();
+  if (!db) return false;
+
+  try {
+    return await new Promise((resolve) => {
+      let repeat = false;
+      const transaction = db.transaction(PUSH_STORE, "readwrite");
+      const store = transaction.objectStore(PUSH_STORE);
+      const request = store.get("shown");
+
+      request.onsuccess = () => {
+        const now = Date.now();
+        const shown = request.result || {};
+        repeat = typeof shown[id] === "number" && now - shown[id] < SHOWN_MEMORY_MS;
+
+        const kept = Object.entries(shown)
+          .filter(([key, at]) => key !== id && typeof at === "number" && now - at < SHOWN_MEMORY_MS)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, SHOWN_MEMORY_LIMIT - 1);
+        const next = Object.fromEntries(kept);
+        next[id] = repeat ? shown[id] : now;
+        store.put(next, "shown");
+      };
+
+      transaction.oncomplete = () => resolve(repeat);
+      transaction.onerror = () => resolve(repeat);
+      transaction.onabort = () => resolve(repeat);
+    });
+  } finally {
+    db.close();
+  }
 }
 
 function isCacheable(response) {
@@ -229,43 +331,83 @@ self.addEventListener("push", (event) => {
     }
   }
 
-  event.waitUntil(
-    self.registration.showNotification(payload.title, {
-      body: payload.body,
-      tag: payload.tag || "iskcon-nairobi-reminder",
-      renotify: Boolean(payload.renotify),
-      icon: payload.icon || "/brand/icon-192.png",
-      badge: payload.badge || "/brand/icon-192.png",
-      data: { url: payload.url || DEFAULT_NOTIFICATION_URL },
-    })
-  );
+  event.waitUntil(showPushNotification(payload));
 });
+
+async function showPushNotification(payload) {
+  const id = typeof payload.id === "string" ? payload.id : "";
+  // The server sends each reminder to a device once; this is the last guard.
+  // A repeat replaces the notification quietly instead of alerting again. It
+  // still shows one, because Safari can revoke push for sites that receive a
+  // push without showing a notification.
+  const repeat = await rememberShown(id);
+
+  await self.registration.showNotification(payload.title, {
+    body: payload.body,
+    tag: payload.tag || id || "iskcon-nairobi-reminder",
+    renotify: repeat ? false : Boolean(payload.renotify),
+    silent: repeat,
+    icon: payload.icon || "/brand/icon-192.png",
+    badge: payload.badge || "/brand/icon-192.png",
+    data: { url: payload.url || DEFAULT_NOTIFICATION_URL },
+  });
+}
 
 self.addEventListener("pushsubscriptionchange", (event) => {
   event.waitUntil(
-    self.registration.pushManager
-      .subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(PUSH_VAPID_PUBLIC_KEY),
-      })
-      .then((subscription) =>
-        fetch("/api/subscribe", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            subscription: {
-              endpoint: subscription.endpoint,
-              keys: {
-                p256dh: subscriptionKeyToBase64Url(subscription.getKey("p256dh")),
-                auth: subscriptionKeyToBase64Url(subscription.getKey("auth")),
-              },
-            },
-          }),
-        })
-      )
-      .catch(() => undefined)
+    replaceRenewedSubscription(event.oldSubscription, event.newSubscription).catch(() => undefined)
   );
 });
+
+/**
+ * The browser renewed the push subscription. Register the new one as the same
+ * device, naming the endpoint it replaces and carrying the device's reminder
+ * choices, so the server swaps the row rather than adding a second one or
+ * switching reminders off.
+ */
+async function replaceRenewedSubscription(oldSubscription, newSubscription) {
+  const [deviceId, last] = await Promise.all([pushDbGet("deviceId"), pushDbGet("sync")]);
+
+  let subscription = newSubscription || (await self.registration.pushManager.getSubscription());
+  if (!subscription) {
+    subscription = await self.registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey:
+        oldSubscription?.options?.applicationServerKey ||
+        urlBase64ToUint8Array(PUSH_VAPID_PUBLIC_KEY),
+    });
+  }
+
+  // Already registered, for example by an open page.
+  if (last && last.endpoint === subscription.endpoint) return;
+
+  const previousEndpoint = [oldSubscription?.endpoint, last?.endpoint].find(
+    (endpoint) => endpoint && endpoint !== subscription.endpoint
+  );
+  const body = {
+    subscription: {
+      endpoint: subscription.endpoint,
+      keys: {
+        p256dh: subscriptionKeyToBase64Url(subscription.getKey("p256dh")),
+        auth: subscriptionKeyToBase64Url(subscription.getKey("auth")),
+      },
+    },
+  };
+  if (typeof deviceId === "string" && DEVICE_ID_PATTERN.test(deviceId)) body.deviceId = deviceId;
+  if (previousEndpoint) body.previousEndpoint = previousEndpoint;
+  // Without saved choices the server carries them over from the replaced row.
+  if (last) body.preferences = { calendar: Boolean(last.calendar), noticeboard: Boolean(last.noticeboard) };
+
+  const response = await fetch("/api/subscribe", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  if (response.ok && last) {
+    await pushDbSet("sync", { ...last, endpoint: subscription.endpoint, syncedAt: Date.now() });
+  }
+}
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();

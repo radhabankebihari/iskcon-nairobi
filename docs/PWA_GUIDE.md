@@ -41,6 +41,26 @@ Never cache forms, analytics, subscriptions, payment flows, or admin responses. 
 - Push URLs must be same-origin paths such as `/festivals`; the worker rejects external notification URLs.
 - Notification clicks focus an exact open route, then reuse an app window, then open a new window. Preserve that order.
 
+## Push Reminders: One Device, One Notification
+
+Calendar reminders are sent by the Vercel cron `/api/cron/calendar-reminders` at 07:00 Nairobi time. The design guarantees each device receives each reminder once.
+
+**Device identity.** Every browser keeps a random v4 device ID in IndexedDB (`iskcon-push` database, `kv` store), shared by the page (`src/lib/pushDeviceStore.ts`) and the worker (`public/sw.js`). It is sent with every subscription and stored in column H of `PushSubscriptions`. The store keeps one row per device: a new endpoint for a known device replaces its row, and stray rows for the same device are merged away (`planPushUpsert` in `src/lib/pushDevices.ts`).
+
+**Renewal.** When the browser renews a subscription, the worker's `pushsubscriptionchange` handler registers the new endpoint with the device ID, the endpoint it replaces, and the saved reminder choices. If the browser renews without telling the worker (common in Chrome), the next page view notices the changed endpoint and does the same. Either way reminders stay on and no second row is created.
+
+**Sync throttling.** The page only calls `/api/subscribe` when the endpoint or choices changed, or once a week (`needsPushSync` in `src/lib/pushSyncPolicy.ts`). Calls from several components on one page run one after another, so a page view costs no request at all once a device is synced.
+
+**Sending.** For each reminder, the cron:
+1. Skips the event if `PushDeliveryLog` says it reached every device.
+2. Claims the event in `PushRunClaims`. If two runs overlap, the first claim wins and the other stops. A claim older than 10 minutes is ignored, so a crashed run cannot block a retry.
+3. Sends one message per device (`selectRecipients`), skipping devices with a receipt in `PushDeliveryReceipts`. Receipts are written in batches of 25 and on exit, so a rerun after a partial failure reaches only the devices that missed it.
+4. Sends every copy with the same Web Push `Topic`, so a push service holding an undelivered copy for an offline phone replaces it rather than queueing two.
+
+**On the device.** The worker remembers which reminder IDs it has shown for 30 days. A repeat replaces the existing notification silently (same tag, `silent: true`). It still shows a notification, because Safari can revoke push permission from sites that receive pushes without showing one.
+
+Run the cron by hand with `curl -H "Authorization: Bearer $CRON_SECRET" https://<domain>/api/cron/calendar-reminders`; repeating it is safe.
+
 ## Release Checklist
 
 1. Run `npm run verify:pwa` and `npm run build`.

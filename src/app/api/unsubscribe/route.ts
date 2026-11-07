@@ -7,32 +7,10 @@ import {
 import {
   removePushSubscription,
 } from "@/lib/pushSubscriptions";
+import { isValidDeviceId, isValidPushEndpoint } from "@/lib/pushDevices";
 
 export const runtime = "nodejs";
 const maxRequestBytes = 4 * 1024;
-
-const allowedPushHosts = [
-  "fcm.googleapis.com",
-  "updates.push.services.mozilla.com",
-  "web.push.apple.com",
-  "wns2-",
-  "notify.windows.com",
-];
-
-function isValidPushEndpoint(endpoint: string) {
-  if (endpoint.length > 500) return false;
-  try {
-    const url = new URL(endpoint);
-    if (url.protocol !== "https:") return false;
-    return allowedPushHosts.some((host) =>
-      host.endsWith("-")
-        ? url.hostname.startsWith(host)
-        : url.hostname === host || url.hostname.endsWith(`.${host}`)
-    );
-  } catch {
-    return false;
-  }
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -44,14 +22,21 @@ export async function POST(request: NextRequest) {
     });
     if (blocked) return blocked;
 
-    const payload = await readLimitedJson<{ endpoint?: unknown }>(request, maxRequestBytes);
-    const endpoint = typeof payload.endpoint === "string" ? payload.endpoint : "";
+    const payload = await readLimitedJson<{ endpoint?: unknown; deviceId?: unknown }>(
+      request,
+      maxRequestBytes
+    );
+    const endpoint = payload.endpoint;
 
     if (!isValidPushEndpoint(endpoint)) {
       return NextResponse.json({ message: "Invalid endpoint." }, { status: 400 });
     }
+    if (payload.deviceId !== undefined && !isValidDeviceId(payload.deviceId)) {
+      return NextResponse.json({ message: "Invalid device." }, { status: 400 });
+    }
 
-    await removePushSubscription(endpoint);
+    // With a device ID, any other row this device left behind goes too.
+    await removePushSubscription(endpoint, isValidDeviceId(payload.deviceId) ? payload.deviceId : undefined);
 
     return NextResponse.json({ ok: true });
   } catch (error) {

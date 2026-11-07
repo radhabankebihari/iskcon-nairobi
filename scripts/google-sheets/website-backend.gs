@@ -8,8 +8,10 @@ const HEADERS = {
   'Kirtan Safari Registrations': ['Timestamp', 'Full Name', 'Email', 'Phone Number', 'Days Attending', 'No. of People', 'How They Heard About Us', 'Wants Future Updates'],
   'Kirtan Safari 2027 Interest': ['Timestamp', 'Name', 'Email', 'WhatsApp Number', 'City or Country', 'Consent'],
   WebsiteAnalytics: ['Timestamp', 'Event', 'Path', 'City'],
-  PushSubscriptions: ['Created At', 'Endpoint', 'P256DH', 'Auth', 'User Agent', 'Calendar Enabled', 'Noticeboard Enabled'],
+  PushSubscriptions: ['Created At', 'Endpoint', 'P256DH', 'Auth', 'User Agent', 'Calendar Enabled', 'Noticeboard Enabled', 'Device ID'],
   PushDeliveryLog: ['Event ID', 'Sent At', 'Attempted', 'Delivered', 'Failed', 'Pruned'],
+  PushDeliveryReceipts: ['Event ID', 'Device Key', 'Sent At'],
+  PushRunClaims: ['Event ID', 'Run ID', 'Claimed At'],
 };
 
 function doPost(e) {
@@ -105,11 +107,14 @@ function performAction(action, data) {
     case 'kirtan.interest': return recordKirtanInterest(data);
     case 'analytics.record': return recordAnalytics(data);
     case 'push.list': return { records: listPushRecords() };
-    case 'push.count': return { count: listPushRecords().length };
+    case 'push.count': return { count: countPushDevices() };
     case 'push.upsert': return upsertPush(data);
     case 'push.remove': return removePush(data);
     case 'push.deliveryExists': return deliveryExists(data);
     case 'push.recordDelivery': return recordDelivery(data);
+    case 'push.deliveredDevices': return deliveredDevices(data);
+    case 'push.recordReceipts': return recordReceipts(data);
+    case 'push.claimRun': return claimRun(data);
     default: throw new Error('Unknown action');
   }
 }
@@ -177,49 +182,100 @@ function recordAnalytics(data) {
   return { recorded: true };
 }
 
-function listPushRecords() {
+// Push subscriptions keep one row per device. Each browser sends a random
+// v4 device ID (column H); a renewed subscription names the endpoint it
+// replaces. These rules mirror src/lib/pushDevices.ts.
+const DEVICE_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+
+function pushRows() {
   const rows = sheetFor('PushSubscriptions').getDataRange().getDisplayValues();
-  const records = [];
-  rows.forEach(function(row) {
+  const result = [];
+  rows.forEach(function(row, index) {
     const endpoint = row[1] || '';
     if (endpoint.indexOf('https://') !== 0 || !row[2] || !row[3]) return;
-    records.push({
-      createdAt: row[0] || '', endpoint: endpoint,
-      keys: { p256dh: row[2], auth: row[3] }, userAgent: row[4] || '',
+    result.push({
+      rowNumber: index + 1, createdAt: row[0] || '', endpoint: endpoint,
+      p256dh: row[2], auth: row[3], userAgent: row[4] || '',
       calendarEnabled: row[5] === 'TRUE', noticeboardEnabled: row[6] === 'TRUE',
+      deviceId: DEVICE_ID_PATTERN.test(row[7] || '') ? row[7] : '',
     });
   });
-  return records;
+  return result;
+}
+
+function listPushRecords() {
+  return pushRows().map(function(row) {
+    return {
+      createdAt: row.createdAt, endpoint: row.endpoint,
+      keys: { p256dh: row.p256dh, auth: row.auth }, userAgent: row.userAgent,
+      calendarEnabled: row.calendarEnabled, noticeboardEnabled: row.noticeboardEnabled,
+      deviceId: row.deviceId,
+    };
+  });
+}
+
+function countPushDevices() {
+  const devices = {};
+  pushRows().forEach(function(row) { devices[row.deviceId || row.endpoint] = true; });
+  return Object.keys(devices).length;
+}
+
+function validEndpoint(value) {
+  const endpoint = plain(value, 500);
+  return endpoint.indexOf('https://') === 0 ? endpoint : '';
 }
 
 function upsertPush(data) {
-  const endpoint = required(plain(data.endpoint, 500), 'Endpoint');
-  if (endpoint.indexOf('https://') !== 0 || !/^[A-Za-z0-9_-]{1,120}$/.test(data.p256dh || '') ||
+  const endpoint = required(validEndpoint(data.endpoint), 'Endpoint');
+  if (!/^[A-Za-z0-9_-]{1,120}$/.test(data.p256dh || '') ||
       !/^[A-Za-z0-9_-]{1,64}$/.test(data.auth || '')) throw new Error('Invalid subscription');
+  const deviceId = DEVICE_ID_PATTERN.test(data.deviceId || '') ? data.deviceId : '';
+  const previous = validEndpoint(data.previousEndpoint);
+
+  const rows = pushRows();
+  const sameEndpoint = rows.filter(function(row) { return row.endpoint === endpoint; });
+  const sameDevice = deviceId ? rows.filter(function(row) { return row.deviceId === deviceId; }) : [];
+  const replaced = previous ? rows.filter(function(row) { return row.endpoint === previous; }) : [];
+
+  const owned = {};
+  sameEndpoint.concat(sameDevice, replaced).forEach(function(row) { owned[row.rowNumber] = row; });
+  const ownedRows = Object.keys(owned).map(function(key) { return owned[key]; })
+    .sort(function(a, b) { return a.rowNumber - b.rowNumber; });
+
+  // Preferences: sent values win, then this endpoint, the replaced endpoint, then the device's newest row.
+  const newestDevice = sameDevice.slice().sort(function(a, b) {
+    return (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0) || b.rowNumber - a.rowNumber;
+  })[0];
+  const inherited = sameEndpoint[0] || replaced[0] || newestDevice;
+  const calendar = typeof data.calendarEnabled === 'boolean' ? data.calendarEnabled : Boolean(inherited && inherited.calendarEnabled);
+  const noticeboard = typeof data.noticeboardEnabled === 'boolean' ? data.noticeboardEnabled : Boolean(inherited && inherited.noticeboardEnabled);
+  const storedDeviceId = deviceId || (sameEndpoint.filter(function(row) { return row.deviceId; })[0] || {}).deviceId || '';
+
+  const values = [new Date().toISOString(), endpoint, data.p256dh, data.auth, cell(data.userAgent, 200), calendar, noticeboard, storedDeviceId];
   const sheet = sheetFor('PushSubscriptions');
-  const rows = sheet.getDataRange().getDisplayValues();
-  let index = -1;
-  for (let i = 0; i < rows.length; i++) {
-    if (rows[i][1] === endpoint) { index = i; break; }
+  if (!ownedRows.length) {
+    sheet.appendRow(values);
+    return { created: true };
   }
-  const previous = index >= 0 ? rows[index] : [];
-  const calendar = typeof data.calendarEnabled === 'boolean' ? data.calendarEnabled : previous[5] === 'TRUE';
-  const noticeboard = typeof data.noticeboardEnabled === 'boolean' ? data.noticeboardEnabled : previous[6] === 'TRUE';
-  const values = [new Date(), endpoint, data.p256dh, data.auth, cell(data.userAgent, 200), calendar, noticeboard];
-  if (index >= 0) sheet.getRange(index + 1, 1, 1, values.length).setValues([values]);
-  else sheet.appendRow(values);
-  return { created: index < 0 };
+
+  sheet.getRange(ownedRows[0].rowNumber, 1, 1, values.length).setValues([values]);
+  // Every other owned row sits below the first; delete from the bottom so row numbers stay valid.
+  ownedRows.slice(1).map(function(row) { return row.rowNumber; })
+    .sort(function(a, b) { return b - a; })
+    .forEach(function(rowNumber) { sheet.deleteRow(rowNumber); });
+  return { created: false };
 }
 
 function removePush(data) {
-  const endpoint = required(plain(data.endpoint, 500), 'Endpoint');
+  const endpoint = required(validEndpoint(data.endpoint), 'Endpoint');
+  const deviceId = DEVICE_ID_PATTERN.test(data.deviceId || '') ? data.deviceId : '';
   const sheet = sheetFor('PushSubscriptions');
-  const rows = sheet.getDataRange().getDisplayValues();
-  let removed = false;
-  for (let i = rows.length - 1; i >= 0; i--) {
-    if (rows[i][1] === endpoint) { sheet.deleteRow(i + 1); removed = true; }
-  }
-  return { removed: removed };
+  const doomed = pushRows()
+    .filter(function(row) { return row.endpoint === endpoint || (deviceId && row.deviceId === deviceId); })
+    .map(function(row) { return row.rowNumber; })
+    .sort(function(a, b) { return b - a; });
+  doomed.forEach(function(rowNumber) { sheet.deleteRow(rowNumber); });
+  return { removed: doomed.length > 0 };
 }
 
 function deliveryExists(data) {
@@ -234,4 +290,43 @@ function recordDelivery(data) {
   sheet.appendRow([cell(eventId, 160), new Date(), Number(data.attempted) || 0,
     Number(data.delivered) || 0, Number(data.failed) || 0, Number(data.pruned) || 0]);
   return { recorded: true };
+}
+
+// Receipts: one row per reminder per device, so a rerun only reaches devices
+// that missed it. Keys look like device:<id> or endpoint:<hash>.
+function deliveredDevices(data) {
+  const eventId = required(plain(data.eventId, 160), 'Event ID');
+  const rows = sheetFor('PushDeliveryReceipts').getDataRange().getDisplayValues();
+  const keys = [];
+  rows.forEach(function(row) { if (row[0] === eventId && row[1]) keys.push(row[1]); });
+  return { keys: keys };
+}
+
+function recordReceipts(data) {
+  const eventId = required(plain(data.eventId, 160), 'Event ID');
+  const keys = (Array.isArray(data.keys) ? data.keys : [])
+    .map(function(key) { return plain(key, 80); })
+    .filter(function(key) { return /^(device|endpoint):[0-9a-f-]{8,64}$/.test(key); });
+  if (!keys.length) return { recorded: 0 };
+  const sheet = sheetFor('PushDeliveryReceipts');
+  const sentAt = new Date().toISOString();
+  sheet.getRange(sheet.getLastRow() + 1, 1, keys.length, 3)
+    .setValues(keys.map(function(key) { return [cell(eventId, 160), key, sentAt]; }));
+  return { recorded: keys.length };
+}
+
+// Runs under the script lock in doPost, so checking and claiming cannot interleave.
+function claimRun(data) {
+  const eventId = required(plain(data.eventId, 160), 'Event ID');
+  const runId = required(plain(data.runId, 64), 'Run ID');
+  const windowMs = Math.min(Math.max(Number(data.windowMs) || 600000, 60000), 3600000);
+  const sheet = sheetFor('PushRunClaims');
+  const now = Date.now();
+  const active = sheet.getDataRange().getDisplayValues().some(function(row) {
+    const at = Date.parse(row[2]);
+    return row[0] === eventId && row[1] !== runId && at && now - at < windowMs;
+  });
+  if (active) return { claimed: false };
+  sheet.appendRow([cell(eventId, 160), runId, new Date(now).toISOString()]);
+  return { claimed: true };
 }

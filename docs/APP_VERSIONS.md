@@ -32,6 +32,20 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.2.0 - Calendar, Giving, and Design Refresh
+
+**Released:** 7 November 2026
+
+**Update mode:** Silent. A minor release. `CACHE_VERSION` moved to v8 so installed devices replace cached interface files.
+
+### Highlights
+
+- The 2027 Vaishnava calendar, with short descriptions for every 2026 and 2027 observance, fasting notes, and Ekadashi break-fast times.
+- A simpler giving flow: M-Pesa Paybill details, contact buttons, and image cards for each cause page.
+- A site-wide design pass: sentence-case buttons, clearer festival headers, refreshed imagery, and a header that stays compact when a page is refreshed mid-scroll.
+- Forms, analytics, and push reminders save through the client-owned Apps Script backend.
+- Calendar reminders reach each device once, and renewed subscriptions keep their reminder choices.
+
 ## 1.1.4 - Responsive Layout Correction
 
 **Released:** 4 November 2026

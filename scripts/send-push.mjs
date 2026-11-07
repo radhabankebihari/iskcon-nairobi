@@ -95,10 +95,12 @@ async function main() {
   let pruned = 0;
   let skippedDuplicate = 0;
   const failed = [];
-  const seenEndpoints = new Set();
+  // One send per device: a renewed device can briefly have two rows that
+  // share its device ID; rows without one are matched by endpoint.
+  const seenDevices = new Set();
 
   for (let i = 0; i < rows.length; i += 1) {
-    const { endpoint, keys } = rows[i];
+    const { endpoint, keys, deviceId } = rows[i];
     const p256dh = keys?.p256dh;
     const authKey = keys?.auth;
 
@@ -111,11 +113,13 @@ async function main() {
       continue;
     }
 
-    if (seenEndpoints.has(endpoint)) {
+    const deviceKey = typeof deviceId === "string" && deviceId ? `device:${deviceId}` : `endpoint:${endpoint}`;
+    if (seenDevices.has(deviceKey) || seenDevices.has(`endpoint:${endpoint}`)) {
       skippedDuplicate += 1;
       continue;
     }
-    seenEndpoints.add(endpoint);
+    seenDevices.add(deviceKey);
+    seenDevices.add(`endpoint:${endpoint}`);
 
     const subscription = {
       endpoint,

@@ -10,7 +10,10 @@ export type SheetAction =
   | "push.upsert"
   | "push.remove"
   | "push.deliveryExists"
-  | "push.recordDelivery";
+  | "push.recordDelivery"
+  | "push.deliveredDevices"
+  | "push.recordReceipts"
+  | "push.claimRun";
 
 type BridgeResponse<T> = {
   success?: boolean;
