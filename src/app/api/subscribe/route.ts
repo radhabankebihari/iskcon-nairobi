@@ -13,33 +13,10 @@ import {
   ensurePushSheet,
   upsertPushSubscription,
 } from "@/lib/pushSubscriptions";
+import { isValidDeviceId, isValidPushEndpoint } from "@/lib/pushDevices";
 
 export const runtime = "nodejs";
 const maxRequestBytes = 8 * 1024;
-
-const allowedPushHosts = [
-  "fcm.googleapis.com",
-  "updates.push.services.mozilla.com",
-  "web.push.apple.com",
-  "wns2-",
-  "notify.windows.com",
-];
-
-function isValidPushEndpoint(endpoint: string) {
-  if (endpoint.length > 500) return false;
-
-  try {
-    const url = new URL(endpoint);
-    if (url.protocol !== "https:") return false;
-    return allowedPushHosts.some((host) =>
-      host.endsWith("-")
-        ? url.hostname.startsWith(host)
-        : url.hostname === host || url.hostname.endsWith(`.${host}`)
-    );
-  } catch {
-    return false;
-  }
-}
 
 function isValidSubscriptionKey(value: string, maxLength: number) {
   return value.length > 0 && value.length <= maxLength && /^[A-Za-z0-9_-]+$/.test(value);
@@ -61,6 +38,8 @@ export async function POST(request: NextRequest) {
         keys?: { p256dh?: unknown; auth?: unknown };
       };
       userAgent?: unknown;
+      deviceId?: unknown;
+      previousEndpoint?: unknown;
       preferences?: {
         calendar?: unknown;
         noticeboard?: unknown;
@@ -79,10 +58,10 @@ export async function POST(request: NextRequest) {
       typeof payload.subscription?.keys?.auth === "string"
         ? payload.subscription.keys.auth
         : "";
-    const userAgent =
-      typeof payload.userAgent === "string"
-        ? asPlainText(payload.userAgent, 200)
-        : "";
+    const userAgent = asPlainText(
+      typeof payload.userAgent === "string" ? payload.userAgent : request.headers.get("user-agent") || "",
+      200
+    );
     const calendarEnabled =
       typeof payload.preferences?.calendar === "boolean"
         ? payload.preferences.calendar
@@ -100,12 +79,29 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Invalid push subscription." }, { status: 400 });
     }
 
+    // Both are optional so older clients keep working, but anything sent must be valid.
+    if (payload.deviceId !== undefined && !isValidDeviceId(payload.deviceId)) {
+      return NextResponse.json({ message: "Invalid device." }, { status: 400 });
+    }
+    if (
+      payload.previousEndpoint !== undefined &&
+      (!isValidPushEndpoint(payload.previousEndpoint) || payload.previousEndpoint === endpoint)
+    ) {
+      return NextResponse.json({ message: "Invalid previous subscription." }, { status: 400 });
+    }
+    const deviceId = isValidDeviceId(payload.deviceId) ? payload.deviceId : undefined;
+    const previousEndpoint = isValidPushEndpoint(payload.previousEndpoint)
+      ? payload.previousEndpoint
+      : undefined;
+
     await ensurePushSheet();
     await upsertPushSubscription({
       endpoint,
       p256dh,
       auth,
       userAgent,
+      deviceId,
+      previousEndpoint,
       calendarEnabled,
       noticeboardEnabled,
     });

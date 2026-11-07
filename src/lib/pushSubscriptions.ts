@@ -1,9 +1,20 @@
 import { google } from "googleapis";
-import { createHash } from "crypto";
 import { asSheetText } from "@/lib/security";
+import {
+  planPushUpsert,
+  rowsToRemove,
+  type PushUpsertInput,
+  type StoredPushRow,
+} from "@/lib/pushDevices";
 
 export const PUSH_SHEET_NAME = "PushSubscriptions";
-const pushEndpointLocks = new Set<string>();
+
+/**
+ * Columns: A created/updated at, B endpoint, C p256dh, D auth, E user agent,
+ * F calendar on, G noticeboard on, H device ID. Column H was added for device
+ * identity; rows written before it simply have no device ID.
+ */
+const PUSH_RANGE = `${PUSH_SHEET_NAME}!A:H`;
 
 export type PushSubscriptionRecord = {
   createdAt: string;
@@ -12,6 +23,7 @@ export type PushSubscriptionRecord = {
   userAgent: string;
   calendarEnabled: boolean;
   noticeboardEnabled: boolean;
+  deviceId: string;
 };
 
 type PushSheetRef = {
@@ -27,11 +39,9 @@ function getAuth() {
     throw new Error("Push subscription backend is not configured.");
   }
 
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/g, "\n");
-
   return new google.auth.JWT({
     email: clientEmail,
-    key: privateKey,
+    key: rawPrivateKey.replace(/\\n/g, "\n"),
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 }
@@ -46,6 +56,16 @@ function getSpreadsheetId() {
 
 function getSheets() {
   return google.sheets({ version: "v4", auth: getAuth() });
+}
+
+// Row numbers shift when a row is deleted, so changes from this server instance
+// run one at a time. Duplicate rows that slip through from separate instances
+// are merged on the device's next sync, and sends are filtered per device anyway.
+let mutationQueue: Promise<unknown> = Promise.resolve();
+function serially<T>(task: () => Promise<T>): Promise<T> {
+  const run = mutationQueue.then(task, task);
+  mutationQueue = run.catch(() => undefined);
+  return run;
 }
 
 export async function ensurePushSheet(): Promise<PushSheetRef> {
@@ -89,22 +109,19 @@ export async function ensurePushSheet(): Promise<PushSheetRef> {
   };
 }
 
-export async function listPushSubscriptions(): Promise<
-  { record: PushSubscriptionRecord; rowNumber: number }[]
-> {
-  const { spreadsheetId } = await ensurePushSheet();
-  const sheets = getSheets();
+function isTrue(value: unknown) {
+  return value === true || value === "TRUE";
+}
 
-  const response = await sheets.spreadsheets.values.get({
+async function readPushRows(spreadsheetId: string): Promise<StoredPushRow[]> {
+  const response = await getSheets().spreadsheets.values.get({
     spreadsheetId,
-    range: `${PUSH_SHEET_NAME}!A:G`,
+    range: PUSH_RANGE,
   });
 
-  const rows = response.data.values ?? [];
-  const records: { record: PushSubscriptionRecord; rowNumber: number }[] = [];
-
-  rows.forEach((row, index) => {
-    const [createdAt, endpoint, p256dh, auth, userAgent, calendarEnabled, noticeboardEnabled] = row;
+  const rows: StoredPushRow[] = [];
+  (response.data.values ?? []).forEach((row, index) => {
+    const [createdAt, endpoint, p256dh, auth, userAgent, calendarEnabled, noticeboardEnabled, deviceId] = row;
 
     if (
       typeof endpoint === "string" &&
@@ -114,113 +131,127 @@ export async function listPushSubscriptions(): Promise<
       typeof auth === "string" &&
       auth.length > 0
     ) {
-      records.push({
-        record: {
-          createdAt: typeof createdAt === "string" ? createdAt : "",
-          endpoint,
-          keys: { p256dh, auth },
-          userAgent: typeof userAgent === "string" ? userAgent : "",
-          calendarEnabled: calendarEnabled === true || calendarEnabled === "TRUE",
-          noticeboardEnabled: noticeboardEnabled === true || noticeboardEnabled === "TRUE",
-        },
+      rows.push({
         rowNumber: index + 1,
+        createdAt: typeof createdAt === "string" ? createdAt : "",
+        endpoint,
+        p256dh,
+        auth,
+        userAgent: typeof userAgent === "string" ? userAgent : "",
+        calendarEnabled: isTrue(calendarEnabled),
+        noticeboardEnabled: isTrue(noticeboardEnabled),
+        deviceId: typeof deviceId === "string" ? deviceId : "",
       });
     }
   });
 
-  return records;
+  return rows;
 }
 
+function toRecord(row: StoredPushRow): PushSubscriptionRecord {
+  return {
+    createdAt: row.createdAt,
+    endpoint: row.endpoint,
+    keys: { p256dh: row.p256dh, auth: row.auth },
+    userAgent: row.userAgent,
+    calendarEnabled: row.calendarEnabled,
+    noticeboardEnabled: row.noticeboardEnabled,
+    deviceId: row.deviceId,
+  };
+}
+
+export async function listPushRows(): Promise<StoredPushRow[]> {
+  const { spreadsheetId } = await ensurePushSheet();
+  return readPushRows(spreadsheetId);
+}
+
+export async function listPushSubscriptions(): Promise<
+  { record: PushSubscriptionRecord; rowNumber: number }[]
+> {
+  const rows = await listPushRows();
+  return rows.map((row) => ({ record: toRecord(row), rowNumber: row.rowNumber }));
+}
+
+/** Number of distinct devices subscribed. */
 export async function countPushSubscriptions(): Promise<number> {
-  const records = await listPushSubscriptions();
-  return records.length;
+  const rows = await listPushRows();
+  return new Set(rows.map((row) => row.deviceId || row.endpoint)).size;
 }
 
-export async function upsertPushSubscription(input: {
-  endpoint: string;
-  p256dh: string;
-  auth: string;
-  userAgent: string;
-  calendarEnabled?: boolean;
-  noticeboardEnabled?: boolean;
-}): Promise<boolean> {
-  const lockKey = createHash("sha256").update(input.endpoint).digest("hex");
-  if (pushEndpointLocks.has(lockKey)) {
-    return false;
-  }
+async function deleteRows(ref: PushSheetRef, rowNumbers: number[]) {
+  if (rowNumbers.length === 0) return;
 
-  pushEndpointLocks.add(lockKey);
-  try {
-    const records = await listPushSubscriptions();
-    const existing = records.find(({ record }) => record.endpoint === input.endpoint);
+  // Highest first, so each deletion leaves the remaining row numbers valid.
+  const descending = [...new Set(rowNumbers)].sort((a, b) => b - a);
+  await getSheets().spreadsheets.batchUpdate({
+    spreadsheetId: ref.spreadsheetId,
+    requestBody: {
+      requests: descending.map((rowNumber) => ({
+        deleteDimension: {
+          range: {
+            sheetId: ref.sheetId,
+            dimension: "ROWS",
+            startIndex: rowNumber - 1,
+            endIndex: rowNumber,
+          },
+        },
+      })),
+    },
+  });
+}
 
-    const { spreadsheetId } = await ensurePushSheet();
+/**
+ * Save a subscription so its device has exactly one row. Returns true when the
+ * device was not stored before.
+ */
+export function upsertPushSubscription(input: PushUpsertInput): Promise<boolean> {
+  return serially(async () => {
+    const ref = await ensurePushSheet();
+    const rows = await readPushRows(ref.spreadsheetId);
+    const plan = planPushUpsert(rows, input);
     const sheets = getSheets();
+
     const values = [
       new Date().toISOString(),
-      input.endpoint,
-      input.p256dh,
-      input.auth,
-      asSheetText(input.userAgent),
-      input.calendarEnabled ?? existing?.record.calendarEnabled ?? false,
-      input.noticeboardEnabled ?? existing?.record.noticeboardEnabled ?? false,
+      plan.values.endpoint,
+      plan.values.p256dh,
+      plan.values.auth,
+      asSheetText(plan.values.userAgent),
+      plan.values.calendarEnabled,
+      plan.values.noticeboardEnabled,
+      plan.values.deviceId,
     ];
 
-    if (existing) {
+    if (plan.targetRow !== null) {
       await sheets.spreadsheets.values.update({
-        spreadsheetId,
-        range: `${PUSH_SHEET_NAME}!A${existing.rowNumber}:G${existing.rowNumber}`,
-        valueInputOption: "USER_ENTERED",
+        spreadsheetId: ref.spreadsheetId,
+        range: `${PUSH_SHEET_NAME}!A${plan.targetRow}:H${plan.targetRow}`,
+        valueInputOption: "RAW",
         requestBody: { values: [values] },
       });
+      // Every row to delete sits below the target row, so the target is unaffected.
+      await deleteRows(ref, plan.deleteRows);
       return false;
     }
 
     await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: `${PUSH_SHEET_NAME}!A:G`,
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [
-          values,
-        ],
-      },
+      spreadsheetId: ref.spreadsheetId,
+      range: PUSH_RANGE,
+      valueInputOption: "RAW",
+      insertDataOption: "INSERT_ROWS",
+      requestBody: { values: [values] },
     });
-
     return true;
-  } finally {
-    pushEndpointLocks.delete(lockKey);
-  }
+  });
 }
 
-export async function removePushSubscription(endpoint: string): Promise<boolean> {
-  const records = await listPushSubscriptions();
-  const match = records.find(({ record }) => record.endpoint === endpoint);
-
-  if (!match) {
-    return false;
-  }
-
-  const { spreadsheetId, sheetId } = await ensurePushSheet();
-  const sheets = getSheets();
-
-  await sheets.spreadsheets.batchUpdate({
-    spreadsheetId,
-    requestBody: {
-      requests: [
-        {
-          deleteDimension: {
-            range: {
-              sheetId,
-              dimension: "ROWS",
-              startIndex: match.rowNumber - 1,
-              endIndex: match.rowNumber,
-            },
-          },
-        },
-      ],
-    },
+/** Remove a device's subscription: its endpoint and any other row with its device ID. */
+export function removePushSubscription(endpoint: string, deviceId?: string): Promise<boolean> {
+  return serially(async () => {
+    const ref = await ensurePushSheet();
+    const rows = await readPushRows(ref.spreadsheetId);
+    const doomed = rowsToRemove(rows, endpoint, deviceId);
+    await deleteRows(ref, doomed);
+    return doomed.length > 0;
   });
-
-  return true;
 }

@@ -132,7 +132,7 @@ async function main() {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: `${PUSH_SHEET_NAME}!A:E`,
+    range: `${PUSH_SHEET_NAME}!A:H`,
   });
 
   const rows = response.data.values ?? [];
@@ -140,10 +140,15 @@ async function main() {
   let pruned = 0;
   let skippedDuplicate = 0;
   const failed = [];
-  const seenEndpoints = new Set();
+  // One send per device: rows share a device ID (column H) after a renewal, and
+  // older rows without one are matched by endpoint.
+  const seenDevices = new Set();
+  // Dead rows are deleted after the loop, highest first. Deleting inside the loop
+  // would shift every later row up and remove the wrong subscriptions.
+  const deadRows = [];
 
   for (let i = 0; i < rows.length; i += 1) {
-    const [, endpoint, p256dh, authKey] = rows[i];
+    const [, endpoint, p256dh, authKey, , , , deviceId] = rows[i];
 
     if (
       typeof endpoint !== "string" ||
@@ -154,11 +159,13 @@ async function main() {
       continue;
     }
 
-    if (seenEndpoints.has(endpoint)) {
+    const deviceKey = typeof deviceId === "string" && deviceId ? `device:${deviceId}` : `endpoint:${endpoint}`;
+    if (seenDevices.has(deviceKey) || seenDevices.has(`endpoint:${endpoint}`)) {
       skippedDuplicate += 1;
       continue;
     }
-    seenEndpoints.add(endpoint);
+    seenDevices.add(deviceKey);
+    seenDevices.add(`endpoint:${endpoint}`);
 
     const subscription = {
       endpoint,
@@ -181,23 +188,7 @@ async function main() {
 
       if (status === 404 || status === 410) {
         pruned += 1;
-        await sheets.spreadsheets.batchUpdate({
-          spreadsheetId,
-          requestBody: {
-            requests: [
-              {
-                deleteDimension: {
-                  range: {
-                    sheetId,
-                    dimension: "ROWS",
-                    startIndex: i,
-                    endIndex: i + 1,
-                  },
-                },
-              },
-            ],
-          },
-        });
+        deadRows.push(i);
         console.log(`pruned (${status}): ${endpoint.slice(0, 60)}...`);
         continue;
       }
@@ -205,6 +196,26 @@ async function main() {
       failed.push({ endpoint, status, message: error?.message || String(error) });
       console.error(`failed ${i + 1}/${rows.length}: ${endpoint.slice(0, 60)}... (${status})`);
     }
+  }
+
+  if (deadRows.length > 0) {
+    await sheets.spreadsheets.batchUpdate({
+      spreadsheetId,
+      requestBody: {
+        requests: [...deadRows]
+          .sort((a, b) => b - a)
+          .map((rowIndex) => ({
+            deleteDimension: {
+              range: {
+                sheetId,
+                dimension: "ROWS",
+                startIndex: rowIndex,
+                endIndex: rowIndex + 1,
+              },
+            },
+          })),
+      },
+    });
   }
 
   console.log(
