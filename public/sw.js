@@ -9,7 +9,7 @@
  * Bump CACHE_VERSION whenever this policy or the precache list changes.
  * See docs/PWA_GUIDE.md before editing this file.
  */
-const CACHE_VERSION = "iskcon-nairobi-v8";
+const CACHE_VERSION = "iskcon-nairobi-v9";
 const UPDATE_MODE = "silent";
 const CACHE_PREFIX = "iskcon-nairobi-";
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
@@ -33,7 +33,7 @@ const PRECACHE_URLS = [
 ];
 
 const PUSH_VAPID_PUBLIC_KEY =
-  "BPgPEE6PLUqf6M27TuN7hvlg1sMKrpDeM1RK5I_basFwH11J5FGcvGQ0h93Ci2Z3jk-gv3PAqWvYqKUVzmxSnTE";
+  "BFsVd_yIr-gs4MJeQI7vZj88yRlnMOiVaQeCPhQxGiILme7CU-GtmkqtYPJ9A0TXkNfg0b36i-BomaTRmYOGUsw";
 
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
