@@ -128,7 +128,9 @@ export default function LearnPage() {
         titleAccent="& Study"
         subtitle="Spiritual Education"
         description="All our philosophy is Prabhupada-centered: rooted in Srila Prabhupada's books, the teachings of the Goswamis, and practical devotional life."
-        image="/images/krishna-student.jpeg"
+        image="/images/learn/krishna-student-refined.webp"
+        imageAlt="A devotional painting of young Krishna with Yashoda and Balarama in Vrindavan"
+        imageClassName="sm:object-[center_20%]"
         className="sm:min-h-[500px]"
       />
 

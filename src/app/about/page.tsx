@@ -179,10 +179,10 @@ export default function AboutPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
-                src="/images/iskcon-nairobi-main-altar-wide.jpg"
-                alt="Main altar at ISKCON Nairobi"
-                className="aspect-[4/5] w-full object-cover shadow-card"
+              <Image width={1170} height={1170} sizes="(max-width: 768px) 100vw, 50vw" unoptimized
+                src="/images/hero-radha-bankebihari-darshan.webp"
+                alt="Sri Sri Radha Bankebihari on the ISKCON Nairobi altar"
+                className="hidden aspect-[4/5] w-full object-cover shadow-card sm:block"
               />
               <div className="grid gap-4">
                 <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
@@ -231,6 +231,12 @@ export default function AboutPage() {
               </article>
             ))}
           </div>
+
+          <Image width={1170} height={1170} sizes="100vw" unoptimized
+            src="/images/hero-radha-bankebihari-darshan.webp"
+            alt="Sri Sri Radha Bankebihari on the ISKCON Nairobi altar"
+            className="mt-8 aspect-[4/5] w-full object-cover shadow-card sm:hidden"
+          />
         </div>
       </section>
 

@@ -65,7 +65,8 @@ export default function JanmashtamiPage() {
         title="Krishna Janmashtami"
         subtitle="Appearance of Lord Krishna"
         description="The biggest celebration of the year at ISKCON Nairobi, honouring the divine appearance of Lord Krishna with worship, kirtan, drama, service, and prasadam."
-        image="/images/calendar-janmashtami-krishna.jpeg"
+        image="/images/festivals/janmashtami-child-krishna-butter.webp"
+        imageClassName="max-sm:object-[72%_center]"
         height="lg"
         className="festival-page-hero"
       />

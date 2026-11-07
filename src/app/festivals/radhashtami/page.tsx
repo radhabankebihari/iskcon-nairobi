@@ -65,7 +65,8 @@ export default function RadhashtamiPage() {
         title="Radhashtami"
         subtitle="Appearance of Srimati Radharani"
         description="A sacred festival honouring Srimati Radharani, the supreme devotee of Krishna and the compassionate doorway to pure devotional service."
-        image="/images/calendar-radhashtami-sakhis.jpeg"
+        image="/images/festivals/radhashtami-childhood-sakhis.webp"
+        imageClassName="object-[center_8%] max-sm:object-[72%_center]"
         height="lg"
         className="festival-page-hero"
       />

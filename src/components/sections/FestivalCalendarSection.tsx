@@ -24,7 +24,7 @@ export default function FestivalCalendarSection() {
   });
 
   return (
-    <section className="pt-10 pb-section bg-temple-cream sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
+    <section className="bg-temple-cream pt-10 pb-5 sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-6">
       <div className="content-width section-padding">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
@@ -109,26 +109,19 @@ export default function FestivalCalendarSection() {
           ))}
         </div>
 
-        <div className="mt-8 flex justify-start sm:mt-10">
-          <Link
-            href="/festivals"
-            className="text-link tap-target flex items-center gap-2 text-gold-ink hover:gap-3 transition-all"
-          >
-            All festivals <ArrowRight size={12} />
-          </Link>
-        </div>
-
-        {/* CTA Banner */}
-        <div className="mt-12 bg-temple-brown p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        {/* One link to the full calendar, under the cards. */}
+        <div className="mt-8 flex flex-col gap-3 border-t border-temple-sand pt-5 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <div>
-            <p className="font-display text-white text-xl mb-1">Never Miss a Festival</p>
-            <p className="font-body text-white/60 text-sm">See every festival, Ekadashi, and holy day on the ISKCON Nairobi calendar.</p>
+            <p className="font-display text-lg font-semibold text-ink">Never miss a festival</p>
+            <p className="mt-0.5 font-body text-sm text-ink/75">
+              See every festival, Ekadashi, and holy day on the ISKCON Nairobi calendar.
+            </p>
           </div>
           <Link
             href="/festivals"
-            className="min-h-11 bg-primary text-white font-body text-sm font-semibold px-6 py-3 hover:bg-primary-dark transition-colors"
+            className="text-link tap-target shrink-0 text-primary"
           >
-            View Festivals
+            View the full calendar <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>
       </div>

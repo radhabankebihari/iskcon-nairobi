@@ -19,7 +19,7 @@ export default function GauraPurnimaPage() {
         title="Gaura Purnima"
         subtitle="Appearance of Sri Chaitanya"
         description={description}
-        image="/images/community/iskcon-temple-architecture.jpg"
+        image="/images/festivals/gaura-purnima-child-nimai.webp"
         height="lg"
       />
       <section className="py-section bg-temple-bg">

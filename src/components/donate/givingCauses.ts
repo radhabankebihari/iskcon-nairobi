@@ -1,4 +1,4 @@
-import { donationPaths } from "@/data/site";
+import { donationPaths, socialLinks, templeGiving } from "@/data/site";
 
 // Plain data, shared by the server-rendered donate pages and the client-side
 // payment card. It must not live in a "use client" file: a server component
@@ -34,4 +34,16 @@ export const givingCauses: GivingCause[] = [
 /** How a cause reads inside a sentence, such as "Giving to the General Fund". */
 export function causeName(cause: GivingCause) {
   return cause.slug === "general" ? "the General Fund" : cause.title;
+}
+
+const whatsapp = socialLinks.find((link) => link.name === "WhatsApp");
+
+/** A WhatsApp link with a ready-made message naming the cause and asking for a receipt. */
+export function receiptMessageLink(cause: GivingCause) {
+  if (!whatsapp) return null;
+  const message =
+    `Hare Krishna. I have given to ${causeName(cause)} by M-Pesa ` +
+    `(Paybill ${templeGiving.mpesaPaybill}, account ${templeGiving.mpesaAccount}). ` +
+    "Please send me a receipt. My name is ";
+  return `${whatsapp.href}?text=${encodeURIComponent(message)}`;
 }

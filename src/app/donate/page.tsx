@@ -4,6 +4,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { templeGiving, templeInfo } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 import MpesaPayCard from "@/components/donate/MpesaPayCard";
+import GiveFollowUp from "@/components/donate/GiveFollowUp";
 import CauseCard from "@/components/donate/CauseCard";
 import { givingCauses } from "@/components/donate/givingCauses";
 
@@ -30,7 +31,7 @@ export default function DonatePage() {
         facts={[`M-Pesa Paybill ${templeGiving.mpesaPaybill}`, `Account ${templeGiving.mpesaAccount}`, "Receipts on request"]}
       />
 
-      <section className="bg-temple-cream py-10 sm:py-14">
+      <section className="bg-temple-cream pt-10 pb-6 sm:pt-12 sm:pb-8">
         <div className="content-width section-padding">
           {/* Phones: intro, then the payment card, then the details. Desktop: text left, card right. */}
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_26rem] lg:grid-rows-[auto_1fr] lg:gap-x-14 lg:gap-y-0">
@@ -41,8 +42,8 @@ export default function DonatePage() {
                 can thank you and direct your gift. To support something specific, choose a cause below.
               </p>
             </div>
-            <MpesaPayCard className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center" />
-            <div className="max-w-xl lg:self-start">
+            <MpesaPayCard showFollowUp={false} className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start" />
+            <div className="lg:self-start">
               <ul className="space-y-3 lg:mt-6">
                 {reassurances.map((line) => (
                   <li key={line} className="flex gap-3 font-body text-sm leading-relaxed text-ink/80">
@@ -51,21 +52,18 @@ export default function DonatePage() {
                   </li>
                 ))}
               </ul>
+              <GiveFollowUp className="mt-8 border-t border-temple-sand pt-6" />
               <p className="mt-6 font-body text-sm leading-relaxed text-ink/75">
-                Would you rather give in person? Visit the temple office at {templeInfo.shortAddress}, or call{" "}
-                <a href={`tel:${templeInfo.phoneHref}`} className="font-semibold text-primary underline-offset-4 hover:underline">
-                  {templeInfo.phoneDisplay}
-                </a>
-                .
+                Prefer to give in person? Visit the temple office at {templeInfo.shortAddress}.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="causes" className="scroll-mt-24 bg-temple-bg py-12 sm:py-16">
+      <section id="causes" className="scroll-mt-24 bg-temple-bg pt-0 pb-12 sm:pb-16">
         <div className="content-width section-padding">
-          <div className="mx-auto mb-10 max-w-2xl text-center">
+          <div className="mx-auto mb-8 max-w-2xl border-t border-temple-sand pt-8 text-center sm:mb-10 sm:pt-10">
             <SectionHeading eyebrow="Choose Your Cause" title="Where Your Gift Goes" />
             <p className="mt-3 font-body text-sm leading-relaxed text-ink/75 sm:text-base">
               Each cause has its own page with what your gift supports and how to give to it.

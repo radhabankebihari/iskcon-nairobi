@@ -2,19 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Check, Copy, Mail, MessageCircle, Phone, Smartphone } from "lucide-react";
-import { socialLinks, templeGiving, templeInfo } from "@/data/site";
-import { causeName, generalCause, type GivingCause } from "@/components/donate/givingCauses";
+import { templeGiving, templeInfo } from "@/data/site";
+import { causeName, generalCause, receiptMessageLink, type GivingCause } from "@/components/donate/givingCauses";
 
-const whatsapp = socialLinks.find((link) => link.name === "WhatsApp");
-
-function receiptMessageLink(cause: GivingCause) {
-  if (!whatsapp) return null;
-  const message =
-    `Hare Krishna. I have given to ${causeName(cause)} by M-Pesa ` +
-    `(Paybill ${templeGiving.mpesaPaybill}, account ${templeGiving.mpesaAccount}). ` +
-    "Please send me a receipt. My name is ";
-  return `${whatsapp.href}?text=${encodeURIComponent(message)}`;
-}
 
 function CopyValue({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -58,7 +48,16 @@ function CopyValue({ label, value }: { label: string; value: string }) {
  * WhatsApp message that names the cause and asks for a receipt. Every cause
  * uses the same Paybill account, so the cause travels in that message.
  */
-export default function MpesaPayCard({ cause = generalCause, className = "" }: { cause?: GivingCause; className?: string }) {
+export default function MpesaPayCard({
+  cause = generalCause,
+  className = "",
+  showFollowUp = true,
+}: {
+  cause?: GivingCause;
+  className?: string;
+  /** Set false when the page shows the follow-up step (GiveFollowUp) elsewhere. */
+  showFollowUp?: boolean;
+}) {
   const receiptLink = receiptMessageLink(cause);
 
   return (
@@ -83,6 +82,7 @@ export default function MpesaPayCard({ cause = generalCause, className = "" }: {
       </div>
       <p className="mt-3 font-body text-sm text-sand/75">Enter your amount and M-Pesa PIN to confirm.</p>
 
+      {showFollowUp && (
       <div className="mt-6 border-t border-white/10 pt-5">
         <p className="font-body text-sm leading-relaxed text-sand/75">
           Then send a quick message so your gift reaches {causeName(cause)} and you receive a receipt.
@@ -107,6 +107,7 @@ export default function MpesaPayCard({ cause = generalCause, className = "" }: {
           </a>
         </div>
       </div>
+      )}
     </aside>
   );
 }
