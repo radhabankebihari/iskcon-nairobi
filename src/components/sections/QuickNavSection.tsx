@@ -1,101 +1,139 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, HandHeart, Heart, MapPin } from "lucide-react";
+import { ArrowRight, BookOpen, ChevronRight, HandHeart, Heart } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
+import { templeInfo, templeSchedule } from "@/data/site";
+import { getTempleStatus, type TempleStatus } from "@/lib/templeStatus";
 
-const navCards = [
-  {
-    icon: MapPin,
-    title: "Visit Temple",
-    description: "Temple timings, directions, and what to expect on your first visit.",
-    href: "/visit",
-    accent: "text-primary",
-    line: "bg-primary",
-    hover: "hover:border-primary/35 hover:bg-primary/[0.055]",
-  },
+const classTime = templeSchedule.find((item) => item.event === "Srimad-Bhagavatam Class")?.time;
+
+// Each door carries one specific, true fact instead of a generic description, so
+// visitors learn something useful before they even click.
+const secondaryPaths = [
   {
     icon: BookOpen,
     title: "Learn",
-    description: "Bhagavad Gita, philosophy programmes, and weekly classes.",
+    detail: classTime ? `Srimad-Bhagavatam class daily, ${classTime}` : "Daily classes and study programmes",
     href: "/learn",
-    accent: "text-gold-dark",
-    line: "bg-gold",
-    hover: "hover:border-gold/50 hover:bg-gold/[0.07]",
   },
   {
     icon: HandHeart,
     title: "Serve",
-    description: "Volunteer with Food For Life, the farm, festivals, and more.",
+    detail: "Food For Life, the farm, and festivals",
     href: "/serve",
-    accent: "text-acacia",
-    line: "bg-acacia",
-    hover: "hover:border-acacia/45 hover:bg-acacia/[0.065]",
   },
   {
     icon: Heart,
-    title: "Donate",
-    description: "Support temple worship, cow protection, students, and prasadam.",
+    title: "Give",
+    detail: "Support worship, prasadam, and cow care",
     href: "/donate",
-    accent: "text-sunset",
-    line: "bg-sunset",
-    hover: "hover:border-sunset/45 hover:bg-sunset/[0.06]",
   },
 ];
 
 export default function QuickNavSection() {
+  // The homepage is prerendered, so the visitor's clock is only read after hydration.
+  const [status, setStatus] = useState<TempleStatus | null>(null);
+
+  useEffect(() => {
+    const update = () => setStatus(getTempleStatus(new Date()));
+    const first = window.setTimeout(update, 0);
+    const timer = window.setInterval(update, 60_000);
+    return () => {
+      window.clearTimeout(first);
+      window.clearInterval(timer);
+    };
+  }, []);
+
   return (
-    <section className="bg-temple-cream pb-7 pt-9 sm:pb-10 sm:pt-12">
+    <section className="bg-temple-cream pb-8 pt-8 sm:pb-14 sm:pt-14">
       <div className="content-width section-padding">
-        <div className="mb-5 text-center sm:mb-7 sm:flex sm:items-center sm:gap-5 sm:text-left">
-          <span className="eyebrow sm:shrink-0">Find Your Path</span>
-          <span className="hidden h-px flex-1 bg-gold/35 sm:block" aria-hidden="true" />
+        <div className="mb-5 max-w-2xl sm:mb-9">
+          <SectionHeading eyebrow="Find Your Path" title="Where would you like to begin?" />
+          <p className="mt-3 hidden font-body text-sm leading-relaxed text-ink/75 sm:block sm:text-base">
+            Everyone is welcome. Most people start with a visit.
+          </p>
         </div>
 
         <nav
-          aria-label="Explore ISKCON Nairobi"
-          className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4 lg:gap-5"
-          style={{ gridAutoRows: "1fr" }}
+          aria-label="Ways to begin at ISKCON Nairobi"
+          className="grid gap-3 sm:gap-4 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-5"
         >
-          {navCards.map((card) => {
-            const Icon = card.icon;
+          <Link
+            href="/visit"
+            className="group card-surface flex flex-col overflow-hidden text-ink shadow-sm transition-shadow duration-300 hover:border-gold/50 hover:shadow-card-hover"
+          >
+            <div className="relative hidden h-52 overflow-hidden sm:block md:h-auto md:min-h-48 md:flex-1">
+              <Image
+                src="/images/iskcon-nairobi-aerial.jpg"
+                alt="The ISKCON Nairobi temple seen from above, with the city skyline behind it"
+                fill
+                sizes="(max-width: 1024px) 100vw, 640px"
+                className="object-cover object-[center_78%] transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+            </div>
 
-            return (
-              <Link
-                key={card.href}
-                href={card.href}
-                className={`group relative flex min-h-[168px] flex-col card-surface p-3.5 text-ink shadow-sm transition-all duration-300 sm:min-h-[210px] sm:p-6 lg:min-h-[238px] lg:p-7 ${card.hover} hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:-translate-y-0.5 focus-visible:shadow-card-hover`}
-              >
-                <span className={`absolute inset-x-0 top-0 h-0.5 ${card.line}`} aria-hidden="true" />
+            <div className="flex flex-1 flex-col gap-1.5 p-4 sm:gap-2 sm:p-6 md:flex-none lg:p-7">
+              <StatusLine status={status} />
+              <h3 className="font-display text-2xl font-semibold leading-tight sm:text-[1.7rem]">
+                Visit the temple
+              </h3>
+              <p className="hidden font-body text-sm leading-relaxed text-ink/75 sm:block sm:text-base">
+                {templeInfo.shortAddress}. No experience needed. Come as you are.
+              </p>
+              <span className="mt-2 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                Plan your visit
+                <ArrowRight size={14} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </div>
+          </Link>
 
-                <div className="relative flex h-12 w-full items-center">
-                  <span
-                    className={`absolute -left-3.5 z-20 h-px w-8 ${card.line} transition-all duration-300 group-hover:w-16 group-focus-visible:w-16 sm:-left-6 sm:w-[2.875rem] sm:group-hover:w-20 sm:group-focus-visible:w-20 lg:-left-7 lg:w-[3.125rem] lg:group-hover:w-20 lg:group-focus-visible:w-20`}
-                    style={{ top: "75%" }}
-                    aria-hidden="true"
-                  />
-                  <div className="relative z-10 flex h-12 w-12 items-center justify-center border border-temple-sand bg-white/35">
-                    <span className="relative z-30 flex h-7 w-7 items-center justify-center bg-white">
-                      <Icon size={20} className={card.accent} aria-hidden="true" />
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-auto pt-4 sm:pt-6">
-                  <h3 className="font-display text-lg font-semibold leading-tight text-ink sm:text-2xl">
-                    {card.title}
-                  </h3>
-                  <p className="mt-1.5 font-body text-xs leading-relaxed text-ink/75 sm:mt-2 sm:text-sm">
-                    {card.description}
-                  </p>
-                  <span className="mt-5 hidden items-center gap-2 font-body text-xs font-bold uppercase tracking-[0.14em] text-primary transition-all duration-300 lg:inline-flex lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100">
-                    Explore <ArrowUpRight size={14} aria-hidden="true" />
+          {/* Phones show the three smaller paths as one divided list; wider screens show cards. */}
+          <ul className="grid divide-y divide-temple-sand border border-temple-sand bg-white shadow-sm sm:gap-4 sm:divide-y-0 sm:border-0 sm:bg-transparent sm:shadow-none md:grid-rows-3 lg:gap-5">
+            {secondaryPaths.map(({ icon: Icon, title, detail, href }) => (
+              <li key={href} className="flex">
+                <Link
+                  href={href}
+                  className="group flex min-h-14 flex-1 items-center gap-3 px-4 py-3 text-ink transition-shadow duration-300 sm:border sm:border-temple-sand sm:bg-white sm:min-h-[4.5rem] sm:gap-4 sm:px-6 sm:py-4 sm:shadow-sm sm:hover:border-gold/50 sm:hover:shadow-card-hover"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/12 text-gold-ink sm:h-11 sm:w-11">
+                    <Icon size={20} aria-hidden="true" />
                   </span>
-                </div>
-              </Link>
-            );
-          })}
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-lg font-semibold leading-tight sm:text-xl">{title}</span>
+                    <span className="mt-0.5 block font-body text-sm leading-snug text-ink/75">{detail}</span>
+                  </span>
+                  <ChevronRight
+                    size={20}
+                    aria-hidden="true"
+                    className="shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
     </section>
+  );
+}
+
+function StatusLine({ status }: { status: TempleStatus | null }) {
+  // Before hydration, show the timeless fact rather than a guess about now.
+  if (!status) {
+    return <span className="font-body text-sm font-semibold text-ink/75">Open daily, morning and evening</span>;
+  }
+
+  return (
+    <span className="inline-flex items-center gap-2 font-body text-sm font-semibold text-ink">
+      <span
+        className={`h-2 w-2 shrink-0 rounded-full ${status.isOpen ? "bg-emerald-600" : "bg-sunset"}`}
+        aria-hidden="true"
+      />
+      {/* "Until 12:45 PM" reads as "Open now until 12:45 PM", keeping the time's capitals. */}
+      {`${status.isOpen ? "Open now" : "Closed now,"} ${status.detailText.charAt(0).toLowerCase()}${status.detailText.slice(1)}`}
+    </span>
   );
 }
