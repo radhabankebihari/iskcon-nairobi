@@ -3,6 +3,7 @@
 
 import { vaishnavaCalendar2026 } from "./vaishnavaCalendar2026";
 import { vaishnavaCalendar2027 } from "./vaishnavaCalendar2027";
+import { describeObservance } from "./calendarDescriptions";
 
 export type CalendarEntry = {
   date: string;
@@ -24,10 +25,21 @@ export type CalendarMonth = {
   events: CalendarEntry[];
 };
 
+// An entry without its own description gets the shared one for its name, so
+// every year reads the same way (see calendarDescriptions.ts).
+function withDescriptions(month: CalendarMonth): CalendarMonth {
+  return {
+    ...month,
+    events: month.events.map((entry) =>
+      entry.description ? entry : { ...entry, description: describeObservance(entry.event, entry.type) }
+    ),
+  };
+}
+
 export const vaishnavaCalendarMonths: CalendarMonth[] = [
   ...vaishnavaCalendar2026,
   ...vaishnavaCalendar2027,
-];
+].map(withDescriptions);
 
 export const MONTH_NUMBERS: Record<string, number> = {
   January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,

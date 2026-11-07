@@ -8,6 +8,7 @@
 // Ekadashi they end, rather than listed as a separate date.
 
 import type { CalendarEntry, CalendarMonth } from "./vaishnavaCalendar";
+import { EKADASHI_DESCRIPTION, HOLIDAY_DESCRIPTION, people } from "./calendarDescriptions";
 
 const YEAR = 2027;
 const MONTH_NAMES = [
@@ -25,34 +26,8 @@ const lunarPhases: [newMoons: number[], fullMoons: number[]][] = [
   [[], [15]], [[29], [15]], [[28], [14]], [[27], [13]],
 ];
 
-const EKADASHI = "A day of fasting from grains and beans, given to extra chanting, reading, and hearing about Krishna.";
-const HOLIDAY = "Public holiday in Kenya.";
-
-// People who appear more than once in the year share one description.
-const people = {
-  devananda: "A Bhagavatam reciter of Navadvipa whom Sri Caitanya Mahaprabhu forgave and blessed.",
-  mahesaUddharana: "Two of the twelve cowherd associates (gopalas) of Lord Nityananda.",
-  locana: "Poet-devotee who wrote Caitanya-mangala and many songs still sung in kirtan.",
-  jivaJagadisa: "Srila Jiva Gosvami, the great philosopher among the Six Gosvamis of Vrindavan, and Sri Jagadisa Pandita, a close associate of Sri Caitanya.",
-  jagadisa: "A close associate of Sri Caitanya Mahaprabhu.",
-  gopalaBhatta: "One of the Six Gosvamis of Vrindavan, who served the Radha-Ramana deity.",
-  advaita: "Incarnation of Maha-Visnu whose prayers called Sri Caitanya Mahaprabhu to appear.",
-  madhva: "Founding acarya of the Brahma-Madhva line in which ISKCON stands.",
-  ramanuja: "Great acarya of the Sri Vaishnava tradition, teacher of devotion to Lord Narayana.",
-  narottama: "Acarya whose Bengali songs of devotion are sung in temples around the world.",
-  purusottama: "One of the twelve cowherd associates (gopalas) of Lord Nityananda.",
-  bhaktisiddhanta: "Srila Prabhupada's spiritual master, who founded the Gaudiya Math and spread Krishna consciousness across India.",
-  rasikananda: "Disciple of Syamananda Prabhu who spread devotion through Orissa.",
-  madhavendra: "The root of the tree of devotion in Sri Caitanya's line, who served the Gopala deity.",
-  srivasa: "Associate of Sri Caitanya in whose courtyard the nightly kirtans of Navadvipa began.",
-  syamananda: "Student of Srila Jiva Gosvami who preached widely in Orissa.",
-  vrndavanaDasa: "Author of Caitanya-bhagavata, a celebrated biography of Sri Caitanya Mahaprabhu.",
-  vakresvara: "Associate of Sri Caitanya famous for dancing for hours in kirtan.",
-  gadadhara: "Sri Caitanya's lifelong companion, an expansion of Srimati Radharani.",
-  srinivasa: "Acarya who carried the books of the Six Gosvamis from Vrindavan to Bengal.",
-  bhaktivinoda: "Acarya who pioneered spreading Krishna consciousness beyond India and wrote many books and songs.",
-  nimbarka: "Acarya of the Kumara line of Vaishnavas.",
-};
+const EKADASHI = EKADASHI_DESCRIPTION;
+const HOLIDAY = HOLIDAY_DESCRIPTION;
 
 type Extra = Partial<Omit<CalendarEntry, "date" | "day" | "event">>;
 type Row = [day: number, event: string, extra?: Extra];
