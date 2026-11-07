@@ -36,18 +36,30 @@ export default function Navigation() {
   const forceSolidNav = pathname === "/privacy" || pathname === "/terms";
   const solidNav = scrolled || forceSolidNav;
 
+  const [scrollSynced, setScrollSynced] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     // A refresh can restore the scroll position before this listener exists, and then
-    // no scroll event arrives. Without this check the header stays transparent and
-    // full height over the page content until the visitor scrolls again.
-    const initialCheck = window.setTimeout(handleScroll, 0);
+    // no scroll event arrives, so read the position once as well. Both updates land
+    // in the same render.
+    const initialCheck = window.setTimeout(() => {
+      handleScroll();
+      setScrollSynced(true);
+    }, 0);
     return () => {
       window.clearTimeout(initialCheck);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Until this point the header's look comes from the data-nav-scrolled mark set
+  // by the inline script in the root layout (see globals.css). Hand over only once
+  // a render reflects the real scroll position, so the header never flickers.
+  useEffect(() => {
+    if (scrollSynced) document.documentElement.setAttribute("data-nav-ready", "");
+  }, [scrollSynced]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -152,7 +164,7 @@ export default function Navigation() {
             >
               <BrandLogo
                 className={cn(
-                  "nav-brand-logo min-[901px]:-translate-y-px transition-[width,height,transform] duration-300 [filter:saturate(1.08)_contrast(1.12)]",
+                  "nav-brand-logo -translate-y-[2px] min-[901px]:-translate-y-[3px] transition-[width,height,transform] duration-300 [filter:saturate(1.08)_contrast(1.12)]",
                   solidNav
                     ? "h-[46px] w-[50px] max-[900px]:h-[42px] max-[900px]:w-[45px]"
                     : "h-[68px] w-[73px] max-[900px]:h-[48px] max-[900px]:w-[52px]"

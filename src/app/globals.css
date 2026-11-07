@@ -97,6 +97,46 @@ input, select, textarea {
     --site-nav-py: 0.75rem;
   }
 }
+
+/* Header before the page scripts load. The server always renders the header in
+   its at-the-top form, so a refresh partway down a page drew the transparent,
+   full-size header over the content for about a second. The inline script in the
+   root layout marks <html> data-nav-scrolled from the first moment; these rules
+   then show the solid, compact header until Navigation takes over and marks
+   <html> data-nav-ready. They sit in the base layer with !important because the
+   at-the-top header uses !important utilities, and for !important rules an
+   earlier layer wins. */
+@layer base {
+  html:not([data-nav-ready]) .site-nav,
+  html:not([data-nav-ready]) .site-nav * {
+    transition: none !important;
+  }
+
+  html[data-nav-scrolled]:not([data-nav-ready]) .site-nav {
+    --site-nav-py: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-color: color-mix(in oklab, var(--color-gold) 25%, transparent) !important;
+    background-color: color-mix(in oklab, var(--color-dusk) 90%, transparent) !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+    backdrop-filter: blur(14px) !important;
+  }
+
+  html[data-nav-scrolled]:not([data-nav-ready]) .site-nav .nav-brand-logo {
+    width: 50px !important;
+    height: 46px !important;
+  }
+
+  html[data-nav-scrolled]:not([data-nav-ready]) .site-nav .nav-brand-expansion {
+    opacity: 0.8 !important;
+  }
+
+  @media (max-width: 900px) {
+    html[data-nav-scrolled]:not([data-nav-ready]) .site-nav .nav-brand-logo {
+      width: 45px !important;
+      height: 42px !important;
+    }
+  }
+}
 ::selection { background-color: var(--color-primary); color: white; }
 
 /* Keyboard focus. A restrained gold outline remains readable on light, dark,
