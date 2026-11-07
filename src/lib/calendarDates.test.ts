@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getNextObservance, getUpcomingCalendarDates } from "./calendarDates";
+import { getNextObservance, getUpcomingCalendarDates, getUpcomingCalendarDays, isMoonPhase } from "./calendarDates";
 
 describe("getUpcomingCalendarDates", () => {
   it("returns only future dates, soonest first", () => {
@@ -53,5 +53,19 @@ describe("getUpcomingCalendarDates", () => {
 
   it("is empty once the last calendar year has finished", () => {
     expect(getUpcomingCalendarDates(new Date("2028-01-02T00:00:00+03:00"))).toEqual([]);
+  });
+
+  it("leaves new and full moon markers out of upcoming observances", () => {
+    const dates = getUpcomingCalendarDates(new Date("2026-11-07T09:00:00+03:00"));
+    expect(dates.some((item) => isMoonPhase(item.event))).toBe(false);
+    expect(dates.some((item) => item.event.startsWith("Amavasya") || item.event.startsWith("Purnima"))).toBe(false);
+  });
+
+  it("lists each upcoming date once, with every observance that day", () => {
+    const days = getUpcomingCalendarDays(new Date("2026-11-07T09:00:00+03:00"), 6);
+    expect(days).toHaveLength(6);
+    expect(new Set(days.map((day) => day.isoDate)).size).toBe(days.length);
+    const govardhana = days.find((day) => day.isoDate === "2026-11-10");
+    expect(govardhana?.items.length).toBeGreaterThan(1);
   });
 });

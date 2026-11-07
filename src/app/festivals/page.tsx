@@ -3,10 +3,15 @@ import Link from "next/link";
 import PageHero from "@/components/ui/PageHero";
 import CalendarNotificationOptIn from "@/components/ui/CalendarNotificationOptIn";
 import { homepageFestivalPreview, templeInfo } from "@/data/site";
-import { MONTH_NUMBERS, vaishnavaCalendarMonths, type CalendarMonth as CalendarMonthData } from "@/data/vaishnavaCalendar";
-import { Calendar, MapPin, ArrowRight, Sparkles, UtensilsCrossed } from "lucide-react";
+import {
+  MONTH_NUMBERS,
+  vaishnavaCalendarMonths,
+  type CalendarEntry,
+  type CalendarMonth as CalendarMonthData,
+} from "@/data/vaishnavaCalendar";
+import { Calendar, MapPin, ArrowRight, Moon, Sparkles, UtensilsCrossed } from "lucide-react";
 import { getKirtanSafariState } from "@/lib/kirtanSafariState";
-import { getUpcomingCalendarDates } from "@/lib/calendarDates";
+import { getUpcomingCalendarDates, getUpcomingCalendarDays, isMoonPhase } from "@/lib/calendarDates";
 import { safeJsonLd } from "@/lib/security";
 import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -18,7 +23,31 @@ export const metadata = withSeo({
   description: "ISKCON Nairobi festival calendar including Ratha Yatra, Janmashtami, Gaura Purnima, and Kirtan Safari.",
 }, "/festivals");
 
+type CalendarDay = {
+  date: string;
+  day: string;
+  /** The new or full moon marker for this date, shown as a label. */
+  moon?: CalendarEntry;
+  items: CalendarEntry[];
+};
+
+/** One row per date: every observance that day together, the moon phase as a label. */
+function groupByDate(events: CalendarEntry[]): CalendarDay[] {
+  const days = new Map<string, CalendarDay>();
+  for (const item of events) {
+    const day = days.get(item.date) ?? { date: item.date, day: item.day, items: [] };
+    if (isMoonPhase(item.event)) day.moon = item;
+    else day.items.push(item);
+    days.set(item.date, day);
+  }
+  const dayNumber = (date: string) => Number(date.replace(/^\D+/, ""));
+  return [...days.values()].sort((a, b) => dayNumber(a.date) - dayNumber(b.date));
+}
+
 function CalendarMonth({ month }: { month: CalendarMonthData }) {
+  const days = groupByDate(month.events);
+  const observances = days.reduce((total, day) => total + day.items.length, 0);
+
   return (
     <section className="card-surface">
         <div className="flex items-center justify-between border-b border-temple-sand bg-temple-cream px-4 py-3">
@@ -26,41 +55,54 @@ function CalendarMonth({ month }: { month: CalendarMonthData }) {
             {month.month} <span className="text-ink/75">{month.year}</span>
           </h3>
           <span className="font-body text-xs font-semibold text-gold-ink">
-            {month.events.length} observances
+            {observances} observances
           </span>
         </div>
         <div className="divide-y divide-temple-sand/70">
-          {month.events.map((item) => (
-            <div key={`${month.year}-${month.month}-${item.date}-${item.event}`} className="grid grid-cols-[4.8rem_1fr] gap-3 px-4 py-3">
+          {days.map((day) => (
+            <div key={`${month.year}-${month.month}-${day.date}`} className="grid grid-cols-[4.8rem_1fr] gap-3 px-4 py-3">
               <div>
-                <p className="font-body text-xs font-bold uppercase tracking-[0.08em] text-primary">{item.date}</p>
-                <p className="font-body text-xs uppercase tracking-[0.14em] text-ink/75">{item.day}</p>
+                <p className="font-body text-xs font-bold uppercase tracking-[0.08em] text-primary">{day.date}</p>
+                <p className="font-body text-xs uppercase tracking-[0.14em] text-ink/75">{day.day}</p>
+                {day.moon && (
+                  <p className="mt-1 inline-flex items-center gap-1 font-body text-xs text-ink/75">
+                    <Moon size={11} aria-hidden="true" />
+                    {/^purnima/i.test(day.moon.event) ? "Full moon" : "New moon"}
+                  </p>
+                )}
               </div>
-              <div className="min-w-0">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className={`font-body text-sm leading-snug ${item.type === "Major" ? "font-semibold text-ink" : "text-ink/80"}`}>
-                    {item.event}
-                  </p>
-                  {item.type && (
-                    <span className="inline-flex items-center gap-1 bg-gold/10 px-2 py-0.5 font-body text-xs font-semibold text-gold-ink">
-                      {item.type === "Major" && <Sparkles size={10} aria-hidden="true" />}
-                      {item.type === "Major" ? "Festival" : item.type}
-                    </span>
-                  )}
-                </div>
-                {item.description && (
-                  <p className="mt-1 font-body text-xs leading-relaxed text-ink/75">{item.description}</p>
+              <div className="min-w-0 space-y-3">
+                {day.items.length === 0 && day.moon && (
+                  <p className="font-body text-sm leading-snug text-ink/80">{day.moon.description}</p>
                 )}
-                {(item.fast || item.breakFast) && (
-                  <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-xs font-semibold text-primary">
-                    {item.fast && <span>{item.fast}</span>}
-                    {item.breakFast && (
-                      <span className="inline-flex items-center gap-1">
-                        <UtensilsCrossed size={11} aria-hidden="true" /> Break fast {item.breakFast}
-                      </span>
+                {day.items.map((item) => (
+                  <div key={item.event}>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className={`font-body text-sm leading-snug ${item.type === "Major" ? "font-semibold text-ink" : "text-ink/80"}`}>
+                        {item.event}
+                      </p>
+                      {item.type && (
+                        <span className="inline-flex items-center gap-1 bg-gold/10 px-2 py-0.5 font-body text-xs font-semibold text-gold-ink">
+                          {item.type === "Major" && <Sparkles size={10} aria-hidden="true" />}
+                          {item.type === "Major" ? "Festival" : item.type}
+                        </span>
+                      )}
+                    </div>
+                    {item.description && (
+                      <p className="mt-1 font-body text-xs leading-relaxed text-ink/75">{item.description}</p>
                     )}
-                  </p>
-                )}
+                    {(item.fast || item.breakFast) && (
+                      <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-xs font-semibold text-primary">
+                        {item.fast && <span>{item.fast}</span>}
+                        {item.breakFast && (
+                          <span className="inline-flex items-center gap-1">
+                            <UtensilsCrossed size={11} aria-hidden="true" /> Break fast {item.breakFast}
+                          </span>
+                        )}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -84,7 +126,7 @@ export default function FestivalsPage() {
   );
   const today = new Date();
   const now = today.getTime();
-  const nextDates = getUpcomingCalendarDates(today, 6);
+  const nextDates = getUpcomingCalendarDays(today, 6);
   // A month is past once its last day has ended in Nairobi.
   const monthEnd = (month: CalendarMonthData) =>
     Date.UTC(month.year, MONTH_NUMBERS[month.month], 1) - 3 * 60 * 60 * 1000;
@@ -140,20 +182,24 @@ export default function FestivalsPage() {
           </div>
           {nextDates.length > 0 ? (
             <ul className="mb-12 grid gap-px border border-temple-sand bg-temple-sand sm:grid-cols-2 lg:grid-cols-3">
-              {nextDates.map((item) => (
-                <li key={`${item.isoDate}-${item.event}`} className="flex items-baseline gap-4 bg-white p-5">
+              {nextDates.map((day) => (
+                <li key={day.isoDate} className="flex items-baseline gap-4 bg-white p-5">
                   <span className="shrink-0">
-                    <span className="block font-body text-sm font-bold uppercase tracking-wide text-primary">{item.label}</span>
-                    <span className="block font-body text-xs uppercase tracking-[0.14em] text-ink/75">{item.day}</span>
+                    <span className="block font-body text-sm font-bold uppercase tracking-wide text-primary">{day.label}</span>
+                    <span className="block font-body text-xs uppercase tracking-[0.14em] text-ink/75">{day.day}</span>
                   </span>
-                  <span className="min-w-0">
-                    <span className="block font-display text-lg leading-snug text-ink">{item.event}</span>
-                    {item.description && (
-                      <span className="mt-1 block font-body text-xs leading-relaxed text-ink/75">{item.description}</span>
-                    )}
-                    {item.fast && (
-                      <span className="mt-1 block font-body text-xs font-semibold text-primary">{item.fast}</span>
-                    )}
+                  <span className="min-w-0 space-y-3">
+                    {day.items.map((item) => (
+                      <span key={item.event} className="block">
+                        <span className="block font-display text-lg leading-snug text-ink">{item.event}</span>
+                        {item.description && (
+                          <span className="mt-1 block font-body text-xs leading-relaxed text-ink/75">{item.description}</span>
+                        )}
+                        {item.fast && (
+                          <span className="mt-1 block font-body text-xs font-semibold text-primary">{item.fast}</span>
+                        )}
+                      </span>
+                    ))}
                   </span>
                 </li>
               ))}

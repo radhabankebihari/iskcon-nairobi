@@ -33,15 +33,43 @@ const allCalendarDates: CalendarDate[] = vaishnavaCalendarMonths
   )
   .sort((a, b) => a.endsAt - b.endsAt);
 
+/** New and full moon markers: reference information, not temple observances. */
+export function isMoonPhase(event: string) {
+  return /^(purnima|amavasya) \(/i.test(event);
+}
+
 /**
  * Temple observances that have not finished yet in Nairobi, soonest first.
- * Kenyan public holidays are left out; they appear only in the month listings.
+ * Kenyan public holidays and moon markers are left out; they appear only in
+ * the month listings.
  */
 export function getUpcomingCalendarDates(now: Date, limit?: number): CalendarDate[] {
   const upcoming = allCalendarDates.filter(
-    (item) => item.type !== "Holiday" && item.endsAt >= now.getTime()
+    (item) => item.type !== "Holiday" && !isMoonPhase(item.event) && item.endsAt >= now.getTime()
   );
   return limit ? upcoming.slice(0, limit) : upcoming;
+}
+
+export type UpcomingDay = {
+  isoDate: string;
+  label: string;
+  day: string;
+  items: CalendarDate[];
+};
+
+/** Upcoming observances grouped by date, so a busy day is listed once. */
+export function getUpcomingCalendarDays(now: Date, limitDays?: number): UpcomingDay[] {
+  const days: UpcomingDay[] = [];
+  for (const item of getUpcomingCalendarDates(now)) {
+    const last = days[days.length - 1];
+    if (last && last.isoDate === item.isoDate) {
+      last.items.push(item);
+    } else {
+      if (limitDays && days.length === limitDays) break;
+      days.push({ isoDate: item.isoDate, label: item.label, day: item.day, items: [item] });
+    }
+  }
+  return days;
 }
 
 /** The next date (today included) whose name matches, for festival pages. */

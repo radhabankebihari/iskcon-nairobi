@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import { homepageFestivalPreview } from "@/data/site";
 import { useKirtanSafariState } from "@/hooks/useKirtanSafariState";
-import { getUpcomingCalendarDates } from "@/lib/calendarDates";
+import { getUpcomingCalendarDays } from "@/lib/calendarDates";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 export default function FestivalCalendarSection() {
@@ -17,7 +17,7 @@ export default function FestivalCalendarSection() {
     const timer = window.setTimeout(() => setNow(new Date()), 0);
     return () => window.clearTimeout(timer);
   }, []);
-  const nextDates = now ? getUpcomingCalendarDates(now, 4) : [];
+  const nextDates = now ? getUpcomingCalendarDays(now, 4) : [];
   const visibleFestivals = homepageFestivalPreview.filter((festival) => {
     if (!now || new Date(festival.endsAt).getTime() <= now.getTime()) return false;
     return festivalState.phase !== "concluded" || festival.href !== "/festivals/kirtan-safari";
@@ -37,10 +37,14 @@ export default function FestivalCalendarSection() {
         {now && (nextDates.length > 0 || visibleFestivals.length === 0) && (
           nextDates.length > 0 ? (
             <ul className={`grid gap-px border border-temple-sand bg-temple-sand sm:grid-cols-2 ${visibleFestivals.length ? "mb-8" : ""}`}>
-              {nextDates.map((item) => (
-                <li key={`${item.isoDate}-${item.event}`} className="flex items-baseline gap-4 bg-white p-5">
-                  <span className="w-16 shrink-0 font-body text-sm font-bold uppercase tracking-wide text-primary">{item.label}</span>
-                  <span className="font-display text-lg leading-snug text-ink">{item.event}</span>
+              {nextDates.map((day) => (
+                <li key={day.isoDate} className="flex items-baseline gap-4 bg-white p-5">
+                  <span className="w-16 shrink-0 font-body text-sm font-bold uppercase tracking-wide text-primary">{day.label}</span>
+                  <span className="space-y-1">
+                    {day.items.map((item) => (
+                      <span key={item.event} className="block font-display text-lg leading-snug text-ink">{item.event}</span>
+                    ))}
+                  </span>
                 </li>
               ))}
             </ul>
