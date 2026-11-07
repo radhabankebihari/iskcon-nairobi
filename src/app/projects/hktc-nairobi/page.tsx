@@ -189,8 +189,8 @@ export default function HKTCNairobiPage() {
             <div className="grid gap-4">
               <div className="overflow-hidden border border-temple-sand bg-white shadow-card">
                 <img
-                  src="/images/hktc/hktc-nairobi-kirtan-class.jpg"
-                  alt="HKTC Nairobi students leading kirtan and class"
+                  src="/images/leadership/govinda-prem-prabhu-outdoors.jpg"
+                  alt="Govinda Prem Prabhu outdoors"
                   className="h-full w-full object-cover"
                 />
               </div>
