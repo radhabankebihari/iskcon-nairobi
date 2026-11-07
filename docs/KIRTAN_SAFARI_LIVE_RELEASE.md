@@ -159,7 +159,7 @@ approval. Never create a fifth festival broadcast without a new content approval
 1. Complete `docs/KIRTAN_SAFARI_EVALUATION.md` locally or on a preview deployment.
 2. Confirm the programme, contact number, and directions. Confirm a stream ID,
    status, and `livestream.enabled: true` only while an official broadcast exists.
-3. Confirm the Google service account can create/write the future-interest tab.
+3. Confirm the Apps Script backend can create and write the future-interest tab.
 4. Review the branch diff and exclude unrelated workspace changes.
 5. Merge `codex/kirtan-safari` into `main` only after visual approval.
 6. Deploy the merged `main`; do not promote this development branch directly.

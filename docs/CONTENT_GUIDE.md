@@ -42,8 +42,9 @@ action links accurate. The Kirtan Safari notice should link to
 
 Public forms post to server routes under `src/app/api`. Do not write to Google
 Sheets directly from client components. Server routes must validate inputs,
-escape sheet formulas, enforce same-origin JSON requests, and use environment
-variables for service account credentials.
+enforce same-origin JSON requests, and save through the signed Apps Script
+bridge (`src/lib/appsScriptBridge.ts`), whose secret stays in server-only
+environment variables. The script escapes sheet formulas before writing.
 
 Current sheet-backed features:
 

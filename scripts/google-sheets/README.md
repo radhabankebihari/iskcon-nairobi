@@ -1,41 +1,33 @@
-# Google Sheet Submission Notifications
+# Website backend (Apps Script)
 
-This folder contains the Apps Script used by the ISKCON Nairobi Google Sheet that receives website form submissions.
+`website-backend.gs` is the only script the website needs. It runs as a Web app
+inside the temple-owned Google Sheet and receives every form submission,
+analytics event, and push subscription from the website's server. No Google
+Cloud project, API, or service-account key is involved.
 
-## What It Does
+Setup, secrets, and verification steps are in `docs/TEMPLE_SHEET_CUTOVER.md`.
 
-`submission-notifications.gs` watches these tabs:
+## How a request is checked
 
-- `Contact Us`
-- `Guest House Enquiries`
-- `Kirtan Safari Registrations`
-- `Bhagavad Gita Course`
+The website server signs each request with `GOOGLE_APPS_SCRIPT_SECRET`. The
+script accepts it only when the HMAC signature matches its `WEBSITE_SHARED_SECRET`
+property, the timestamp is within five minutes, and the one-time nonce has not
+been seen before. Every action then runs under a script lock.
 
-Every hour, it checks whether any new rows were added. If yes, it emails `manahsiksadas@gmail.com` with the tab name and submitted row details.
+## Tabs it writes
 
-## Install
+`Contact Us`, `Guest House Enquiries`, `Kirtan Safari Registrations`,
+`Kirtan Safari 2027 Interest`, `WebsiteAnalytics`, `PushSubscriptions`,
+`PushDeliveryLog`, `PushDeliveryReceipts`, and `PushRunClaims`. Missing tabs are
+created with their headers on first use.
 
-1. Open the Google Sheet that receives website submissions.
-2. Go to `Extensions -> Apps Script`.
-3. Paste the contents of `submission-notifications.gs`.
-4. Save the project.
-5. Run `installHourlySubmissionNotificationTrigger` once.
-6. Approve the Google permissions.
+## Email alerts
 
-The installer creates the hourly trigger and records the current last row in every watched tab, so old submissions are not emailed in bulk.
+Set the optional `NOTIFICATION_EMAIL` script property to email the temple
+office as each contact or guest-house enquiry arrives.
 
-## Test
+## After changing the script
 
-Run `sendTestSubmissionNotification` from Apps Script. You should receive a test email.
-
-## Reset
-
-Run `resetSubmissionNotificationState` if you want the script to treat the current row counts as the new baseline.
-
-## Remove
-
-Run `removeSubmissionNotificationTriggers` to stop hourly checks.
-
-## Notes
-
-Google Sheets API writes do not reliably trigger normal `onEdit` notifications, which is why this uses an hourly time-based trigger. There is no extra website hosting cost for this setup. It uses Google Apps Script and MailApp quotas on the Google account that installs the trigger.
+Paste the new version into the Sheet's Apps Script project, then create a new
+Web app deployment version. The `/exec` URL in Vercel must point at the active
+deployment.

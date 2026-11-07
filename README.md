@@ -106,6 +106,6 @@ Then push to GitHub and deploy through Vercel.
 
 - Keep Vercel environment variables current.
 - Rotate any key that is accidentally pasted into git, chat, logs, screenshots, or public tools.
-- Keep Google Sheets private and share them only with the service account and trusted administrators.
+- Keep the temple Google Sheet private and share it only with trusted administrators. The website writes to it through the signed Apps Script Web app, not a shared account.
 - Review `npm audit` before major releases.
 - Prefer a durable rate limiter such as Redis or Vercel KV if spam volume increases.

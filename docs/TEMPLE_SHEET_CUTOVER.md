@@ -7,7 +7,7 @@ Client-owned destination: [ISKCON Nairobi submissions sheet](https://docs.google
 ## Prepare the client-owned spreadsheet
 
 1. Use the temple-owned spreadsheet as the permanent record. Confirm that it is not shared publicly.
-2. Before switching traffic, copy existing rows (including headers) from all applicable tabs: `Contact Us`, `Guest House Enquiries`, `Kirtan Safari Registrations`, `Kirtan Safari 2027 Interest`, `WebsiteAnalytics`, `PushSubscriptions`, and `PushDeliveryLog`. The website can create missing tabs, but it cannot reconstruct old subscriptions or delivery history. Preserve the seven-column order of `PushSubscriptions` and six-column order of `PushDeliveryLog` shown in `scripts/google-sheets/website-backend.gs`.
+2. Before switching traffic, copy existing rows (including headers) from all applicable tabs: `Contact Us`, `Guest House Enquiries`, `Kirtan Safari Registrations`, `Kirtan Safari 2027 Interest`, `WebsiteAnalytics`, `PushSubscriptions`, and `PushDeliveryLog`. The website can create missing tabs (including `PushDeliveryReceipts` and `PushRunClaims`), but it cannot reconstruct old subscriptions or delivery history. Keep the column order shown in `HEADERS` in `scripts/google-sheets/website-backend.gs`; `PushSubscriptions` has eight columns, the last being `Device ID`.
 3. Keep the previous spreadsheet read-only during the short verification/rollback period. Do not copy user data into a public content hub.
 
 ## Deploy Apps Script
@@ -29,6 +29,6 @@ After the new path is verified, remove the retired service-account credentials a
 2. Subscribe a test device with calendar and noticeboard preferences, reload it, and verify the preferences persist. Unsubscribe and confirm its row is removed. Check the protected subscriber-count endpoint if used.
 3. In a controlled test, verify `PushDeliveryLog` prevents a second reminder for the same event. Do not broadcast a test push to all subscribers.
 4. Confirm analytics appears only on production, and check Apps Script **Executions** for failures or quota issues. Compare new and old sheets: only the client sheet should receive new rows.
-5. If using immediate `NOTIFICATION_EMAIL`, do not also install the older hourly `submission-notifications.gs` trigger, or messages may be emailed twice. If the hourly digest is preferred, omit `NOTIFICATION_EMAIL` and install only that trigger in the client Apps Script project.
+5. Set `NOTIFICATION_EMAIL` to receive contact and guest-house enquiries by email as they arrive. If an old sheet still has the retired hourly notification trigger installed, remove it there so nothing is emailed twice.
 
 The previous connection should not be disabled until these checks pass. A copied spreadsheet does not include its old Apps Script deployment or triggers.

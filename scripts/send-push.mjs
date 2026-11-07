@@ -164,7 +164,7 @@ async function main() {
 
 function normalizeNotificationPath(value) {
   try {
-    const url = new URL(value, "https://iskconnairobi.esthrema.com");
+    const url = new URL(value, "https://iskconnairobi.com");
     return `${url.pathname}${url.search}${url.hash}` || "/";
   } catch {
     return "/";
