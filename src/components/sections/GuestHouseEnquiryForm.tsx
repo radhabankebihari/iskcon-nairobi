@@ -2,7 +2,8 @@
 
 import FormMessage from "@/components/ui/FormMessage";
 import { isValidEmail } from "@/lib/formValidation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { guestRooms } from "@/data/site";
 
 type FormState = {
   fullName: string;
@@ -33,6 +34,16 @@ export default function GuestHouseEnquiryForm() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+
+  // A room chosen from a room card arrives as ?room=; only known room names are used.
+  useEffect(() => {
+    const room = new URLSearchParams(window.location.search).get("room");
+    if (!room || !guestRooms.some((item) => item.name === room)) return;
+    const timer = window.setTimeout(() => {
+      setForm((current) => (current.message ? current : { ...current, message: `I'd like to ask about the ${room}.` }));
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const updateField = (field: keyof FormState, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));

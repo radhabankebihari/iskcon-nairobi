@@ -1,6 +1,6 @@
 import PageHero from "@/components/ui/PageHero";
-import { templeInfo, templeScheduleGroups } from "@/data/site";
-import { MapPin, Clock, Phone, AlertCircle } from "lucide-react";
+import { templeInfo, templeSchedule, templeScheduleGroups } from "@/data/site";
+import { MapPin, Clock, Phone, AlertCircle, ChevronDown } from "lucide-react";
 import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -9,6 +9,15 @@ export const metadata = withSeo({
   title: "Visit the Temple",
   description: "Plan your visit to ISKCON Nairobi. Temple timings, location, what to expect, and how to reach us.",
 }, "/visit");
+
+// The moments most visitors come for. The full ritual schedule stays one tap away.
+const keyMoments = [
+  "Mangala Arati in the Main Temple",
+  "Shringar Darshan",
+  "Srimad-Bhagavatam Class",
+  "Raj Bhoga Arati",
+  "Sandhya - Gaur Arati",
+].flatMap((event) => templeSchedule.filter((item) => item.event === event));
 
 export default function VisitPage() {
   return (
@@ -19,6 +28,7 @@ export default function VisitPage() {
         subtitle="Plan Your Visit"
         description="The temple is open daily to all visitors. Come as you are - no prior experience needed."
         image="/images/iskcon-nairobi-aerial.jpg"
+        facts={["Open daily from 4:30 AM and 4:30 PM", "Hare Krishna Close, Parklands", "Everyone welcome"]}
         className="sm:min-h-[500px]"
       />
 
@@ -46,28 +56,44 @@ export default function VisitPage() {
                   ))}
                 </div>
               </div>
+              <span id="schedule" className="block scroll-mt-32" aria-hidden="true" />
               <SectionHeading eyebrow="Daily Programmes" title="Temple Schedule" eyebrowClassName="eyebrow block mb-4" titleClassName="section-title mb-8" />
-              <div className="space-y-8">
-                {templeScheduleGroups.map((group) => (
-                  <div key={group.title} className="border border-temple-sand bg-white/50">
-                    <div className="border-b border-temple-sand p-4">
-                      <p className="font-display text-ink text-xl">{group.title}</p>
-                      <p className="font-body text-gold-ink text-xs font-semibold tracking-widest uppercase mt-1">{group.timeRange}</p>
-                    </div>
-                    <div className="divide-y divide-temple-sand">
-                      {group.items.map((item) => (
-                        <div key={`${group.title}-${item.time}-${item.event}`} className="flex items-center justify-between px-4 py-3">
-                          <div className="flex items-center gap-5">
-                            <span className="font-body text-gold-ink font-semibold text-sm w-24 flex-shrink-0">{item.time}</span>
-                            <span className="font-display text-ink text-lg">{item.event}</span>
-                          </div>
-                          <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gold/40" />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+              <ul className="divide-y divide-temple-sand border border-temple-sand bg-white">
+                {keyMoments.map((item) => (
+                  <li key={item.event} className="flex items-center gap-5 px-5 py-4">
+                    <span className="w-24 flex-shrink-0 font-body text-sm font-semibold text-gold-ink">{item.time}</span>
+                    <span className="font-display text-lg text-ink">{item.event}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
+
+              <details className="group mt-6 border border-temple-sand bg-white/50">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 font-body text-sm font-semibold text-ink">
+                  Show the full daily schedule
+                  <ChevronDown size={18} aria-hidden="true" className="text-primary transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="space-y-6 border-t border-temple-sand p-4 sm:p-5">
+                  {templeScheduleGroups.map((group) => (
+                    <div key={group.title} className="border border-temple-sand bg-white/50">
+                      <div className="border-b border-temple-sand p-4">
+                        <p className="font-display text-ink text-xl">{group.title}</p>
+                        <p className="font-body text-gold-ink text-xs font-semibold tracking-widest uppercase mt-1">{group.timeRange}</p>
+                      </div>
+                      <div className="divide-y divide-temple-sand">
+                        {group.items.map((item) => (
+                          <div key={`${group.title}-${item.time}-${item.event}`} className="flex items-center justify-between px-4 py-3">
+                            <div className="flex items-center gap-5">
+                              <span className="font-body text-gold-ink font-semibold text-sm w-24 flex-shrink-0">{item.time}</span>
+                              <span className="font-display text-ink text-lg">{item.event}</span>
+                            </div>
+                            <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gold/40" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </details>
 
             </div>
 
@@ -90,7 +116,7 @@ export default function VisitPage() {
                     <Clock size={16} className="text-gold mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-body font-medium text-ink text-sm">Opening Hours</p>
-                      <p className="font-body text-ink/75 text-sm mt-0.5">{templeInfo.hours}</p>
+                      <p className="font-body text-ink/75 text-sm mt-0.5 whitespace-pre-line">{templeInfo.hours}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -105,9 +131,9 @@ export default function VisitPage() {
                   href={templeInfo.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary w-full justify-center mt-6 text-xs"
+                  className="btn-primary w-full justify-center mt-6"
                 >
-                  Get Directions
+                  Open in Google Maps
                 </a>
               </div>
 
@@ -123,8 +149,8 @@ export default function VisitPage() {
                 <p className="font-body text-white/60 text-sm leading-relaxed mb-4">
                   Contact the temple about guest accommodation, retreats, and extended spiritual visits.
                 </p>
-                <ButtonLink variant="ghost" href="/guest-house" className="w-full justify-center text-xs">
-                  View Guest House
+                <ButtonLink variant="ghost" href="/guest-house" className="w-full justify-center">
+                  View the guest house
                 </ButtonLink>
               </div>
             </div>

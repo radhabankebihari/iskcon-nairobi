@@ -257,7 +257,7 @@ export default function PwaRegistrar() {
           <button
             type="button"
             onClick={installPromptedUpdate}
-            className="flex min-h-11 items-center justify-center gap-2 bg-gold px-4 font-body text-xs font-bold uppercase tracking-[0.12em] text-dusk transition-colors hover:bg-gold-light"
+            className="flex min-h-11 items-center justify-center gap-2 bg-gold px-4 font-body text-sm font-bold text-dusk transition-colors hover:bg-gold-light"
           >
             <RefreshCw className="h-4 w-4" aria-hidden="true" />
             Update now

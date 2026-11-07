@@ -34,7 +34,7 @@ export default function ProjectsSection() {
             </p>
             <Link
               href="/projects"
-              className="tap-target projects-explain mt-5 inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-[0.14em] text-sunset transition-colors hover:text-primary"
+              className="text-link tap-target projects-explain mt-5 inline-flex items-center gap-2 text-sunset transition-colors hover:text-primary"
             >
               Explore all projects <ArrowRight size={14} aria-hidden="true" />
             </Link>
@@ -105,7 +105,7 @@ export default function ProjectsSection() {
                       </p>
                       <Link
                         href={project.href}
-                        className="tap-target mt-3 inline-flex items-center gap-1.5 font-body text-xs font-bold uppercase tracking-[0.14em] text-sunset transition-colors hover:text-primary"
+                        className="text-link tap-target mt-3 inline-flex items-center gap-1.5 text-sunset transition-colors hover:text-primary"
                       >
                         Visit this work <ArrowRight size={12} aria-hidden="true" />
                       </Link>
@@ -120,7 +120,7 @@ export default function ProjectsSection() {
         <div className="mt-12 border-t border-temple-sand pt-5 lg:hidden">
           <Link
             href="/projects"
-            className="tap-target inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-[0.14em] text-sunset transition-colors hover:text-primary"
+            className="text-link tap-target inline-flex items-center gap-2 text-sunset transition-colors hover:text-primary"
           >
             Explore all projects <ArrowRight size={14} aria-hidden="true" />
           </Link>

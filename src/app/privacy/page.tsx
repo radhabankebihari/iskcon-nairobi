@@ -193,7 +193,7 @@ export default function PrivacyPage() {
               <span className="eyebrow block mb-3">How We Handle Data</span>
               <h1 className="section-title">
                 Privacy<br />
-                <em className="text-gold not-italic font-normal">Policy</em>
+                <em className="not-italic font-normal">Policy</em>
               </h1>
             </header>
 

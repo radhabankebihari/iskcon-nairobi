@@ -292,7 +292,7 @@ export default function SrilaPrabhupadaPage() {
           <h2 className="font-display text-display-md">The doors he asked us to keep open are still open.</h2>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <ButtonLink variant="ghost" href="/visit">
-              Plan Your Visit
+              Plan your visit
             </ButtonLink>
             <ButtonLink variant="ghost" href="/learn">
               Study His Books

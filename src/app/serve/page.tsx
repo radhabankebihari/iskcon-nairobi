@@ -42,7 +42,7 @@ export default function ServePage() {
             ))}
           </div>
           <div className="mt-12 text-center">
-            <ButtonLink variant="primary" href="/contact">Register as a Volunteer</ButtonLink>
+            <ButtonLink variant="primary" href="/contact">Register as a volunteer</ButtonLink>
           </div>
         </div>
       </section>

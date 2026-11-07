@@ -1,13 +1,15 @@
 import PageHero from "@/components/ui/PageHero";
 import ContactForm from "@/components/sections/ContactForm";
 import { MapPin, Phone, Mail, Clock, MessageSquare } from "lucide-react";
-import { templeInfo } from "@/data/site";
+import { socialLinks, templeInfo } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 
 export const metadata = withSeo({
   title: "Contact",
   description: "Get in touch with ISKCON Nairobi. Temple address, phone, email, and enquiry form.",
 }, "/contact");
+
+const whatsapp = socialLinks.find((link) => link.name === "WhatsApp");
 
 export default function ContactPage() {
   const contactItems = [
@@ -23,9 +25,7 @@ export default function ContactPage() {
         title="Get in"
         titleAccent="Touch"
         subtitle="Contact Us"
-        image="/images/sunset-route.png"
-        height="md"
-        className="sm:min-h-[500px]"
+        variant="compact"
       />
 
       <section className="py-section bg-temple-bg">
@@ -34,7 +34,21 @@ export default function ContactPage() {
             <div className="lg:col-span-1 space-y-8">
               <div>
                 <span className="eyebrow block mb-4">Temple Contact</span>
-                <h2 className="section-title text-2xl mb-6">We'd Love<br />to Hear From You</h2>
+                <h2 className="section-title text-2xl mb-6">We'd love to hear from you</h2>
+                {/* The quickest routes first; the form is for anything that can wait. */}
+                <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                  <a href={`tel:${templeInfo.phoneHref}`} className="btn-primary justify-center">
+                    <Phone size={16} aria-hidden="true" /> Call the temple
+                  </a>
+                  {whatsapp && (
+                    <a href={whatsapp.href} target="_blank" rel="noopener noreferrer" className="btn-outline justify-center">
+                      <MessageSquare size={16} aria-hidden="true" /> WhatsApp
+                    </a>
+                  )}
+                  <a href={templeInfo.mapUrl} target="_blank" rel="noopener noreferrer" className="btn-outline justify-center">
+                    <MapPin size={16} aria-hidden="true" /> Directions
+                  </a>
+                </div>
               </div>
               {contactItems.map((item) => (
                 <div key={item.label} className="flex gap-4">
@@ -59,7 +73,7 @@ export default function ContactPage() {
             <div className="lg:col-span-2 bg-temple-cream border border-temple-sand p-8 lg:p-10">
               <div className="flex items-center gap-3 mb-8">
                 <MessageSquare size={20} className="text-gold" />
-                <h3 className="font-display text-2xl font-semibold text-ink">Send a Message</h3>
+                <h3 className="font-display text-2xl font-semibold text-ink">Send a message</h3>
               </div>
               <ContactForm />
             </div>

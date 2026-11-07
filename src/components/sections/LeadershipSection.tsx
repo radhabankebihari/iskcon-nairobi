@@ -19,7 +19,7 @@ export default function LeadershipSection() {
       <div className="relative z-10 content-width section-padding">
         <div className="mb-12 grid gap-10 lg:grid-cols-[0.94fr_0.86fr] lg:items-center">
           <div>
-            <SectionHeading eyebrow="Guidance & Vision" title="Srila Prabhupada" accent="and Africa's doorway" eyebrowClassName="eyebrow block mb-4 text-gold" titleClassName="section-title-light" />
+            <SectionHeading accentTone="gold" eyebrow="Guidance & Vision" title="Srila Prabhupada" accent="and Africa's doorway" eyebrowClassName="eyebrow block mb-4 text-gold" titleClassName="section-title-light" />
             <div className="relative mt-6 lg:hidden">
               <div className="relative overflow-hidden border border-gold/20 bg-dusk/92 p-3 shadow-card-hover">
                 <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"

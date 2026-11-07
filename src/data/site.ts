@@ -31,8 +31,16 @@ export const templeInfo = {
   phoneHref: "+254722815039",
   email: "iskconnairobi@gmail.com",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=ISKCON%20Nairobi%20Hare%20Krishna%20Close%20Nairobi%20Kenya",
-  hours: `Morning: ${morningHours} | Evening: ${eveningHours}`,
+  // Two lines; shown with whitespace-pre-line so each session sits on its own line.
+  hours: `Morning: ${morningHours}\nEvening: ${eveningHours}`,
   note: "Programme timings can vary on festival days. Contact the temple before travelling for major celebrations.",
+};
+
+// M-Pesa giving details, as printed on every page of the temple's 2027 calendar.
+// The same Paybill is used for Kirtan Safari with its own account name.
+export const templeGiving = {
+  mpesaPaybill: "250144",
+  mpesaAccount: "seva",
 };
 
 export const socialLinks = [
@@ -190,6 +198,43 @@ export const homepageFestivalPreview = [
     tag: "",
     endsAt: "2026-09-20T00:00:00+03:00",
   },
+  // 2027 dates from the temple's printed Hare Krishna Calendar 2027.
+  {
+    title: "Gaura Purnima",
+    date: "Monday 22 March 2027",
+    month: "Mar",
+    day: "22",
+    location: "ISKCON Nairobi, Hare Krishna Temple",
+    description: "The appearance of Sri Caitanya Mahaprabhu, observed with a fast till moonrise, kirtan, abhishek, class, and an evening feast.",
+    image: "/images/community/iskcon-temple-architecture.jpg",
+    href: "/festivals/gaura-purnima",
+    tag: "",
+    endsAt: "2027-03-22T23:59:59+03:00",
+  },
+  {
+    title: "Sri Krishna Janmashtami",
+    date: "Wednesday 25 August 2027",
+    month: "Aug",
+    day: "25",
+    location: "ISKCON Nairobi, Hare Krishna Temple",
+    description: "The appearance day of Lord Krishna, observed with fasting until midnight, kirtan, abhishek, offerings, and prasadam.",
+    image: "/images/calendar-janmashtami-krishna.jpeg",
+    href: "/festivals/janmashtami",
+    tag: "",
+    endsAt: "2027-08-25T23:59:59+03:00",
+  },
+  {
+    title: "Radhashtami",
+    date: "Wednesday 8 September 2027",
+    month: "Sep",
+    day: "08",
+    location: "ISKCON Nairobi, Hare Krishna Temple",
+    description: "Appearance of Srimati Radharani, observed with a fast till noon, kirtan, class, worship, and special temple programmes.",
+    image: "/images/calendar-radhashtami-sakhis.jpeg",
+    href: "/festivals/radhashtami",
+    tag: "",
+    endsAt: "2027-09-08T23:59:59+03:00",
+  },
 ];
 
 export const vaishnavaCalendar2026 = [
@@ -333,6 +378,63 @@ export const vaishnavaCalendar2026 = [
   },
 ];
 
+// The seven purposes of ISKCON, as printed in the temple's 2027 calendar.
+export const sevenPurposes = [
+  "To systematically propagate spiritual knowledge to society at large and to educate all people in the techniques of spiritual life, in order to check the imbalance of values in life and to achieve real unity and peace in the world.",
+  "To propagate a consciousness of Krishna (God), as it is revealed in the great scriptures of India, Bhagavad-gita and Srimad-Bhagavatam.",
+  "To bring the members of the Society together with each other and nearer to Krishna, the prime entity, thus developing the idea within the members, and humanity at large, that each soul is part and parcel of the quality of Godhead (Krishna).",
+  "To teach and encourage the sankirtana movement, congregational chanting of the holy name of God, as revealed in the teachings of Lord Sri Chaitanya Mahaprabhu.",
+  "To erect for the members and for society at large a holy place of transcendental pastimes dedicated to the personality of Krishna.",
+  "To bring the members closer together for the purpose of teaching a simpler, more natural way of life.",
+  "With a view towards achieving the aforementioned purposes, to publish and distribute periodicals, magazines, books, and other writings.",
+];
+
+// Sister ISKCON centres in East Africa, as listed in the temple's 2027 calendar.
+export const eastAfricaCentres = [
+  {
+    city: "Mombasa",
+    temple: "New Dwarikadham Temple",
+    address: "Beach Road, Nyali, Mombasa, Kenya",
+    phones: ["+254 733 466 577"],
+    email: "iskconmmsa2011@gmail.com",
+    website: "https://www.iskconmmsa.com",
+  },
+  {
+    city: "Kisumu",
+    temple: "Sri Sri Radha Madan Mohan Temple",
+    address: "Addis Ababa / Cairo Road, Milimani, Kisumu, Kenya",
+    phones: ["+254 722 828 494"],
+    email: "srisriradhamadanmohan.kisumu@gmail.com",
+  },
+  {
+    city: "Eldoret",
+    temple: "Sri Sri Radha Shyamsundar Temple",
+    address: "Eldoret, Kenya",
+    phones: ["+254 783 785 070"],
+    email: "iskconeldoret2018@gmail.com",
+  },
+  {
+    city: "Nakuru",
+    temple: "ISKCON Nakuru",
+    address: "17/39 Forest Road, Milimani, Nakuru, Kenya",
+    phones: ["+254 720 853 880"],
+  },
+  {
+    city: "Dar es Salaam",
+    temple: "Sri Sri Radha Shyamsundar Temple",
+    address: "Mosque Street, Dar es Salaam, Tanzania",
+    phones: ["+255 713 215 432"],
+    email: "rathodpv57@gmail.com",
+  },
+  {
+    city: "Kampala",
+    temple: "ISKCON Kampala",
+    address: "9b Dewinton Road, Kampala, Uganda",
+    phones: ["+256 758 405 972", "+256 787 806 006"],
+    email: "iskconuganda@gmail.com",
+  },
+];
+
 export const testimonials = [
   {
     quote: "The first thing I felt at the temple was welcome. The kirtan, prasadam, and classes gave me a spiritual home in Nairobi.",
@@ -425,7 +527,7 @@ export const leadershipProfiles = [
     category: "Resident Teaching",
     image: "/images/leadership/sri-gauranga-prabhu-web.jpg",
     summary: "The senior-most resident brahmachari and a respected teacher.",
-    details: "Sri Gauranga Prabhu is the senior resident brahmachari, supporting temple life through teaching, mentorship, resident training, and daily service.",
+    details: "Sri Gauranga Prabhu is the senior resident brahmachari and facilitates the Bhakti Sastri and Bhakti Vaibhava classes, supporting temple life through teaching, mentorship, resident training, and daily service.",
   },
 ];
 
@@ -449,35 +551,30 @@ export const donationPaths = [
     title: "Temple Worship",
     description: "Support daily worship at Sri Sri Radha Bankebihari Temple: flowers, lamps, offerings, maintenance, and festival worship.",
     image: "/images/donate/main-altar-offering.jpg",
-    icon: "🪔",
     href: "/donate/temple",
   },
   {
     title: "Food For Life",
     description: "Help prepare and distribute sanctified vegetarian meals for temple guests, students, and communities in need.",
     image: "/images/food-for-life/prasadam-students.jpg",
-    icon: "🍛",
     href: "/donate/food",
   },
   {
     title: "Cow Protection",
     description: "Support feed, veterinary care, shelter, and daily service for protected cows at the Thika farm and goshala.",
     image: "/images/thika-farm/thika-farm-visit-gate.jpg",
-    icon: "🐄",
     href: "/donate/cows",
   },
   {
     title: "Student Sponsorship",
     description: "Sponsor study materials, prasadam, retreats, and mentorship for youth and students learning Krishna consciousness.",
     image: "/images/hktc/hktc-nairobi-prabhupada-book-study.jpg",
-    icon: "📚",
     href: "/donate/students",
   },
   {
     title: "Festival Support",
     description: "Help make Ratha Yatra, Janmashtami, Gaura Purnima, and Kirtan Safari accessible with kirtan, prasadam, and public outreach.",
     image: "/images/hero-ratha-yatra-kenya.jpg",
-    icon: "🎺",
     href: "/donate/festivals",
   },
 ];

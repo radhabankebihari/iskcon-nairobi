@@ -100,7 +100,7 @@ export default function AdhivasaBlogPage() {
                 </div>
                 <Link
                   href="/blog"
-                  className="tap-target inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:text-sand"
+                  className="text-link tap-target inline-flex items-center gap-2 text-gold transition-colors hover:text-sand"
                 >
                   More devotional stories <ArrowRight size={12} />
                 </Link>

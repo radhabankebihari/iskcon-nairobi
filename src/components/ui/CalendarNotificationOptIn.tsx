@@ -149,12 +149,13 @@ export default function CalendarNotificationOptIn() {
             Enable reminders to receive push notifications for Ekadashi and major ISKCON Nairobi festivals.
           </p>
 
+          {permission !== "denied" && permission !== "unsupported" && (
           <div className="mt-5 flex flex-wrap gap-3">
             <button
               type="button"
               onClick={enableReminders}
-              disabled={enabled || isSaving || permission === "unsupported" || permission === "denied"}
-              className="inline-flex min-h-11 items-center gap-2 bg-primary px-5 py-3 font-body text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-ink/30"
+              disabled={enabled || isSaving}
+              className="inline-flex min-h-11 items-center gap-2 bg-primary px-5 py-3 font-body text-sm font-bold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-ink/30"
             >
               <BellRing size={15} />
               {buttonLabel}
@@ -164,16 +165,24 @@ export default function CalendarNotificationOptIn() {
               <button
                 type="button"
                 onClick={disableReminders}
-                className="inline-flex min-h-11 items-center gap-2 border border-temple-sand px-5 py-3 font-body text-xs font-bold uppercase tracking-[0.16em] text-ink transition hover:border-primary/40"
+                className="inline-flex min-h-11 items-center gap-2 border border-temple-sand px-5 py-3 font-body text-sm font-bold text-ink transition hover:border-primary/40"
               >
                 Turn off
               </button>
             )}
           </div>
+          )}
 
           {permission === "denied" && (
-            <p className="mt-3 font-body text-xs leading-relaxed text-primary">
-              Notifications are blocked in this browser. Open the browser site settings for ISKCON Nairobi to allow notifications.
+            <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">
+              Notifications are turned off for this site in your browser. You can allow them in your browser&apos;s site
+              settings, or simply check this calendar.
+            </p>
+          )}
+
+          {permission === "unsupported" && (
+            <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">
+              This browser can&apos;t show reminders. The calendar below lists every date.
             </p>
           )}
         </div>

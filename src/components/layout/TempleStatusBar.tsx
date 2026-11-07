@@ -93,7 +93,7 @@ export default function TempleStatusBar({ visible }: TempleStatusBarProps) {
             </span>
             <span className="h-3 w-px shrink-0 bg-gold/40 max-[900px]:hidden" />
             <span className="truncate text-ink/75 max-[900px]:text-xs">
-              <span className="max-[900px]:hidden">{status && `${status.detailText} - ${status.windowLabel}`}</span>
+              <span className="max-[900px]:hidden">{status?.detailText}</span>
               <span className="hidden max-[900px]:inline">{status?.detailText}</span>
             </span>
           </div>
@@ -105,7 +105,7 @@ export default function TempleStatusBar({ visible }: TempleStatusBarProps) {
             </span>
             <Link
               href={festivalHref}
-              className="tap-target inline-flex shrink-0 items-center gap-1.5 border border-sunset/35 bg-sunset/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.13em] text-sunset-ink transition-colors hover:border-sunset/60 hover:bg-sunset/15 max-[900px]:gap-1 max-[900px]:px-1.5 max-[900px]:py-1 max-[900px]:text-xs max-[900px]:tracking-[0.06em]"
+              className="tap-target inline-flex shrink-0 items-center gap-1.5 border border-sunset/35 bg-sunset/10 px-3 py-1.5 text-sm font-semibold text-sunset-ink transition-colors hover:border-sunset/60 hover:bg-sunset/15 max-[900px]:gap-1 max-[900px]:px-1.5 max-[900px]:py-1 max-[900px]:text-xs max-[900px]:"
             >
               <FestivalIcon size={13} className="shrink-0 max-[900px]:h-3 max-[900px]:w-3" />
               <span className="max-[900px]:hidden">

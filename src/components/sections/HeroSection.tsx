@@ -38,37 +38,37 @@ const baseHeroImages: HeroImage[] = [
     tagline: "Come offer a lamp to Lord Krishna.",
     description: "26 October - 24 November 2026. Lamp offerings daily at 7:30 AM and 7:30 PM.",
     ctas: [
-      { href: "/visit", label: "Plan Your Visit", variant: "primary" },
-      { href: "/festivals", label: "Explore Festivals", variant: "ghost" },
+      { href: "/visit", label: "Plan your visit", variant: "primary" },
+      { href: "/festivals", label: "Explore festivals", variant: "ghost" },
     ],
     durationMs: 10000,
   },
   {
-    src: "/images/hero-ratha-yatra-kenya.jpg",
-    alt: "Ratha Yatra devotees in Nairobi carrying a Hare Krishna sign",
+    src: "/images/hero-ratha-yatra-nairobi-gathering.webp",
+    alt: "Devotees gather for Ratha Yatra in central Nairobi, with the city skyline behind them",
     position: "center 48%",
-    mobilePosition: "62% center",
+    mobilePosition: "52% center",
     eyebrow: "Sri Sri Radha Bankebihari Temple",
     tagline: "Faith.\u2002Community.\u2002Service.",
     description:
       "Discover Krishna Consciousness in Nairobi through worship, kirtan, prasadam, education, and service.",
     ctas: [
-      { href: "/visit", label: "Visit Temple", variant: "ghost" },
-      { href: "/donate", label: "Support Our Mission", variant: "primary" },
+      { href: "/visit", label: "Visit the temple", variant: "ghost" },
+      { href: "/donate", label: "Support our mission", variant: "primary" },
     ],
   },
   {
-    src: "/images/kirtan-safari-daily-darshan-2026.jpg",
+    src: "/images/hero-radha-bankebihari-darshan.webp",
     alt: "Daily darshan of Sri Sri Radha Bankebihari in red festival attire",
-    position: "center top",
+    position: "center 22%",
     mobilePosition: "center top",
     eyebrow: "Sri Sri Radha Bankebihari Temple",
     tagline: "Faith.\u2002Community.\u2002Service.",
     description:
       "Discover Krishna Consciousness in Nairobi through worship, kirtan, prasadam, education, and service.",
     ctas: [
-      { href: "/visit", label: "Visit Temple", variant: "ghost" },
-      { href: "/donate", label: "Support Our Mission", variant: "primary" },
+      { href: "/visit", label: "Visit the temple", variant: "ghost" },
+      { href: "/donate", label: "Support our mission", variant: "primary" },
     ],
   },
 ];
@@ -239,16 +239,6 @@ export default function HeroSection() {
               <ArrowDown size={14} className="animate-bounce" />
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Temple schedule ticker */}
-      <div className="absolute top-20 right-0 hidden lg:flex flex-col items-end gap-1 pr-8 pt-8">
-        <span className="eyebrow text-gold text-shadow">Today&apos;s Programmes</span>
-        <div className="text-right text-shadow">
-          <p className="font-body text-white/90 text-xs">4:30 A.M. - Mangala Arati</p>
-          <p className="font-body text-white/90 text-xs">7:15 A.M. - Shringar Darshan</p>
-          <p className="font-body text-white/90 text-xs">7:00 P.M. - Sandhya - Gaur Arati</p>
         </div>
       </div>
     </section>

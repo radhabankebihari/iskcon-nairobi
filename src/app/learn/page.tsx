@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bell, BookOpen, CalendarDays, Clock, GraduationCap, Home, LibraryBig, MessageCircle, Users } from "lucide-react";
+import { ArrowRight, Baby, Bell, BookOpen, CalendarDays, Clock, GraduationCap, HeartHandshake, Home, LibraryBig, MessageCircle, Music, Users } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -9,7 +9,7 @@ import ButtonLink from "@/components/ui/ButtonLink";
 export const metadata = withSeo({
   title: "Learn",
   description:
-    "Daily Srimad-Bhagavatam classes, Bhagavad-gita study, HKTC philosophy classes, Sunday festival classes, Bhakti Vriksha, seminars, and personal guidance at ISKCON Nairobi.",
+    "Daily Srimad-Bhagavatam classes, Bhagavad-gita study, Sunday School, Bhakti Sastri, HKTC philosophy classes, Bhakti Vriksha, Ladies Sanga, Namahatta, and personal guidance at ISKCON Nairobi.",
 }, "/learn");
 
 const learningPaths = [
@@ -24,18 +24,27 @@ const learningPaths = [
   {
     icon: BookOpen,
     eyebrow: "Verse by Verse",
-    title: "Bhagavad-gita Study",
+    title: "Bhagavad-gita Classes",
     timing: "Covered in regular temple and HKTC classes",
     description:
-      "Each Bhagavad-gita class focuses on one verse at a time, following Bhagavad-gita As It Is and the conclusions taught by Srila Prabhupada and the Goswamis.",
+      "Deepen your understanding of spiritual wisdom, one verse at a time, following Bhagavad-gita As It Is and the conclusions taught by Srila Prabhupada and the Goswamis.",
+    facilitator: "Aishvarya Lila Devi Dasi",
   },
   {
     icon: CalendarDays,
     eyebrow: "Every Sunday",
-    title: "Sunday Festival Class",
-    timing: "After the 12:00 P.M. arati",
+    title: "Sunday Afternoon Programme",
+    timing: "Sundays, 12:00 to 2:00 P.M.",
     description:
-      "The Sunday festival includes a temple class for the whole community, followed by kirtan, association, and prasadam.",
+      "Join us every Sunday afternoon for kirtan, a spiritual talk, and a delicious feast, open to the whole community.",
+  },
+  {
+    icon: Baby,
+    eyebrow: "Ages 3 to 18",
+    title: "Sunday School",
+    timing: "Sundays, 12:00 to 2:00 P.M.",
+    description:
+      "Interactive Krishna conscious learning for children through stories, activities, kirtan, and fun, while parents attend the Sunday programme.",
   },
 ];
 
@@ -50,33 +59,58 @@ const formalStudyTracks = [
     scope: "Bhagavad-gita, Nectar of Devotion, Nectar of Instruction, and Sri Isopanisad",
     description:
       "A structured study path for devotees who want deeper grounding in Srila Prabhupada's foundational books.",
+    facilitator: "Sri Gauranga Das",
   },
   {
     title: "Bhakti Vaibhava",
     scope: "A systematic study of Srimad-Bhagavatam",
     description:
       "A more advanced course track for serious students who want to study Bhagavatam with discipline, guidance, and service mood.",
+    facilitator: "Sri Gauranga Das",
   },
 ];
 
-const communityLearning = [
+type CommunityItem = {
+  icon: typeof Users;
+  title: string;
+  description: string;
+  timing?: string;
+  facilitator?: string;
+};
+
+const communityLearning: CommunityItem[] = [
   {
     icon: Users,
-    title: "Bhakti Vriksha Sessions",
+    title: "Bhakti Vriksha",
     description:
-      "Small-group devotional gatherings are held regularly for study, kirtan, discussion, and practical guidance in Krishna consciousness.",
+      "Small-group devotional gatherings for learning, discussion, kirtan, and meaningful association.",
+    facilitator: "Kaivalya Krishna Das",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Ladies Sanga",
+    description:
+      "A warm gathering for ladies, with kirtan, Bhagavad-gita discussion, and devotional association.",
+    facilitator: "Caitanya Devi Dasi & Mohan Priya Devi Dasi",
+  },
+  {
+    icon: Home,
+    title: "Namahatta Gatherings",
+    description:
+      "Devotional gatherings held in homes across the community, with kirtan and discussion. You can also invite devotees to your own home.",
+    facilitator: "Rukma Das",
+  },
+  {
+    icon: Music,
+    title: "Six-Hour Kirtans",
+    description: "Immerse yourself in uplifting congregational chanting and devotional music.",
+    timing: "Monthly, with dates announced regularly",
   },
   {
     icon: Bell,
     title: "Weekend Seminars",
     description:
       "The temple regularly invites visiting devotees and speakers for seminars. Watch the temple notice board for dates, topics, and speaker announcements.",
-  },
-  {
-    icon: Home,
-    title: "Home Programmes",
-    description:
-      "You can invite devotees to your home for kirtan, class, prasadam, or guidance for family and personal spiritual practice.",
   },
   {
     icon: MessageCircle,
@@ -103,12 +137,12 @@ export default function LearnPage() {
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <SectionHeading eyebrow="Programmes & Classes" title="Study Through" accent="Hearing and Discussion" eyebrowClassName="eyebrow mb-3 block" />
             <p className="mx-auto mt-5 max-w-2xl font-body text-sm leading-relaxed text-ink/75 sm:text-base">
-              ISKCON Nairobi offers learning through daily temple classes, weekly HKTC philosophy sessions,
-              Sunday festival classes, Bhakti Vriksha groups, and seminars with invited speakers.
+              ISKCON Nairobi offers learning through daily temple classes, the Sunday programme and Sunday School,
+              Bhakti Sastri and Bhakti Vaibhava courses, weekly HKTC philosophy sessions, and community sangas.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {learningPaths.map((path) => (
               <article
                 key={path.title}
@@ -128,6 +162,9 @@ export default function LearnPage() {
                   {path.timing}
                 </div>
                 <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">{path.description}</p>
+                {"facilitator" in path && path.facilitator && (
+                  <p className="mt-3 font-body text-xs font-semibold text-gold-ink">Facilitator: {path.facilitator}</p>
+                )}
               </article>
             ))}
           </div>
@@ -175,12 +212,13 @@ export default function LearnPage() {
                       {track.scope}
                     </p>
                     <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">{track.description}</p>
+                    <p className="mt-3 font-body text-xs font-semibold text-gold-ink">Facilitator: {track.facilitator}</p>
                   </div>
                   <Link
                     href="/contact"
-                    className="tap-target mt-6 inline-flex items-center gap-2 self-start font-body text-xs font-semibold uppercase tracking-widest text-gold-ink transition-all hover:gap-3"
+                    className="text-link tap-target mt-6 inline-flex items-center gap-2 self-start text-gold-ink transition-all hover:gap-3"
                   >
-                    Inquire About This Course
+                    Ask about this course
                     <ArrowRight size={12} />
                   </Link>
                 </article>
@@ -198,11 +236,12 @@ export default function LearnPage() {
               <h2 className="font-display text-display-sm font-semibold leading-tight text-ink">
                 Regular Evening
                 <br />
-                <em className="text-gold not-italic font-normal">Study at HKTC</em>
+                <em className="not-italic font-normal">Study at HKTC</em>
               </h2>
               <p className="mt-5 font-body text-sm leading-relaxed text-ink/75 sm:text-base">
-                The Hare Krishna Training Centre hosts philosophy classes through the week. Each class is one
-                hour, includes students from the wider community, and prasadam is served afterward.
+                The Hare Krishna Training Centre helps train and guide students in Krishna consciousness, with
+                philosophy classes through the week. Each class is one hour, includes students from the wider
+                community, and prasadam is served afterward. Facilitator: Govinda Prem Das.
               </p>
             </div>
 
@@ -241,20 +280,25 @@ export default function LearnPage() {
             <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
               Seminars, Sangas
               <br />
-              <em className="text-gold not-italic font-normal">and Personal Guidance</em>
+              <em className="not-italic font-normal">and Personal Guidance</em>
             </h2>
             <p className="mt-5 font-body text-sm leading-relaxed text-sand/75 sm:text-base">
-              Learning also happens through association: small groups, visiting speakers, home programmes,
-              and direct guidance from devotees.
+              Learning also happens through association: small groups, sangas, home gatherings, kirtan,
+              visiting speakers, and direct guidance from devotees.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {communityLearning.map((item) => (
               <article key={item.title} className="border border-gold/15 bg-white/[0.06] p-5">
                 <item.icon className="mb-4 text-gold" size={21} />
                 <h3 className="font-display text-xl font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 font-body text-sm leading-relaxed text-sand/75">{item.description}</p>
+                {(item.timing || item.facilitator) && (
+                  <p className="mt-3 font-body text-xs font-semibold text-gold">
+                    {item.timing ?? `Facilitator: ${item.facilitator}`}
+                  </p>
+                )}
               </article>
             ))}
           </div>
@@ -265,7 +309,7 @@ export default function LearnPage() {
             </ButtonLink>
             <Link
               href="/projects/hktc-nairobi"
-              className="min-h-11 inline-flex items-center justify-center gap-2 border border-gold/40 px-5 py-3 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-white"
+              className="min-h-11 inline-flex items-center justify-center gap-2 border border-gold/40 px-5 py-3 font-body text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-white"
             >
               Explore HKTC Nairobi
               <ArrowRight size={14} />

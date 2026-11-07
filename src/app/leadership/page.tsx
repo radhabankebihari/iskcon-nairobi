@@ -81,7 +81,7 @@ export default function LeadershipPage() {
       <section className="bg-sand py-section sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
         <div className="content-width section-padding">
           <div className="mb-12 text-center">
-            <SectionHeading eyebrow="Key Service Leaders" title="Departments carried by" accent="devotee leadership" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
+            <SectionHeading eyebrow="Key Service Leaders" title="Departments led by" accent="devotee leadership" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">

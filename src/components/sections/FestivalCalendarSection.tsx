@@ -33,10 +33,10 @@ export default function FestivalCalendarSection() {
           </div>
         </div>
 
-        {/* Next dates from the calendar, shown when no featured festival is coming up */}
-        {now && visibleFestivals.length === 0 && (
+        {/* The next few dates from the calendar, then the featured festivals */}
+        {now && (nextDates.length > 0 || visibleFestivals.length === 0) && (
           nextDates.length > 0 ? (
-            <ul className="grid gap-px border border-temple-sand bg-temple-sand sm:grid-cols-2">
+            <ul className={`grid gap-px border border-temple-sand bg-temple-sand sm:grid-cols-2 ${visibleFestivals.length ? "mb-8" : ""}`}>
               {nextDates.map((item) => (
                 <li key={`${item.isoDate}-${item.event}`} className="flex items-baseline gap-4 bg-white p-5">
                   <span className="w-16 shrink-0 font-body text-sm font-bold uppercase tracking-wide text-primary">{item.label}</span>
@@ -55,7 +55,7 @@ export default function FestivalCalendarSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visibleFestivals.map((festival) => (
             <Link
-              key={festival.href}
+              key={`${festival.href}-${festival.endsAt}`}
               href={festival.href}
               className="group block card-surface hover:border-gold/40 transition-all duration-300 hover:shadow-card-hover overflow-hidden"
             >
@@ -97,8 +97,8 @@ export default function FestivalCalendarSection() {
                 <p className="font-body text-ink/75 text-sm leading-relaxed line-clamp-2">
                   {festival.description}
                 </p>
-                <div className="mt-4 flex items-center gap-1.5 font-body text-xs font-semibold text-gold-ink tracking-widest uppercase">
-                  Learn More <ArrowRight size={11} />
+                <div className="text-link mt-4 flex items-center gap-1.5 text-gold-ink">
+                  Learn more <ArrowRight size={11} />
                 </div>
               </div>
             </Link>
@@ -108,9 +108,9 @@ export default function FestivalCalendarSection() {
         <div className="mt-8 flex justify-start sm:mt-10">
           <Link
             href="/festivals"
-            className="tap-target flex items-center gap-2 font-body text-xs text-gold-ink font-semibold tracking-widest uppercase hover:gap-3 transition-all"
+            className="text-link tap-target flex items-center gap-2 text-gold-ink hover:gap-3 transition-all"
           >
-            All Festivals <ArrowRight size={12} />
+            All festivals <ArrowRight size={12} />
           </Link>
         </div>
 
@@ -118,11 +118,11 @@ export default function FestivalCalendarSection() {
         <div className="mt-12 bg-temple-brown p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-display text-white text-xl mb-1">Never Miss a Festival</p>
-            <p className="font-body text-white/60 text-sm">See the full 2026 Vaishnava calendar for ISKCON Nairobi.</p>
+            <p className="font-body text-white/60 text-sm">See every festival, Ekadashi, and holy day on the ISKCON Nairobi calendar.</p>
           </div>
           <Link
             href="/festivals"
-            className="min-h-11 bg-gold text-ink font-body text-xs font-semibold tracking-widest uppercase px-6 py-3 hover:bg-gold-light transition-colors"
+            className="min-h-11 bg-primary text-white font-body text-sm font-semibold px-6 py-3 hover:bg-primary-dark transition-colors"
           >
             View Festivals
           </Link>

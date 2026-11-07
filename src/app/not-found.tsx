@@ -44,11 +44,11 @@ export default function NotFound() {
             <nav aria-label="Page recovery options" className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <ButtonLink variant="primary" href="/" className="gap-2">
                 <ArrowLeft size={17} aria-hidden="true" />
-                Return Home
+                Return home
               </ButtonLink>
               <ButtonLink variant="ghost" href="/visit" className="gap-2">
                 <MapPin size={17} aria-hidden="true" />
-                Plan a Visit
+                Plan a visit
               </ButtonLink>
               <ButtonLink variant="ghost" href="/festivals" className="gap-2">
                 <CalendarDays size={17} aria-hidden="true" />

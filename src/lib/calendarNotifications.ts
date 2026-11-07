@@ -1,4 +1,4 @@
-import { vaishnavaCalendar2026 } from "@/data/site";
+import { entryIsoDate, vaishnavaCalendarMonths, type CalendarEntry } from "@/data/vaishnavaCalendar";
 
 export type CalendarNotificationEvent = {
   id: string;
@@ -9,21 +9,6 @@ export type CalendarNotificationEvent = {
   startsAt: string;
   href: string;
   type: "Ekadashi" | "Major";
-};
-
-const monthNumbers: Record<string, string> = {
-  January: "01",
-  February: "02",
-  March: "03",
-  April: "04",
-  May: "05",
-  June: "06",
-  July: "07",
-  August: "08",
-  September: "09",
-  October: "10",
-  November: "11",
-  December: "12",
 };
 
 function eventSlug(value: string) {
@@ -65,34 +50,37 @@ function titleForEvent(event: string, type: "Ekadashi" | "Major") {
     return "Ekadashi reminder";
   }
 
-  return event.split(" - ")[0].split(" / ")[0];
+  return event.split(" - ")[0].split(" / ")[0].split(": ")[0];
 }
 
-function bodyForEvent(event: string, type: "Ekadashi" | "Major") {
+function bodyForEvent(item: CalendarEntry, type: "Ekadashi" | "Major") {
+  const fast = item.fast ? ` ${item.fast}.` : "";
+
   if (type === "Ekadashi") {
-    return `Today is ${event}. Please check temple announcements for local fasting details.`;
+    const breakFast = item.breakFast
+      ? ` Break fast ${item.breakFast}.`
+      : " Please check temple announcements for local fasting details.";
+    return `Today is ${item.event}.${fast}${breakFast}`;
   }
 
-  return `Today at ISKCON Nairobi: ${event}. Open the calendar for programme details.`;
+  return `Today at ISKCON Nairobi: ${item.event}.${fast} Open the calendar for programme details.`;
 }
 
 export const calendarNotificationEvents: CalendarNotificationEvent[] =
-  vaishnavaCalendar2026
+  vaishnavaCalendarMonths
     .flatMap((month) => {
-      const monthNumber = monthNumbers[month.month];
-
       return month.events
         .filter((item) => item.type === "Ekadashi" || item.type === "Major")
         .map((item) => {
-          const day = item.date.replace(/^\D+/, "").padStart(2, "0");
+          const isoDate = entryIsoDate(month, item);
           const type = item.type as "Ekadashi" | "Major";
-          const startsAt = `2026-${monthNumber}-${day}T07:00:00+03:00`;
-          const id = `2026-${monthNumber}-${day}-${eventSlug(item.event)}`;
+          const startsAt = `${isoDate}T07:00:00+03:00`;
+          const id = `${isoDate}-${eventSlug(item.event)}`;
 
           return {
             id,
             title: titleForEvent(item.event, type),
-            body: bodyForEvent(item.event, type),
+            body: bodyForEvent(item, type),
             event: item.event,
             dateLabel: item.date,
             startsAt,

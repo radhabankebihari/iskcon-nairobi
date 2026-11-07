@@ -83,7 +83,7 @@ export default function QuickNavSection() {
               <p className="hidden font-body text-sm leading-relaxed text-ink/75 sm:block sm:text-base">
                 {templeInfo.shortAddress}. No experience needed. Come as you are.
               </p>
-              <span className="mt-2 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+              <span className="text-link mt-2 inline-flex items-center gap-2 text-primary">
                 Plan your visit
                 <ArrowRight size={14} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>

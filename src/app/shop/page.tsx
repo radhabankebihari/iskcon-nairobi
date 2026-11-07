@@ -65,7 +65,7 @@ export default function ShopPage() {
                     <span className="font-display text-gold-ink font-bold text-lg flex-shrink-0 ml-2">{product.price}</span>
                   </div>
                   <p className="font-body text-ink/75 text-sm leading-relaxed mb-5">{product.desc}</p>
-                  <button className="min-h-11 w-full flex items-center justify-center gap-2 bg-temple-brown text-white font-body text-xs font-semibold tracking-widest uppercase py-3 hover:bg-gold hover:text-ink transition-colors">
+                  <button className="min-h-11 w-full flex items-center justify-center gap-2 bg-temple-brown text-white font-body text-sm font-semibold py-3 hover:bg-gold hover:text-ink transition-colors">
                     <ShoppingBag size={12} />
                     Order Now
                   </button>
@@ -90,7 +90,7 @@ export default function ShopPage() {
           </div>
 
           <div className="mt-8 text-center">
-            <ButtonLink variant="primary" href="/contact">Place a Custom Order</ButtonLink>
+            <ButtonLink variant="primary" href="/contact">Place a custom order</ButtonLink>
           </div>
         </div>
       </section>

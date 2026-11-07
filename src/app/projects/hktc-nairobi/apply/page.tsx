@@ -28,7 +28,7 @@ export default function HktcApplyPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <a href={`mailto:${templeInfo.email}?subject=HKTC%20Nairobi%20Application%20Interest`} className="btn-primary">
-                Email Application Interest
+                Email your interest
               </a>
               <ButtonLink variant="outline" href="/projects/hktc-nairobi">
                 Back to HKTC

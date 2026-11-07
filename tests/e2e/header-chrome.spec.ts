@@ -82,19 +82,29 @@ test("the desktop brand expansion stays on one line", async ({ page, isMobile })
   expect(metrics.height).toBeLessThanOrEqual(metrics.lineHeight + 1);
 });
 
-test("the homepage donation actions keep an even height", async ({ page }) => {
+test("the homepage invites giving through the donate page", async ({ page }) => {
   await page.goto("/", { waitUntil: "load" });
 
-  const actions = await page.locator(".donation-path-card a").evaluateAll((links) =>
-    links.map((link) => ({
-      height: Math.round(link.getBoundingClientRect().height),
-      label: link.textContent?.trim(),
-    }))
-  );
+  const cta = page.locator("[data-donation-cta]");
+  await expect(cta).toHaveAttribute("href", "/donate");
+  const box = await cta.boundingBox();
+  expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+});
 
-  expect(actions).toHaveLength(5);
-  expect(new Set(actions.map(({ height }) => height)).size).toBe(1);
-  expect(new Set(actions.map(({ label }) => label))).toEqual(new Set(["Donate"]));
+test("the donate page offers every cause with its own page", async ({ page }) => {
+  await page.goto("/donate", { waitUntil: "load" });
+
+  const causes = await page
+    .locator("[data-giving-cause]")
+    .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  expect(causes).toEqual([
+    "/donate/general",
+    "/donate/temple",
+    "/donate/food",
+    "/donate/cows",
+    "/donate/students",
+    "/donate/festivals",
+  ]);
 });
 
 for (const route of ["/", "/visit"]) {

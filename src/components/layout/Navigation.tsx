@@ -292,14 +292,14 @@ export default function Navigation() {
               className="mb-3 flex min-h-11 w-full items-center justify-center gap-2 border border-gold/40 py-3 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:bg-white/5"
             >
               <Phone size={13} />
-              Call Temple
+              Call the temple
             </a>
             <Link
               href="/donate"
               onClick={() => setIsOpen(false)}
               className="btn-primary w-full justify-center text-xs"
             >
-              Support Our Mission
+              Support our mission
             </Link>
           </div>
         </div>

@@ -49,8 +49,8 @@ export default function ProjectsPage() {
                   <p className="font-body text-ink/75 text-xs uppercase tracking-widest mb-2">{project.subtitle}</p>
                   <h2 className="font-display text-2xl font-semibold text-ink group-hover:text-primary transition-colors">{project.title}</h2>
                   <p className="font-body text-ink/75 text-sm leading-relaxed mt-3">{project.description}</p>
-                  <div className="mt-6 flex items-center gap-2 font-body text-xs font-semibold tracking-widest uppercase text-primary">
-                    Learn More <ArrowRight size={13} />
+                  <div className="text-link mt-6 flex items-center gap-2 text-primary">
+                    Learn more <ArrowRight size={13} />
                   </div>
                 </div>
               </Link>

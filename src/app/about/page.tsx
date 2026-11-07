@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/ui/PageHero";
-import { templeInfo } from "@/data/site";
+import { eastAfricaCentres, sevenPurposes, templeInfo } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 import {
   ArrowRight,
@@ -10,7 +10,10 @@ import {
   Globe2,
   HeartHandshake,
   Home,
+  Mail,
+  MapPin,
   Music,
+  Phone,
   Utensils,
   Users,
 } from "lucide-react";
@@ -88,8 +91,8 @@ const programmes = [
     icon: CalendarDays,
     title: "Sunday Feast and Sunday School",
     text:
-      "A weekly gathering with kirtan, class, children's learning, association, and a vegetarian feast for all who attend.",
-    href: "/visit",
+      "Every Sunday, 12:00 to 2:00 P.M.: kirtan, a spiritual talk, and a feast for all, with Sunday School for children aged 3 to 18.",
+    href: "/learn",
   },
   {
     icon: HeartHandshake,
@@ -165,12 +168,9 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink variant="primary" href="/visit" className="justify-center">
-                  Plan Your Visit
-                </ButtonLink>
                 <Link
                   href="/srila-prabhupada"
-                  className="min-h-11 inline-flex items-center justify-center gap-2 border border-gold/40 px-5 py-3 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-white"
+                  className="min-h-11 inline-flex items-center justify-center gap-2 border border-gold/40 px-5 py-3 font-body text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-white"
                 >
                   Nairobi and Prabhupada
                   <ArrowRight size={14} />
@@ -211,7 +211,7 @@ export default function AboutPage() {
             <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
               Nairobi was never meant
               <br />
-              <em className="text-gold not-italic font-normal">to be a closed temple</em>
+              <em className="not-italic font-normal">to be a closed temple</em>
             </h2>
             <p className="mt-5 font-body text-sm leading-relaxed text-sand/75 sm:text-base">
               Srila Prabhupada's instruction shaped the temple from the beginning: the mission here was not to serve
@@ -257,6 +257,29 @@ export default function AboutPage() {
                 </article>
               ))}
             </div>
+          </div>
+
+          <div className="mt-12 border-t border-gold/25 pt-10">
+            <div className="max-w-2xl">
+              <span className="eyebrow mb-3 block">Our Mission</span>
+              <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+                The seven purposes of ISKCON
+              </h2>
+              <p className="mt-3 font-body text-sm leading-relaxed text-ink/75 sm:text-base">
+                Srila Prabhupada set out these purposes when he founded ISKCON in New York in 1966. They still guide
+                every temple programme.
+              </p>
+            </div>
+            <ol className="mt-8 grid gap-x-8 gap-y-5 md:grid-cols-2">
+              {sevenPurposes.map((purpose, index) => (
+                <li key={index} className="flex gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/40 font-display text-lg font-semibold text-gold-ink">
+                    {index + 1}
+                  </span>
+                  <p className="font-body text-sm leading-relaxed text-ink/80">{purpose}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
@@ -304,13 +327,67 @@ export default function AboutPage() {
                   {item.title}
                 </h3>
                 <p className="mt-3 font-body text-sm leading-relaxed text-ink/75">{item.text}</p>
-                <div className="mt-5 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-widest text-gold-ink">
+                <div className="text-link mt-5 inline-flex items-center gap-2 text-gold-ink">
                   Explore
                   <ArrowRight size={13} />
                 </div>
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-temple-cream py-section sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
+        <div className="content-width section-padding">
+          <div className="mb-8 max-w-2xl">
+            <SectionHeading eyebrow="ISKCON East Africa" title="Sister temples" accent="across the region" eyebrowClassName="eyebrow mb-3 block" />
+            <p className="mt-4 font-body text-sm leading-relaxed text-ink/75 sm:text-base">
+              Travelling beyond Nairobi? These ISKCON centres welcome visitors for darshan, kirtan, and prasadam.
+            </p>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {eastAfricaCentres.map((centre) => (
+              <li key={centre.city} className="card-surface p-5">
+                <p className="font-body text-xs font-semibold uppercase tracking-[0.16em] text-gold-ink">{centre.city}</p>
+                <h3 className="mt-1 font-display text-xl font-semibold leading-tight text-ink">{centre.temple}</h3>
+                <p className="mt-3 flex gap-2 font-body text-sm leading-relaxed text-ink/75">
+                  <MapPin size={15} className="mt-0.5 shrink-0 text-gold" aria-hidden="true" />
+                  {centre.address}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                  {centre.phones.map((phone) => (
+                    <a
+                      key={phone}
+                      href={`tel:${phone.replace(/\s/g, "")}`}
+                      className="tap-target inline-flex items-center gap-2 font-body text-sm text-ink/80 hover:text-primary"
+                    >
+                      <Phone size={14} className="text-gold" aria-hidden="true" />
+                      {phone}
+                    </a>
+                  ))}
+                </div>
+                {centre.email && (
+                  <a
+                    href={`mailto:${centre.email}`}
+                    className="tap-target mt-1 inline-flex max-w-full items-center gap-2 break-all font-body text-sm text-ink/80 hover:text-primary"
+                  >
+                    <Mail size={14} className="shrink-0 text-gold" aria-hidden="true" />
+                    {centre.email}
+                  </a>
+                )}
+                {centre.website && (
+                  <a
+                    href={centre.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link tap-target mt-3 text-primary"
+                  >
+                    Visit website <ArrowRight size={13} aria-hidden="true" />
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -322,7 +399,7 @@ export default function AboutPage() {
               <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
                 Come for darshan,
                 <br />
-                <em className="text-gold not-italic font-normal">prasadam or a quiet moment</em>
+                <em className="not-italic font-normal">prasadam or a quiet moment</em>
               </h2>
               <p className="mt-5 font-body text-sm leading-relaxed text-sand/75 sm:text-base">
                 No prior experience with the tradition is required. Come with an open mind, respectful dress, and a
@@ -336,11 +413,11 @@ export default function AboutPage() {
                   <p className="font-body text-xs font-semibold uppercase tracking-[0.16em] text-gold">
                     {item.label}
                   </p>
-                  <p className="mt-2 font-body text-sm leading-relaxed text-sand/75">{item.value}</p>
+                  <p className="mt-2 whitespace-pre-line font-body text-sm leading-relaxed text-sand/75">{item.value}</p>
                 </div>
               ))}
               <ButtonLink variant="primary" href="/visit" className="mt-2 justify-center">
-                Plan Your Visit
+                Plan your visit
               </ButtonLink>
             </div>
           </div>

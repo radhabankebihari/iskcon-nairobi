@@ -266,7 +266,7 @@ export default function JharikhandaBlogPage() {
                 </div>
                 <Link
                   href="/festivals/kirtan-safari"
-                  className="tap-target inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:text-sand"
+                  className="text-link tap-target inline-flex items-center gap-2 text-gold transition-colors hover:text-sand"
                 >
                   Festival details <ArrowRight size={12} />
                 </Link>
@@ -325,7 +325,7 @@ export default function JharikhandaBlogPage() {
                   href={sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="tap-target mt-4 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-widest text-gold-ink transition-all hover:gap-3"
+                  className="text-link tap-target mt-4 inline-flex items-center gap-2 text-gold-ink transition-all hover:gap-3"
                 >
                   Open Vedabase <ExternalLink size={12} />
                 </a>
