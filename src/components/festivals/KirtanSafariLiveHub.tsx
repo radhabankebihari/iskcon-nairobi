@@ -229,7 +229,7 @@ export default function KirtanSafariLiveHub() {
             {isPreEvent ? "Register Free" : isBetweenDays ? "Join Us Tomorrow" : "Join Us Today"}
           </KirtanSafariRegistrationButton>
           <a href={kirtanSafariConfig.links.directions} target="_blank" rel="noopener noreferrer" className="ks-live-secondary">
-            <Navigation size={16} aria-hidden="true" /> Get Directions
+            <Navigation size={16} aria-hidden="true" /> Get directions
           </a>
           <a href={kirtanSafariConfig.links.instagram} target="_blank" rel="noopener noreferrer" className="ks-live-icon">
             <Camera size={17} aria-hidden="true" /> Instagram

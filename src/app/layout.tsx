@@ -144,6 +144,10 @@ const structuredData = {
   image: `${siteUrl}${previewImage}`,
 };
 
+// Matches the 40px threshold in Navigation. It keeps listening, because the
+// browser restores a refreshed page's scroll position after this runs.
+const navScrollScript = `(function(){var d=document.documentElement;function s(){if(window.scrollY>40){d.setAttribute("data-nav-scrolled","")}else{d.removeAttribute("data-nav-scrolled")}}s();window.addEventListener("scroll",s,{passive:true})})();`;
+
 export default function RootLayout({
   children,
 }: {
@@ -153,8 +157,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${sourceSerif4.variable}`}
+      // The scroll script below adds data attributes to <html> before React loads.
+      suppressHydrationWarning
     >
       <body className="bg-sand text-dusk antialiased">
+        {/* Marks the page as scrolled from the first moment, including when a
+            refresh restores a mid-page position, so the header can show its
+            solid compact form before the page scripts load. See globals.css. */}
+        <script dangerouslySetInnerHTML={{ __html: navScrollScript }} />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>

@@ -301,7 +301,7 @@ export default function NoticeboardButton({ statusBarVisible = false }: Noticebo
                   type="button"
                   onClick={enabled ? disableAlerts : enableAlerts}
                   disabled={isSaving || permission === "unsupported" || permission === "denied"}
-                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 bg-primary px-4 py-2.5 font-body text-xs font-bold uppercase tracking-[0.14em] text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-ink/30"
+                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 bg-primary px-4 py-2.5 font-body text-sm font-bold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-ink/30"
                 >
                   {enabled ? <Check size={13} /> : <BellRing size={13} />}
                   {alertLabel}

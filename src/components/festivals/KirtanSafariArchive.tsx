@@ -6,8 +6,8 @@ import KirtanSafariFutureInterestForm from "./KirtanSafariFutureInterestForm";
 export default function KirtanSafariArchive() {
   const { archive, links, days } = kirtanSafariConfig;
   const availableActions = [
-    links.gallery ? { label: "View Festival Gallery", href: links.gallery, Icon: Camera } : null,
-    links.recordings ? { label: "Watch Kirtan Recordings", href: links.recordings, Icon: Video } : null,
+    links.gallery ? { label: "View the festival gallery", href: links.gallery, Icon: Camera } : null,
+    links.recordings ? { label: "Watch kirtan recordings", href: links.recordings, Icon: Video } : null,
     { label: "Follow Kirtan Safari", href: links.instagram, Icon: Camera },
   ].filter(Boolean) as Array<{ label: string; href: string; Icon: typeof Camera }>;
 
@@ -40,7 +40,7 @@ export default function KirtanSafariArchive() {
           <figure className="mt-[clamp(2rem,5vw,4rem)]">
             <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/9]">
               <Image
-                src="/images/kirtan-safari/kirtan-safari-2026-temple-memory.jpg"
+                src="/images/kirtan-safari/kirtan-safari-2026-temple-memory-lit.webp"
                 alt="Devotees gathered in kirtan before the altar at ISKCON Nairobi"
                 fill
                 sizes="(max-width: 900px) 100vw, 1100px"

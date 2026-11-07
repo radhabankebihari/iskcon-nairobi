@@ -1,5 +1,5 @@
-import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
+import MediaGallery from "@/components/sections/MediaGallery";
 import { socialLinks } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 
@@ -7,13 +7,6 @@ export const metadata = withSeo({
   title: "Media Gallery",
   description: "Photos and videos from ISKCON Nairobi - temple life, festivals, community service, and the beauty of Krishna consciousness in East Africa.",
 }, "/media");
-
-const categories = ["All", "Temple Life", "Festivals", "Farm & Goshala", "Food For Life", "HKTC", "Kirtan Safari"];
-
-const images = [
-  { src: "/images/iskcon-nairobi-main-altar-thumb.jpg", caption: "Main altar at ISKCON Nairobi", category: "Temple Life" },
-  { src: "/images/thika-farm/thika-farm-visit-gate.jpg", caption: "Organic farming and cow protection at Thika", category: "Farm & Goshala" },
-];
 
 export default function MediaPage() {
   const mediaSocials = socialLinks.filter((link) => ["YouTube", "Instagram", "Facebook"].includes(link.name));
@@ -46,7 +39,7 @@ export default function MediaPage() {
               rel="noopener noreferrer"
               className="btn-primary justify-center text-xs"
             >
-              View Full Album
+              View the full album
             </a>
           </div>
 
@@ -64,47 +57,24 @@ export default function MediaPage() {
               rel="noopener noreferrer"
               className="btn-primary justify-center text-xs"
             >
-              View Farm Album
+              View the farm album
             </a>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-10">
-            {categories.map((cat, i) => (
-              <button
-                key={cat}
-                className={`min-h-11 font-body text-xs font-semibold tracking-widest uppercase px-4 py-2 border transition-colors ${
-                  i === 0
-                    ? "bg-gold text-ink border-gold"
-                    : "border-temple-sand text-ink/75 hover:border-gold hover:text-gold-ink"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="mb-8">
+            <span className="eyebrow mb-2 block">Photo archive</span>
+            <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">From the early days</h2>
+            <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-ink/75 sm:text-base">
+              Archival moments from the beginnings of ISKCON in Nairobi, alongside temple life today.
+            </p>
           </div>
-
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
-            {images.map((img, i) => (
-              <div key={i} className="group relative overflow-hidden break-inside-avoid mb-3 cursor-pointer image-grade">
-                <Image width={1600} height={1200} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  src={img.src}
-                  alt={img.caption}
-                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="font-body text-white text-xs leading-tight">{img.caption}</p>
-                  <p className="font-body text-gold text-xs mt-1 uppercase tracking-wider">{img.category}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <MediaGallery />
 
           <div className="mt-10 text-center">
             <p className="font-body text-ink/75 text-sm">More photos and videos are shared on ISKCON Nairobi social channels.</p>
             <div className="flex flex-wrap gap-4 justify-center mt-4">
               {mediaSocials.map((platform) => (
-                <a key={platform.name} href={platform.href} target="_blank" rel="noopener noreferrer" className="tap-target font-body text-xs font-semibold text-gold-ink tracking-widest uppercase border-b border-gold/30 pb-0.5 hover:border-gold transition-colors">
+                <a key={platform.name} href={platform.href} target="_blank" rel="noopener noreferrer" className="tap-target font-body text-sm font-semibold text-gold-ink border-b border-gold/30 pb-0.5 hover:border-gold transition-colors">
                   {platform.name} →
                 </a>
               ))}

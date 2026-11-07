@@ -84,7 +84,7 @@ export default function FoodForLifePage() {
       <section className="py-16 bg-primary-dark text-center section-padding">
         <h2 className="font-display text-display-md text-white mb-4">Volunteer With Us</h2>
         <p className="font-body text-white/80 mb-8 max-w-md mx-auto">Join our Food For Life team - cooking, distributing, fundraising, or driving. Every hour of service makes a direct impact.</p>
-        <ButtonLink variant="ghost" href="/contact">Become a Volunteer</ButtonLink>
+        <ButtonLink variant="ghost" href="/contact">Become a volunteer</ButtonLink>
       </section>
     </>
   );

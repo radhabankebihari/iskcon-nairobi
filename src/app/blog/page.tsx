@@ -102,7 +102,7 @@ export default function BlogPage() {
 
               <Link
                 href={featured.href}
-                className="tap-target mt-8 inline-flex items-center gap-2 self-start font-body text-xs font-semibold uppercase tracking-widest text-gold-ink transition-all hover:gap-3"
+                className="text-link tap-target mt-8 inline-flex items-center gap-2 self-start text-gold-ink transition-all hover:gap-3"
               >
                 Read the full story <ArrowRight size={12} />
               </Link>
@@ -120,9 +120,6 @@ export default function BlogPage() {
                     More from the Journal
                   </h3>
                 </div>
-                <p className="font-body text-xs uppercase tracking-[0.14em] text-ink/75">
-                  {rest.length} {rest.length === 1 ? "story" : "stories"}
-                </p>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -162,7 +159,7 @@ export default function BlogPage() {
                         <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-ink/75">
                           {post.excerpt}
                         </p>
-                        <span className="mt-5 inline-flex items-center gap-1.5 self-start font-body text-xs font-semibold uppercase tracking-widest text-gold-ink transition-all group-hover:gap-2.5">
+                        <span className="text-link mt-5 inline-flex items-center gap-1.5 self-start text-gold-ink transition-all group-hover:gap-2.5">
                           Read the story <ArrowUpRight size={12} />
                         </span>
                       </div>

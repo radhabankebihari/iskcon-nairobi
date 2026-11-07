@@ -1,89 +1,90 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
-import { donationPaths, socialLinks, templeInfo } from "@/data/site";
-import { Heart, Mail, MessageCircle, Phone } from "lucide-react";
+import MpesaPayCard from "@/components/donate/MpesaPayCard";
+import DonationIcon from "@/components/ui/DonationIcon";
+import { givingCauses } from "@/components/donate/givingCauses";
 
 type Props = {
   params: Promise<{ fund: string }>;
 };
 
-const generalFund = {
-  title: "General Fund",
-  description: "Support temple operations, urgent needs, worship, outreach, maintenance, and community service where help is most needed.",
-  image: "/images/divine-childhood-of-krishna-vrindavan.jpeg",
-  icon: "🙏",
-  href: "/donate/general",
-};
-
-function getFund(slug: string) {
-  const fund = [...donationPaths, generalFund].find((path) => path.href.endsWith(`/${slug}`));
-  if (!fund) notFound();
-  return fund;
+function getCause(slug: string) {
+  const cause = givingCauses.find((item) => item.slug === slug);
+  if (!cause) notFound();
+  return cause;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).fund;
-  const fund = getFund(slug);
-  return withSeo({ title: `Donate - ${fund.title}`, description: fund.description }, `/donate/${slug}`);
+  const cause = getCause(slug);
+  return withSeo({ title: `Donate - ${cause.title}`, description: cause.description }, `/donate/${slug}`);
 }
 
+/** One cause: its photo and purpose beside the M-Pesa steps, with the cause named in the receipt message. */
 export default async function DonateFundPage({ params }: Props) {
-  const fund = getFund((await params).fund);
-  const whatsapp = socialLinks.find((link) => link.name === "WhatsApp");
+  const cause = getCause((await params).fund);
+  const others = givingCauses.filter((item) => item.slug !== cause.slug);
 
   return (
     <>
       <PageHero
         title="Donate to"
-        titleAccent={fund.title}
+        titleAccent={cause.title}
         subtitle="Support ISKCON Nairobi"
-        description={fund.description}
-        image={fund.image}
-        height="md"
-        className="sm:min-h-[500px]"
+        variant="compact"
       />
 
-      <section className="py-section bg-temple-bg">
+      <section className="bg-temple-cream py-10 sm:py-14">
         <div className="content-width section-padding">
-          <div className="grid lg:grid-cols-[1.2fr_.8fr] gap-8 items-start">
-            <div className="card-surface p-8 lg:p-10">
-              <div className="text-4xl mb-5">{fund.icon}</div>
-              <h2 className="font-display text-3xl font-semibold text-ink mb-4">How to Give</h2>
-              <p className="font-body text-ink/75 leading-relaxed mb-8">
-                Online payment integration is being finalized. For now, contact the temple office and mention "{fund.title}" so your donation can be directed correctly.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <a href={`tel:${templeInfo.phoneHref}`} className="btn-primary justify-center">
-                  <Phone size={14} />
-                  Call Temple
-                </a>
-                <a href={`mailto:${templeInfo.email}?subject=Donation%20-%20${encodeURIComponent(fund.title)}`} className="btn-outline justify-center">
-                  <Mail size={14} />
-                  Email Office
-                </a>
-                {whatsapp && (
-                  <a href={whatsapp.href} target="_blank" rel="noopener noreferrer" className="btn-outline justify-center sm:col-span-2">
-                    <MessageCircle size={14} />
-                    WhatsApp the Temple
-                  </a>
-                )}
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start lg:gap-12">
+            <div>
+              <div className="relative aspect-[16/9] overflow-hidden shadow-card">
+                <Image
+                  src={cause.image}
+                  alt=""
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="mt-6 flex gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <DonationIcon href={cause.href} />
+                </span>
+                <div>
+                  <h2 className="font-display text-2xl font-semibold text-ink">What your gift supports</h2>
+                  <p className="mt-2 font-body text-base leading-relaxed text-ink/75">{cause.description}</p>
+                </div>
               </div>
             </div>
-
-            <aside className="bg-temple-brown p-8 border border-gold/20">
-              <Heart className="text-gold mb-5" size={30} />
-              <h3 className="font-display text-2xl text-white font-semibold mb-3">Donation Note</h3>
-              <p className="font-body text-white/60 text-sm leading-relaxed">
-                ISKCON Nairobi welcomes designated giving for worship, prasadam, cow protection, student outreach, and festivals. Please request a receipt when you contact the temple office.
-              </p>
-              <Link href="/donate" className="tap-target mt-7 inline-flex font-body text-xs font-semibold tracking-widest uppercase text-gold border-b border-gold/40 pb-1">
-                View all funds
-              </Link>
-            </aside>
+            <MpesaPayCard cause={cause} className="lg:sticky lg:top-32" />
           </div>
+
+          <nav aria-label="Other causes" className="mt-12 border-t border-temple-sand pt-8">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-gold-ink">Other causes</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {others.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center gap-2 border border-temple-sand bg-white px-4 font-body text-sm font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary"
+                  >
+                    <DonationIcon href={item.href} size={16} className="text-primary" />
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/donate" className="text-link tap-target mt-6 text-primary">
+              <ArrowLeft size={14} aria-hidden="true" /> All giving options
+            </Link>
+          </nav>
         </div>
       </section>
     </>

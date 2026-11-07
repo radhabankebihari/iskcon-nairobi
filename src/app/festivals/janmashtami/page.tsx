@@ -1,5 +1,4 @@
 import PageHero from "@/components/ui/PageHero";
-import { templeInfo } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 import {
   ArrowRight,
@@ -13,6 +12,10 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
+import FestivalDateNote from "@/components/festivals/FestivalDateNote";
+
+// Re-render daily so the next festival date stays current.
+export const revalidate = 86400;
 
 export const metadata = withSeo({
   title: "Krishna Janmashtami",
@@ -60,10 +63,10 @@ export default function JanmashtamiPage() {
     <>
       <PageHero
         title="Krishna Janmashtami"
-        titleAccent="The Lord Appears"
-        subtitle={templeInfo.legalName}
+        subtitle="Appearance of Lord Krishna"
         description="The biggest celebration of the year at ISKCON Nairobi, honouring the divine appearance of Lord Krishna with worship, kirtan, drama, service, and prasadam."
-        image="/images/calendar-janmashtami-krishna.jpeg"
+        image="/images/festivals/janmashtami-child-krishna-butter.webp"
+        imageClassName="max-sm:object-[72%_center]"
         height="lg"
         className="festival-page-hero"
       />
@@ -152,11 +155,12 @@ export default function JanmashtamiPage() {
               </h2>
             </div>
             <div>
+              <FestivalDateNote pattern={/^Janmashtami|Janmashtami - /} name="Janmashtami" className="mb-3" />
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="flex gap-3 border border-temple-sand bg-temple-cream/60 p-4">
                   <CalendarDays className="mt-0.5 shrink-0 text-gold" size={18} />
                   <p className="font-body text-sm leading-relaxed text-ink/75">
-                    The detailed yearly programme is announced closer to the date through the temple noticeboard and official channels.
+                    The detailed programme is announced closer to the date through the temple noticeboard and official channels.
                   </p>
                 </div>
                 <div className="flex gap-3 border border-temple-sand bg-temple-cream/60 p-4">
@@ -168,7 +172,7 @@ export default function JanmashtamiPage() {
               </div>
               <div className="mt-5 flex flex-wrap gap-3">
                 <ButtonLink variant="primary" href="/donate/festivals">
-                  Support this Festival <ArrowRight size={14} />
+                  Support this festival <ArrowRight size={14} />
                 </ButtonLink>
                 <ButtonLink variant="outline" href="/festivals" className="border-gold text-gold hover:bg-gold hover:text-white">
                   Explore All Festivals

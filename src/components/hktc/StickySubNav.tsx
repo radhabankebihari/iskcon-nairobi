@@ -79,11 +79,7 @@ export default function StickySubNav() {
                 <a
                   href={`#${item.id}`}
                   onClick={handleClick(item.id)}
-                  className={`inline-flex min-h-11 items-center whitespace-nowrap px-3 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.08em] transition-colors ${
-                    isActive
-                      ? "bg-gold text-ink"
-                      : "text-ink/75 hover:bg-temple-cream hover:text-ink"
-                  }`}
+                  className={`inline-flex min-h-11 items-center whitespace-nowrap px-3 py-1.5 font-body text-sm font-semibold transition-colors ${ isActive ? "bg-gold text-ink" : "text-ink/75 hover:bg-temple-cream hover:text-ink" }`}
                 >
                   {item.label}
                 </a>

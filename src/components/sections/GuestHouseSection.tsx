@@ -26,7 +26,7 @@ export default function GuestHouseSection() {
             <span className="eyebrow text-gold block mb-3">Spiritual Hospitality</span>
             <h2 className="font-display text-display-md text-temple-cream leading-tight">
               Stay With<br />
-              <em className="text-gold not-italic font-normal">Us in Nairobi</em>
+              <em className="not-italic font-normal">Us in Nairobi</em>
             </h2>
             <p className="font-body text-white/70 text-sm mt-4 max-w-sm leading-relaxed">
               Rest, retreat, and reconnect. Our guest house offers serene accommodation within the temple campus, with access to all morning and evening programmes.
@@ -63,10 +63,10 @@ export default function GuestHouseSection() {
                 </div>
 
                 <Link
-                  href={`/guest-house#${room.name.toLowerCase().replace(/ /g, "-")}`}
-                  className="min-h-11 block text-center bg-transparent border border-gold/40 text-gold font-body text-xs font-semibold tracking-widest uppercase py-2.5 hover:bg-gold hover:text-white transition-all"
+                  href={`/guest-house?room=${encodeURIComponent(room.name)}#enquire`}
+                  className="min-h-11 block text-center bg-transparent border border-gold/40 text-gold font-body text-sm font-semibold py-2.5 hover:bg-gold hover:text-white transition-all"
                 >
-                  Enquire
+                  Enquire about this room
                 </Link>
               </div>
             </div>
@@ -76,9 +76,9 @@ export default function GuestHouseSection() {
         <div className="mt-8 flex justify-start sm:mt-10">
           <Link
             href="/guest-house"
-            className="tap-target flex items-center gap-2 font-body text-xs text-gold font-semibold tracking-widest uppercase hover:gap-3 transition-all flex-shrink-0"
+            className="text-link tap-target flex items-center gap-2 text-gold hover:gap-3 transition-all flex-shrink-0"
           >
-            All Rooms & Facilities <ArrowRight size={12} />
+            All rooms and facilities <ArrowRight size={12} />
           </Link>
         </div>
 

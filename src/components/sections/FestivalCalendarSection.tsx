@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import { homepageFestivalPreview } from "@/data/site";
 import { useKirtanSafariState } from "@/hooks/useKirtanSafariState";
-import { getUpcomingCalendarDates } from "@/lib/calendarDates";
+import { getUpcomingCalendarDays } from "@/lib/calendarDates";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 export default function FestivalCalendarSection() {
@@ -17,14 +17,14 @@ export default function FestivalCalendarSection() {
     const timer = window.setTimeout(() => setNow(new Date()), 0);
     return () => window.clearTimeout(timer);
   }, []);
-  const nextDates = now ? getUpcomingCalendarDates(now, 4) : [];
+  const nextDates = now ? getUpcomingCalendarDays(now, 4) : [];
   const visibleFestivals = homepageFestivalPreview.filter((festival) => {
     if (!now || new Date(festival.endsAt).getTime() <= now.getTime()) return false;
     return festivalState.phase !== "concluded" || festival.href !== "/festivals/kirtan-safari";
   });
 
   return (
-    <section className="pt-10 pb-section bg-temple-cream sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
+    <section className="bg-temple-cream pt-10 pb-5 sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-6">
       <div className="content-width section-padding">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
@@ -33,14 +33,18 @@ export default function FestivalCalendarSection() {
           </div>
         </div>
 
-        {/* Next dates from the calendar, shown when no featured festival is coming up */}
-        {now && visibleFestivals.length === 0 && (
+        {/* The next few dates from the calendar, then the featured festivals */}
+        {now && (nextDates.length > 0 || visibleFestivals.length === 0) && (
           nextDates.length > 0 ? (
-            <ul className="grid gap-px border border-temple-sand bg-temple-sand sm:grid-cols-2">
-              {nextDates.map((item) => (
-                <li key={`${item.isoDate}-${item.event}`} className="flex items-baseline gap-4 bg-white p-5">
-                  <span className="w-16 shrink-0 font-body text-sm font-bold uppercase tracking-wide text-primary">{item.label}</span>
-                  <span className="font-display text-lg leading-snug text-ink">{item.event}</span>
+            <ul className={`grid gap-px border border-temple-sand bg-temple-sand sm:grid-cols-2 ${visibleFestivals.length ? "mb-8" : ""}`}>
+              {nextDates.map((day) => (
+                <li key={day.isoDate} className="flex items-baseline gap-4 bg-white p-5">
+                  <span className="w-16 shrink-0 font-body text-sm font-bold uppercase tracking-wide text-primary">{day.label}</span>
+                  <span className="space-y-1">
+                    {day.items.map((item) => (
+                      <span key={item.event} className="block font-display text-lg leading-snug text-ink">{item.event}</span>
+                    ))}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -55,7 +59,7 @@ export default function FestivalCalendarSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visibleFestivals.map((festival) => (
             <Link
-              key={festival.href}
+              key={`${festival.href}-${festival.endsAt}`}
               href={festival.href}
               className="group block card-surface hover:border-gold/40 transition-all duration-300 hover:shadow-card-hover overflow-hidden"
             >
@@ -97,34 +101,27 @@ export default function FestivalCalendarSection() {
                 <p className="font-body text-ink/75 text-sm leading-relaxed line-clamp-2">
                   {festival.description}
                 </p>
-                <div className="mt-4 flex items-center gap-1.5 font-body text-xs font-semibold text-gold-ink tracking-widest uppercase">
-                  Learn More <ArrowRight size={11} />
+                <div className="text-link mt-4 flex items-center gap-1.5 text-gold-ink">
+                  Learn more <ArrowRight size={11} />
                 </div>
               </div>
             </Link>
           ))}
         </div>
 
-        <div className="mt-8 flex justify-start sm:mt-10">
-          <Link
-            href="/festivals"
-            className="tap-target flex items-center gap-2 font-body text-xs text-gold-ink font-semibold tracking-widest uppercase hover:gap-3 transition-all"
-          >
-            All Festivals <ArrowRight size={12} />
-          </Link>
-        </div>
-
-        {/* CTA Banner */}
-        <div className="mt-12 bg-temple-brown p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        {/* One link to the full calendar, under the cards. */}
+        <div className="mt-8 flex flex-col gap-3 border-t border-temple-sand pt-5 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <div>
-            <p className="font-display text-white text-xl mb-1">Never Miss a Festival</p>
-            <p className="font-body text-white/60 text-sm">See the full 2026 Vaishnava calendar for ISKCON Nairobi.</p>
+            <p className="font-display text-lg font-semibold text-ink">Never miss a festival</p>
+            <p className="mt-0.5 font-body text-sm text-ink/75">
+              See every festival, Ekadashi, and holy day on the ISKCON Nairobi calendar.
+            </p>
           </div>
           <Link
             href="/festivals"
-            className="min-h-11 bg-gold text-ink font-body text-xs font-semibold tracking-widest uppercase px-6 py-3 hover:bg-gold-light transition-colors"
+            className="text-link tap-target shrink-0 text-primary"
           >
-            View Festivals
+            View the full calendar <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>
       </div>

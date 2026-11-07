@@ -7,9 +7,11 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 const galleryImages = [
   {
-    src: "/images/donate/main-altar-offering.jpg",
-    caption: "Janmashtami celebrations at ISKCON Nairobi",
-    tone: "Temple Life",
+    src: "/images/archive/srila-prabhupada-nairobi-devotees.webp",
+    caption: "Srila Prabhupada with devotees in Nairobi",
+    alt: "Archival group photograph of Srila Prabhupada seated among devotees in Nairobi",
+    tone: "Early Days",
+    href: "/media#early-days",
     className: "lg:col-span-5 lg:row-span-2",
     imageClass: "h-[320px] sm:h-[420px] lg:h-full",
   },
@@ -107,8 +109,8 @@ export default function GallerySection() {
                   >
                     {img.caption}
                   </p>
-                  <div className={`mt-2 items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.16em] text-gold opacity-90 transition-opacity group-hover:opacity-100 ${isLead || isWide ? "flex" : "hidden sm:flex"}`}>
-                    View Story <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
+                  <div className={`text-link mt-2 items-center gap-2 text-gold opacity-90 transition-opacity group-hover:opacity-100 ${isLead || isWide ? "flex" : "hidden sm:flex"}`}>
+                    See the gallery <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
 
@@ -121,9 +123,9 @@ export default function GallerySection() {
         <div className="mt-8 flex justify-start sm:mt-10">
           <Link
             href="/media"
-            className="tap-target flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-widest text-gold-ink transition-all hover:gap-3"
+            className="text-link tap-target flex items-center gap-2 text-gold-ink transition-all hover:gap-3"
           >
-            Full Gallery <ArrowRight size={12} />
+            Full gallery <ArrowRight size={12} />
           </Link>
         </div>
       </div>

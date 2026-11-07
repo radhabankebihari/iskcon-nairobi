@@ -227,7 +227,7 @@ export default function HKTCNairobiPage() {
               <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
                 A Living Introduction
                 <br />
-                <em className="text-gold not-italic font-normal">to Vedic Culture</em>
+                <em className="not-italic font-normal">to Vedic Culture</em>
               </h2>
               <p className="mt-5 font-body text-sm leading-relaxed text-sand/75 sm:text-base">
                 Life at HKTC is a fascinating introduction to Vedic culture: its food, philosophy, attire, music,
@@ -341,7 +341,7 @@ export default function HKTCNairobiPage() {
                   href="https://photos.app.goo.gl/MIZfuQWWgNPvBuG43"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="tap-target mt-6 inline-flex items-center gap-2 border-b border-gold/50 pb-1 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:text-white"
+                  className="tap-target mt-6 inline-flex items-center gap-2 border-b border-gold/50 pb-1 font-body text-sm font-semibold text-gold transition-colors hover:text-white"
                 >
                   View Graduation Album
                   <ExternalLink size={13} />
@@ -360,7 +360,7 @@ export default function HKTCNairobiPage() {
             <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
               A Decade of
               <br />
-              <em className="text-gold not-italic font-normal">Building Students</em>
+              <em className="not-italic font-normal">Building Students</em>
             </h2>
           </div>
           <div className="text-sand [&_.eyebrow]:text-gold/75 [&_h3]:text-white [&_p]:text-sand/62 [&_li]:border-sand/15">
@@ -383,7 +383,7 @@ export default function HKTCNairobiPage() {
             href="https://www.instagram.com/hktc.africa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
             rel="noopener noreferrer"
-            className="tap-target mt-6 inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-widest text-gold-ink hover:text-ink"
+            className="text-link tap-target mt-6 inline-flex items-center gap-2 text-gold-ink hover:text-ink"
           >
             <Camera size={14} />
             More on Instagram @hktc.africa
@@ -438,7 +438,7 @@ export default function HKTCNairobiPage() {
               <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
                 Help Sponsor
                 <br />
-                <em className="text-gold not-italic font-normal">Student Formation</em>
+                <em className="not-italic font-normal">Student Formation</em>
               </h2>
               <p className="mt-5 max-w-2xl font-body text-sm leading-relaxed text-sand/75 sm:text-base">
                 Support can help provide study materials, prasadam, student accommodation, retreats, examinations,
@@ -450,7 +450,7 @@ export default function HKTCNairobiPage() {
                 </ButtonLink>
                 <Link
                   href="/contact"
-                  className="min-h-11 inline-flex items-center justify-center gap-2 border border-gold/40 px-5 py-3 font-body text-xs font-semibold uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-white"
+                  className="min-h-11 inline-flex items-center justify-center gap-2 border border-gold/40 px-5 py-3 font-body text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-white"
                 >
                   Speak to the Temple
                   <ArrowRight size={14} />
@@ -492,7 +492,7 @@ export default function HKTCNairobiPage() {
                     href="https://peopledaily.digital/lifestyle/young-hare-krishna-monks-revive-simple-way-of-living"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="tap-target font-body text-xs font-semibold uppercase tracking-widest text-gold"
+                    className="text-link tap-target text-gold"
                   >
                     People Daily
                   </a>
@@ -500,7 +500,7 @@ export default function HKTCNairobiPage() {
                     href="https://iskconnews.org/kenyas-hare-krishna-training-centre-gives-students-ashram-experience/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="tap-target font-body text-xs font-semibold uppercase tracking-widest text-gold"
+                    className="text-link tap-target text-gold"
                   >
                     Ashram Experience
                   </a>
@@ -508,7 +508,7 @@ export default function HKTCNairobiPage() {
                     href="https://iskconnews.org/students-join-nairobi-hare-krishna-training-centre/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="tap-target font-body text-xs font-semibold uppercase tracking-widest text-gold"
+                    className="text-link tap-target text-gold"
                   >
                     ISKCON News
                   </a>
@@ -516,7 +516,7 @@ export default function HKTCNairobiPage() {
                     href="https://www.dandavats.com/?p=56815"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="tap-target font-body text-xs font-semibold uppercase tracking-widest text-gold"
+                    className="text-link tap-target text-gold"
                   >
                     Dandavats Report
                   </a>
@@ -524,7 +524,7 @@ export default function HKTCNairobiPage() {
                     href="https://www.dandavats.com/?p=26003"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="tap-target font-body text-xs font-semibold uppercase tracking-widest text-gold"
+                    className="text-link tap-target text-gold"
                   >
                     Dandavats HKTC
                   </a>

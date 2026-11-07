@@ -259,7 +259,7 @@ export default function TermsPage() {
               <span className="eyebrow block mb-3">Use of This Site</span>
               <h1 className="section-title">
                 Terms<br />
-                <em className="text-gold not-italic font-normal">and Conditions</em>
+                <em className="not-italic font-normal">and Conditions</em>
               </h1>
             </header>
 

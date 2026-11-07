@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Camera, Clock, Mail, MapPin, MessageCircle, Phone, Play } from "lucide-react";
+import { ArrowRight, Camera, Mail, MapPin, MessageCircle, Phone, Play } from "lucide-react";
 import { templeInfo, templeScheduleGroups, navigation, socialLinks } from "@/data/site";
 import BrandLogo from "@/components/ui/BrandLogo";
 
@@ -35,7 +35,7 @@ export default function Footer() {
               <BrandLogo className="h-16 w-[172px]" />
             </Link>
             <p className="font-body text-white/70 text-sm leading-relaxed mb-6 max-w-xs">
-              The digital headquarters for ISKCON East Africa - where devotion, education, community service, and the beauty of the African landscape come together.
+              Sri Sri Radha Bankebihari Temple: a home for worship, kirtan, learning, and prasadam in Nairobi, open to everyone.
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ href, label, name }) => {
@@ -57,7 +57,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-body text-white font-semibold text-xs tracking-[0.15em] uppercase mb-5">Explore</h4>
-            <ul className="space-y-2.5">
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -73,26 +73,22 @@ export default function Footer() {
 
           <div>
             <h4 className="font-body text-white font-semibold text-xs tracking-[0.15em] uppercase mb-5">
-              Daily Programme
+              Visiting Hours
             </h4>
-            <ul className="space-y-4">
+            {/* Two lines instead of the full ritual schedule, which lives on the Visit page. */}
+            <ul className="space-y-3">
               {templeScheduleGroups.map((group) => (
                 <li key={group.title}>
                   <p className="font-body text-gold text-xs font-semibold uppercase tracking-[0.14em]">
-                    {group.title}
+                    {group.title.startsWith("Morning") ? "Morning" : "Evening"}
                   </p>
-                  <p className="font-body text-white/70 text-xs mt-1 mb-2">{group.timeRange}</p>
-                  <ul className="space-y-2">
-                    {group.items.map((item) => (
-                      <li key={`${group.title}-${item.time}-${item.event}`} className="flex items-start gap-3">
-                        <span className="font-body text-gold text-xs w-20 flex-shrink-0 pt-0.5">{item.time}</span>
-                        <span className="font-body text-white/70 text-sm">{item.event}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="mt-1 font-body text-sm text-white/80">{group.timeRange}</p>
                 </li>
               ))}
             </ul>
+            <Link href="/visit#schedule" className="text-link tap-target mt-5 text-gold-light">
+              Full daily schedule <ArrowRight size={14} aria-hidden="true" />
+            </Link>
           </div>
 
           <div>
@@ -126,21 +122,15 @@ export default function Footer() {
                   {templeInfo.email}
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Clock size={14} className="text-gold mt-0.5 flex-shrink-0" />
-                <span className="font-body text-white/70 text-sm leading-relaxed">
-                  Temple open daily<br />{templeInfo.hours.replace("Daily: ", "")}
-                </span>
-              </li>
             </ul>
 
             <a
               href={templeInfo.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target inline-flex items-center gap-2 mt-5 font-body text-xs text-gold-light font-semibold tracking-widest uppercase border-b border-primary/30 pb-0.5 hover:border-primary transition-colors"
+              className="tap-target inline-flex items-center gap-2 mt-5 font-body text-sm text-gold-light font-semibold border-b border-primary/30 pb-0.5 hover:border-primary transition-colors"
             >
-              Get Directions
+              Get directions
             </a>
           </div>
         </div>
@@ -148,7 +138,7 @@ export default function Footer() {
 
       <div className="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-      <div className="content-width section-padding py-5">
+      <div className="content-width section-padding pt-5 pb-20 sm:pb-5">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-center font-body text-white/70 text-xs sm:text-left">
             © {new Date().getFullYear()} ISKCON Nairobi. All rights reserved.

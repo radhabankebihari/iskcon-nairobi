@@ -102,7 +102,7 @@ export default function StatsSection() {
           <span className="eyebrow text-gold block mb-3">Our Impact</span>
           <h2 className="section-title-light">
             <span>Krishna Consciousness</span><br />
-            <em className="text-gold not-italic font-normal">Across East Africa</em>
+            <em className="not-italic font-normal">Across East Africa</em>
           </h2>
         </div>
 

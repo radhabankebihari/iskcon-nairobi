@@ -97,6 +97,46 @@ input, select, textarea {
     --site-nav-py: 0.75rem;
   }
 }
+
+/* Header before the page scripts load. The server always renders the header in
+   its at-the-top form, so a refresh partway down a page drew the transparent,
+   full-size header over the content for about a second. The inline script in the
+   root layout marks <html> data-nav-scrolled from the first moment; these rules
+   then show the solid, compact header until Navigation takes over and marks
+   <html> data-nav-ready. They sit in the base layer with !important because the
+   at-the-top header uses !important utilities, and for !important rules an
+   earlier layer wins. */
+@layer base {
+  html:not([data-nav-ready]) .site-nav,
+  html:not([data-nav-ready]) .site-nav * {
+    transition: none !important;
+  }
+
+  html[data-nav-scrolled]:not([data-nav-ready]) .site-nav {
+    --site-nav-py: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-color: color-mix(in oklab, var(--color-gold) 25%, transparent) !important;
+    background-color: color-mix(in oklab, var(--color-dusk) 90%, transparent) !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+    backdrop-filter: blur(14px) !important;
+  }
+
+  html[data-nav-scrolled]:not([data-nav-ready]) .site-nav .nav-brand-logo {
+    width: 50px !important;
+    height: 46px !important;
+  }
+
+  html[data-nav-scrolled]:not([data-nav-ready]) .site-nav .nav-brand-expansion {
+    opacity: 0.8 !important;
+  }
+
+  @media (max-width: 900px) {
+    html[data-nav-scrolled]:not([data-nav-ready]) .site-nav .nav-brand-logo {
+      width: 45px !important;
+      height: 42px !important;
+    }
+  }
+}
 ::selection { background-color: var(--color-primary); color: white; }
 
 /* Keyboard focus. A restrained gold outline remains readable on light, dark,
@@ -158,8 +198,8 @@ img, video, canvas, svg { max-width: 100%; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background-color: var(--color-primary); color: white;
-  font-weight: 500; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 1rem 2rem; transition: all 0.3s;
+  font-weight: 600; font-size: 0.875rem; letter-spacing: 0;
+  padding: 0.875rem 1.75rem; transition: all 0.3s;
   min-height: 44px; text-align: center; justify-content: center;
 }
 .btn-primary:hover { background-color: var(--color-primary-dark); }
@@ -167,16 +207,16 @@ img, video, canvas, svg { max-width: 100%; }
 .btn-outline {
   display: inline-flex; align-items: center; gap: 0.5rem;
   border: 1px solid var(--color-primary); color: var(--color-primary);
-  font-weight: 500; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 1rem 2rem; transition: all 0.3s;
+  font-weight: 600; font-size: 0.875rem; letter-spacing: 0;
+  padding: 0.875rem 1.75rem; transition: all 0.3s;
   min-height: 44px; text-align: center; justify-content: center;
 }
 .btn-outline:hover { background-color: var(--color-primary); color: white; }
 
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  color: white; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 1rem 2rem; border: 1px solid rgba(255,255,255,0.4); transition: all 0.3s;
+  color: white; font-weight: 600; font-size: 0.875rem; letter-spacing: 0;
+  padding: 0.875rem 1.75rem; border: 1px solid rgba(255,255,255,0.4); transition: all 0.3s;
   min-height: 44px; text-align: center; justify-content: center;
 }
 .btn-ghost:hover { border-color: var(--color-sand); background-color: rgba(244,236,225,0.12); }
@@ -190,6 +230,21 @@ img, video, canvas, svg { max-width: 100%; }
   }
 }
 
+/* One style for text links with an arrow, in normal capitalisation. Capitals are
+   kept for the small labels above headings. In the components layer so a colour
+   utility can set the link colour for light or dark sections. */
+@layer components {
+  .text-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-body); font-size: 0.875rem; font-weight: 600;
+    letter-spacing: 0; text-transform: none;
+    text-decoration: underline; text-decoration-color: transparent;
+    text-underline-offset: 4px; text-decoration-thickness: 1px;
+    transition: text-decoration-color 0.2s;
+  }
+  .text-link:hover { text-decoration-color: currentColor; }
+}
+
 /* Typography helpers */
 /* In the components layer so a text colour utility can override it on dark sections. */
 @layer components {
@@ -201,8 +256,11 @@ img, video, canvas, svg { max-width: 100%; }
 .section-title {
   font-family: var(--font-display); line-height: 1.15;
   color: var(--color-ink); font-size: clamp(1.5rem, 3.5vw, 2.75rem);
+  /* Even line lengths, so a short word is never left alone on a line. */
+  text-wrap: balance;
 }
-.section-title em { color: var(--color-gold-ink); }
+/* Headings are one colour. A gold accent line is opt-in through SectionHeading. */
+.section-title em { color: inherit; }
 .section-title-light {
   font-family: var(--font-display); line-height: 1.15;
   color: var(--color-temple-cream); font-size: clamp(1.5rem, 3.5vw, 2.75rem);
@@ -257,8 +315,6 @@ img { transition: opacity 0.3s ease; }
   .btn-ghost {
     width: 100%;
     padding: 0.875rem 1rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
     white-space: normal;
   }
 

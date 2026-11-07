@@ -1,7 +1,10 @@
 import PageHero from "@/components/ui/PageHero";
-import { templeInfo } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
+import FestivalDateNote from "@/components/festivals/FestivalDateNote";
+
+// Re-render daily so the next festival date stays current.
+export const revalidate = 86400;
 
 export const metadata = withSeo({
   title: "Gaura Purnima",
@@ -14,19 +17,19 @@ export default function GauraPurnimaPage() {
     <>
       <PageHero
         title="Gaura Purnima"
-        titleAccent="Appearance of Sri Chaitanya"
-        subtitle={templeInfo.legalName}
+        subtitle="Appearance of Sri Chaitanya"
         description={description}
-        image="/images/community/iskcon-temple-architecture.jpg"
+        image="/images/festivals/gaura-purnima-child-nimai.webp"
         height="lg"
       />
       <section className="py-section bg-temple-bg">
         <div className="content-width section-padding max-w-3xl">
           <p className="font-body text-ink/75 leading-relaxed mb-8">{description}</p>
-          <p className="font-body text-ink/75 leading-relaxed mb-8">Contact the temple for the current year's fasting, abhishek, and feast schedule.</p>
+          <FestivalDateNote pattern={/^Gaura Purnima/} name="Gaura Purnima" className="mb-6" />
+          <p className="font-body text-ink/75 leading-relaxed mb-8">Contact the temple for this year's abhishek and feast schedule.</p>
           <div className="flex flex-wrap gap-4">
-            <ButtonLink variant="primary" href="/donate/festivals">Support this Festival</ButtonLink>
-            <ButtonLink variant="outline" href="/contact" className="border-gold text-gold hover:bg-gold hover:text-white">Register Interest</ButtonLink>
+            <ButtonLink variant="primary" href="/donate/festivals">Support this festival</ButtonLink>
+            <ButtonLink variant="outline" href="/contact" className="border-gold text-gold hover:bg-gold hover:text-white">Register interest</ButtonLink>
           </div>
         </div>
       </section>
