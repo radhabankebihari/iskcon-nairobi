@@ -91,6 +91,11 @@ function CalendarMonth({ month }: { month: CalendarMonthData }) {
                     {item.description && (
                       <p className="mt-1 font-body text-xs leading-relaxed text-ink/75">{item.description}</p>
                     )}
+                    {/^kartika vrata/i.test(item.event) && (
+                      <Link href="/festivals/kartik" className="mt-1.5 inline-flex items-center gap-1 font-body text-xs font-semibold text-primary underline-offset-4 hover:underline">
+                        Kartik guide and Damodarastakam <ArrowRight size={11} aria-hidden="true" />
+                      </Link>
+                    )}
                     {(item.fast || item.breakFast) && (
                       <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-xs font-semibold text-primary">
                         {item.fast && <span>{item.fast}</span>}
@@ -214,7 +219,9 @@ export default function FestivalsPage() {
             </p>
           )}
 
-          <CalendarNotificationOptIn />
+          <div id="reminders" className="scroll-mt-28">
+            <CalendarNotificationOptIn />
+          </div>
 
           {upcomingFestivals.length > 0 && (
           <>

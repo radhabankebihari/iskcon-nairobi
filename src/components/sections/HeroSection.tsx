@@ -38,8 +38,8 @@ const baseHeroImages: HeroImage[] = [
     tagline: "Come offer a lamp to Lord Krishna.",
     description: "26 October - 24 November 2026. Lamp offerings daily at 7:30 AM and 7:30 PM.",
     ctas: [
-      { href: "/visit", label: "Plan your visit", variant: "primary" },
-      { href: "/festivals", label: "Explore festivals", variant: "ghost" },
+      { href: "/festivals/kartik", label: "Discover Kartik", variant: "primary" },
+      { href: "/visit", label: "Plan your visit", variant: "ghost" },
     ],
     durationMs: 10000,
   },

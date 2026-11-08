@@ -82,6 +82,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // Codex's earlier lyrics-only page now lives inside the Kartik guide.
+        source: "/festivals/damodarastakam",
+        destination: "/festivals/kartik#damodarastakam",
+        permanent: true,
+      },
+      {
         source: "/calendar",
         destination: "/festivals",
         permanent: true,

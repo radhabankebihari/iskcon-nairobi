@@ -33,6 +33,11 @@ const allCalendarDates: CalendarDate[] = vaishnavaCalendarMonths
   )
   .sort((a, b) => a.endsAt - b.endsAt);
 
+/** Every calendar entry, soonest first. */
+export function getAllCalendarDates(): readonly CalendarDate[] {
+  return allCalendarDates;
+}
+
 /** New and full moon markers: reference information, not temple observances. */
 export function isMoonPhase(event: string) {
   return /^(purnima|amavasya) \(/i.test(event);

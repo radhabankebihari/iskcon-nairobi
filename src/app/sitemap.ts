@@ -17,6 +17,7 @@ const staticRoutes: RouteEntry[] = [
   { path: "/learn", priority: 0.8, changeFrequency: "monthly" },
   { path: "/projects", priority: 0.8, changeFrequency: "monthly" },
   { path: "/festivals", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/festivals/kartik", priority: 0.8, changeFrequency: "weekly" },
   { path: "/guest-house", priority: 0.7, changeFrequency: "monthly" },
   { path: "/media", priority: 0.6, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.7, changeFrequency: "monthly" },

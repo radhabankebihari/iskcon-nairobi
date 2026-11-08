@@ -509,3 +509,33 @@ img { transition: opacity 0.3s ease; }
     justify-content: center;
   }
 }
+
+/* Kartik page: the rope that links the four Damodara scenes. */
+.kartik-rope::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  border-left: 2px dashed color-mix(in oklab, var(--color-gold) 45%, transparent);
+}
+@media (min-width: 768px) {
+  .kartik-rope::before {
+    left: 0.5rem;
+    right: 0.5rem;
+    top: 1rem;
+    bottom: auto;
+    border-left: 0;
+    border-top: 2px dashed color-mix(in oklab, var(--color-gold) 45%, transparent);
+  }
+}
+.kartik-today-lamp {
+  animation: kartik-flicker 2.4s ease-in-out infinite;
+}
+@keyframes kartik-flicker {
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(230, 184, 92, 0.55); }
+  50% { box-shadow: 0 0 16px 5px rgba(230, 184, 92, 0.85); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kartik-today-lamp { animation: none; }
+}
