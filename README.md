@@ -14,7 +14,7 @@ Production Next.js website for ISKCON Nairobi / Sri Sri Radha Bankebihari Temple
 ## Local Development
 
 ```bash
-npm install
+npm ci
 npm run dev
 npm run build
 npm run verify:pwa
@@ -25,6 +25,8 @@ The local dev server runs at `http://localhost:3000`.
 ## Handoff Documentation
 
 - `PROJECT_GUIDELINES.md` is the contributor entry point.
+- `docs/REPOSITORY_MAP.md` explains where routes, content, forms, integrations, assets, and tests live.
+- `docs/RELEASE_WORKFLOW.md` defines the development, staging, release, and production gates; verify branch tips before using them.
 - `docs/DESIGN_SYSTEM.md` records the visual language, spacing rhythm, page hero rules, and mobile-first layout decisions.
 - `docs/CONTENT_GUIDE.md` explains where to add pages, festivals, notices, blog posts, images, and sheet-backed forms.
 - `docs/ASSET_SOURCES.md` records non-temple library assets that should be reviewed or replaced when final photography is available.
@@ -100,7 +102,8 @@ After changing SEO routes, robots, sitemap, metadata, or API behavior, run:
 npm run build
 ```
 
-Then push to GitHub and deploy through Vercel.
+Do not push a feature branch directly to production. Follow the review and
+promotion gates in `docs/RELEASE_WORKFLOW.md`; `main` is the production branch.
 
 ## Operational Checklist
 

@@ -93,6 +93,12 @@ Release is the exact proposed production build. It is a content and code freeze.
 Before approval:
 
 1. Confirm all automated checks are green.
+   The pull-request visual check builds the target branch and compares its
+   screenshots with the candidate in the same browser environment. Run
+   `npm run test:visual:compare` locally for a repeatable check against
+   `origin/main`; fetch first, or set `VISUAL_BASE_REF` to compare with a
+   different base. Install Chromium with `npx playwright install chromium`
+   before the first local run.
 2. Review the Vercel preview from top to bottom on mobile and desktop.
 3. Verify dates, contacts, payment details, external links, notices, and images.
 4. Submit harmless form tests and confirm the correct destination where needed.
@@ -159,6 +165,12 @@ allow staging form tests to pollute production records when a test destination
 is available.
 
 ## Daily commands
+
+First fetch and compare the branch tips with `origin/main`. The branch roles
+above describe the intended process, not proof that today's long-lived branches
+have already received every production commit. If `development`, `staging`, or
+`release` is behind, reconcile it through review before starting or promoting
+work; do not force-push or bypass a gate.
 
 Start work:
 

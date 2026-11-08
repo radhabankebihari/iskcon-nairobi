@@ -37,6 +37,8 @@ server.err.log
 
 # local workspace tooling
 .agents/
+CLAUDE.md
+.claude/
 
 # env files (can opt-in for committing if needed)
 .env*
