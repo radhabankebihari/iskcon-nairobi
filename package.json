@@ -13,6 +13,7 @@
     "test:a11y:update": "playwright test a11y --update-snapshots",
     "test:visual": "playwright test --grep @visual",
     "test:visual:update": "playwright test --grep @visual --update-snapshots",
+    "test:visual:compare": "node scripts/compare-visual.mjs",
     "test:festival": "vitest run src/lib/kirtanSafariState.test.ts",
     "test:calendar-push": "vitest run src/lib/calendarPushSchedule.test.ts",
     "verify:pwa": "node scripts/verify-pwa.mjs",

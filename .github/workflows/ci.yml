@@ -28,3 +28,28 @@ jobs:
           name: playwright-results
           path: test-results/
           retention-days: 7
+
+  visual-comparison:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run test:visual:compare
+        env:
+          VISUAL_BASE_REF: origin/${{ github.base_ref }}
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-comparison-results
+          path: test-results/
+          retention-days: 7

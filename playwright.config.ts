@@ -1,6 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
 const port = 3031;
+const appDirectory = process.env.VISUAL_APP_DIR;
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -50,6 +51,7 @@ export default defineConfig({
   webServer: {
     // Tests run the production build, so analytics must be switched off explicitly.
     command: `npm run start -- -p ${port}`,
+    ...(appDirectory ? { cwd: appDirectory } : {}),
     url: `http://localhost:${port}`,
     timeout: 60_000,
     reuseExistingServer: false,

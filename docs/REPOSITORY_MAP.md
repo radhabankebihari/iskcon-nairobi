@@ -62,7 +62,8 @@ uncommitted work in other worktrees untouched. Use `.env.example` for variable
 names; keep real values in `.env.local` or the hosting dashboard.
 
 For code changes, run `npm run lint`, `npx tsc --noEmit`, `npx vitest run`,
-`npm run verify:pwa`, `npm run build`, and the relevant Playwright tests. The
-full visual suite requires local reference screenshots; its generated images
-are intentionally ignored by git. Follow `docs/RELEASE_WORKFLOW.md` and obtain
-approval before any production promotion.
+`npm run verify:pwa`, `npm run build`, and the relevant Playwright tests. Run
+`npm run test:visual:compare` to build the base revision and compare all visual
+routes in the same browser environment. Generated images remain ignored by git;
+CI runs the comparison on pull requests. Follow `docs/RELEASE_WORKFLOW.md` and
+obtain approval before any production promotion.
