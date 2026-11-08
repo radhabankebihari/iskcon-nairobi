@@ -60,6 +60,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Please enter a valid phone number." }, { status: 400 });
     }
 
+    // Contact and guest-house forms share this route; the script separates their tabs by formType.
     await callAppsScript("contact.submit", {
       firstName,
       lastName,

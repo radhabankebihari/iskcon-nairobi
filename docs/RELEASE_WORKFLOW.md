@@ -160,6 +160,12 @@ is available.
 
 ## Daily commands
 
+First fetch and compare the branch tips with `origin/main`. The branch roles
+above describe the intended process, not proof that today's long-lived branches
+have already received every production commit. If `development`, `staging`, or
+`release` is behind, reconcile it through review before starting or promoting
+work; do not force-push or bypass a gate.
+
 Start work:
 
 ```bash

@@ -8,6 +8,8 @@ assets traceable, spacing intentional, and public integrations secure.
 
 - `README.md` explains local setup, environment variables, deployment, and
   operational checks.
+- `docs/REPOSITORY_MAP.md` maps the route, data, component, integration, asset,
+  and test boundaries for new contributors.
 - `docs/DESIGN_SYSTEM.md` records the visual language, spacing presets,
   navigation behavior, page hero rules, and mobile priorities.
 - `docs/CONTENT_GUIDE.md` explains where shared content lives and how to add
@@ -18,6 +20,8 @@ assets traceable, spacing intentional, and public integrations secure.
   service worker, install icons, offline behavior, or notification deep links.
 - `docs/APP_VERSIONS.md` is the authority for release names, version numbers,
   update modes, and the visitor-controlled major-update experience.
+- `docs/RELEASE_WORKFLOW.md` defines promotion gates. Verify their branch tips
+  against `origin/main` before relying on a branch name as a readiness signal.
 
 ## Development Principles
 

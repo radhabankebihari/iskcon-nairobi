@@ -2,8 +2,12 @@
 
 ## Main Content Locations
 
-- Shared temple data, navigation, projects, festivals, stats, gallery cards,
-  guest rooms, notices, and testimonials: `src/data/site.ts`
+- Shared temple identity, hours, navigation, projects, homepage festival
+  previews, stats, gallery cards, guest rooms, and testimonials: `src/data/site.ts`
+- Noticeboard entries and expiry rules: `src/data/notices.ts`
+- Festival calendar entries: `src/data/vaishnavaCalendar2026.ts` and
+  `src/data/vaishnavaCalendar2027.ts`, joined by `src/data/vaishnavaCalendar.ts`
+- Kirtan Safari guests and programme: `src/data/kirtanSafari.ts`
 - Blog index cards: `src/data/blog.ts`
 - Page metadata, hero copy, and page-specific layout: `src/app/**/page.tsx`
 - API integrations: `src/app/api/**`
@@ -21,6 +25,7 @@ If it only belongs to a page, keep it in that page.
    Radhashtami intentionally share a format.
 4. Add calendar and sitemap coverage if the route should be indexed.
 5. Prefer temple images or sacred artwork with clear subject positioning.
+6. Check the route at phone, tablet, and desktop widths before promotion.
 
 ## Adding A Blog Article
 
@@ -33,10 +38,10 @@ If it only belongs to a page, keep it in that page.
 
 ## Adding Notices
 
-Noticeboard content lives in `src/data/site.ts`. Notices are public-facing and
+Noticeboard content lives in `src/data/notices.ts`. Notices are public-facing and
 may trigger notifications for users who opted in, so keep titles short and
-action links accurate. The Kirtan Safari notice should link to
-`/festivals/kirtan-safari`.
+action links accurate. Use an explicit Nairobi-offset `expiresAt` for a
+time-limited notice, and check the linked route still exists.
 
 ## Forms And Sheets
 
@@ -48,10 +53,15 @@ environment variables. The script escapes sheet formulas before writing.
 
 Current sheet-backed features:
 
-- Contact form
-- Kirtan Safari registration
-- Push subscriptions
-- City-only website analytics
+- Contact and guest-house enquiry forms (both through `/api/contact`, stored in
+  separate tabs by `formType`)
+- Kirtan Safari registration and future-interest forms
+- Push subscriptions and delivery records
+- City-only website analytics (`WebsiteAnalytics`)
+
+The Bhagavad Gita course route returns 410 because that intake is closed.
+For the tab names and Apps Script deployment contract, see
+`scripts/google-sheets/README.md` and `docs/TEMPLE_SHEET_CUTOVER.md`.
 
 ## Image Library
 
@@ -73,3 +83,9 @@ Use domain folders under `public/images`:
 Do not create a generic placeholder folder for new assets. If an image is a
 temporary library asset, still place it in the domain where it is used and record
 its source in `docs/ASSET_SOURCES.md`.
+
+Name new files by subject and purpose, with a year or event when useful (for
+example `thika-farm-2022-cows.webp`). Use `-desktop` and `-mobile` only for
+intentional crop variants. Before renaming an existing image, search every
+reference, including metadata, the manifest, CSS, and the service worker;
+`public/` paths are URLs that may already be cached or shared.
