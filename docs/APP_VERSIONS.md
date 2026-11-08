@@ -32,6 +32,16 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.0 - Kartik Guide and 2027 Temple Schedule
+
+**Released:** 8 November 2026
+
+**Update mode:** Silent. A minor release: a new page and schedule changes visitors will notice. `CACHE_VERSION` moved to v10 so installed devices drop cached pages with the old hours.
+
+- New `/festivals/kartik` guide: the Damodara story, daily lamp offerings, how to offer a lamp, the Damodarastakam reader, and the month's holy days. `/festivals/damodarastakam` redirects to it.
+- Temple hours and daily schedule follow the printed 2027 calendar (4:30 AM to 1:00 PM, 4:20 PM to 8:30 PM).
+- Two approved community testimonials, the calendar's programme facilitators, and new Thika Farm and HKTC photos. The Ratha Yatra and Shop pages stay unpublished.
+
 ## 1.2.0 - Calendar, Giving, and Design Refresh
 
 **Released:** 7 November 2026
