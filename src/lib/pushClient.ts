@@ -157,6 +157,10 @@ export async function syncPushPreferences(
   }
 }
 
+/**
+ * Subscribe this device and save it on the server. Returns null when either
+ * step fails, so callers never report notifications as on when they are not.
+ */
 export async function enablePushOnDevice(
   registration: ServiceWorkerRegistration
 ): Promise<PushSubscription | null> {
@@ -173,16 +177,14 @@ export async function enablePushOnDevice(
   }
 
   if (existing) {
-    await registerWithServer(existing);
-    return existing;
+    return (await registerWithServer(existing)) ? existing : null;
   }
 
   const created = await subscribeToPush(registration);
 
   if (created) {
     // The device's earlier endpoint, if any, is sent as previousEndpoint and replaced.
-    await registerWithServer(created);
-    return created;
+    return (await registerWithServer(created)) ? created : null;
   }
 
   return null;

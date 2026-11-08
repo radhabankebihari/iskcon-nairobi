@@ -33,6 +33,10 @@ async function callBridge(action, data) {
   });
   if (!response.ok) throw new Error(`Sheets bridge returned HTTP ${response.status}.`);
   const result = await response.json();
+  // Same rule as src/lib/appsScriptBridge.ts: push actions need the one-row-per-device script.
+  if (action.startsWith("push.") && !((result?.version ?? 0) >= 2)) {
+    throw new Error("The Apps Script backend is out of date. Redeploy scripts/google-sheets/website-backend.gs first.");
+  }
   if (result?.success !== true) throw new Error(`Sheets bridge rejected ${action}.`);
   return result.data;
 }

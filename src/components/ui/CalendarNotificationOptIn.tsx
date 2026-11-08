@@ -18,6 +18,7 @@ export default function CalendarNotificationOptIn() {
   const [permission, setPermission] = useState<PermissionState>("default");
   const [enabled, setEnabled] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
 
   const [upcomingEvents, setUpcomingEvents] = useState(() =>
     calendarNotificationEvents.slice(0, 3)
@@ -67,6 +68,7 @@ export default function CalendarNotificationOptIn() {
     }
 
     setIsSaving(true);
+    setSaveFailed(false);
 
     try {
       await navigator.serviceWorker.register("/sw.js");
@@ -83,7 +85,14 @@ export default function CalendarNotificationOptIn() {
         window.dispatchEvent(new Event("iskcon-calendar-notifications-changed"));
 
         const registration = await navigator.serviceWorker.ready;
-        await enablePushOnDevice(registration);
+        if (!(await enablePushOnDevice(registration))) {
+          // The server did not save the subscription, so reminders are not really on.
+          window.localStorage.removeItem(OPT_IN_KEY);
+          setEnabled(false);
+          window.dispatchEvent(new Event("iskcon-calendar-notifications-changed"));
+          setSaveFailed(true);
+          return;
+        }
         await registration.showNotification("Calendar reminders enabled", {
           body: "You will receive reminders for Ekadashi and major ISKCON Nairobi festivals on this device.",
           tag: "iskcon-calendar-reminders-enabled",
@@ -171,6 +180,12 @@ export default function CalendarNotificationOptIn() {
               </button>
             )}
           </div>
+          )}
+
+          {saveFailed && (
+            <p role="alert" className="mt-4 font-body text-sm leading-relaxed text-primary">
+              Notifications could not be turned on right now. Please try again shortly.
+            </p>
           )}
 
           {permission === "denied" && (

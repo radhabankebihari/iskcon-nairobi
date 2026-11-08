@@ -2,6 +2,13 @@
 // Execute as: Me; Who has access: Anyone. Never expose its URL in browser code.
 // Script properties: SPREADSHEET_ID, WEBSITE_SHARED_SECRET, optional NOTIFICATION_EMAIL.
 
+// Raise this whenever the actions below change. The website refuses push
+// writes to an older script (see BACKEND_VERSION_FOR_PUSH in
+// src/lib/appsScriptBridge.ts), so a stale deployment fails loudly instead of
+// quietly storing duplicate rows.
+// 2: one row per device, delivery receipts, and run claims.
+const BACKEND_VERSION = 2;
+
 const HEADERS = {
   'Contact Us': ['Timestamp', 'First Name', 'Last Name', 'Email', 'Phone', 'Subject', 'Message'],
   'Guest House Enquiries': ['Timestamp', 'First Name', 'Last Name', 'Email', 'Phone', 'Subject', 'Message'],
@@ -43,13 +50,13 @@ function doPost(e) {
       const cache = CacheService.getScriptCache();
       if (cache.get(request.nonce)) throw new Error('Repeated request');
       cache.put(request.nonce, 'used', 360);
-      return jsonResponse({ success: true, data: performAction(request.action, request.data || {}) });
+      return jsonResponse({ success: true, version: BACKEND_VERSION, data: performAction(request.action, request.data || {}) });
     } finally {
       lock.releaseLock();
     }
   } catch (error) {
     console.error('Website bridge request failed: ' + error);
-    return jsonResponse({ success: false, error: 'The request could not be processed.' });
+    return jsonResponse({ success: false, version: BACKEND_VERSION, error: 'The request could not be processed.' });
   }
 }
 

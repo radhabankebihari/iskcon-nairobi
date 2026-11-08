@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { Bell, BellRing, CalendarDays, Check, ChevronRight, X } from "lucide-react";
+import { Bell, BellRing, ChevronRight, X } from "lucide-react";
 import { getSiteNotices, type SiteNotice } from "@/data/notices";
 import { cn } from "@/lib/utils";
 import { markCurrentNoticesAsSent } from "@/components/system/NoticeNotificationManager";
@@ -54,6 +54,7 @@ export default function NoticeboardButton({ statusBarVisible = false }: Noticebo
   const [enabled, setEnabled] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -145,6 +146,7 @@ export default function NoticeboardButton({ statusBarVisible = false }: Noticebo
     }
 
     setIsSaving(true);
+    setSaveFailed(false);
 
     try {
       await navigator.serviceWorker.register("/sw.js");
@@ -162,7 +164,14 @@ export default function NoticeboardButton({ statusBarVisible = false }: Noticebo
         window.dispatchEvent(new Event("iskcon-noticeboard-notifications-changed"));
 
         const registration = await navigator.serviceWorker.ready;
-        await enablePushOnDevice(registration);
+        if (!(await enablePushOnDevice(registration))) {
+          // The server did not save the subscription, so alerts are not really on.
+          window.localStorage.removeItem(OPT_IN_KEY);
+          setEnabled(false);
+          window.dispatchEvent(new Event("iskcon-noticeboard-notifications-changed"));
+          setSaveFailed(true);
+          return;
+        }
         await registration.showNotification("Noticeboard alerts enabled", {
           body: "New ISKCON Nairobi notices will notify this device.",
           tag: "iskcon-noticeboard-enabled",
@@ -192,20 +201,14 @@ export default function NoticeboardButton({ statusBarVisible = false }: Noticebo
     }
   };
 
-  const alertLabel = (() => {
-    if (permission === "unsupported") {
-      return "Alerts unavailable";
-    }
-
-    if (permission === "denied") {
-      return "Alerts blocked";
-    }
-
-    if (enabled) {
-      return "Alerts on";
-    }
-
-    return isSaving ? "Enabling..." : "Enable alerts";
+  const alertsUnavailable = permission === "unsupported" || permission === "denied";
+  const alertStatus = (() => {
+    if (permission === "unsupported") return "This browser cannot show notifications.";
+    if (permission === "denied") return "Notifications are blocked for this site. Allow them in your browser's site settings to turn alerts on.";
+    if (isSaving) return enabled ? "Turning alerts off..." : "Turning alerts on...";
+    if (saveFailed) return "Notifications could not be turned on right now. Please try again shortly.";
+    if (enabled) return "On for this device. Tap the switch to turn alerts off.";
+    return "Off. Tap the switch to get a notification when the temple posts a new notice.";
   })();
 
   return (
@@ -291,26 +294,45 @@ export default function NoticeboardButton({ statusBarVisible = false }: Noticebo
             </div>
 
             <div className="border-t border-temple-sand bg-temple-cream/70 p-4">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="font-body text-xs leading-relaxed text-ink/75">
-                  {permission === "denied"
-                    ? "Notifications are blocked in this browser. Use site settings to allow them."
-                    : "Enable alerts to receive push notifications when new notices are added."}
+              <div className="flex items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <p id="notice-alerts-label" className="font-body text-sm font-semibold text-ink">
+                    New notice alerts
+                  </p>
+                  <p id="notice-alerts-status" aria-live="polite" className="mt-0.5 font-body text-xs leading-relaxed text-ink/75">
+                    {alertStatus}
+                  </p>
                 </div>
+                {/* A switch reads as on/off at a glance, and the same control turns alerts back off. */}
                 <button
                   type="button"
+                  role="switch"
+                  aria-checked={enabled}
+                  aria-labelledby="notice-alerts-label"
+                  aria-describedby="notice-alerts-status"
+                  data-notice-alerts-switch
                   onClick={enabled ? disableAlerts : enableAlerts}
-                  disabled={isSaving || permission === "unsupported" || permission === "denied"}
-                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 bg-primary px-4 py-2.5 font-body text-sm font-bold text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-ink/30"
+                  disabled={isSaving || alertsUnavailable}
+                  className="group inline-flex min-h-11 shrink-0 items-center gap-2.5 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {enabled ? <Check size={13} /> : <BellRing size={13} />}
-                  {alertLabel}
+                  <span className={cn("w-7 text-right font-body text-xs font-bold uppercase tracking-wide", enabled ? "text-primary" : "text-ink/75")}>
+                    {enabled ? "On" : "Off"}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "relative h-7 w-12 rounded-full border transition-colors group-focus-visible:outline group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-gold",
+                      enabled ? "border-primary bg-primary" : "border-ink/30 bg-ink/15"
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "absolute left-0 top-0.5 h-[22px] w-[22px] rounded-full bg-white shadow transition-transform",
+                        enabled ? "translate-x-[22px]" : "translate-x-0.5"
+                      )}
+                    />
+                  </span>
                 </button>
-              </div>
-
-              <div className="mt-3 flex items-center gap-2 font-body text-xs uppercase tracking-[0.13em] text-ink/75">
-                <CalendarDays size={12} className="text-gold" />
-                You can turn alerts off here any time
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { createHmac } from "node:crypto";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { callAppsScript } from "./appsScriptBridge";
+import { callAppsScript, OutdatedBackendError } from "./appsScriptBridge";
 
 const scriptUrl = "https://script.google.com/macros/s/AKfycbxExample123/exec";
 const secret = "test-secret-with-at-least-thirty-two-characters";
@@ -55,8 +55,32 @@ describe("Apps Script bridge", () => {
     vi.stubEnv("GOOGLE_APPS_SCRIPT_SECRET", secret);
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
       ok: true,
-      json: async () => ({ success: false, error: "The request could not be processed." }),
+      json: async () => ({ success: false, version: 2, error: "The request could not be processed." }),
     }));
     await expect(callAppsScript("push.upsert", {})).rejects.toThrow("rejected push.upsert");
+  });
+
+  it("refuses push actions from a script older than one row per device", async () => {
+    vi.stubEnv("GOOGLE_APPS_SCRIPT_URL", scriptUrl);
+    vi.stubEnv("GOOGLE_APPS_SCRIPT_SECRET", secret);
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, data: { created: true } }),
+    }));
+
+    await expect(callAppsScript("push.upsert", {})).rejects.toBeInstanceOf(OutdatedBackendError);
+    // Forms keep working on an older script.
+    await expect(callAppsScript("contact.submit", {})).resolves.toEqual({ created: true });
+  });
+
+  it("accepts push actions from the current script", async () => {
+    vi.stubEnv("GOOGLE_APPS_SCRIPT_URL", scriptUrl);
+    vi.stubEnv("GOOGLE_APPS_SCRIPT_SECRET", secret);
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, version: 2, data: { created: false } }),
+    }));
+
+    await expect(callAppsScript("push.upsert", {})).resolves.toEqual({ created: false });
   });
 });
