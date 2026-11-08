@@ -132,7 +132,6 @@ function StatusLine({ status }: { status: TempleStatus | null }) {
         className={`h-2 w-2 shrink-0 rounded-full ${status.isOpen ? "bg-emerald-600" : "bg-sunset"}`}
         aria-hidden="true"
       />
-      {/* "Until 12:45 PM" reads as "Open now until 12:45 PM", keeping the time's capitals. */}
       {`${status.isOpen ? "Open now" : "Closed now,"} ${status.detailText.charAt(0).toLowerCase()}${status.detailText.slice(1)}`}
     </span>
   );

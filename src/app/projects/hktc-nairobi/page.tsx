@@ -186,10 +186,10 @@ export default function HKTCNairobiPage() {
 
             <div className="grid gap-4">
               <div className="overflow-hidden card-surface shadow-card">
-                <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
-                  src="/images/leadership/govinda-prem-prabhu-outdoors.jpg"
-                  alt="Govinda Prem Prabhu outdoors"
-                  className="h-full w-full object-cover"
+                <Image width={960} height={640} sizes="(max-width: 768px) 100vw, 50vw"
+                  src="/images/hktc/govinda-prem-community-gathering.webp"
+                  alt="Govinda Prem Prabhu with devotees at a gathering"
+                  className="h-full w-full object-cover brightness-[1.03] contrast-[1.03]"
                 />
               </div>
               <div className="border border-gold/25 bg-gold/10 p-5">

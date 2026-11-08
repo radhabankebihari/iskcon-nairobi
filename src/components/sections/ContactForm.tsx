@@ -26,7 +26,6 @@ const initialForm: FormState = {
 
 const subjects = [
   "General Enquiry",
-  "Guest House Booking",
   "HKTC Admissions",
   "Food For Life Volunteering",
   "Donation Query",

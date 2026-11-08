@@ -18,7 +18,8 @@ export default function MediaPage() {
         titleAccent="& Video Gallery"
         subtitle="Media Library"
         description="Life at ISKCON Nairobi through the lens - festivals, farm, temple worship, and the beauty of devotional community in East Africa."
-        image="/images/community/harinam-kirtan-devotees.jpg"
+        image="/images/media-film-hero.webp"
+        imageAlt="Black-and-white film camera and photographic negatives"
         height="md"
         className="sm:min-h-[500px]"
       />
@@ -63,9 +64,9 @@ export default function MediaPage() {
 
           <div className="mb-8">
             <span className="eyebrow mb-2 block">Photo archive</span>
-            <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">From the early days</h2>
+            <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">Nairobi in photographs</h2>
             <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-ink/75 sm:text-base">
-              Archival moments from the beginnings of ISKCON in Nairobi, alongside temple life today.
+              Archival moments, temple life today, and visits to the Thika Farm and Goshala.
             </p>
           </div>
           <MediaGallery />

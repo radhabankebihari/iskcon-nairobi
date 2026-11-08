@@ -1,4 +1,5 @@
 import PageHero from "@/components/ui/PageHero";
+import { notFound } from "next/navigation";
 import { withSeo } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
@@ -12,6 +13,7 @@ export const metadata = withSeo({
 }, "/festivals/rath-yatra");
 
 export default function RathYatraPage() {
+  notFound(); // Preserve the page draft without publishing it yet.
   const description = "Ratha Yatra is the Festival of Chariots, a public celebration of Lord Jagannath with kirtan, procession, dance, and prasadam distribution in Nairobi.";
   return (
     <>

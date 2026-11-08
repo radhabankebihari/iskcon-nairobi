@@ -105,12 +105,52 @@ const images: GalleryImage[] = [
     height: 897,
   },
   {
-    src: "/images/thika-farm/thika-farm-visit-gate.jpg",
-    caption: "A visit to the Thika Farm and Goshala",
-    alt: "Entrance to the Thika Farm and Goshala",
+    src: "/images/thika-farm/thika-farm-2022-017.webp",
+    caption: "Devotees gather for kirtan at Thika Farm",
+    alt: "Devotees raising their hands in kirtan before the farm altar",
     category: "Farm & Goshala",
-    width: 2200,
-    height: 1245,
+    width: 2000,
+    height: 1132,
+  },
+  {
+    src: "/images/thika-farm/thika-farm-2022-192.webp",
+    caption: "Kirtan on the farm veranda",
+    alt: "Devotees seated together and clapping during kirtan",
+    category: "Farm & Goshala",
+    width: 2000,
+    height: 1132,
+  },
+  {
+    src: "/images/thika-farm/thika-farm-2022-142.webp",
+    caption: "Cows at the feeding stalls",
+    alt: "Brown and black-and-white cows gathered at the goshala feeding stalls",
+    category: "Farm & Goshala",
+    width: 2000,
+    height: 1132,
+  },
+  {
+    src: "/images/thika-farm/thika-farm-2022-199.webp",
+    caption: "The goshala herd at Thika Farm",
+    alt: "Cows gathered in the outdoor goshala enclosure",
+    category: "Farm & Goshala",
+    width: 2000,
+    height: 1132,
+  },
+  {
+    src: "/images/thika-farm/thika-farm-2022-143.webp",
+    caption: "Flowers in the farm garden",
+    alt: "Red hibiscus flower growing in the farm garden",
+    category: "Farm & Goshala",
+    width: 2000,
+    height: 1132,
+  },
+  {
+    src: "/images/thika-farm/thika-farm-2022-139.webp",
+    caption: "Inside the goshala",
+    alt: "Cows sheltered inside the Thika Farm goshala",
+    category: "Farm & Goshala",
+    width: 2000,
+    height: 1132,
   },
 ];
 
@@ -121,6 +161,16 @@ export default function MediaGallery() {
   const [selected, setSelected] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const visibleImages = category === "All" ? images : images.filter((image) => image.category === category);
+
+  useEffect(() => {
+    const selectLinkedCategory = () => {
+      if (window.location.hash === "#farm-goshala") setCategory("Farm & Goshala");
+      if (window.location.hash === "#early-days") setCategory("Early Days");
+    };
+    selectLinkedCategory();
+    window.addEventListener("hashchange", selectLinkedCategory);
+    return () => window.removeEventListener("hashchange", selectLinkedCategory);
+  }, []);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -144,6 +194,7 @@ export default function MediaGallery() {
 
   return (
     <div id="early-days" className="scroll-mt-32">
+      <div id="farm-goshala" className="scroll-mt-32" />
       <div className="mb-8 flex flex-wrap gap-2" aria-label="Filter photographs">
         {categories.map((item) => (
           <button

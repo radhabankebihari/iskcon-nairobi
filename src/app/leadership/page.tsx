@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { ArrowRight, HeartHandshake, Users } from "lucide-react";
+import { ArrowRight, HeartHandshake } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
-import { leadershipDepartments, leadershipProfiles } from "@/data/site";
+import { calendarProgrammeFacilitators, leadershipDepartments, leadershipProfiles } from "@/data/site";
 import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -91,7 +91,7 @@ export default function LeadershipPage() {
                   <Image width={1600} height={1200} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     src={profile.image}
                     alt={profile.name}
-                    className="h-full w-full object-cover object-[center_28%] transition-transform duration-700 group-hover:scale-105"
+                    className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${profile.name === "Govinda Prem Prabhu" ? "object-[7%_center]" : "object-[center_28%]"}`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -115,6 +115,28 @@ export default function LeadershipPage() {
 
       <section className="bg-temple-bg py-section-sm sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
         <div className="content-width section-padding">
+          <div className="mb-9 max-w-3xl">
+            <SectionHeading eyebrow="Programme Facilitators" title="Guiding study" accent="and community" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
+            <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">
+              The temple&apos;s 2027 calendar names these devotees as facilitators for regular learning and community programmes.
+            </p>
+          </div>
+          <div className="grid gap-x-10 md:grid-cols-2">
+            {calendarProgrammeFacilitators.map((facilitator) => (
+              <article key={facilitator.name} className="border-t border-temple-sand py-6">
+                <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                  {facilitator.programme}
+                </p>
+                <h3 className="mt-2 font-display text-2xl text-ink">{facilitator.name}</h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-ink/75">{facilitator.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-temple-bg py-section-sm sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
+        <div className="content-width section-padding">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <div>
               <HeartHandshake className="mb-5 text-primary" size={28} />
@@ -123,16 +145,15 @@ export default function LeadershipPage() {
                 Temple life is sustained through teams serving worship, education, kirtan, hospitality, outreach, festivals, administration, and community care.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <ul className="grid grid-cols-2 gap-x-6 sm:grid-cols-3">
               {leadershipDepartments.map((department) => (
-                <div key={department} className="card-surface px-4 py-4 shadow-card">
-                  <Users className="mb-3 text-gold" size={17} />
-                  <p className="font-body text-xs font-semibold uppercase tracking-[0.08em] text-ink/75">
+                <li key={department} className="border-t border-gold/25 py-4">
+                  <p className="font-body text-sm font-medium text-ink/80">
                     {department}
                   </p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>

@@ -15,7 +15,7 @@ export default function TestimonialsSection() {
         <div
           tabIndex={0}
           role="group"
-          aria-label="Community testimonials"
+          aria-label="Community stories and profiles"
           className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0"
         >
           {testimonials.map((item) => (

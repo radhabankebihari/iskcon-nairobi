@@ -35,7 +35,11 @@ function hrefForEvent(event: string) {
   }
 
   if (lower.includes("ratha yatra")) {
-    return "/festivals/rath-yatra";
+    return "/festivals";
+  }
+
+  if (lower.includes("kartika vrata") || lower.includes("bhisma pancaka")) {
+    return "/festivals/kartik";
   }
 
   if (lower.includes("gaura purnima")) {

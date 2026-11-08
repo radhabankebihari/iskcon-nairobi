@@ -225,7 +225,7 @@ export default function SrilaPrabhupadaPage() {
                 className="relative aspect-[4/3] w-full object-cover object-[center_30%] shadow-card-hover"
               />
               <figcaption className="relative mt-4 border-l border-gold/40 pl-4 font-body text-xs leading-relaxed text-sand/75">
-                I found references to Nairobi photos of Srila Prabhupada, but did not download them because the available copies did not show a clear reuse license.
+                Srila Prabhupada, whose books and teachings continue to guide the temple community in Nairobi.
               </figcaption>
             </figure>
           </div>
@@ -263,9 +263,9 @@ export default function SrilaPrabhupadaPage() {
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
               <Ship className="mb-5 text-gold" size={28} />
-              <h2 className="font-display text-display-md text-white">Sources and image notes</h2>
+              <h2 className="font-display text-display-md text-white">Sources and photographs</h2>
               <p className="mt-4 font-body text-sm leading-relaxed text-sand/75">
-                This page combines your supplied text with public references. The downloaded images are from Wikimedia Commons pages with reuse/license information. Nairobi-specific Prabhupada photos were found online, but not used as site assets because the license status was not clear enough.
+                These references provide historical context for Srila Prabhupada's life and work in Kenya, alongside records for selected photographs on this page.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">

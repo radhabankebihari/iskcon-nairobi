@@ -1,4 +1,4 @@
-import { templeHours } from "@/data/site";
+import { templeHours, templeSchedule } from "@/data/site";
 
 export type TempleStatus = {
   isOpen: boolean;
@@ -29,27 +29,12 @@ const windows = [
   { start: eveningCloses, end: morningOpens + 1440, isOpen: false, label: `${templeHours.evening.closes} - ${templeHours.morning.opens}` },
 ];
 
-const programmes = [
-  { minute: 270, label: "Mangala Arati" },
-  { minute: 300, label: "Sri Tulasi Arati" },
-  { minute: 420, label: "Shringar Bhoga" },
-  { minute: 435, label: "Shringar Darshan" },
-  { minute: 440, label: "Sri Guru Puja" },
-  { minute: 480, label: "Srimad-Bhagavatam Class" },
-  { minute: 490, label: "Baal Bhoga" },
-  { minute: 510, label: "Dhoop Arati" },
-  { minute: 670, label: "Raj Bhoga" },
-  { minute: 720, label: "Raj Bhoga Arati" },
-  { minute: 765, label: "Temple Closes" },
-  { minute: 970, label: "Utthapan Bhoga" },
-  { minute: 990, label: "Uthapan Arati" },
-  { minute: 1115, label: "Sandhya Bhoga" },
-  { minute: 1125, label: "Sri Tulasi Arati" },
-  { minute: 1140, label: "Sandhya - Gaur Arati" },
-  { minute: 1210, label: "Sayana Bhoga" },
-  { minute: 1230, label: "Sayana Arati" },
-  { minute: 1245, label: "Temple Closes" },
-];
+const programmes = templeSchedule.map(({ time, event }) => {
+  const match = time.match(/^(\d+):(\d+) (A\.M\.|P\.M\.)$/);
+  if (!match) throw new Error(`Invalid temple schedule time: ${time}`);
+  const hour = Number(match[1]) % 12 + (match[3] === "P.M." ? 12 : 0);
+  return { minute: hour * 60 + Number(match[2]), label: event };
+});
 
 function getNairobiMinutes(date: Date) {
   const parts = new Intl.DateTimeFormat("en-GB", {

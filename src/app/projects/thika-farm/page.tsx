@@ -17,7 +17,7 @@ export default function ThikaFarmPage() {
         titleAccent="& Goshala"
         subtitle="Organic Farming & Cow Protection"
         description="Forty acres of sacred land in the Kenyan highlands - where cow protection, organic farming, and devotional community life thrive together."
-        image="/images/thika-farm/thika-farm-visit-gate.jpg"
+        image="/images/thika-farm/thika-farm-2022-141.webp"
         height="md"
         className="sm:min-h-[500px]"
       />
@@ -35,12 +35,25 @@ export default function ThikaFarmPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                "/images/thika-farm/thika-farm-visit-gate.jpg",
-                "/images/thika-farm/goshala-cows-pasture.jpg",
-              ].map((src, i) => (
-                <Image width={1600} height={1200} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" key={i} src={src} alt="Farm" className={`w-full object-cover ${i === 1 ? "mt-8" : ""}`} style={{ aspectRatio: "3/4" }} />
+                { src: "/images/thika-farm/thika-farm-2022-103.webp", alt: "Fruit trees growing at Thika Farm" },
+                { src: "/images/thika-farm/thika-farm-2022-135.webp", alt: "Hanging planter in the farm garden" },
+              ].map((photo, i) => (
+                <Image width={1600} height={1200} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 33vw" key={photo.src} src={photo.src} alt={photo.alt} className={`w-full object-cover ${i === 1 ? "mt-8" : ""}`} style={{ aspectRatio: "3/4" }} />
               ))}
             </div>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+            {[
+              { src: "/images/thika-farm/thika-farm-2022-146.webp", alt: "Devotee seated with a harmonium on the farm lawn", caption: "A quiet moment on the lawn" },
+              { src: "/images/thika-farm/thika-farm-2022-147.webp", alt: "Farm buildings and cow shelters at Thika Farm", caption: "The farm and cow shelters" },
+            ].map((photo) => (
+              <figure key={photo.src}>
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
+                </div>
+                <figcaption className="mt-2 font-body text-xs text-ink/75">{photo.caption}</figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>

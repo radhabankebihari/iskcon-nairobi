@@ -17,7 +17,7 @@ const learningPaths = [
     icon: BookOpen,
     eyebrow: "Daily Scripture",
     title: "Srimad-Bhagavatam Class",
-    timing: "Daily at 8:00 A.M.",
+    timing: "Daily at 7:30 A.M.",
     description:
       "The morning class studies one verse of Srimad-Bhagavatam with Srila Prabhupada's purport, discussion, and practical application for devotional life.",
   },

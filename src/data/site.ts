@@ -2,11 +2,11 @@
 // homepage cards, and cross-page summaries. Prefer editing copy and image
 // choices here when a change is reused in more than one page or section.
 
-// The single source for opening hours, in 24-hour Nairobi time. The status bar,
-// schedule, footer, and search listing data all read from these values.
+// The printed Hare Krishna Calendar 2027, page 28, is the source for this
+// daily temple schedule. Keep the status bar, Visit page, and footer in sync.
 export const templeHours = {
-  morning: { opens: "04:30", closes: "12:45" },
-  evening: { opens: "16:30", closes: "20:45" },
+  morning: { opens: "04:30", closes: "13:00" },
+  evening: { opens: "16:20", closes: "20:30" },
 };
 
 function formatHour(time: string) {
@@ -46,7 +46,7 @@ export const templeGiving = {
 export const socialLinks = [
   { label: "FB", name: "Facebook", href: "https://www.facebook.com/profile.php?id=100064683579429" },
   { label: "IG", name: "Instagram", href: "https://www.instagram.com/iskcon_nairobi/" },
-  { label: "YT", name: "YouTube", href: "https://www.youtube.com/results?search_query=ISKCON+Nairobi" },
+  { label: "YT", name: "YouTube", href: "https://www.youtube.com/@iskcon_nairobi" },
   { label: "WA", name: "WhatsApp", href: "https://wa.me/254721667181" },
 ];
 
@@ -98,7 +98,7 @@ export const projects = [
     title: "Thika Farm & Goshala",
     subtitle: "Organic Farming & Cow Protection",
     description: "Sacred land where cow protection, natural farming, and devotional community life come together outside Nairobi.",
-    image: "/images/thika-farm/thika-farm-visit-gate.jpg",
+    image: "/images/thika-farm/thika-farm-2022-199.webp",
     href: "/projects/thika-farm",
     tag: "Agriculture",
   },
@@ -122,15 +122,6 @@ export const festivals = [
     image: "/images/kirtan-safari-2026-poster-thumb.jpg",
     href: "/festivals/kirtan-safari",
     featured: true,
-  },
-  {
-    title: "Ratha Yatra",
-    date: "Annual procession",
-    location: "Nairobi",
-    description: "The Festival of Chariots, a public celebration of Lord Jagannath with kirtan, procession, dance, and prasadam distribution.",
-    image: "/images/festivals/ratha-yatra-procession.jpg",
-    href: "/festivals/rath-yatra",
-    featured: false,
   },
   {
     title: "Janmashtami",
@@ -451,18 +442,18 @@ export const testimonials = [
     image: "/images/community/joshua.jpg",
   },
   {
-    quote: "The farm helped me understand simple living in a practical way: caring for cows, working with the land, and chanting together.",
-    name: "Mike",
-    role: "Thika Farm service",
-    origin: "Kenya",
-    image: "/images/community/eng-m.jpg",
+    quote: "Whether we're on the temple floor or out on Nairobi's streets, when the whole room starts chanting together, I feel I'm exactly where Krishna wants me to be.",
+    name: "Rachit",
+    role: "Mrdanga player",
+    origin: "India",
+    image: "/images/community/rachit.jpg",
   },
   {
-    quote: "Ratha Yatra brought the whole city into celebration. I had never seen devotion expressed so publicly and joyfully.",
-    name: "Visva Daksina",
-    role: "Ratha Yatra service",
-    origin: "Kiambu, Kenya",
-    image: "/images/community/visva-daksina.jpg",
+    quote: "I came to Nairobi expecting a quiet temple visit, but I found a yatra full of life, sharing the holy name through harinama, classes, kirtan, and prasadam for those who need it. Serving alongside them changed me.",
+    name: "Kevin Prabhu",
+    role: "Temple visitor",
+    origin: "Canada",
+    image: "/images/community/kevin-prabhu.webp",
   },
 ];
 
@@ -501,9 +492,9 @@ export const leadershipProfiles = [
     name: "Govinda Prem Prabhu",
     role: "Regional Secretary, Hare Krishna Training Centre",
     category: "Regional & Educational Leadership",
-    image: "/images/leadership/govinda-prem-prabhu-portrait.jpg",
+    image: "/images/leadership/govinda-prem-prabhu-outdoors.jpg",
     summary: "Regional Secretary and key leader of the Hare Krishna Training Centre.",
-    details: "Govinda Prem Prabhu serves as Regional Secretary and leads HKTC, guiding student education, devotional training, and regional coordination.",
+    details: "Govinda Prem Prabhu serves as Regional Secretary and leads the Hare Krishna Training Centre, where he facilitates student education and devotional training.",
   },
   {
     name: "Mukund Morari Prabhu",
@@ -519,7 +510,7 @@ export const leadershipProfiles = [
     category: "Community Guidance",
     image: "/images/leadership/rukma-prabhu.jpg",
     summary: "One of the vice presidents, a respected community elder, teacher, and trusted source of pastoral guidance.",
-    details: "Rukma Prabhu serves as Vice President, guiding devotee care and Namahatta while teaching sastra, conducting yajnas, and advising the community.",
+    details: "Rukma Prabhu serves as Vice President, facilitates Namahatta gatherings, and supports devotee care through teaching, yajnas, and community guidance.",
   },
   {
     name: "Sri Gauranga Prabhu",
@@ -527,7 +518,31 @@ export const leadershipProfiles = [
     category: "Resident Teaching",
     image: "/images/leadership/sri-gauranga-prabhu-web.jpg",
     summary: "The senior-most resident brahmachari and a respected teacher.",
-    details: "Sri Gauranga Prabhu is the senior resident brahmachari and facilitates the Bhakti Sastri and Bhakti Vaibhava classes, supporting temple life through teaching, mentorship, resident training, and daily service.",
+    details: "Sri Gauranga Prabhu is the senior resident brahmachari and facilitates Bhakti Sastri and Bhakti Vaibhava classes alongside resident training and daily service.",
+  },
+];
+
+// The 2027 temple calendar credits these facilitators by programme, not by management office.
+export const calendarProgrammeFacilitators = [
+  {
+    name: "Aishwarya Lila Devi Dasi",
+    programme: "Gita Classes",
+    description: "Facilitates classes exploring the Bhagavad-gita and its spiritual teachings.",
+  },
+  {
+    name: "Caitanya Devi Dasi",
+    programme: "Ladies Sanga",
+    description: "Co-facilitates gatherings for kirtan, Bhagavad-gita discussion, and devotional association.",
+  },
+  {
+    name: "Mohan Priya Devi Dasi",
+    programme: "Ladies Sanga",
+    description: "Co-facilitates gatherings for kirtan, Bhagavad-gita discussion, and devotional association.",
+  },
+  {
+    name: "Kaivalya Krishna Das",
+    programme: "Bhakti Vriksha Class",
+    description: "Facilitates small-group devotional gatherings for learning, discussion, and kirtan.",
   },
 ];
 
@@ -614,31 +629,27 @@ export const templeScheduleGroups = [
     title: "Morning Aarti & Darshan Timings",
     timeRange: morningHours,
     items: [
-      { time: "4:30 A.M.", event: "Mangala Arati in the Main Temple" },
-      { time: "5:00 A.M.", event: "Sri Tulasi Arati" },
-      { time: "7:00 A.M.", event: "Shringar Bhoga" },
-      { time: "7:15 A.M.", event: "Shringar Darshan" },
-      { time: "7:20 A.M.", event: "Sri Guru Puja" },
-      { time: "8:00 A.M.", event: "Srimad-Bhagavatam Class" },
-      { time: "8:10 A.M.", event: "Baal Bhoga" },
-      { time: "8:30 A.M.", event: "Dhoop Arati" },
-      { time: "11:10 A.M.", event: "Raj Bhoga" },
-      { time: "12:00 P.M.", event: "Raj Bhoga Arati" },
-      { time: "12:45 P.M.", event: "Temple Closes" },
+      { time: "4:30 A.M.", event: "Mangala Arati" },
+      { time: "5:00 A.M.", event: "Tulasi Puja" },
+      { time: "5:15 A.M.", event: "Japa Meditation" },
+      { time: "7:15 A.M.", event: "Deity Greeting" },
+      { time: "7:20 A.M.", event: "Guru Puja and Kirtan" },
+      { time: "7:30 A.M.", event: "Srimad-Bhagavatam Class" },
+      { time: "8:20 A.M.", event: "Dhup Arati" },
+      { time: "12:30 P.M.", event: "Raj Bhoga Arati" },
+      { time: "1:00 P.M.", event: "Deities Rest" },
     ],
   },
   {
     title: "Evening Aarti & Darshan Timings",
     timeRange: eveningHours,
     items: [
-      { time: "4:10 P.M.", event: "Utthapan Bhoga" },
-      { time: "4:30 P.M.", event: "Uthapan Arati" },
-      { time: "6:35 P.M.", event: "Sandhya Bhoga" },
-      { time: "6:45 P.M.", event: "Sri Tulasi Arati" },
-      { time: "7:00 P.M.", event: "Sandhya - Gaur Arati" },
-      { time: "8:10 P.M.", event: "Sayana Bhoga" },
-      { time: "8:30 P.M.", event: "Sayana Arati" },
-      { time: "8:45 P.M.", event: "Temple Closes" },
+      { time: "4:20 P.M.", event: "Vaikalika Arati" },
+      { time: "6:45 P.M.", event: "Tulasi Puja" },
+      { time: "7:00 P.M.", event: "Sandhya Arati" },
+      { time: "7:30 P.M.", event: "Bhagavad-gita Class" },
+      { time: "8:15 P.M.", event: "Sayana Arati" },
+      { time: "8:30 P.M.", event: "Temple Closes" },
     ],
   },
 ];

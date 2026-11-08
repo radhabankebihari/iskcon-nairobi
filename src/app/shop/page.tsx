@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import PageHero from "@/components/ui/PageHero";
 import { ShoppingBag, Star } from "lucide-react";
 import { withSeo } from "@/lib/seo";
@@ -20,6 +21,7 @@ const products = [
 ];
 
 export default function ShopPage() {
+  notFound(); // Keep the prepared page unpublished until the shop is approved.
   return (
     <>
       <PageHero

@@ -16,7 +16,8 @@ export default function HktcApplyPage() {
         titleAccent="Application"
         subtitle="Study Interest"
         description="Tell the education team which course or study pathway you are interested in."
-        image="/images/community/harinam-kirtan-devotees.jpg"
+        image="/images/hktc/hktc-nairobi-student-class.jpg"
+        imageAlt="HKTC Nairobi students studying together"
         height="sm"
       />
       <section className="py-section bg-temple-bg">

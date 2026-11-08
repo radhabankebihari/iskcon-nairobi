@@ -31,13 +31,13 @@ const galleryImages = [
     imageClass: "h-[170px] sm:h-[240px] lg:h-full",
   },
   {
-    src: "/images/thika-farm/thika-farm-visit-gate.jpg",
-    caption: "A visit to the Thika Farm and Goshala",
+    src: "/images/thika-farm/thika-farm-2022-102.webp",
+    caption: "Krishna Balarama Goshala at Thika Farm",
+    alt: "Krishna Balarama Goshala sign at the farm entrance",
     tone: "Goshala",
     className: "lg:col-span-4",
     imageClass: "h-[170px] sm:h-[240px] lg:h-full",
-    href: "https://drive.google.com/drive/folders/10o0rJGeiIebEz0DRN1xsaiHlxrrF8Gtw?usp=drive_link",
-    external: true,
+    href: "/media#farm-goshala",
   },
   {
     src: "/images/hktc/hktc-nairobi-prabhupada-book-study.jpg",
@@ -76,8 +76,6 @@ export default function GallerySection() {
               <Link
                 key={img.caption}
                 href={img.href ?? "/media"}
-                target={img.external ? "_blank" : undefined}
-                rel={img.external ? "noopener noreferrer" : undefined}
                 className={`group relative overflow-hidden border border-temple-sand bg-dusk shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-card-hover ${
                   isLead || isWide ? "col-span-2" : ""
                 } ${i === 3 || i === 4 ? "max-sm:hidden" : ""} ${img.className}`}

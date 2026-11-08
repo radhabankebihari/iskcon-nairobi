@@ -12,11 +12,11 @@ export const metadata = withSeo({
 
 // The moments most visitors come for. The full ritual schedule stays one tap away.
 const keyMoments = [
-  "Mangala Arati in the Main Temple",
-  "Shringar Darshan",
+  "Mangala Arati",
+  "Deity Greeting",
   "Srimad-Bhagavatam Class",
   "Raj Bhoga Arati",
-  "Sandhya - Gaur Arati",
+  "Sandhya Arati",
 ].flatMap((event) => templeSchedule.filter((item) => item.event === event));
 
 export default function VisitPage() {
