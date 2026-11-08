@@ -22,6 +22,9 @@ export function needsPushSync(
   current: Omit<PushSyncState, "syncedAt">,
   now: number
 ) {
+  // With every option off the device has nothing to receive. A save queued
+  // before the visitor turned notifications off must not store it again.
+  if (!current.calendar && !current.noticeboard) return false;
   if (!last) return true;
   if (last.endpoint !== current.endpoint) return true;
   if (last.calendar !== current.calendar || last.noticeboard !== current.noticeboard) return true;

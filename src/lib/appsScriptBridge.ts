@@ -69,7 +69,8 @@ export async function callAppsScript<T>(action: SheetAction, data: unknown): Pro
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ payload, signature }),
     cache: "no-store",
-    signal: AbortSignal.timeout(20_000),
+    // A cold Apps Script start can take well over ten seconds.
+    signal: AbortSignal.timeout(30_000),
   });
 
   if (!response.ok) {

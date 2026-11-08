@@ -29,7 +29,7 @@ async function callBridge(action, data) {
   const signature = createHmac("sha256", secret).update(payload).digest("hex");
   const response = await fetch(url, {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ payload, signature }), signal: AbortSignal.timeout(20_000),
+    body: JSON.stringify({ payload, signature }), signal: AbortSignal.timeout(30_000),
   });
   if (!response.ok) throw new Error(`Sheets bridge returned HTTP ${response.status}.`);
   const result = await response.json();

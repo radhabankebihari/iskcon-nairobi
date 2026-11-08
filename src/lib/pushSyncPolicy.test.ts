@@ -26,6 +26,17 @@ describe("needsPushSync", () => {
     expect(needsPushSync({ ...synced, syncedAt: now - PUSH_RESYNC_INTERVAL_MS }, current, now)).toBe(true);
     expect(needsPushSync({ ...synced, syncedAt: now + 60_000 }, current, now)).toBe(true);
   });
+
+  it("never saves a device with every option off", () => {
+    const off = { ...current, calendar: false, noticeboard: false };
+    expect(needsPushSync(null, off, now)).toBe(false);
+    expect(needsPushSync(synced, off, now)).toBe(false);
+    expect(needsPushSync({ ...synced, syncedAt: now - PUSH_RESYNC_INTERVAL_MS }, off, now)).toBe(false);
+  });
+
+  it("still saves when one option stays on", () => {
+    expect(needsPushSync(synced, { ...current, calendar: false, noticeboard: true }, now)).toBe(true);
+  });
 });
 
 describe("previousEndpointFor", () => {

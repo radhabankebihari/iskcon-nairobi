@@ -44,12 +44,19 @@ function doPost(e) {
       throw new Error('Expired or invalid request');
     }
 
+    const cache = CacheService.getScriptCache();
+    if (cache.get(request.nonce)) throw new Error('Repeated request');
+    cache.put(request.nonce, 'used', 360);
+
+    // Forms and analytics only append a row, which is safe without a lock.
+    // Push actions read and rewrite rows, so they run one at a time. Keeping
+    // page-view analytics out of the lock stops them delaying push saves.
+    if (String(request.action || '').indexOf('push.') !== 0) {
+      return jsonResponse({ success: true, version: BACKEND_VERSION, data: performAction(request.action, request.data || {}) });
+    }
     const lock = LockService.getScriptLock();
-    lock.waitLock(10000);
+    lock.waitLock(20000);
     try {
-      const cache = CacheService.getScriptCache();
-      if (cache.get(request.nonce)) throw new Error('Repeated request');
-      cache.put(request.nonce, 'used', 360);
       return jsonResponse({ success: true, version: BACKEND_VERSION, data: performAction(request.action, request.data || {}) });
     } finally {
       lock.releaseLock();
@@ -72,10 +79,15 @@ function jsonResponse(value) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+// Opened once per request; a push save otherwise opens the spreadsheet several times.
+let openedSpreadsheet = null;
+
 function spreadsheet() {
+  if (openedSpreadsheet) return openedSpreadsheet;
   const id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
   if (!id) throw new Error('SPREADSHEET_ID is missing');
-  return SpreadsheetApp.openById(id);
+  openedSpreadsheet = SpreadsheetApp.openById(id);
+  return openedSpreadsheet;
 }
 
 function sheetFor(name) {

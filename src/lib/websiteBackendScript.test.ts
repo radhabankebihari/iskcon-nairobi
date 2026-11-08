@@ -1,3 +1,4 @@
+import { createHmac, randomBytes } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
@@ -9,8 +10,12 @@ import { describe, expect, it } from "vitest";
  */
 type Row = unknown[];
 
+const SECRET = "test-secret-with-at-least-thirty-two-characters";
+
 function loadBackend() {
   const sheets = new Map<string, Row[]>();
+  const locks = { taken: 0 };
+  const usedNonces = new Set<string>();
 
   const makeSheet = (name: string) => {
     const rows = sheets.get(name)!;
@@ -48,7 +53,26 @@ function loadBackend() {
     Array,
     Boolean,
     String,
-    PropertiesService: { getScriptProperties: () => ({ getProperty: (key: string) => (key === "SPREADSHEET_ID" ? "test-sheet" : null) }) },
+    PropertiesService: {
+      getScriptProperties: () => ({
+        getProperty: (key: string) => ({ SPREADSHEET_ID: "test-sheet", WEBSITE_SHARED_SECRET: SECRET } as Record<string, string>)[key] ?? null,
+      }),
+    },
+    Utilities: {
+      computeHmacSha256Signature: (value: string, key: string) =>
+        [...createHmac("sha256", key).update(value).digest()].map((byte) => (byte > 127 ? byte - 256 : byte)),
+    },
+    CacheService: {
+      getScriptCache: () => ({
+        get: (key: string) => (usedNonces.has(key) ? "used" : null),
+        put: (key: string) => usedNonces.add(key),
+      }),
+    },
+    LockService: { getScriptLock: () => ({ waitLock: () => (locks.taken += 1), releaseLock: () => undefined }) },
+    ContentService: {
+      MimeType: { JSON: "json" },
+      createTextOutput: (text: string) => ({ setMimeType: () => ({ text }) }),
+    },
     SpreadsheetApp: {
       openById: () => ({
         getSheetByName: (name: string) => (sheets.has(name) ? makeSheet(name) : null),
@@ -65,7 +89,13 @@ function loadBackend() {
   vm.runInContext(source, context);
   const perform = context.performAction as (action: string, data: unknown) => Record<string, unknown>;
   const subscriptionRows = () => (sheets.get("PushSubscriptions") ?? []).slice(1);
-  return { perform, subscriptionRows, version: vm.runInContext("BACKEND_VERSION", context) as number };
+  const post = (action: string, data: unknown, options: { signWith?: string; nonce?: string } = {}) => {
+    const payload = JSON.stringify({ timestamp: Date.now(), nonce: options.nonce ?? randomBytes(16).toString("hex"), action, data });
+    const signature = createHmac("sha256", options.signWith ?? SECRET).update(payload).digest("hex");
+    const response = (context.doPost as (e: unknown) => { text: string })({ postData: { contents: JSON.stringify({ payload, signature }) } });
+    return JSON.parse(response.text) as { success: boolean; version?: number; data?: Record<string, unknown> };
+  };
+  return { perform, post, locks, subscriptionRows, version: vm.runInContext("BACKEND_VERSION", context) as number };
 }
 
 const DEVICE = "3f2b8c1e-9d4a-4b7e-8f12-6a5c3d2e1b0f";
@@ -133,5 +163,27 @@ describe("website-backend.gs push storage", () => {
     const { perform } = loadBackend();
     expect(perform("push.claimRun", { eventId: "2026-11-10-govardhana", runId: "run-a" })).toEqual({ claimed: true });
     expect(perform("push.claimRun", { eventId: "2026-11-10-govardhana", runId: "run-b" })).toEqual({ claimed: false });
+  });
+
+  it("answers signed requests with its version", () => {
+    const { post } = loadBackend();
+    expect(post("analytics.record", { event: "page_view", path: "/" })).toMatchObject({ success: true, version: 2 });
+  });
+
+  it("lets forms and analytics skip the lock, but not push saves", () => {
+    const { post, locks } = loadBackend();
+    post("analytics.record", { event: "page_view", path: "/" });
+    post("contact.submit", { firstName: "Test", email: "test@example.com", subject: "Hello", message: "Hi" });
+    expect(locks.taken).toBe(0);
+    post("push.upsert", { endpoint: ENDPOINT, ...keys, deviceId: DEVICE, calendarEnabled: true });
+    expect(locks.taken).toBe(1);
+  });
+
+  it("still refuses bad signatures and repeated requests", () => {
+    const { post } = loadBackend();
+    expect(post("analytics.record", { event: "page_view", path: "/" }, { signWith: "a-different-secret-that-is-long-enough!!" })).toMatchObject({ success: false });
+    const nonce = randomBytes(16).toString("hex");
+    expect(post("analytics.record", { event: "page_view", path: "/" }, { nonce })).toMatchObject({ success: true });
+    expect(post("analytics.record", { event: "page_view", path: "/" }, { nonce })).toMatchObject({ success: false });
   });
 });
