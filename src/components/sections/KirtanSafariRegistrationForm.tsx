@@ -222,6 +222,7 @@ export default function KirtanSafariRegistrationForm() {
         <label className="ks-hidden-field" aria-hidden="true">
           Website
           <input
+            name="website"
             tabIndex={-1}
             autoComplete="off"
             value={form.website}
