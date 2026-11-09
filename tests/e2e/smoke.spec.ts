@@ -147,6 +147,60 @@ test("every address in the sitemap loads", async ({ request }) => {
   }
 });
 
+test("tracking parameters do not change a page canonical", async ({ page }) => {
+  await page.goto("/visit?utm_source=whatsapp");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://iskconnairobi.com/visit");
+});
+
+test("hidden and unpublished pages stay out of search", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const path of ["/guest-house", "/shop", "/festivals/rath-yatra", "/projects/hktc-nairobi/apply"]) {
+    expect(sitemap).not.toContain(`<loc>https://iskconnairobi.com${path}</loc>`);
+  }
+  await page.goto("/guest-house");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await page.goto("/projects/hktc-nairobi/apply");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
+test("sitemap dates are stable and robots keeps utility routes out", async ({ request }) => {
+  const first = await (await request.get("/sitemap.xml")).text();
+  const second = await (await request.get("/sitemap.xml")).text();
+  expect(first).toBe(second);
+  expect(first).toContain("<lastmod>2026-");
+  expect(first).not.toContain("/guest-house");
+  const robots = await (await request.get("/robots.txt")).text();
+  expect(robots).toContain("Disallow: /api/");
+  expect(robots).toContain("Disallow: /offline");
+  expect(robots).not.toContain("Host:");
+});
+
+test("important pages expose page-specific share metadata", async ({ page }) => {
+  for (const path of ["/", "/visit", "/festivals", "/donate", "/festivals/kartik"]) {
+    await page.goto(path);
+    const title = await page.locator('meta[property="og:title"]').getAttribute("content");
+    const description = await page.locator('meta[property="og:description"]').getAttribute("content");
+    const image = await page.locator('meta[property="og:image"]').getAttribute("content");
+    expect(title?.length, path).toBeGreaterThan(10);
+    expect(description?.length, path).toBeGreaterThan(60);
+    expect(image, path).toMatch(/^https:\/\/iskconnairobi\.com\//);
+  }
+});
+
+test("festival and article pages expose matching structured data", async ({ page }) => {
+  for (const [path, type] of [["/festivals/janmashtami", "Event"], ["/blog/jharikhanda-forest-kirtan-safari", "Article"]]) {
+    await page.goto(path);
+    const data = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
+      scripts.flatMap((script) => {
+        const parsed = JSON.parse(script.textContent ?? "null");
+        return Array.isArray(parsed) ? parsed : [parsed];
+      })
+    );
+    expect(data.some((item) => item["@type"] === type), path).toBe(true);
+    expect(data.some((item) => item["@type"] === "BreadcrumbList"), path).toBe(true);
+  }
+});
+
 test("the homepage always lists upcoming dates", async ({ page }) => {
   await blockApiWrites(page);
   await page.clock.setFixedTime(fixedTime);

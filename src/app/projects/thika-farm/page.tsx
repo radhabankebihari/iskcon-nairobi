@@ -1,6 +1,7 @@
 import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
@@ -12,6 +13,7 @@ export const metadata = withSeo({
 export default function ThikaFarmPage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Projects", path: "/projects" }, { name: "Thika Farm & Goshala", path: "/projects/thika-farm" }]} />
       <PageHero
         title="Thika Farm"
         titleAccent="& Goshala"

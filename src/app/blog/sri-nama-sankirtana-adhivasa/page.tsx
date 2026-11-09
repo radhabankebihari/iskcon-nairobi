@@ -11,6 +11,7 @@ import {
 import PageHero from "@/components/ui/PageHero";
 import AdhivasaLyrics from "@/components/blog/AdhivasaLyrics";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 
 const heroImage = "/images/blog/chaitanya-dances-with-followers.jpg";
 const jharikhandaImage = "/images/blog/jharikhanda-mahaprabhu-animals.jpeg";
@@ -59,6 +60,7 @@ const articleGuide = [
 export default function AdhivasaBlogPage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: "The Invitation Before the Festival", path: "/blog/sri-nama-sankirtana-adhivasa" }]} article={{ headline: "The Invitation Before the Festival", description: "A verse-by-verse translation of Sri Nama Sankirtana Adhivasa, a traditional summons before a kirtan festival.", image: heroImage, path: "/blog/sri-nama-sankirtana-adhivasa" }} />
       <PageHero
         title="The Invitation"
         titleAccent="Before the Festival"

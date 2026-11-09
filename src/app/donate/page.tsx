@@ -9,8 +9,10 @@ import CauseCard from "@/components/donate/CauseCard";
 import { givingCauses } from "@/components/donate/givingCauses";
 
 export const metadata = withSeo({
-  title: "Donate",
-  description: "Support ISKCON Nairobi's temple, Food For Life, cow protection, student sponsorship, and festival programmes.",
+  title: "Donate to ISKCON Nairobi",
+  description: "Support ISKCON Nairobi by M-Pesa. Give to temple worship, Food For Life, cow protection, student learning or festivals and find the correct Paybill details.",
+  openGraph: { images: [{ url: "/images/donate/main-altar-offering.webp", width: 1800, height: 1013, alt: "The altar at ISKCON Nairobi" }] },
+  twitter: { images: ["/images/donate/main-altar-offering.webp"] },
 }, "/donate");
 
 const reassurances = [

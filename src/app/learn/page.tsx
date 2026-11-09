@@ -7,7 +7,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
 export const metadata = withSeo({
-  title: "Learn",
+  title: "Bhagavad Gita Classes in Nairobi",
   description:
     "Daily Srimad-Bhagavatam classes, Bhagavad-gita study, Sunday School, Bhakti Sastri, HKTC philosophy classes, Bhakti Vriksha, Ladies Sanga, Namahatta, and personal guidance at ISKCON Nairobi.",
 }, "/learn");

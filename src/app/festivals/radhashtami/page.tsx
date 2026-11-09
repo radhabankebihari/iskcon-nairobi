@@ -14,6 +14,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
 import SharePageButton from "@/components/ui/SharePageButton";
+import StructuredPageData from "@/components/seo/StructuredPageData";
+import { getNextObservance } from "@/lib/calendarDates";
 
 // Re-render daily so the next festival date stays current.
 export const revalidate = 86400;
@@ -60,8 +62,10 @@ const quickNotes = [
 ];
 
 export default function RadhashtamiPage() {
+  const nextDate = getNextObservance(new Date(), /^Radhashtami/);
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Festivals", path: "/festivals" }, { name: "Radhashtami", path: "/festivals/radhashtami" }]} event={nextDate && { name: "Radhashtami", description: "Celebrate the appearance of Srimati Radharani with kirtan, worship and prasadam at ISKCON Nairobi.", startDate: nextDate.isoDate, path: "/festivals/radhashtami" }} />
       <PageHero
         shareTitle="Radhashtami"
         shareLabel="Share this festival"

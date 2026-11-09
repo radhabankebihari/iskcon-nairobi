@@ -1,5 +1,6 @@
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
@@ -11,6 +12,7 @@ export const metadata = withSeo({
 export default function HKTCJujaPage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Projects", path: "/projects" }, { name: "HKTC Juja", path: "/projects/hktc-juja" }]} />
       <PageHero
         title="HKTC"
         titleAccent="Juja"

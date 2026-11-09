@@ -3,7 +3,10 @@ import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
-export const metadata = withSeo({ title: "Serve" }, "/serve");
+export const metadata = withSeo({
+  title: "Volunteer and Serve in Nairobi",
+  description: "Find ways to serve at ISKCON Nairobi through Food For Life, temple care, festivals, student programmes and the Thika farm. Explore volunteer opportunities.",
+}, "/serve");
 
 const opportunities = [
   { emoji: "🍛", title: "Food For Life", desc: "Cook, pack, and distribute prasādam meals. Daily and weekend shifts available.", commitment: "Flexible" },

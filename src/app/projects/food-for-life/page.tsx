@@ -1,17 +1,19 @@
 import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
 export const metadata = withSeo({
-  title: "Food For Life",
+  title: "Food Distribution in Nairobi",
   description: "Distributing thousands of free prasādam meals monthly to students, street children, and vulnerable families across Nairobi.",
 }, "/projects/food-for-life");
 
 export default function FoodForLifePage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Projects", path: "/projects" }, { name: "Food For Life", path: "/projects/food-for-life" }]} />
       <PageHero
         title="Food For"
         titleAccent="Life"

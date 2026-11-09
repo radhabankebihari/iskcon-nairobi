@@ -3,6 +3,8 @@ import { withSeo } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
 import SharePageButton from "@/components/ui/SharePageButton";
+import StructuredPageData from "@/components/seo/StructuredPageData";
+import { getNextObservance } from "@/lib/calendarDates";
 
 // Re-render daily so the next festival date stays current.
 export const revalidate = 86400;
@@ -14,8 +16,10 @@ export const metadata = withSeo({
 
 export default function GauraPurnimaPage() {
   const description = "Gaura Purnima is the appearance day of Sri Chaitanya Mahaprabhu, celebrated with fasting, kirtan, abhishek, class, and an evening feast.";
+  const nextDate = getNextObservance(new Date(), /^Gaura Purnima/);
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Festivals", path: "/festivals" }, { name: "Gaura Purnima", path: "/festivals/gaura-purnima" }]} event={nextDate && { name: "Gaura Purnima", description, startDate: nextDate.isoDate, path: "/festivals/gaura-purnima" }} />
       <PageHero
         shareTitle="Gaura Purnima"
         shareLabel="Share this festival"

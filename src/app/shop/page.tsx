@@ -9,6 +9,7 @@ import ButtonLink from "@/components/ui/ButtonLink";
 export const metadata = withSeo({
   title: "Prasadam Sweet Shop",
   description: "Artisanal Vaishnava sweets and prasadam products from ISKCON Nairobi's kitchen. Festival specials, gift packs, and bulk orders.",
+  robots: { index: false, follow: false },
 }, "/shop");
 
 const products = [

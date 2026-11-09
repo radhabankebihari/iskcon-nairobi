@@ -14,6 +14,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
 import SharePageButton from "@/components/ui/SharePageButton";
+import StructuredPageData from "@/components/seo/StructuredPageData";
+import { getNextObservance } from "@/lib/calendarDates";
 
 // Re-render daily so the next festival date stays current.
 export const revalidate = 86400;
@@ -60,8 +62,10 @@ const quickNotes = [
 ];
 
 export default function JanmashtamiPage() {
+  const nextDate = getNextObservance(new Date(), /^Janmashtami|Janmashtami - /);
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Festivals", path: "/festivals" }, { name: "Janmashtami", path: "/festivals/janmashtami" }]} event={nextDate && { name: "Krishna Janmashtami", description: "Celebrate the appearance of Lord Krishna with kirtan, worship and prasadam at ISKCON Nairobi.", startDate: nextDate.isoDate, path: "/festivals/janmashtami" }} />
       <PageHero
         shareTitle="Krishna Janmashtami"
         shareLabel="Share this festival"

@@ -6,8 +6,10 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
 export const metadata = withSeo({
-  title: "Visit the Temple",
-  description: "Plan your visit to ISKCON Nairobi. Temple timings, location, what to expect, and how to reach us.",
+  title: "Temple Timings and Directions",
+  description: "Plan a visit to ISKCON Nairobi in Parklands. Find daily temple timings, directions, worship highlights and what to expect on your first visit.",
+  openGraph: { images: [{ url: "/images/iskcon-nairobi-aerial.jpg", width: 1920, height: 1280, alt: "ISKCON Nairobi temple from above" }] },
+  twitter: { images: ["/images/iskcon-nairobi-aerial.jpg"] },
 }, "/visit");
 
 // The moments most visitors come for. The full ritual schedule stays one tap away.

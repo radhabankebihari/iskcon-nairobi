@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 
 const sourceUrl = "https://vedabase.io/en/library/cc/madhya/17/";
 const creditUrl = "https://pin.it/1DvGSgZr7";
@@ -176,6 +177,7 @@ function PullQuote({ text }: { text: string }) {
 export default function JharikhandaBlogPage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: "The Forest That Learned to Chant", path: "/blog/jharikhanda-forest-kirtan-safari" }]} article={{ headline: "The Forest That Learned to Chant", description: "Sri Chaitanya Mahaprabhu and the animals of Jharikhanda, retold from Chaitanya-caritamrita, Madhya-lila 17.", image: heroImage, path: "/blog/jharikhanda-forest-kirtan-safari" }} />
       <PageHero
         title="The Forest That"
         titleAccent="Learned to Chant"
