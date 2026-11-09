@@ -9,9 +9,9 @@ import process from "node:process";
 import { chromium } from "@playwright/test";
 
 const port = 3033;
-const runs = 3;
+const runs = Number(process.env.LIGHTHOUSE_RUNS || 3);
 const routes = ["/", "/festivals", "/festivals/kartik", "/donate", "/visit"];
-const profiles = ["mobile", "desktop"];
+const profiles = process.env.LIGHTHOUSE_PROFILES?.split(",") ?? ["mobile", "desktop"];
 const lighthouse = "lighthouse@12.8.2";
 
 function median(values) {
@@ -103,6 +103,6 @@ try {
 const date = new Date().toISOString().slice(0, 10);
 mkdirSync("docs/baselines", { recursive: true });
 writeFileSync(
-  `docs/baselines/lighthouse-${date}.json`,
-  `${JSON.stringify({ date, lighthouse, profile: "mobile and desktop, median of 3, local build", results }, null, 2)}\n`
+  process.env.LIGHTHOUSE_OUTPUT || `docs/baselines/lighthouse-${date}.json`,
+  `${JSON.stringify({ date, lighthouse, profiles, runs, results }, null, 2)}\n`
 );

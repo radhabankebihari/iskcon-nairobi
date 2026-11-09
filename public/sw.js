@@ -9,7 +9,7 @@
  * Bump CACHE_VERSION whenever this policy or the precache list changes.
  * See docs/PWA_GUIDE.md before editing this file.
  */
-const CACHE_VERSION = "iskcon-nairobi-v11";
+const CACHE_VERSION = "iskcon-nairobi-v12";
 const UPDATE_MODE = "silent";
 const CACHE_PREFIX = "iskcon-nairobi-";
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;

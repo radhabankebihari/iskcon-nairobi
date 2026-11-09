@@ -177,7 +177,6 @@ export default function FestivalsPage() {
         description="Celebrate Lord Krishna, Lord Jagannath, Sri Chaitanya Mahaprabhu, and the holy name with Nairobi's devotional community."
         image="/images/festivals/kirtan-safari-gathering-original.jpg"
         imageAlt="Devotees singing and raising their hands in kirtan at ISKCON Nairobi"
-        imageUnoptimized
         imageClassName="brightness-[1.04] contrast-[1.05] saturate-[.94]"
         imageOverlayClassName="bg-gradient-to-b from-black/40 via-black/10 to-black/55"
         height="sm"

@@ -10,21 +10,35 @@ Measured on 2026-11-09 from a local production build with Lighthouse 12.8.2. Eac
 | `/donate` | 53 | 6.7 s | 1150 ms | 91 | 1.9 s | 0 |
 | `/visit` | 57 | 7.3 s | 732 ms | 93 | 1.6 s | 0 |
 
-The homepage LCP element is the first hero image. It is eager, `fetchpriority=high`, and discoverable in the initial document. The mobile problem is not a missing priority hint. Lighthouse's mobile CPU and network simulation exposes substantial script evaluation and layout work; it needs a separate bundle and rendering pass. Lighthouse reported properly sized images on four of five mobile routes, but not `/festivals`; desktop still reports some image waste. One trace identified the 891 x 336 partner logo rendered at approximately 85 x 32; that is now served through `next/image` at the intended dimensions. The old 404 background was reduced from 936 KB to 269 KB as WebP.
+The homepage LCP element is the first hero image. It is eager, `fetchpriority=high`, and discoverable in the initial document. The mobile problem is not a missing priority hint. Lighthouse's mobile CPU and network simulation exposes substantial script evaluation and layout work. One trace identified the 891 x 336 partner logo rendered at approximately 85 x 32; that is now served through `next/image` at the intended dimensions. The old 404 background was reduced from 936 KB to 269 KB as WebP.
+
+## Follow-up image and mobile pass
+
+All 18 public images above 400 KiB were converted to bounded WebP assets, with originals retained under `assets/original-images` outside the public tree. Public image references were updated, and `npm run images:optimize` can be repeated for future uploads. The PWA image cache is v12 so installed browsers replace changed image files. The festivals hero and the two About altar images no longer bypass Next's responsive image optimizer. Three-run mobile medians for the final build are in `docs/baselines/lighthouse-2026-11-09-mobile-final.json`:
+
+| Route | Mobile score | Mobile LCP | Mobile TBT |
+| --- | ---: | ---: | ---: |
+| `/` | 63 | 9.1 s | 169 ms |
+| `/festivals` | 58 | 5.1 s | 923 ms |
+| `/festivals/kartik` | 65 | 7.3 s | 0 ms |
+| `/donate` | 63 | 5.1 s | 672 ms |
+| `/visit` | 66 | 4.7 s | 463 ms |
+
+The 90-point mobile target is not met. Scores fluctuate between synthetic runs, so treat small score changes with caution. The critical hero resource reaches the browser quickly; script evaluation and style/layout work remain costly under Lighthouse's emulated phone. The responsive-image audit now passes on all five routes. The festivals page weight dropped from 1,012 to 789 KiB after removing its hero bypass. Do not mark Phase 4 approved based on smaller source files alone.
 
 ## Cache verification
 
 - Local production build: `/sw.js` responds `Cache-Control: no-store`; `/api/contact` responds `Cache-Control: private, no-store`; HTML remains framework-managed.
-- Live Cloudflare check before promotion: HTML was `cf-cache-status: DYNAMIC`, but `/sw.js` was cached/revalidated with a four-hour maximum age. The new header cannot be verified at the edge until a future deployment.
-- Keep Cloudflare rules bypassing cache for `/api/*` and `/sw.js`. Do not add a blanket cache-everything rule for HTML. Confirm with `curl -sI` after any release.
-- The service worker cache version is now v11, matching the changed cached image asset policy. The launch checklist still mentions v9 and should be updated when its owner reviews it.
+- The obsolete `iskcon-nairobi` Cloudflare account Worker was deleted from the developer's personal account and a follow-up account listing confirmed its removal. The site remains hosted by Vercel. Cloudflare DNS/proxy, if still enabled by the client, is separate from that Worker.
+- Keep any Cloudflare proxy rules bypassing cache for `/api/*` and `/sw.js`. Do not add a blanket cache-everything rule for HTML. Confirm live response headers after a release.
+- The browser PWA service worker in `public/sw.js` is required for offline and push. It is not a Cloudflare Worker and must remain. Its image cache version is now v12.
 
 ## Open before Phase 4 approval
 
 1. Profile shared mobile JavaScript and layout work, reduce the main-thread cost, and repeat the five-page mobile run until LCP < 2.5 s and performance >= 90 or agree on an explicit exception. TBT is a lab proxy, not INP; obtain field INP through PageSpeed or another real-user source.
-2. Complete the source-image pass. At baseline 18 files in `public/images` were above 400 KiB. The first four JPEGs were recompressed only marginally; Windows then refused safe replacement of the next tracked file in this worktree, so the batch was stopped. Originals remain in Git history. Do not assume this target is met.
-3. Inspect the `/festivals` image-sizing audit and desktop tile sizing, then compare crops at mobile, tablet, and desktop widths before changing `sizes` or sources.
-4. Recheck live Cloudflare and Vercel headers after deployment. The local header test does not prove the edge honors them.
+2. The source-image pass is complete for current public assets. Re-run `npm run images:optimize` and check public image sizes when adding new photos.
+3. The `/festivals` image-sizing audit now passes. Recheck crops at mobile, tablet, and desktop widths before any future image-source change.
+4. Recheck live Vercel and any Cloudflare proxy headers after deployment. The local header test does not prove the edge honors them.
 
 No production promotion is part of this phase branch.
 

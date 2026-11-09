@@ -22,7 +22,7 @@ export default function ServePage() {
         titleAccent="Community"
         subtitle="Volunteer Opportunities"
         description="Join hundreds of dedicated volunteers whose selfless service sustains ISKCON Nairobi's programmes across Kenya."
-        image="/images/serve/krishna-balarama-service-refined.webp"
+        image="/images/serve/krishna-balarama-service-refined-optimized.webp"
         imageAlt="A devotional painting of Krishna, Balarama, and cowherd friends sharing a meal"
         className="sm:min-h-[500px]"
       />

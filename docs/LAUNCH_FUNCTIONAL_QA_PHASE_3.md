@@ -31,4 +31,4 @@ The hidden `/guest-house` route was smoke-tested without redesign. `/shop` and R
 3. Have the temple compare displayed dates/times and festival spelling to its 2026 and 2027 calendars. Review the recorded contrast and link-focus accessibility debt, then perform a VoiceOver or NVDA pass.
 4. Review final desktop, tablet, landscape and phone screenshots with a human eye for face crops, overlap and touch-target comfort. Automated image loading and pixel parity do not prove those qualities.
 
-**Cloudflare:** The site is served by Vercel through Cloudflare. Deactivating the old Cloudflare Worker is a separate account-side action. Inspect its Domains & Routes first; do not remove Cloudflare DNS/proxy or the browser service worker in `public/sw.js`.
+**Cloudflare:** The site is served by Vercel. The old `iskcon-nairobi` Cloudflare Worker in the developer's personal account was deleted and its absence verified. Cloudflare DNS/proxy, if enabled, and the browser service worker in `public/sw.js` are separate and unaffected.

@@ -25,6 +25,7 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT"],
   variable: "--font-fraunces",
   display: "swap",
+  preload: false,
 });
 
 const inter = Inter({
@@ -39,6 +40,7 @@ const sourceSerif4 = Source_Serif_4({
   style: ["normal", "italic"],
   variable: "--font-source-serif-4",
   display: "swap",
+  preload: false,
 });
 
 export const viewport: Viewport = {

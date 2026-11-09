@@ -11,8 +11,8 @@ where final temple photography may still be added later.
 | Asset | Source | Current use |
 |---|---|---|
 | `/images/community/harinam-kirtan-devotees.jpg` | Wikimedia Commons, Russian Hare Krishna devotees on Harinam | Media and HKTC application support imagery |
-| `/images/community/iskcon-temple-architecture.jpg` | Wikimedia Commons, ISKCON Temple Bangalore | Generic ISKCON temple architecture for pages that still need final temple-specific photography |
-| `/images/food-for-life/khichdi-prasadam.jpg` | Wikimedia Commons, Khichdi Prasadam at ISKCON Bangalore | Hidden shop route and prasadam support imagery |
+| `/images/community/iskcon-temple-architecture.webp` | Wikimedia Commons, ISKCON Temple Bangalore | Generic ISKCON temple architecture for pages that still need final temple-specific photography |
+| `/images/food-for-life/khichdi-prasadam.webp` | Wikimedia Commons, Khichdi Prasadam at ISKCON Bangalore | Hidden shop route and prasadam support imagery |
 | `/images/thika-farm/goshala-cows-pasture.jpg` | Pixabay cow pasture image | Cow protection support imagery |
 | `/images/festivals/ratha-yatra-procession.jpg` | Wikimedia Commons, London Ratha Yatra | Ratha Yatra page and festival cards |
 | `/images/guest-house/temple-view-room.jpg` | Pexels hotel bedroom image | Guest house room card |

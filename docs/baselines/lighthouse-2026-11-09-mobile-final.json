@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-09",
+  "lighthouse": "lighthouse@12.8.2",
+  "profiles": [
+    "mobile"
+  ],
+  "runs": 3,
+  "results": {
+    "mobile": {
+      "/": {
+        "performance": 63,
+        "accessibility": 99,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcpSeconds": 9.1,
+        "fcpSeconds": 4,
+        "totalBlockingMs": 169,
+        "layoutShift": 0.013,
+        "pageWeightKb": 1457,
+        "properlySizedImages": true
+      },
+      "/festivals": {
+        "performance": 58,
+        "accessibility": 99,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcpSeconds": 5.1,
+        "fcpSeconds": 2.3,
+        "totalBlockingMs": 923,
+        "layoutShift": 0,
+        "pageWeightKb": 789,
+        "properlySizedImages": true
+      },
+      "/festivals/kartik": {
+        "performance": 65,
+        "accessibility": 98,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcpSeconds": 7.3,
+        "fcpSeconds": 4.5,
+        "totalBlockingMs": 0,
+        "layoutShift": 0,
+        "pageWeightKb": 1090,
+        "properlySizedImages": true
+      },
+      "/donate": {
+        "performance": 63,
+        "accessibility": 99,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcpSeconds": 5.1,
+        "fcpSeconds": 2.1,
+        "totalBlockingMs": 672,
+        "layoutShift": 0,
+        "pageWeightKb": 680,
+        "properlySizedImages": true
+      },
+      "/visit": {
+        "performance": 66,
+        "accessibility": 98,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcpSeconds": 4.7,
+        "fcpSeconds": 2.1,
+        "totalBlockingMs": 463,
+        "layoutShift": 0,
+        "pageWeightKb": 594,
+        "properlySizedImages": true
+      }
+    }
+  }
+}

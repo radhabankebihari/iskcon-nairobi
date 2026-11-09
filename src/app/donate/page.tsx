@@ -27,7 +27,7 @@ export default function DonatePage() {
         titleAccent="Mission"
         subtitle="Give With Purpose"
         description="Your gift sustains daily worship, prasadam for those who need it, cow care, students, and festivals open to all of Nairobi."
-        image="/images/donate/main-altar-offering.jpg"
+        image="/images/donate/main-altar-offering.webp"
         facts={[`M-Pesa Paybill ${templeGiving.mpesaPaybill}`, `Account ${templeGiving.mpesaAccount}`, "Receipts on request"]}
       />
 

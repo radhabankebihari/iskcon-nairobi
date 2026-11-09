@@ -44,7 +44,7 @@ const baseHeroImages: HeroImage[] = [
     durationMs: 10000,
   },
   {
-    src: "/images/hero-ratha-yatra-nairobi-gathering.webp",
+    src: "/images/hero-ratha-yatra-nairobi-gathering-optimized.webp",
     alt: "Devotees gather for Ratha Yatra in central Nairobi, with the city skyline behind them",
     position: "center 48%",
     mobilePosition: "52% center",
