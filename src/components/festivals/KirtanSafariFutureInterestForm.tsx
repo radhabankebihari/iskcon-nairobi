@@ -51,7 +51,7 @@ export default function KirtanSafariFutureInterestForm() {
         <label><span>WhatsApp number</span><input required maxLength={40} inputMode="tel" autoComplete="tel" value={fields.phone} onChange={(event) => setFields({ ...fields, phone: event.target.value })} /></label>
         <label><span>City or country</span><input required maxLength={100} autoComplete="address-level2" value={fields.city} onChange={(event) => setFields({ ...fields, city: event.target.value })} /></label>
         <label className="ks-interest-consent"><input type="checkbox" checked={fields.consent} onChange={(event) => setFields({ ...fields, consent: event.target.checked })} /><span>I would like to receive news about future Kirtan Safari editions.</span></label>
-        <label className="ks-interest-honeypot" aria-hidden="true">Website<input tabIndex={-1} autoComplete="off" value={fields.website} onChange={(event) => setFields({ ...fields, website: event.target.value })} /></label>
+        <label className="ks-interest-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" value={fields.website} onChange={(event) => setFields({ ...fields, website: event.target.value })} /></label>
       </div>
       <FormMessage status={status} message={message} className="mt-3" />
       <button type="submit" disabled={status === "submitting"}>{status === "submitting" ? "Submitting..." : "Receive Future Updates"}</button>
