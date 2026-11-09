@@ -16,7 +16,7 @@ for (const [route, label, title] of [
     await expect(share).toHaveAccessibleName(label);
     await share.click();
     await expect(share).toContainText("Link copied");
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(`http://localhost:3031${route}`);
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(new URL(route, page.url()).href);
     await expect(share).toContainText(label, { timeout: 5000 });
 
     await page.evaluate(() => {
@@ -31,7 +31,7 @@ for (const [route, label, title] of [
     await share.click();
     expect(await page.evaluate(() => (window as Window & { sharedData?: ShareData }).sharedData)).toMatchObject({
       title,
-      url: `http://localhost:3031${route}`,
+      url: new URL(route, page.url()).href,
     });
   });
 }
