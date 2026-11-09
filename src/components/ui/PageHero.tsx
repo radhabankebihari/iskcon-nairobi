@@ -77,13 +77,7 @@ export default function PageHero({
       <div
         className={`relative z-10 flex flex-col ${compact ? "pt-32 pb-10 sm:pt-36 sm:pb-12" : "h-full justify-end pt-32 pb-10 sm:pt-36 sm:pb-14"} section-padding content-width ${contentClassName} ${align === "center" ? "items-center text-center" : ""}`}
       >
-        {!shareTitle && subtitle && <span className="eyebrow text-gold block mb-3">{subtitle}</span>}
-        {shareTitle && (
-          <div className="mb-3 flex w-full max-w-4xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
-            {subtitle && <span className="eyebrow text-gold">{subtitle}</span>}
-            <SharePageButton title={shareTitle} label={shareLabel} />
-          </div>
-        )}
+        {subtitle && <span className="eyebrow text-gold block mb-3">{subtitle}</span>}
 
         <h1
           className="font-display text-white text-shadow leading-tight max-w-4xl"
@@ -95,6 +89,7 @@ export default function PageHero({
         {description && (
           <p className="font-body text-white/80 text-sm sm:text-base mt-4 max-w-xl leading-relaxed">{description}</p>
         )}
+        {shareTitle && <div className="mt-2"><SharePageButton title={shareTitle} label={shareLabel} /></div>}
 
         {facts && facts.length > 0 && (
           <ul className={`mt-5 flex flex-wrap gap-x-6 gap-y-2 ${align === "center" ? "justify-center" : ""}`}>

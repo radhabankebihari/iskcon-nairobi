@@ -28,10 +28,8 @@ export default function GauraPurnimaPage() {
       <section className="py-section bg-temple-bg">
         <div className="content-width section-padding max-w-3xl">
           <p className="font-body text-ink/75 leading-relaxed mb-8">{description}</p>
-          <div className="mb-6 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <FestivalDateNote pattern={/^Gaura Purnima/} name="Gaura Purnima" className="min-w-0 basis-full sm:basis-auto sm:flex-1" />
-            <SharePageButton title="Gaura Purnima" label="Share this festival" tone="light" />
-          </div>
+          <FestivalDateNote pattern={/^Gaura Purnima/} name="Gaura Purnima" className="mb-2" />
+          <div className="mb-6"><SharePageButton title="Gaura Purnima" label="Share this festival" tone="light" /></div>
           <p className="font-body text-ink/75 leading-relaxed mb-8">Contact the temple for this year's abhishek and feast schedule.</p>
           <div className="flex flex-wrap gap-4">
             <ButtonLink variant="primary" href="/donate/festivals">Support this festival</ButtonLink>

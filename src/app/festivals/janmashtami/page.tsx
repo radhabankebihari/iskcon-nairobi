@@ -158,10 +158,8 @@ export default function JanmashtamiPage() {
               </h2>
             </div>
             <div>
-              <div className="mb-3 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <FestivalDateNote pattern={/^Janmashtami|Janmashtami - /} name="Janmashtami" className="min-w-0 basis-full sm:basis-auto sm:flex-1" />
-                <SharePageButton title="Krishna Janmashtami" label="Share this festival" tone="light" />
-              </div>
+              <FestivalDateNote pattern={/^Janmashtami|Janmashtami - /} name="Janmashtami" className="mb-2" />
+              <div className="mb-3"><SharePageButton title="Krishna Janmashtami" label="Share this festival" tone="light" /></div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="flex gap-3 border border-temple-sand bg-temple-cream/60 p-4">
                   <CalendarDays className="mt-0.5 shrink-0 text-gold" size={18} />

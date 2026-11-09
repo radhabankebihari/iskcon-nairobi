@@ -201,10 +201,7 @@ export default function KartikPage() {
 
         <div className="content-width section-padding relative z-10 pb-12 pt-[55svh] md:pb-16 md:pt-36">
           <div className="max-w-xl">
-            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-              <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-gold-light">Damodara month · {range}</p>
-              <SharePageButton title="Kartik, the Month of Damodara" text="Daily lamp offerings at 7:30 AM and 7:30 PM, 26 Oct – 24 Nov" label="Share Kartik" />
-            </div>
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-gold-light">Damodara month · {range}</p>
             <h1 className="mt-4 font-display text-[clamp(2.9rem,12vw,5.75rem)] font-medium leading-[0.95] text-white">
               Kartik
             </h1>
@@ -223,6 +220,9 @@ export default function KartikPage() {
                 Lamp offerings every day at <strong className="text-white">{KARTIK_LAMP_TIMES[0]}</strong> and{" "}
                 <strong className="text-white">{KARTIK_LAMP_TIMES[1]}</strong>. Lamps are provided at the temple.
               </p>
+            </div>
+            <div className="mt-2">
+              <SharePageButton title="Kartik, the Month of Damodara" text="Daily lamp offerings at 7:30 AM and 7:30 PM, 26 Oct – 24 Nov" label="Share Kartik" />
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">

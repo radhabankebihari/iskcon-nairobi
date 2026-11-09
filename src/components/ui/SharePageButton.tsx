@@ -50,7 +50,7 @@ export default function SharePageButton({ title, text, label = "Share", tone = "
       type="button"
       data-testid="share-page"
       onClick={sharePage}
-      className={`-mx-1 inline-flex min-h-11 shrink-0 items-center gap-2 rounded-sm px-1 font-body text-xs font-semibold uppercase tracking-[0.18em] underline-offset-4 transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold ${tone === "dark" ? "text-gold-light hover:text-white" : "text-primary hover:text-primary-dark"}`}
+      className={`-mx-1 inline-flex min-h-11 shrink-0 items-center gap-2 rounded-sm px-1 font-body text-xs font-semibold uppercase tracking-[0.18em] underline underline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold ${tone === "dark" ? "text-gold-light hover:text-white" : "text-primary hover:text-primary-dark"}`}
       aria-label={status === "idle" ? label : feedback}
     >
       {status === "copied" ? <Check size={15} aria-hidden="true" /> : <Share2 size={15} aria-hidden="true" />}
