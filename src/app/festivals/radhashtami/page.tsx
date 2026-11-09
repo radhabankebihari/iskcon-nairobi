@@ -13,6 +13,7 @@ import {
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
+import SharePageButton from "@/components/ui/SharePageButton";
 
 // Re-render daily so the next festival date stays current.
 export const revalidate = 86400;
@@ -62,6 +63,8 @@ export default function RadhashtamiPage() {
   return (
     <>
       <PageHero
+        shareTitle="Radhashtami"
+        shareLabel="Share this festival"
         title="Radhashtami"
         subtitle="Appearance of Srimati Radharani"
         description="A sacred festival honouring Srimati Radharani, the supreme devotee of Krishna and the compassionate doorway to pure devotional service."
@@ -155,7 +158,10 @@ export default function RadhashtamiPage() {
               </h2>
             </div>
             <div>
-              <FestivalDateNote pattern={/^Radhashtami/} name="Radhashtami" className="mb-3" />
+              <div className="mb-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <FestivalDateNote pattern={/^Radhashtami/} name="Radhashtami" className="min-w-0 basis-full sm:basis-auto sm:flex-1" />
+                <SharePageButton title="Radhashtami" label="Share this festival" tone="light" />
+              </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="flex gap-3 border border-temple-sand bg-temple-cream/60 p-4">
                   <CalendarDays className="mt-0.5 shrink-0 text-gold" size={18} />

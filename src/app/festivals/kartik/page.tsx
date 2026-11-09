@@ -2,6 +2,7 @@ import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { ArrowRight, Bell, HandHeart, MapPin } from "lucide-react";
 import DamodarastakamReader from "@/components/festivals/kartik/DamodarastakamReader";
+import SharePageButton from "@/components/ui/SharePageButton";
 import { templeInfo } from "@/data/site";
 import { getKartikSeason, KARTIK_LAMP_TIMES, shortDate } from "@/lib/kartik";
 import { nairobiDateKey } from "@/lib/calendarPushSchedule";
@@ -200,7 +201,10 @@ export default function KartikPage() {
 
         <div className="content-width section-padding relative z-10 pb-12 pt-[55svh] md:pb-16 md:pt-36">
           <div className="max-w-xl">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-gold-light">Damodara month · {range}</p>
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+              <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-gold-light">Damodara month · {range}</p>
+              <SharePageButton title="Kartik, the Month of Damodara" text="Daily lamp offerings at 7:30 AM and 7:30 PM, 26 Oct – 24 Nov" label="Share Kartik" />
+            </div>
             <h1 className="mt-4 font-display text-[clamp(2.9rem,12vw,5.75rem)] font-medium leading-[0.95] text-white">
               Kartik
             </h1>
@@ -537,6 +541,7 @@ export default function KartikPage() {
           <h2 className="max-w-2xl font-display text-[clamp(1.75rem,4.5vw,2.5rem)] leading-tight text-white">
             One lamp, offered with love, is enough to begin.
           </h2>
+          <div className="mt-3"><SharePageButton title="Kartik, the Month of Damodara" label="Share with a friend" /></div>
           <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-gold/20 bg-gold/20 sm:grid-cols-3">
             {[
               { href: "/visit", icon: MapPin, title: "Plan your visit", text: "Directions, parking and temple hours." },

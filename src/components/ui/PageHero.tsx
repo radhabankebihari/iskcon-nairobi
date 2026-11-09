@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SharePageButton from "@/components/ui/SharePageButton";
 
 interface PageHeroProps {
   title: string;
@@ -27,6 +28,8 @@ interface PageHeroProps {
   align?: "left" | "center";
   className?: string;
   contentClassName?: string;
+  shareTitle?: string;
+  shareLabel?: string;
 }
 
 export default function PageHero({
@@ -45,6 +48,8 @@ export default function PageHero({
   align = "left",
   className = "",
   contentClassName = "",
+  shareTitle,
+  shareLabel,
 }: PageHeroProps) {
   const heights = {
     sm: "h-[48vh] min-h-[340px] max-h-[460px] sm:h-[42vh] sm:min-h-[360px] sm:max-h-[500px]",
@@ -72,7 +77,13 @@ export default function PageHero({
       <div
         className={`relative z-10 flex flex-col ${compact ? "pt-32 pb-10 sm:pt-36 sm:pb-12" : "h-full justify-end pt-32 pb-10 sm:pt-36 sm:pb-14"} section-padding content-width ${contentClassName} ${align === "center" ? "items-center text-center" : ""}`}
       >
-        {subtitle && <span className="eyebrow text-gold block mb-3">{subtitle}</span>}
+        {!shareTitle && subtitle && <span className="eyebrow text-gold block mb-3">{subtitle}</span>}
+        {shareTitle && (
+          <div className="mb-3 flex w-full max-w-4xl flex-wrap items-center justify-between gap-x-4 gap-y-1">
+            {subtitle && <span className="eyebrow text-gold">{subtitle}</span>}
+            <SharePageButton title={shareTitle} label={shareLabel} />
+          </div>
+        )}
 
         <h1
           className="font-display text-white text-shadow leading-tight max-w-4xl"

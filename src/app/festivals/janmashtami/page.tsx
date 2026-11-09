@@ -13,6 +13,7 @@ import {
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
+import SharePageButton from "@/components/ui/SharePageButton";
 
 // Re-render daily so the next festival date stays current.
 export const revalidate = 86400;
@@ -62,6 +63,8 @@ export default function JanmashtamiPage() {
   return (
     <>
       <PageHero
+        shareTitle="Krishna Janmashtami"
+        shareLabel="Share this festival"
         title="Krishna Janmashtami"
         subtitle="Appearance of Lord Krishna"
         description="The biggest celebration of the year at ISKCON Nairobi, honouring the divine appearance of Lord Krishna with worship, kirtan, drama, service, and prasadam."
@@ -155,7 +158,10 @@ export default function JanmashtamiPage() {
               </h2>
             </div>
             <div>
-              <FestivalDateNote pattern={/^Janmashtami|Janmashtami - /} name="Janmashtami" className="mb-3" />
+              <div className="mb-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <FestivalDateNote pattern={/^Janmashtami|Janmashtami - /} name="Janmashtami" className="min-w-0 basis-full sm:basis-auto sm:flex-1" />
+                <SharePageButton title="Krishna Janmashtami" label="Share this festival" tone="light" />
+              </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="flex gap-3 border border-temple-sand bg-temple-cream/60 p-4">
                   <CalendarDays className="mt-0.5 shrink-0 text-gold" size={18} />

@@ -1,5 +1,6 @@
 import { BookOpen } from "lucide-react";
 import { KirtanSafariRegistrationButton } from "@/components/sections/KirtanSafariRegistrationModal";
+import SharePageButton from "@/components/ui/SharePageButton";
 
 export default function KirtanSafariHero() {
   return (
@@ -118,18 +119,21 @@ export default function KirtanSafariHero() {
         </p>
 
         {/* You are invited */}
-        <p
-          style={{
-            fontFamily: "var(--font-body, sans-serif)",
-            color: "rgba(255,255,255,0.5)",
-            fontSize: "0.75rem",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            marginBottom: "0.75rem",
-          }}
-        >
-          You are invited to
-        </p>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+          <p
+            style={{
+              fontFamily: "var(--font-body, sans-serif)",
+              color: "rgba(255,255,255,0.5)",
+              fontSize: "0.75rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              margin: 0,
+            }}
+          >
+            You are invited to
+          </p>
+          <SharePageButton title="Kirtan Safari 2026" label="Share this festival" />
+        </div>
 
         {/* KIRTAN SAFARI wordmark */}
         <div style={{ marginBottom: "1.5rem" }}>

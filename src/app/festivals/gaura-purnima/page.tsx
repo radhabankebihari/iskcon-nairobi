@@ -2,6 +2,7 @@ import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FestivalDateNote from "@/components/festivals/FestivalDateNote";
+import SharePageButton from "@/components/ui/SharePageButton";
 
 // Re-render daily so the next festival date stays current.
 export const revalidate = 86400;
@@ -16,6 +17,8 @@ export default function GauraPurnimaPage() {
   return (
     <>
       <PageHero
+        shareTitle="Gaura Purnima"
+        shareLabel="Share this festival"
         title="Gaura Purnima"
         subtitle="Appearance of Sri Chaitanya"
         description={description}
@@ -25,7 +28,10 @@ export default function GauraPurnimaPage() {
       <section className="py-section bg-temple-bg">
         <div className="content-width section-padding max-w-3xl">
           <p className="font-body text-ink/75 leading-relaxed mb-8">{description}</p>
-          <FestivalDateNote pattern={/^Gaura Purnima/} name="Gaura Purnima" className="mb-6" />
+          <div className="mb-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <FestivalDateNote pattern={/^Gaura Purnima/} name="Gaura Purnima" className="min-w-0 basis-full sm:basis-auto sm:flex-1" />
+            <SharePageButton title="Gaura Purnima" label="Share this festival" tone="light" />
+          </div>
           <p className="font-body text-ink/75 leading-relaxed mb-8">Contact the temple for this year's abhishek and feast schedule.</p>
           <div className="flex flex-wrap gap-4">
             <ButtonLink variant="primary" href="/donate/festivals">Support this festival</ButtonLink>
