@@ -225,7 +225,7 @@ export default function KartikPage() {
               <SharePageButton title="Kartik, the Month of Damodara" text="Daily lamp offerings at 7:30 AM and 7:30 PM, 26 Oct – 24 Nov" label="Share Kartik" />
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-2 flex flex-wrap gap-3">
               <a href="#damodarastakam" className="btn-primary">
                 Sing the Damodarastakam
               </a>
