@@ -112,8 +112,8 @@ const privacySections = [
     title: "7. Data Retention",
     content: [
       "We retain personal data only for as long as necessary for the purposes described in this Policy, including legal, accounting, reporting, dispute-resolution, and security requirements.",
-      "Contact and guest-house enquiries and event registration or interest submissions in the website's Google Sheet are deleted after 24 months through a daily cleanup, unless a specific legal obligation or active dispute requires longer retention.",
-      "Basic website analytics records in the Google Sheet are deleted after 12 months through the same daily cleanup.",
+      "Our approved retention target is 24 months for contact and guest-house enquiries and event registration or interest submissions in the website's Google Sheet, subject to legal obligations or active disputes. Automated cleanup is not yet active; contact us to request review or deletion of older records.",
+      "Our approved retention target is 12 months for basic website analytics records in the Google Sheet. Automated cleanup is not yet active; contact us about older records.",
       "Donation and financial transaction records may be retained according to Kenyan financial and tax record-keeping requirements, generally for at least five to seven years where applicable.",
       "Account data is retained while an account is active and for a reasonable period after closure. Marketing and newsletter data is retained until you unsubscribe or withdraw consent.",
       "Prayer requests, pastoral communications, allergy notes, child programme details, safeguarding information, and other sensitive communications are retained only as long as needed for their purpose, then deleted, anonymized, or securely archived where legal or safeguarding obligations require retention.",

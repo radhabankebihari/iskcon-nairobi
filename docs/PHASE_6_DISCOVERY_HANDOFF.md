@@ -7,7 +7,7 @@ Status: owner reports Phase 6 account setup complete on 10 November 2026. Public
 - A Google site-verification TXT record is now visible in public DNS. Its value is intentionally omitted here.
 - The homepage, `robots.txt`, and `sitemap.xml` return HTTP 200; the sitemap lists 32 URLs.
 - The owner confirms Search Console verification and sitemap submission, Bing setup, Business Profile claim/details, and administrator access are done.
-- No repository or hosting deployment was needed for the account setup. The separate Phase 5 SEO changes remain local and unpromoted.
+- No repository or hosting deployment was needed for the account setup itself. The Phase 5 SEO changes are included in the subsequent 1.3.1 release candidate.
 
 ## Public preflight (9 November 2026)
 

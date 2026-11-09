@@ -32,6 +32,16 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.1 - Launch Quality Update
+
+**Released:** 10 November 2026
+
+**Update mode:** Silent. A patch release focused on launch quality; cached imagery changed, so `CACHE_VERSION` moves to v13.
+
+- Security, accessibility, SEO and functional checks completed across the launch phases.
+- Key images optimized and refreshed without changing the page designs.
+- The privacy page states approved retention targets but does not claim automatic deletion until the temple installs the Apps Script cleanup trigger.
+
 ## 1.3.0 - Kartik Guide and 2027 Temple Schedule
 
 **Released:** 8 November 2026

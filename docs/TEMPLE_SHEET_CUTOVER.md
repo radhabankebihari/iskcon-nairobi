@@ -39,7 +39,7 @@ After the new path is verified, remove the retired service-account credentials a
 
 The privacy policy sets a 24-month limit for contact, guest-house and Kirtan Safari submissions and a 12-month limit for `WebsiteAnalytics`. The current `website-backend.gs` contains `purgeExpiredWebsiteRecords` for those five tabs only. It skips blank/text timestamps rather than guessing and does not delete push records or accounting data.
 
-Do not release the revised public privacy policy before this script version and its daily trigger are active; otherwise the site would promise a deletion schedule that is not yet running.
+Until this script version and its daily trigger are active, the public privacy policy must present the approved periods as targets and say that automatic cleanup is not yet active. Only change it to a deletion guarantee after verifying the trigger and first run.
 
 1. Before deleting anything, make a restricted backup and review whether any older rows are subject to a legal hold or active dispute. Resolve such records outside the routine cleanup tabs with the temple's privacy lead.
 2. After publishing the current script version, run `purgeExpiredWebsiteRecords` once in the Apps Script editor and inspect **Executions** for the count removed from each tab. Confirm the newest rows and headers remain.
