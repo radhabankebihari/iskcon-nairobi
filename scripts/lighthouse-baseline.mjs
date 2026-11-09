@@ -1,4 +1,4 @@
-// Records mobile Lighthouse scores for the main pages against a local production
+// Records mobile and desktop Lighthouse scores for launch pages against a local production
 // build. Run `npm run build` first. Results are the median of three runs per page
 // and are written to docs/baselines/ so each release can be compared with the last.
 import { spawn, spawnSync } from "node:child_process";
@@ -10,7 +10,8 @@ import { chromium } from "@playwright/test";
 
 const port = 3033;
 const runs = 3;
-const routes = ["/", "/visit", "/donate", "/festivals", "/contact"];
+const routes = ["/", "/festivals", "/festivals/kartik", "/donate", "/visit"];
+const profiles = ["mobile", "desktop"];
 const lighthouse = "lighthouse@12.8.2";
 
 function median(values) {
@@ -30,7 +31,7 @@ async function waitForServer(url) {
   throw new Error(`Server did not start at ${url}`);
 }
 
-function runLighthouse(url, outputPath) {
+function runLighthouse(url, outputPath, profile) {
   const args = [
     "-y",
     lighthouse,
@@ -40,6 +41,7 @@ function runLighthouse(url, outputPath) {
     `--output-path=${outputPath}`,
     "--only-categories=performance,accessibility,best-practices,seo",
     "--chrome-flags=--headless=new --no-sandbox",
+    ...(profile === "desktop" ? ["--preset=desktop"] : []),
   ];
   const result = spawnSync("npx", args, {
     env: { ...process.env, CHROME_PATH: chromium.executablePath() },
@@ -62,17 +64,19 @@ const results = {};
 try {
   await waitForServer(`http://localhost:${port}`);
 
-  for (const route of routes) {
+  for (const profile of profiles) {
+    results[profile] = {};
+    for (const route of routes) {
     const reports = [];
     for (let run = 0; run < runs; run += 1) {
       const outputPath = path.join(workDir, `report-${run}.json`);
-      reports.push(runLighthouse(`http://localhost:${port}${route}`, outputPath));
+      reports.push(runLighthouse(`http://localhost:${port}${route}`, outputPath, profile));
     }
 
     const score = (id) => Math.round(median(reports.map((r) => r.categories[id].score)) * 100);
     const metric = (id) => median(reports.map((r) => r.audits[id].numericValue));
 
-    results[route] = {
+    results[profile][route] = {
       performance: score("performance"),
       accessibility: score("accessibility"),
       bestPractices: score("best-practices"),
@@ -82,8 +86,10 @@ try {
       totalBlockingMs: Math.round(metric("total-blocking-time")),
       layoutShift: Number(metric("cumulative-layout-shift").toFixed(3)),
       pageWeightKb: Math.round(metric("total-byte-weight") / 1024),
+      properlySizedImages: reports.every((r) => r.audits["uses-responsive-images"]?.score !== 0),
     };
-    console.log(route, results[route]);
+    console.log(profile, route, results[profile][route]);
+    }
   }
 } finally {
   rmSync(workDir, { recursive: true, force: true });
@@ -98,5 +104,5 @@ const date = new Date().toISOString().slice(0, 10);
 mkdirSync("docs/baselines", { recursive: true });
 writeFileSync(
   `docs/baselines/lighthouse-${date}.json`,
-  `${JSON.stringify({ date, lighthouse, profile: "mobile, median of 3, local build", results }, null, 2)}\n`
+  `${JSON.stringify({ date, lighthouse, profile: "mobile and desktop, median of 3, local build", results }, null, 2)}\n`
 );

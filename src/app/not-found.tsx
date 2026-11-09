@@ -12,7 +12,7 @@ export default function NotFound() {
     <div className="relative isolate flex min-h-[78svh] overflow-hidden bg-dusk text-temple-cream">
       <div
         className="absolute inset-0 -z-30 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/sunset-route.png')" }}
+        style={{ backgroundImage: "url('/images/sunset-route.webp')" }}
         aria-hidden="true"
       />
       <div
