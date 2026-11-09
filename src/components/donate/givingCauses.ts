@@ -17,7 +17,7 @@ export const generalCause: GivingCause = {
   title: "General Fund",
   description: "The temple committee directs your gift where the need is greatest: worship, upkeep, and urgent needs.",
   href: "/donate/general",
-  image: "/images/iskcon-nairobi-main-altar-wide.jpg",
+  image: "/images/iskcon-nairobi-main-altar-wide.webp",
 };
 
 export const givingCauses: GivingCause[] = [

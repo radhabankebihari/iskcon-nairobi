@@ -7,6 +7,7 @@ import Gallery from "@/components/hktc/Gallery";
 import FAQAccordion from "@/components/hktc/FAQAccordion";
 import { templeInfo } from "@/data/site";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 import {
   ArrowRight,
   BookOpen,
@@ -137,6 +138,7 @@ const sourceNotes = [
 export default function HKTCNairobiPage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Projects", path: "/projects" }, { name: "HKTC Nairobi", path: "/projects/hktc-nairobi" }]} />
       <PageHero
         title="HKTC"
         titleAccent="Nairobi"

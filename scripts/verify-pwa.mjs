@@ -73,7 +73,7 @@ const assertions = [
     "release update mode must be silent or prompt",
   ],
   [worker.includes('self.addEventListener("notificationclick"'), "worker must handle notification deep links"],
-  [config.includes('source: "/sw.js"') && config.includes("must-revalidate"), "worker must be revalidated by browsers"],
+  [config.includes('source: "/sw.js"') && config.includes("no-store"), "worker must not be cached by browsers"],
 ];
 
 for (const [passed, message] of assertions) {

@@ -6,6 +6,7 @@ import ButtonLink from "@/components/ui/ButtonLink";
 export const metadata = withSeo({
   title: "Apply - HKTC Nairobi",
   description: "Express interest in Hare Krishna Training Centre programmes connected with ISKCON Nairobi.",
+  robots: { index: false, follow: false },
 }, "/projects/hktc-nairobi/apply");
 
 export default function HktcApplyPage() {

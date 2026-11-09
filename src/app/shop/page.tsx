@@ -9,15 +9,16 @@ import ButtonLink from "@/components/ui/ButtonLink";
 export const metadata = withSeo({
   title: "Prasadam Sweet Shop",
   description: "Artisanal Vaishnava sweets and prasadam products from ISKCON Nairobi's kitchen. Festival specials, gift packs, and bulk orders.",
+  robots: { index: false, follow: false },
 }, "/shop");
 
 const products = [
-  { name: "Laddhu (Box of 12)", price: "KES 950", desc: "Classic saffron-infused gram flour laddhu prepared with pure ghee. The original prasadam sweet.", tag: "Bestseller", image: "/images/food-for-life/khichdi-prasadam.jpg" },
-  { name: "Gulab Jamun (Box of 16)", price: "KES 800", desc: "Soft milk-solid dumplings soaked in rose-infused sugar syrup. Prepared fresh to order.", tag: "Popular", image: "/images/food-for-life/khichdi-prasadam.jpg" },
-  { name: "Halava Gift Pack", price: "KES 1,200", desc: "Semolina halava packed in artisan containers - ideal as a devotional gift or festival offering.", tag: "Gift", image: "/images/food-for-life/khichdi-prasadam.jpg" },
-  { name: "Barfi Assortment (500g)", price: "KES 1,400", desc: "Mixed milk-based barfi selection - pistachio, saffron, coconut, and rose. Beautifully boxed.", tag: "Assortment", image: "/images/food-for-life/khichdi-prasadam.jpg" },
-  { name: "Festival Sweet Hamper", price: "KES 3,500", desc: "A curated hamper of six varieties - the perfect corporate or family gift for festivals and celebrations.", tag: "Festival", image: "/images/food-for-life/khichdi-prasadam.jpg" },
-  { name: "Bulk Order (5kg+)", price: "From KES 4,500", desc: "Wholesale prasadam sweets for events, weddings, corporate functions, and temple programmes.", tag: "Bulk", image: "/images/food-for-life/khichdi-prasadam.jpg" },
+  { name: "Laddhu (Box of 12)", price: "KES 950", desc: "Classic saffron-infused gram flour laddhu prepared with pure ghee. The original prasadam sweet.", tag: "Bestseller", image: "/images/food-for-life/khichdi-prasadam.webp" },
+  { name: "Gulab Jamun (Box of 16)", price: "KES 800", desc: "Soft milk-solid dumplings soaked in rose-infused sugar syrup. Prepared fresh to order.", tag: "Popular", image: "/images/food-for-life/khichdi-prasadam.webp" },
+  { name: "Halava Gift Pack", price: "KES 1,200", desc: "Semolina halava packed in artisan containers - ideal as a devotional gift or festival offering.", tag: "Gift", image: "/images/food-for-life/khichdi-prasadam.webp" },
+  { name: "Barfi Assortment (500g)", price: "KES 1,400", desc: "Mixed milk-based barfi selection - pistachio, saffron, coconut, and rose. Beautifully boxed.", tag: "Assortment", image: "/images/food-for-life/khichdi-prasadam.webp" },
+  { name: "Festival Sweet Hamper", price: "KES 3,500", desc: "A curated hamper of six varieties - the perfect corporate or family gift for festivals and celebrations.", tag: "Festival", image: "/images/food-for-life/khichdi-prasadam.webp" },
+  { name: "Bulk Order (5kg+)", price: "From KES 4,500", desc: "Wholesale prasadam sweets for events, weddings, corporate functions, and temple programmes.", tag: "Bulk", image: "/images/food-for-life/khichdi-prasadam.webp" },
 ];
 
 export default function ShopPage() {
@@ -29,7 +30,7 @@ export default function ShopPage() {
         titleAccent="Sweet Shop"
         subtitle="Artisanal Temple Sweets"
         description="Handcrafted Vaishnava sweets prepared with pure ingredients, devotion, and the highest culinary standards from our temple kitchen."
-        image="/images/food-for-life/khichdi-prasadam.jpg"
+        image="/images/food-for-life/khichdi-prasadam.webp"
         className="sm:min-h-[500px]"
       />
 

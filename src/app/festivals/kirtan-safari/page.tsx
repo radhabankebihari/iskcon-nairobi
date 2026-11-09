@@ -11,6 +11,7 @@ import KirtanSafariFinalCtaStrip from "@/components/festivals/kirtan-safari/Kirt
 import "@/components/festivals/kirtan-safari/kirtan-safari.css";
 import { getKirtanSafariState } from "@/lib/kirtanSafariState";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 
 export const dynamic = "force-dynamic";
 
@@ -48,11 +49,12 @@ export default async function KirtanSafariPage({ searchParams }: KirtanSafariPag
   );
 
   if (initialFestivalState.phase === "concluded") {
-    return <KirtanSafariArchive />;
+    return <><StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Festivals", path: "/festivals" }, { name: "Kirtan Safari 2026", path: "/festivals/kirtan-safari" }]} /><KirtanSafariArchive /></>;
   }
 
   return (
     <div className="kirtan-safari-page">
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Festivals", path: "/festivals" }, { name: "Kirtan Safari 2026", path: "/festivals/kirtan-safari" }]} />
       <KirtanSafariRegistrationModal />
       <KirtanSafariHero />
       <KirtanSafariLiveHub />

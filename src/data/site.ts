@@ -565,7 +565,7 @@ export const donationPaths = [
   {
     title: "Temple Worship",
     description: "Support daily worship at Sri Sri Radha Bankebihari Temple: flowers, lamps, offerings, maintenance, and festival worship.",
-    image: "/images/donate/main-altar-offering.jpg",
+    image: "/images/donate/main-altar-offering.webp",
     href: "/donate/temple",
   },
   {

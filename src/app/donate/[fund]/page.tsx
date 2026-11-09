@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 import MpesaPayCard from "@/components/donate/MpesaPayCard";
 import DonationIcon from "@/components/ui/DonationIcon";
 import { givingCauses } from "@/components/donate/givingCauses";
@@ -32,6 +33,7 @@ export default async function DonateFundPage({ params }: Props) {
 
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Donate", path: "/donate" }, { name: cause.title, path: cause.href }]} />
       <PageHero
         title="Donate to"
         titleAccent={cause.title}

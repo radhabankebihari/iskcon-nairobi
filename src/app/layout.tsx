@@ -10,7 +10,7 @@ import CalendarNotificationManager from "@/components/system/CalendarNotificatio
 import NoticeNotificationManager from "@/components/system/NoticeNotificationManager";
 import WhatsAppWidget from "@/components/ui/WhatsAppWidget";
 import InstallPromptBanner from "@/components/ui/InstallPromptBanner";
-import { templeHours, templeInfo } from "@/data/site";
+import { socialLinks, templeHours, templeInfo } from "@/data/site";
 import { safeJsonLd } from "@/lib/security";
 import { previewImage, SITE_NAME } from "@/lib/seo";
 
@@ -25,6 +25,7 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT"],
   variable: "--font-fraunces",
   display: "swap",
+  preload: false,
 });
 
 const inter = Inter({
@@ -39,6 +40,7 @@ const sourceSerif4 = Source_Serif_4({
   style: ["normal", "italic"],
   variable: "--font-source-serif-4",
   display: "swap",
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -141,6 +143,8 @@ const structuredData = {
     },
   ],
   image: `${siteUrl}${previewImage}`,
+  logo: `${siteUrl}/brand/icon-512.png`,
+  sameAs: socialLinks.filter((link) => link.name !== "WhatsApp").map((link) => link.href),
 };
 
 // Matches the 40px threshold in Navigation. It keeps listening, because the

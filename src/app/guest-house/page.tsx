@@ -9,6 +9,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 export const metadata = withSeo({
   title: "Guest House",
   description: "Stay at ISKCON Nairobi's on-campus guest house. Serene, affordable accommodation with access to all temple programmes.",
+  robots: { index: false, follow: false },
 }, "/guest-house");
 
 const facilities = [

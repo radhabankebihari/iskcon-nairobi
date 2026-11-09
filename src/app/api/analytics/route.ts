@@ -60,9 +60,18 @@ export async function POST(request: NextRequest) {
     }
 
     const event = asPlainText(payload.event, 40);
-    const path = asPlainText(payload.path, 260);
+    const submittedPath = asPlainText(payload.path, 260);
+    let path = "";
+    if (submittedPath.startsWith("/") && !submittedPath.startsWith("//")) {
+      try {
+        const url = new URL(submittedPath, request.nextUrl.origin);
+        if (url.origin === request.nextUrl.origin) path = url.pathname;
+      } catch {
+        // Malformed paths are rejected below.
+      }
+    }
 
-    if (!allowedEvents.has(event) || !path.startsWith("/")) {
+    if (!allowedEvents.has(event) || !path) {
       return NextResponse.json({ message: "Invalid analytics event." }, { status: 400 });
     }
 

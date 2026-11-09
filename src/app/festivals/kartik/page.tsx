@@ -9,6 +9,7 @@ import { nairobiDateKey } from "@/lib/calendarPushSchedule";
 import type { CalendarDate } from "@/lib/calendarDates";
 import { safeJsonLd } from "@/lib/security";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 
 // Hourly, so the day counter and the "today" marker move with Nairobi time.
 export const revalidate = 3600;
@@ -180,6 +181,8 @@ export default function KartikPage() {
     description: "Daily Damodarastakam singing and ghee lamp offerings to Lord Damodara through the month of Kartik.",
     startDate: season.start.isoDate,
     endDate: season.end.isoDate,
+      eventStatus: "https://schema.org/EventScheduled",
+      url: "https://iskconnairobi.com/festivals/kartik",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
       "@type": "Place",
@@ -191,6 +194,7 @@ export default function KartikPage() {
 
   return (
     <div className="kartik-page bg-[#120c08] text-festival-cream">
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Festivals", path: "/festivals" }, { name: "Kartik", path: "/festivals/kartik" }]} />
       {eventJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(eventJsonLd) }} />}
 
       {/* 1. Hero: the lamp-lit painting, the month's dates, and today's place in it */}

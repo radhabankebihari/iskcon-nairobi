@@ -179,7 +179,7 @@ export default function AboutPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <Image width={1170} height={1170} sizes="(max-width: 768px) 100vw, 50vw" unoptimized
+              <Image width={1170} height={1170} sizes="(max-width: 768px) 100vw, 50vw"
                 src="/images/hero-radha-bankebihari-darshan.webp"
                 alt="Sri Sri Radha Bankebihari on the ISKCON Nairobi altar"
                 className="hidden aspect-[4/5] w-full object-cover shadow-card sm:block"
@@ -232,7 +232,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <Image width={1170} height={1170} sizes="100vw" unoptimized
+          <Image width={1170} height={1170} sizes="100vw"
             src="/images/hero-radha-bankebihari-darshan.webp"
             alt="Sri Sri Radha Bankebihari on the ISKCON Nairobi altar"
             className="mt-8 aspect-[4/5] w-full object-cover shadow-card sm:hidden"

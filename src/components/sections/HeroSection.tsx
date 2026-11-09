@@ -44,7 +44,7 @@ const baseHeroImages: HeroImage[] = [
     durationMs: 10000,
   },
   {
-    src: "/images/hero-ratha-yatra-nairobi-gathering.webp",
+    src: "/images/hero-ratha-yatra-nairobi-gathering-optimized.webp",
     alt: "Devotees gather for Ratha Yatra in central Nairobi, with the city skyline behind them",
     position: "center 48%",
     mobilePosition: "52% center",
@@ -81,11 +81,11 @@ function HeroPicture({ image, isFirst }: { image: HeroImage; isFirst: boolean })
   const className = "hero-bg-image object-cover";
 
   if (!image.mobileSrc) {
-    return <Image src={image.src} alt={image.alt} fill sizes="100vw" loading="eager" fetchPriority={isFirst ? "high" : "auto"} className={className} style={style} />;
+    return <Image src={image.src} alt={image.alt} fill sizes="100vw" loading={isFirst ? "eager" : "lazy"} fetchPriority={isFirst ? "high" : "auto"} className={className} style={style} />;
   }
 
   // Art direction: phones get a separately composed hero image.
-  const common = { alt: image.alt, fill: true, sizes: "100vw" };
+  const common = { alt: image.alt, fill: true, sizes: "100vw", loading: isFirst ? "eager" : "lazy", fetchPriority: isFirst ? "high" : "auto" } as const;
   const { props: desktop } = getImageProps({ ...common, src: image.src });
   const { props: mobile } = getImageProps({ ...common, src: image.mobileSrc });
 

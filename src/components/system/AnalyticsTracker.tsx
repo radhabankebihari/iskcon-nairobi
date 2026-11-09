@@ -12,7 +12,7 @@ type AnalyticsEvent =
 export function trackAnalyticsEvent(event: AnalyticsEvent) {
   const body = JSON.stringify({
     event,
-    path: `${window.location.pathname}${window.location.search}${window.location.hash}`,
+    path: window.location.pathname,
   });
 
   if (navigator.sendBeacon) {

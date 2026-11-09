@@ -19,8 +19,10 @@ import SectionHeading from "@/components/ui/SectionHeading";
 export const dynamic = "force-dynamic";
 
 export const metadata = withSeo({
-  title: "Festivals",
-  description: "ISKCON Nairobi festival calendar including Ratha Yatra, Janmashtami, Gaura Purnima, and Kirtan Safari.",
+  title: "Festival Calendar and Celebrations",
+  description: "Explore the ISKCON Nairobi festival calendar, including Janmashtami, Gaura Purnima and Kartik. Find dates, temple celebrations and ways to take part.",
+  openGraph: { images: [{ url: "/images/festivals/kirtan-safari-gathering-original.jpg", width: 1600, height: 897, alt: "Devotees singing together at ISKCON Nairobi" }] },
+  twitter: { images: ["/images/festivals/kirtan-safari-gathering-original.jpg"] },
 }, "/festivals");
 
 type CalendarDay = {
@@ -151,12 +153,14 @@ export default function FestivalsPage() {
       name: item.event,
       ...(item.description ? { description: item.description } : {}),
       startDate: item.isoDate,
+        eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: {
         "@type": "Place",
         name: templeInfo.legalName,
         address: { "@type": "PostalAddress", streetAddress: templeInfo.shortAddress, addressCountry: "KE" },
       },
+        organizer: { "@type": "Organization", name: templeInfo.name, url: "https://iskconnairobi.com" },
     }));
   const upcomingFestivals = festivalPreview.filter(
     (festival) => new Date(festival.endsAt).getTime() > now
@@ -177,7 +181,6 @@ export default function FestivalsPage() {
         description="Celebrate Lord Krishna, Lord Jagannath, Sri Chaitanya Mahaprabhu, and the holy name with Nairobi's devotional community."
         image="/images/festivals/kirtan-safari-gathering-original.jpg"
         imageAlt="Devotees singing and raising their hands in kirtan at ISKCON Nairobi"
-        imageUnoptimized
         imageClassName="brightness-[1.04] contrast-[1.05] saturate-[.94]"
         imageOverlayClassName="bg-gradient-to-b from-black/40 via-black/10 to-black/55"
         height="sm"

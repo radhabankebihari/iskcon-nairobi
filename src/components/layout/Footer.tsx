@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Camera, Mail, MapPin, MessageCircle, Phone, Play } from "lucide-react";
 import { templeInfo, templeScheduleGroups, navigation, socialLinks } from "@/data/site";
 import BrandLogo from "@/components/ui/BrandLogo";
@@ -154,9 +155,12 @@ export default function Footer() {
               aria-label="Powered by Esthrema"
             >
               <span>Powered by</span>
-              <img
+              <Image
                 src="/images/esthrema-logo.png"
                 alt="Esthrema"
+                width={85}
+                height={32}
+                sizes="85px"
                 className="h-8 w-auto opacity-80 transition-opacity group-hover:opacity-100"
               />
             </a>

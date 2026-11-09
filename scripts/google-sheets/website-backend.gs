@@ -21,6 +21,16 @@ const HEADERS = {
   PushRunClaims: ['Event ID', 'Run ID', 'Claimed At'],
 };
 
+// Retention applies only to timestamp-first submission and analytics tabs.
+// Push records have separate subscription and delivery lifecycles.
+const RETENTION_MONTHS = {
+  'Contact Us': 24,
+  'Guest House Enquiries': 24,
+  'Kirtan Safari Registrations': 24,
+  'Kirtan Safari 2027 Interest': 24,
+  WebsiteAnalytics: 12,
+};
+
 function doPost(e) {
   try {
     const raw = e && e.postData && e.postData.contents;
@@ -348,4 +358,69 @@ function claimRun(data) {
   if (active) return { claimed: false };
   sheet.appendRow([cell(eventId, 160), runId, new Date(now).toISOString()]);
   return { claimed: true };
+}
+
+function retentionCutoffMonths(now, months) {
+  const firstOfFollowingMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - months + 1, 1));
+  const lastDay = new Date(firstOfFollowingMonth.getTime() - 86400000).getUTCDate();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - months,
+    Math.min(now.getUTCDate(), lastDay), now.getUTCHours(), now.getUTCMinutes(),
+    now.getUTCSeconds(), now.getUTCMilliseconds()));
+}
+
+function purgeExpiredRows(sheet, cutoff) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return 0;
+  const timestamps = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+  let removed = 0;
+  let runEnd = 0;
+  let runStart = 0;
+
+  function deleteRun() {
+    if (!runEnd) return;
+    const count = runEnd - runStart + 1;
+    sheet.deleteRows(runStart, count);
+    removed += count;
+    runEnd = 0;
+  }
+
+  for (let index = timestamps.length - 1; index >= 0; index--) {
+    const timestamp = timestamps[index][0];
+    const expired = timestamp instanceof Date && !isNaN(timestamp.getTime()) && timestamp < cutoff;
+    if (expired) {
+      const row = index + 2;
+      if (!runEnd) runEnd = row;
+      runStart = row;
+    } else {
+      deleteRun();
+    }
+  }
+  deleteRun();
+  return removed;
+}
+
+// Run once manually after reviewing the Sheet, then install the daily trigger.
+function purgeExpiredWebsiteRecords() {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    const book = spreadsheet();
+    const now = new Date();
+    Object.keys(RETENTION_MONTHS).forEach(function(name) {
+      const sheet = book.getSheetByName(name);
+      if (!sheet) return;
+      const count = purgeExpiredRows(sheet, retentionCutoffMonths(now, RETENTION_MONTHS[name]));
+      console.log('Retention cleanup: ' + name + ': ' + count + ' rows removed');
+    });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function installRetentionTrigger() {
+  const handler = 'purgeExpiredWebsiteRecords';
+  ScriptApp.getProjectTriggers().filter(function(trigger) {
+    return trigger.getHandlerFunction() === handler;
+  }).forEach(function(trigger) { ScriptApp.deleteTrigger(trigger); });
+  ScriptApp.newTrigger(handler).timeBased().everyDays(1).atHour(3).create();
 }

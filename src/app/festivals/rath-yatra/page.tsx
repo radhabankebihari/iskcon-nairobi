@@ -10,6 +10,7 @@ export const revalidate = 86400;
 export const metadata = withSeo({
   title: "Ratha Yatra",
   description: "Join ISKCON Nairobi's Festival of Chariots with Lord Jagannath, kirtan, procession, dance, and prasadam distribution.",
+  robots: { index: false, follow: false },
 }, "/festivals/rath-yatra");
 
 export default function RathYatraPage() {

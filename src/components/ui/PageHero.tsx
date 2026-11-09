@@ -13,8 +13,6 @@ interface PageHeroProps {
   imageAlt?: string;
   /** Optional crop position for photo heroes at different viewport sizes. */
   imageClassName?: string;
-  /** Preserve the source photo without an extra image-optimizer encode. */
-  imageUnoptimized?: boolean;
   /** Override the standard image shade when a particular photo needs more light. */
   imageOverlayClassName?: string;
   /**
@@ -40,7 +38,6 @@ export default function PageHero({
   image,
   imageAlt = "",
   imageClassName = "",
-  imageUnoptimized = false,
   imageOverlayClassName = "bg-gradient-to-b from-black/50 via-black/40 to-black/70",
   variant = "photo",
   facts,
@@ -65,7 +62,7 @@ export default function PageHero({
     >
       {!compact && image && (
         <>
-          <Image src={image} alt={imageAlt} fill sizes="100vw" loading="eager" fetchPriority="high" unoptimized={imageUnoptimized} className={`object-cover ${imageClassName}`} />
+          <Image src={image} alt={imageAlt} fill sizes="100vw" loading="eager" fetchPriority="high" className={`object-cover ${imageClassName}`} />
           <div className={`absolute inset-0 ${imageOverlayClassName}`} />
           {align === "left" && <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />}
         </>

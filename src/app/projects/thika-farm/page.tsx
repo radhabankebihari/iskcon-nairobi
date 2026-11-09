@@ -1,6 +1,7 @@
 import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
+import StructuredPageData from "@/components/seo/StructuredPageData";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
 
@@ -12,6 +13,7 @@ export const metadata = withSeo({
 export default function ThikaFarmPage() {
   return (
     <>
+      <StructuredPageData breadcrumbs={[{ name: "Home", path: "/" }, { name: "Projects", path: "/projects" }, { name: "Thika Farm & Goshala", path: "/projects/thika-farm" }]} />
       <PageHero
         title="Thika Farm"
         titleAccent="& Goshala"
@@ -35,7 +37,7 @@ export default function ThikaFarmPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { src: "/images/thika-farm/thika-farm-2022-103.webp", alt: "Fruit trees growing at Thika Farm" },
+                { src: "/images/thika-farm/thika-farm-2022-103-optimized.webp", alt: "Fruit trees growing at Thika Farm" },
                 { src: "/images/thika-farm/thika-farm-2022-135.webp", alt: "Hanging planter in the farm garden" },
               ].map((photo, i) => (
                 <Image width={1600} height={1200} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 33vw" key={photo.src} src={photo.src} alt={photo.alt} className={`w-full object-cover ${i === 1 ? "mt-8" : ""}`} style={{ aspectRatio: "3/4" }} />
@@ -44,7 +46,7 @@ export default function ThikaFarmPage() {
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {[
-              { src: "/images/thika-farm/thika-farm-2022-146.webp", alt: "Devotee seated with a harmonium on the farm lawn", caption: "A quiet moment on the lawn" },
+              { src: "/images/thika-farm/thika-farm-2022-146-optimized.webp", alt: "Devotee seated with a harmonium on the farm lawn", caption: "A quiet moment on the lawn" },
               { src: "/images/thika-farm/thika-farm-2022-147.webp", alt: "Farm buildings and cow shelters at Thika Farm", caption: "The farm and cow shelters" },
             ].map((photo) => (
               <figure key={photo.src}>
