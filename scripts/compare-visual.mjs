@@ -36,6 +36,16 @@ try {
     env: { ...process.env, VISUAL_APP_DIR: root },
   });
 } finally {
-  if (!existingBaseline && existsSync(baseline)) run("git", ["worktree", "remove", "--force", baseline]);
-  rmSync(temporary, { recursive: true, force: true });
+  if (!existingBaseline && existsSync(baseline)) {
+    try {
+      run("git", ["worktree", "remove", "--force", baseline]);
+    } catch {
+      console.warn(`Visual comparison finished, but Windows could not remove the temporary worktree: ${baseline}`);
+    }
+  }
+  try {
+    rmSync(temporary, { recursive: true, force: true });
+  } catch {
+    console.warn(`Remove the temporary visual comparison folder when possible: ${temporary}`);
+  }
 }
