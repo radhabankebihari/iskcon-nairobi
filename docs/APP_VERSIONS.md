@@ -32,6 +32,14 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.3 - Leadership Programme Copy
+
+**Released:** 10 November 2026
+
+**Update mode:** Silent. A leadership-page copy correction; `CACHE_VERSION` moves to v15 for installed visitors.
+
+- Introduced programme facilitators through their current classes and gatherings, without editorial source notes.
+
 ## 1.3.2 - Mobile Footer Spacing
 
 **Released:** 10 November 2026

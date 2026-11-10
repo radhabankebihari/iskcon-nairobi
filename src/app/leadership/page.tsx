@@ -116,9 +116,9 @@ export default function LeadershipPage() {
       <section className="bg-temple-bg py-section-sm sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
         <div className="content-width section-padding">
           <div className="mb-9 max-w-3xl">
-            <SectionHeading eyebrow="Programme Facilitators" title="Guiding study" accent="and community" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
+            <SectionHeading eyebrow="Learning & Community" title="The People Behind" accent="the Programmes" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
             <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">
-              The temple&apos;s 2027 calendar names these devotees as facilitators for regular learning and community programmes.
+              Meet the devotees who facilitate Gita classes, Ladies Sanga, and Bhakti Vriksha gatherings at ISKCON Nairobi.
             </p>
           </div>
           <div className="grid gap-x-10 md:grid-cols-2">

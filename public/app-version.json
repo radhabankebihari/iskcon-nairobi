@@ -1,11 +1,10 @@
 {
-  "version": "1.3.2",
-  "name": "Mobile Footer Spacing",
+  "version": "1.3.3",
+  "name": "Leadership Programme Copy",
   "publishedAt": "2026-11-10",
   "updateMode": "silent",
-  "summary": "Reduced excess space below the footer on mobile screens.",
+  "summary": "Clarified the learning and community programmes on the leadership page.",
   "highlights": [
-    "A cleaner end to each page on mobile",
-    "The floating WhatsApp button remains available"
+    "Clearer programme facilitator introduction"
   ]
 }
