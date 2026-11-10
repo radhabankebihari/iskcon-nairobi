@@ -497,20 +497,20 @@ export const leadershipProfiles = [
     details: "Govinda Prem Prabhu serves as Regional Secretary and leads the Hare Krishna Training Centre, where he facilitates student education and devotional training.",
   },
   {
-    name: "Mukund Morari Prabhu",
-    role: "Vice President, Kirtan Coordination",
-    category: "Temple Coordination",
-    image: "/images/leadership/mukund-morari-prabhu-web.jpg",
-    summary: "One of the vice presidents and a world-class mrdanga player.",
-    details: "Mukund Morari Prabhu serves as Vice President and coordinates temple kirtans, musician training, festivals, and Nairobi's devotional music culture.",
-  },
-  {
     name: "Rukma Prabhu",
     role: "Vice President, Community Devotee Care",
     category: "Community Guidance",
     image: "/images/leadership/rukma-prabhu.jpg",
     summary: "One of the vice presidents, a respected community elder, teacher, and trusted source of pastoral guidance.",
     details: "Rukma Prabhu serves as Vice President, facilitates Namahatta gatherings, and supports devotee care through teaching, yajnas, and community guidance.",
+  },
+  {
+    name: "Mukund Morari Prabhu",
+    role: "Vice President, Kirtan Coordination",
+    category: "Temple Coordination",
+    image: "/images/leadership/mukund-morari-prabhu-web.jpg",
+    summary: "One of the vice presidents and a world-class mrdanga player.",
+    details: "Mukund Morari Prabhu serves as Vice President and coordinates temple kirtans, musician training, festivals, and Nairobi's devotional music culture.",
   },
   {
     name: "Sri Gauranga Prabhu",
