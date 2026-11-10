@@ -36,10 +36,7 @@ export default function LeadershipPage() {
             </div>
             <div className="space-y-5 font-body text-body-md leading-relaxed text-ink/75">
               <p>
-                ISKCON Nairobi is not presented here as a single-person temple-president structure. The temple now functions through a departmental service setup, with responsibilities distributed across education, worship, kirtan, outreach, hospitality, festivals, administration, and community care.
-              </p>
-              <p>
-                This structure allows senior devotees, teachers, coordinators, resident brahmacharis, and volunteers to serve together while keeping Srila Prabhupada's vision at the centre: serious spiritual education, strong kirtan, prasadam distribution, and outreach across East Africa.
+                ISKCON Nairobi&apos;s service is coordinated across education, worship, kirtan, outreach, hospitality, festivals, administration, and community care. Senior devotees, teachers, and volunteers work together to carry Srila Prabhupada&apos;s vision forward.
               </p>
             </div>
           </div>

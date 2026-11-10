@@ -32,6 +32,16 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.5 - Site Copy Polish
+
+**Released:** 10 November 2026
+
+**Update mode:** Silent. Visitor-facing copy and confirmed opening hours; `CACHE_VERSION` moves to v17 for installed visitors.
+
+- Rewrote the homepage, About, and Leadership introductions in direct, welcoming language.
+- Replaced HKTC research notes with a short further-reading introduction and kept the source links.
+- Clarified the graduation album text and the Visit page's daily opening hours.
+
 ## 1.3.4 - Leadership Heading Refinement
 
 **Released:** 10 November 2026

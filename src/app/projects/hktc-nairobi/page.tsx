@@ -128,13 +128,6 @@ const studentLife = [
   },
 ];
 
-const sourceNotes = [
-  "ISKCON News describes HKTC Nairobi as an ashram-style student experience near major universities, with morning programmes, Bhagavatam class, japa, service, kirtan, Bhagavad-gita study, and certificates after character training.",
-  "People Daily describes Kenya's young Vaishnava monks through simple living, early rising, chanting, temple classes, devotional attire, vegetarian culture, and service.",
-  "Dandavats reports that students joined HKTC Nairobi to chant, study Srila Prabhupada's books, follow the four regulative principles, and respond to Srila Prabhupada's desire to preach to local Africans.",
-  "A public Dandavats graduation report records HKTC activities in Kenya from April 2011 and an official opening on 11 January 2017, attributed in context to H.H. Gopal Krishna Goswami Maharaja.",
-];
-
 export default function HKTCNairobiPage() {
   return (
     <>
@@ -336,8 +329,7 @@ export default function HKTCNairobiPage() {
                 <GraduationCap className="mb-5 text-gold" size={30} />
                 <h3 className="font-display text-2xl font-semibold text-white">Graduation Ceremony</h3>
                 <p className="mt-4 font-body text-sm leading-relaxed text-sand/75">
-                  The graduation ceremony is held every year after students complete the book sequence and sit for
-                  examinations. The full HKTC graduation album is hosted externally so the website stays fast.
+                  Students celebrate the completion of their studies and examinations at the HKTC graduation ceremony. View photographs from the occasion in the graduation album.
                 </p>
                 <a
                   href="https://photos.app.goo.gl/MIZfuQWWgNPvBuG43"
@@ -481,14 +473,10 @@ export default function HKTCNairobiPage() {
 
               <div className="border border-gold/15 bg-white/[0.05] p-5">
                 <BookOpen className="mb-4 text-gold" size={24} />
-                <h3 className="font-display text-xl font-semibold text-white">Notes from public reports</h3>
-                <div className="mt-3 space-y-2">
-                  {sourceNotes.map((note) => (
-                    <p key={note} className="font-body text-xs leading-relaxed text-sand/75">
-                      {note}
-                    </p>
-                  ))}
-                </div>
+                <h3 className="font-display text-xl font-semibold text-white">Further Reading</h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-sand/75">
+                  Explore reports and stories about the students, daily life, and development of the Hare Krishna Training Centre.
+                </p>
                 <div className="mt-5 flex flex-wrap gap-4">
                   <a
                     href="https://peopledaily.digital/lifestyle/young-hare-krishna-monks-revive-simple-way-of-living"

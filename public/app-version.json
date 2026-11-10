@@ -1,10 +1,11 @@
 {
-  "version": "1.3.4",
-  "name": "Leadership Heading Refinement",
+  "version": "1.3.5",
+  "name": "Site Copy Polish",
   "publishedAt": "2026-11-10",
   "updateMode": "silent",
-  "summary": "Refined the leadership page's programme facilitator heading.",
+  "summary": "Clearer visitor-facing copy across five pages, including confirmed temple hours.",
   "highlights": [
-    "Devotees guiding ISKCON Nairobi's programmes"
+    "Warmer temple story and leadership copy",
+    "Clearer HKTC information and visit hours"
   ]
 }

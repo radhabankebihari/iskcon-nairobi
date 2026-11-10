@@ -30,7 +30,7 @@ export default function VisitPage() {
         subtitle="Plan Your Visit"
         description="The temple is open daily to all visitors. Come as you are - no prior experience needed."
         image="/images/iskcon-nairobi-aerial.jpg"
-        facts={["Open daily from 4:30 AM and 4:30 PM", "Hare Krishna Close, Parklands", "Everyone welcome"]}
+        facts={["Open daily: 4:30 AM-1:00 PM and 4:20-8:30 PM", "Hare Krishna Close, Parklands", "Everyone welcome"]}
         className="sm:min-h-[500px]"
       />
 

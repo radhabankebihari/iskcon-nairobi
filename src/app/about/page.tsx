@@ -209,14 +209,13 @@ export default function AboutPage() {
           <div className="mb-10 max-w-3xl">
             <span className="eyebrow mb-3 block text-gold">Our Story</span>
             <h2 className="font-display text-display-sm font-semibold leading-tight text-white">
-              Nairobi was never meant
+              A Spiritual Home
               <br />
-              <em className="not-italic font-normal">to be a closed temple</em>
+              <em className="not-italic font-normal">for Nairobi</em>
             </h2>
             <p className="mt-5 font-body text-sm leading-relaxed text-sand/75 sm:text-base">
-              Srila Prabhupada's instruction shaped the temple from the beginning: the mission here was not to serve
-              only people already familiar with the tradition. It was to make Krishna consciousness accessible to
-              Nairobi and to Kenya.
+              Srila Prabhupada envisioned a temple where people across Nairobi could encounter Krishna consciousness.
+              That welcome continues through worship, kirtan, study, prasadam, and service.
             </p>
           </div>
 
