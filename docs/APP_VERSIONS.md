@@ -32,6 +32,15 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.2 - Mobile Footer Spacing
+
+**Released:** 10 November 2026
+
+**Update mode:** Silent. A small mobile layout correction; `CACHE_VERSION` moves to v14 for installed visitors.
+
+- Reduced unnecessary space below the footer from 80px to a 20px minimum, including device safe-area support.
+- Kept the floating WhatsApp button's behavior unchanged.
+
 ## 1.3.1 - Launch Quality Update
 
 **Released:** 10 November 2026

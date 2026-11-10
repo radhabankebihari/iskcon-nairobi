@@ -1,12 +1,11 @@
 {
-  "version": "1.3.1",
-  "name": "Launch Quality Update",
+  "version": "1.3.2",
+  "name": "Mobile Footer Spacing",
   "publishedAt": "2026-11-10",
   "updateMode": "silent",
-  "summary": "Improved security checks, page metadata, image loading, accessibility, and mobile performance.",
+  "summary": "Reduced excess space below the footer on mobile screens.",
   "highlights": [
-    "Faster loading images across key pages",
-    "Clearer search and sharing information",
-    "More reliable mobile and offline experience"
+    "A cleaner end to each page on mobile",
+    "The floating WhatsApp button remains available"
   ]
 }
