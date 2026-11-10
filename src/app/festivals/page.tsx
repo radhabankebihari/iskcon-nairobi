@@ -233,7 +233,7 @@ export default function FestivalsPage() {
               <SectionHeading eyebrow="Next Temple Programmes" title="Upcoming" accent="Highlights" />
             </div>
             <p className="max-w-xl font-body text-sm leading-relaxed text-ink/75">
-              Key public events from the ISKCON Nairobi Vaishnava calendar. Dates may be confirmed again closer to each festival.
+              Key celebrations from our Vaishnava calendar. Programme dates and timings may change; please check the noticeboard before visiting.
             </p>
           </div>
 
@@ -334,8 +334,8 @@ export default function FestivalsPage() {
                   Every observance, month by month
                 </h2>
                 <p className="mt-2 max-w-2xl font-body text-sm leading-relaxed text-ink/75">
-                  Festivals, Ekadashi fasts with break-fast times, and the appearance and disappearance days of
-                  great Vaishnavas, from the temple&apos;s printed calendar. Kenyan public holidays are included for
+                  Our Vaishnava calendar brings together festivals, Ekadashi fasts with break-fast times, and the
+                  appearance and disappearance days of great Vaishnavas. Kenyan public holidays are included for
                   planning.
                 </p>
               </div>

@@ -34,7 +34,7 @@ export default function GauraPurnimaPage() {
           <p className="font-body text-ink/75 leading-relaxed mb-8">{description}</p>
           <FestivalDateNote pattern={/^Gaura Purnima/} name="Gaura Purnima" className="mb-2" />
           <div className="mb-6"><SharePageButton title="Gaura Purnima" label="Share this festival" tone="light" /></div>
-          <p className="font-body text-ink/75 leading-relaxed mb-8">Contact the temple for this year's abhishek and feast schedule.</p>
+          <p className="font-body text-ink/75 leading-relaxed mb-8">Contact our temple office for the next celebration&apos;s abhishek and feast programme.</p>
           <div className="flex flex-wrap gap-4">
             <ButtonLink variant="primary" href="/donate/festivals">Support this festival</ButtonLink>
             <ButtonLink variant="outline" href="/contact" className="border-gold text-gold hover:bg-gold hover:text-white">Register interest</ButtonLink>

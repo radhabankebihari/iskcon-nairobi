@@ -69,7 +69,7 @@ export default function ThikaFarmPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: "🐄", title: "Goshala", desc: "Over 200 cows and bulls receive lifelong protection, veterinary care, and the highest quality feed. Milk is used exclusively for temple worship and prasādam." },
-              { icon: "🌿", title: "Organic Farming", desc: "Vegetables, fruits, and grains grown using traditional and sustainable methods. No synthetic pesticides or fertilisers. All produce offered as prasādam." },
+              { icon: "🌿", title: "Organic Farming", desc: "Vegetables, fruits, and grains grown using traditional and sustainable methods. All produce offered as prasādam." },
               { icon: "🧈", title: "Dairy Production", desc: "Fresh milk, yoghurt, ghee, and paneer produced daily from our protected cows - offered in the temple and distributed through Food For Life." },
               { icon: "🏕️", title: "Retreat Visits", desc: "Day visits and weekend spiritual retreats available for groups and individuals. Experience a day of farm life, cow care, and devotional community." },
               { icon: "🤝", title: "Volunteering", desc: "Join us for a week or a season. Volunteers participate in cow care, farming, construction, and daily temple programmes." },

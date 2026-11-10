@@ -32,6 +32,17 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.6 - Temple Voice Refinement
+
+**Released:** 10 November 2026
+
+**Update mode:** Silent. Public copy corrections; `CACHE_VERSION` moves to v18 for installed visitors.
+
+- Recast HKTC history and daily student life in the temple's voice while retaining the further-reading links.
+- Clarified festival calendar and Gaura Purnima programme wording and simplified the books invitation.
+- Removed the unconfirmed synthetic-pesticide claim and standardized Govinda Prem Prabhu's name.
+- Left the privacy policy's honest retention disclosure unchanged until the temple verifies its cleanup trigger.
+
 ## 1.3.5 - Site Copy Polish
 
 **Released:** 10 November 2026

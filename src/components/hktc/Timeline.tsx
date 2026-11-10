@@ -9,7 +9,7 @@ const entries: TimelineEntry[] = [
     year: "2011",
     title: "HKTC Activities Begin",
     detail:
-      "Public reports record HKTC activities in Kenya starting in April 2011, planting the seed of a dedicated student training programme in Nairobi.",
+      "HKTC's work in Kenya began in April 2011, laying the foundation for a dedicated student training programme in Nairobi.",
   },
   {
     year: "2017",

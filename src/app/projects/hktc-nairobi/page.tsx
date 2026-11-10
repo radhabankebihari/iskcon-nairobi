@@ -161,9 +161,9 @@ export default function HKTCNairobiPage() {
                   guiding HKTC's student training, devotional education, and community care.
                 </p>
                 <p>
-                  HKTC is part of the vision carried forward from Srila Prabhupada's mission for Africa. Public
-                  reports record its work beginning in Kenya in April 2011, with an official opening on 11 January
-                  2017 under the blessings of H.H. Gopal Krishna Goswami Maharaja.
+                  HKTC carries forward Srila Prabhupada&apos;s vision for Africa. Its work in Kenya began in April
+                  2011, and HKTC Nairobi formally opened on 11 January 2017 with the blessings of H.H. Gopal
+                  Krishna Goswami Maharaja.
                 </p>
               </div>
 
@@ -230,9 +230,8 @@ export default function HKTCNairobiPage() {
                 explore, ask questions, practice, and grow under expert guidance.
               </p>
               <p className="mt-4 font-body text-sm leading-relaxed text-sand/75 sm:text-base">
-                Public articles about the centre describe a rhythm of simple living and high thinking, with students
-                rising early, attending temple programmes, chanting, studying, serving, cooking, taking prasadam, and
-                building character through Srila Prabhupada's books.
+                At HKTC, students begin the day with chanting and classes, then take part in study, service,
+                cooking, and prasadam. Srila Prabhupada&apos;s books guide their learning and daily practice.
               </p>
             </div>
 

@@ -193,7 +193,7 @@ export default function LearnPage() {
                     Books Available at the Temple
                   </h3>
                   <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">
-                    The temple stocks Srila Prabhupada's books through the office, gift shop, or on request by contacting the temple. Visitors and students are welcome to ask for guidance on where to begin.
+                    Srila Prabhupada&apos;s books are available through our temple office. Ask us where to begin.
                   </p>
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default function LearnPage() {
               <p className="mt-5 font-body text-sm leading-relaxed text-ink/75 sm:text-base">
                 The Hare Krishna Training Centre helps train and guide students in Krishna consciousness, with
                 philosophy classes through the week. Each class is one hour, includes students from the wider
-                community, and prasadam is served afterward. Facilitator: Govinda Prem Das.
+                community, and prasadam is served afterward. Facilitator: Govinda Prem Prabhu.
               </p>
             </div>
 
