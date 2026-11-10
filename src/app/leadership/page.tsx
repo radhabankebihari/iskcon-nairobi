@@ -116,7 +116,7 @@ export default function LeadershipPage() {
       <section className="bg-temple-bg py-section-sm sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
         <div className="content-width section-padding">
           <div className="mb-9 max-w-3xl">
-            <SectionHeading eyebrow="Learning & Community" title="The People Behind" accent="the Programmes" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
+            <SectionHeading eyebrow="Learning & Community" title="Devotees Guiding" accent="Our Programmes" eyebrowClassName="eyebrow mb-3 block" accentClassName="not-italic text-gold" />
             <p className="mt-4 font-body text-sm leading-relaxed text-ink/75">
               Meet the devotees who facilitate Gita classes, Ladies Sanga, and Bhakti Vriksha gatherings at ISKCON Nairobi.
             </p>

@@ -32,6 +32,14 @@ announce. Full decision rules are maintained in `PROJECT_GUIDELINES.md`.
 6. Deploy and verify that an installation on the previous version shows the release panel.
 7. Test **Later** and **Update now**. Later must leave the waiting worker inactive; Update now must activate and reload once.
 
+## 1.3.4 - Leadership Heading Refinement
+
+**Released:** 10 November 2026
+
+**Update mode:** Silent. A heading correction; `CACHE_VERSION` moves to v16 for installed visitors.
+
+- Named the programme facilitators as devotees in the section heading.
+
 ## 1.3.3 - Leadership Programme Copy
 
 **Released:** 10 November 2026
