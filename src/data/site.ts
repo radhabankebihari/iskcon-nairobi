@@ -27,8 +27,8 @@ export const templeInfo = {
     "Nairobi, Kenya",
   ],
   shortAddress: "Hare Krishna Close, Parklands / West Ngara, Nairobi",
-  phoneDisplay: "+254 722 815 039",
-  phoneHref: "+254722815039",
+  phoneDisplay: "+254 753 419 194",
+  phoneHref: "+254753419194",
   email: "iskconnairobi@gmail.com",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=ISKCON%20Nairobi%20Hare%20Krishna%20Close%20Nairobi%20Kenya",
   // Two lines; shown with whitespace-pre-line so each session sits on its own line.
@@ -47,7 +47,7 @@ export const socialLinks = [
   { label: "FB", name: "Facebook", href: "https://www.facebook.com/profile.php?id=100064683579429" },
   { label: "IG", name: "Instagram", href: "https://www.instagram.com/iskcon_nairobi/" },
   { label: "YT", name: "YouTube", href: "https://www.youtube.com/@iskcon_nairobi" },
-  { label: "WA", name: "WhatsApp", href: "https://wa.me/254721667181" },
+  { label: "WA", name: "WhatsApp", href: "https://wa.me/254753419194" },
 ];
 
 export const navigation = [

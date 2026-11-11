@@ -85,7 +85,7 @@ export const kirtanSafariConfig = {
       label: "Lost property",
       value: "Please report missing belongings to the temple office",
     },
-    { label: "Contact", value: "+254 721 667181", href: "tel:+254721667181" },
+    { label: "Contact", value: "+254 753 419 194", href: "tel:+254753419194" },
   ],
   days: [
     {

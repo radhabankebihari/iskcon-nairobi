@@ -40,7 +40,7 @@ Evidence to record: verified site, sitemap status, and whether IndexNow is enabl
 ## 3. Google Business Profile (temple owner)
 
 1. Search Google Maps for the existing ISKCON Nairobi listing before creating a new profile. Claim an unverified listing, or request ownership if another account already manages it. Avoid duplicate profiles.
-2. The temple must confirm the public name, exact map pin, address, main telephone number, category, website, and normal/special opening hours. The website currently lists `ISKCON Nairobi`, Hare Krishna Close, Parklands / West Ngara, Nairobi, `+254 722 815 039`, and `https://iskconnairobi.com`.
+2. The temple must confirm the public name, exact map pin, address, main telephone number, category, website, and normal/special opening hours. The website currently lists `ISKCON Nairobi`, Hare Krishna Close, Parklands / West Ngara, Nairobi, `+254 753 419 194`, and `https://iskconnairobi.com`.
 3. Complete whichever verification method Google offers. Add real, approved photos of the temple, altar, and community. Do not publish invented testimonials or solicit incentivised reviews.
 4. Grant at least two temple-controlled people appropriate access. The developer should have manager access only if needed.
 5. Check Bing Places and Apple Business Connect after the Google profile is correct; avoid creating a second location for the same temple.
