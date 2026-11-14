@@ -374,10 +374,10 @@ export default function AboutPage() {
                 {centre.email && (
                   <a
                     href={`mailto:${centre.email}`}
-                    className="tap-target mt-1 inline-flex max-w-full items-center gap-2 break-all font-body text-sm text-ink/80 hover:text-primary"
+                    className="tap-target mt-1 flex w-fit max-w-full items-start gap-2 font-body text-sm text-ink/80 hover:text-primary"
                   >
-                    <Mail size={14} className="shrink-0 text-gold" aria-hidden="true" />
-                    {centre.email}
+                    <Mail size={14} className="mt-0.5 shrink-0 text-gold" aria-hidden="true" />
+                    <span className="min-w-0 break-all">{centre.email}</span>
                   </a>
                 )}
                 {centre.website && (
@@ -385,7 +385,7 @@ export default function AboutPage() {
                     href={centre.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-link tap-target mt-3 text-primary"
+                    className="text-link tap-target mt-3 flex w-fit items-center gap-1 text-primary"
                   >
                     Visit website <ArrowRight size={13} aria-hidden="true" />
                   </a>

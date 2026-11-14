@@ -113,7 +113,7 @@ export default function Footer() {
                 <li className="flex items-center gap-3">
                   <MessageCircle size={14} className="text-gold flex-shrink-0" />
                   <a href={whatsappLink.href} target="_blank" rel="noopener noreferrer" className="tap-target font-body text-white/70 text-sm hover:text-gold-light transition-colors">
-                    WhatsApp +254 721 667 181
+                    WhatsApp {templeInfo.phoneDisplay}
                   </a>
                 </li>
               )}

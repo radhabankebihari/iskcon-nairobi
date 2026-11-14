@@ -155,6 +155,12 @@ const images: GalleryImage[] = [
 ];
 
 const categories = ["All", "Early Days", "Temple Life", "Farm & Goshala"] as const;
+const archivalGroupPhoto = "/images/archive/srila-prabhupada-nairobi-devotees.webp";
+const archivalGroupPhotoStyle = {
+  filter: "brightness(1.04) contrast(1.03)",
+  transform: "scale(1.1)",
+  transformOrigin: "left center",
+};
 
 export default function MediaGallery() {
   const [category, setCategory] = useState<(typeof categories)[number]>("All");
@@ -223,8 +229,8 @@ export default function MediaGallery() {
               width={image.width}
               height={image.height}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
-              style={image.src === "/images/iskcon-nairobi-full-altar.webp" ? { filter: "brightness(1.1) contrast(1.04)" } : undefined}
+              className={`h-auto w-full transition-transform duration-500 ${image.src === archivalGroupPhoto ? "" : "group-hover:scale-[1.02]"}`}
+              style={image.src === archivalGroupPhoto ? archivalGroupPhotoStyle : image.src === "/images/iskcon-nairobi-full-altar.webp" ? { filter: "brightness(1.1) contrast(1.04)" } : undefined}
             />
             <span className="block px-3 pb-3 pt-2">
               <span className="block font-body text-xs font-semibold uppercase text-gold-ink">{image.category}</span>
@@ -247,7 +253,7 @@ export default function MediaGallery() {
               <p className="min-w-0 truncate font-display text-base font-semibold">{activeImage.caption}</p>
               <button type="button" onClick={() => setSelected(null)} aria-label="Close photograph" className="flex h-11 w-11 shrink-0 items-center justify-center hover:text-gold"><X size={22} /></button>
             </div>
-            <div className="relative min-h-0 flex-1 bg-black">
+            <div className="relative min-h-0 flex-1 overflow-hidden bg-black">
               <Image
                 src={activeImage.src}
                 alt={activeImage.alt}
@@ -255,7 +261,7 @@ export default function MediaGallery() {
                 height={activeImage.height}
                 sizes="96vw"
                 className="mx-auto max-h-[calc(96vh-116px)] w-auto max-w-full object-contain"
-                style={activeImage.src === "/images/iskcon-nairobi-full-altar.webp" ? { filter: "brightness(1.1) contrast(1.04)" } : undefined}
+                style={activeImage.src === archivalGroupPhoto ? archivalGroupPhotoStyle : activeImage.src === "/images/iskcon-nairobi-full-altar.webp" ? { filter: "brightness(1.1) contrast(1.04)" } : undefined}
               />
             </div>
             <div className="flex items-center justify-between px-3 py-1 font-body text-xs text-white/75">
