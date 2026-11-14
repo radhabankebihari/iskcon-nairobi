@@ -187,7 +187,7 @@ export default function SrilaPrabhupadaPage() {
 
       <section id="nairobi" className="overflow-hidden bg-dusk py-section text-sand">
         <div className="content-width section-padding">
-          <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-center lg:gap-14 xl:grid-cols-[minmax(0,1fr)_28rem] xl:gap-16">
             <div>
               <SectionHeading eyebrow="Kenya and East Africa" title="He did not send only a movement." accent="He came in person." eyebrowClassName="eyebrow mb-4 block text-gold" titleClassName="section-title-light" accentClassName="not-italic text-gold" />
               <div className="mt-7 space-y-5 font-body text-body-md leading-relaxed text-sand/75">
@@ -217,15 +217,19 @@ export default function SrilaPrabhupadaPage() {
               </div>
             </div>
 
-            <figure className="relative">
-              <div className="absolute -inset-4 border border-gold/20" />
-              <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
-                src="/images/prabhupada/prabhupada-nairobi-bus.jpeg"
-                alt="Srila Prabhupada seated aboard a blue bus in Nairobi"
-                className="relative aspect-[4/3] w-full bg-dusk object-contain shadow-card-hover"
-              />
-              <figcaption className="relative mt-4 border-l border-gold/40 pl-4 font-body text-xs leading-relaxed text-sand/75">
-                Srila Prabhupada, whose books and teachings continue to guide the temple community in Nairobi.
+            {/* A portrait photograph: the frame follows the photo, and the caption sits below it. */}
+            <figure className="mx-auto w-full max-w-[17rem] sm:max-w-sm lg:max-w-none">
+              <div className="relative">
+                <div className="absolute -inset-3 border border-gold/25" aria-hidden="true" />
+                <Image width={383} height={522}
+                  sizes="(max-width: 640px) 17rem, (max-width: 1280px) 24rem, 28rem"
+                  src="/images/prabhupada/prabhupada-nairobi-bus.jpeg"
+                  alt="Srila Prabhupada seated aboard a blue bus in Nairobi"
+                  className="relative h-auto w-full object-cover shadow-card-hover"
+                />
+              </div>
+              <figcaption className="mt-6 border-l border-gold/40 pl-4 font-body text-xs leading-relaxed text-sand/75">
+                Srila Prabhupada, garlanded at the left window, travelling by bus with devotees in Nairobi during his visits to Kenya.
               </figcaption>
             </figure>
           </div>
