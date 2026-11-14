@@ -83,7 +83,8 @@ export default function GallerySection() {
                 <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
                   src={img.src}
                   alt={img.alt ?? img.caption}
-                  className={`h-full w-full object-cover image-grade transition-transform duration-700 group-hover:scale-105 ${img.imageClass}`}
+                  className={`h-full w-full object-cover image-grade transition-transform duration-700 ${isLead ? "scale-110 origin-left" : "group-hover:scale-105"} ${img.imageClass}`}
+                  style={isLead ? { filter: "brightness(1.04) contrast(1.03)" } : undefined}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dusk/92 via-dusk/18 to-transparent" />
                 <div className="absolute inset-0 bg-gold/0 transition-colors duration-300 group-hover:bg-gold/10" />

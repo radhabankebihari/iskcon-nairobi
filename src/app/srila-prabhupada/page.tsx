@@ -220,9 +220,9 @@ export default function SrilaPrabhupadaPage() {
             <figure className="relative">
               <div className="absolute -inset-4 border border-gold/20" />
               <Image width={1600} height={1200} sizes="(max-width: 768px) 100vw, 50vw"
-                src="/images/prabhupada/swami-prabhupada-classic.jpg"
-                alt="Srila Prabhupada"
-                className="relative aspect-[4/3] w-full object-cover object-[center_30%] shadow-card-hover"
+                src="/images/prabhupada/prabhupada-nairobi-bus.jpeg"
+                alt="Srila Prabhupada seated aboard a blue bus in Nairobi"
+                className="relative aspect-[4/3] w-full bg-dusk object-contain shadow-card-hover"
               />
               <figcaption className="relative mt-4 border-l border-gold/40 pl-4 font-body text-xs leading-relaxed text-sand/75">
                 Srila Prabhupada, whose books and teachings continue to guide the temple community in Nairobi.
