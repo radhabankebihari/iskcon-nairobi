@@ -187,10 +187,30 @@ export default function SrilaPrabhupadaPage() {
 
       <section id="nairobi" className="overflow-hidden bg-dusk py-section text-sand">
         <div className="content-width section-padding">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-center lg:gap-14 xl:grid-cols-[minmax(0,1fr)_28rem] xl:gap-16">
-            <div>
+          {/* Phones read heading, photo, then story; wide screens put the photo beside the heading and story. */}
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-14 lg:gap-y-0 xl:grid-cols-[minmax(0,1fr)_28rem] xl:gap-x-16">
+            <div className="lg:col-start-1 lg:row-start-2">
               <SectionHeading eyebrow="Kenya and East Africa" title="He did not send only a movement." accent="He came in person." eyebrowClassName="eyebrow mb-4 block text-gold" titleClassName="section-title-light" accentClassName="not-italic text-gold" />
-              <div className="mt-7 space-y-5 font-body text-body-md leading-relaxed text-sand/75">
+            </div>
+
+            {/* A portrait photograph: the frame follows the photo, and the caption sits below it. */}
+            <figure className="mx-auto w-full max-w-[17rem] sm:max-w-sm lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:max-w-none lg:self-center">
+              <div className="relative">
+                <div className="absolute -inset-3 border border-gold/25" aria-hidden="true" />
+                <Image width={383} height={522}
+                  sizes="(max-width: 640px) 17rem, (max-width: 1280px) 24rem, 28rem"
+                  src="/images/prabhupada/prabhupada-nairobi-bus.jpeg"
+                  alt="Srila Prabhupada seated aboard a blue bus in Nairobi"
+                  className="relative h-auto w-full object-cover shadow-card-hover"
+                />
+              </div>
+              <figcaption className="mt-6 border-l border-gold/40 pl-4 font-body text-xs leading-relaxed text-sand/75">
+                Srila Prabhupada, garlanded at the left window, travelling by bus with devotees in Nairobi during his visits to Kenya.
+              </figcaption>
+            </figure>
+
+            <div className="lg:col-start-1 lg:row-start-3 lg:mt-7">
+              <div className="space-y-5 font-body text-body-md leading-relaxed text-sand/75">
                 <p>
                   ISKCON's early Kenyan work began remarkably soon after the society was founded. Srila Prabhupada came to Nairobi in 1971, giving darshan, leading kirtan, lecturing in the evenings, and encouraging the devotees who were trying to establish Krishna consciousness in East Africa.
                 </p>
@@ -216,22 +236,6 @@ export default function SrilaPrabhupadaPage() {
                 ))}
               </div>
             </div>
-
-            {/* A portrait photograph: the frame follows the photo, and the caption sits below it. */}
-            <figure className="mx-auto w-full max-w-[17rem] sm:max-w-sm lg:max-w-none">
-              <div className="relative">
-                <div className="absolute -inset-3 border border-gold/25" aria-hidden="true" />
-                <Image width={383} height={522}
-                  sizes="(max-width: 640px) 17rem, (max-width: 1280px) 24rem, 28rem"
-                  src="/images/prabhupada/prabhupada-nairobi-bus.jpeg"
-                  alt="Srila Prabhupada seated aboard a blue bus in Nairobi"
-                  className="relative h-auto w-full object-cover shadow-card-hover"
-                />
-              </div>
-              <figcaption className="mt-6 border-l border-gold/40 pl-4 font-body text-xs leading-relaxed text-sand/75">
-                Srila Prabhupada, garlanded at the left window, travelling by bus with devotees in Nairobi during his visits to Kenya.
-              </figcaption>
-            </figure>
           </div>
         </div>
       </section>
