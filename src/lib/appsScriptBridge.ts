@@ -13,7 +13,8 @@ export type SheetAction =
   | "push.recordDelivery"
   | "push.deliveredDevices"
   | "push.recordReceipts"
-  | "push.claimRun";
+  | "push.claimRun"
+  | "cron.recordRun";
 
 type BridgeResponse<T> = {
   success?: boolean;
