@@ -29,7 +29,7 @@ const activities = [
   { title: "Dairy Production", image: farm("farm-cows-enclosure"), alt: "Cows in the outdoor goshala enclosure", desc: "Fresh milk, yoghurt, ghee, and paneer produced daily from our protected cows - offered in the temple and distributed through Food For Life." },
   { title: "Retreat Visits", image: farm("goshala-gathering"), alt: "Devotees gathered in the farm pavilion", desc: "Day visits and weekend spiritual retreats available for groups and individuals. Experience a day of farm life, cow care, and devotional community." },
   { title: "Volunteering", image: farm("farm-greenhouse-visit"), alt: "Devotees visiting the farm greenhouse", desc: "Join us for a week or a season. Volunteers participate in cow care, farming, construction, and daily temple programmes." },
-  { title: "Training", image: farm("goshala-farm-fields"), alt: "Cultivated fields and greenhouses at the farm", desc: "Practical training in sustainable agriculture and traditional Indian farming for aspiring homesteaders and devotional farmers." },
+  { title: "Training", image: farm("goshala-farm-fields"), alt: "Cultivated fields and greenhouses at the farm", desc: "Practical training in sustainable agriculture and traditional Vedic farming for aspiring homesteaders and devotional farmers." },
 ];
 
 export default function ThikaFarmPage() {
@@ -61,7 +61,7 @@ export default function ThikaFarmPage() {
               <div className="relative aspect-[16/9] overflow-hidden shadow-card">
                 <Image src={farm("new-farm-aerial")} alt="Aerial view of the farm buildings and surrounding grounds" fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
               </div>
-              <figcaption className="mt-2 font-body text-xs text-ink/75">Thika Farm from above</figcaption>
+              <figcaption className="mt-2 font-body text-xs text-ink/75">An aerial view of Thika Farm</figcaption>
             </figure>
           </div>
         </div>
