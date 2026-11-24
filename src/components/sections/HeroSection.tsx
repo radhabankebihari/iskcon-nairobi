@@ -6,6 +6,7 @@ import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { slidesInSeason } from "@/lib/seasonalSlides";
 import "./HeroSection.css";
 
 type HeroCta = {
@@ -25,7 +26,12 @@ type HeroImage = {
   description: string;
   ctas: HeroCta[];
   durationMs?: number;
+  /** Seasonal slides: shown from this moment (ISO, Nairobi offset) ... */
+  showFrom?: string;
+  /** ... until the end of this moment. Undated slides always show. */
+  showUntil?: string;
 };
+
 
 const baseHeroImages: HeroImage[] = [
   {
@@ -42,6 +48,25 @@ const baseHeroImages: HeroImage[] = [
       { href: "/visit", label: "Plan your visit", variant: "ghost" },
     ],
     durationMs: 10000,
+    showUntil: "2026-11-24T23:59:59+03:00",
+  },
+  {
+    // Temporary real photograph of a temple class until a dedicated Gita image is ready.
+    src: "/images/hktc/hktc-nairobi-hero-class.jpg",
+    alt: "A full hall of students listening to a class at ISKCON Nairobi",
+    position: "center 45%",
+    mobilePosition: "38% center",
+    eyebrow: "Gita Jayanti · Sunday 20 December",
+    tagline: "The song of God, for daily life.",
+    description:
+      "Celebrate the day Lord Krishna spoke the Bhagavad-gita. Join the Bhagavad-gita class every evening at 7:30 PM.",
+    ctas: [
+      { href: "/learn", label: "Learn the Gita", variant: "primary" },
+      { href: "/visit", label: "Plan your visit", variant: "ghost" },
+    ],
+    durationMs: 9000,
+    showFrom: "2026-11-25T00:00:00+03:00",
+    showUntil: "2026-12-20T23:59:59+03:00",
   },
   {
     src: "/images/hero-ratha-yatra-nairobi-gathering-optimized.webp",
@@ -97,14 +122,14 @@ function HeroPicture({ image, isFirst }: { image: HeroImage; isFirst: boolean })
   );
 }
 
-export default function HeroSection() {
+export default function HeroSection({ now }: { now: number }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [paused, setPaused] = useState(false);
   // Only the first slide downloads with the page. Each later slide is fetched
   // shortly before it appears, so a visitor who leaves early never pays for it.
   const [readySlides, setReadySlides] = useState(() => new Set([0]));
   const rotationRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const heroImages = baseHeroImages;
+  const heroImages = slidesInSeason(baseHeroImages, now);
 
   useEffect(() => {
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;

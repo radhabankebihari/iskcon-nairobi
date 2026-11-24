@@ -189,6 +189,18 @@ export const homepageFestivalPreview = [
     tag: "",
     endsAt: "2026-09-20T00:00:00+03:00",
   },
+  {
+    title: "Kartik, the Month of Damodara",
+    date: "26 October - 24 November 2026",
+    month: "Oct",
+    day: "26",
+    location: "ISKCON Nairobi, Hare Krishna Temple",
+    description: "A month of daily ghee-lamp offerings to Lord Damodara with the Damodarastakam, remembering the pastime of Krishna bound by Mother Yashoda's love.",
+    image: "/images/festivals/kartik/link-preview.jpg",
+    href: "/festivals/kartik",
+    tag: "",
+    endsAt: "2026-11-24T23:59:59+03:00",
+  },
   // 2027 dates from the temple's printed Hare Krishna Calendar 2027.
   {
     title: "Gaura Purnima",
@@ -225,6 +237,18 @@ export const homepageFestivalPreview = [
     href: "/festivals/radhashtami",
     tag: "",
     endsAt: "2027-09-08T23:59:59+03:00",
+  },
+  {
+    title: "Kartik, the Month of Damodara",
+    date: "15 October - 14 November 2027",
+    month: "Oct",
+    day: "15",
+    location: "ISKCON Nairobi, Hare Krishna Temple",
+    description: "The month of Damodara returns: daily ghee-lamp offerings with the Damodarastakam, the story of Krishna bound by love, and the month's holy days.",
+    image: "/images/festivals/kartik/link-preview.jpg",
+    href: "/festivals/kartik",
+    tag: "",
+    endsAt: "2027-11-14T23:59:59+03:00",
   },
 ];
 

@@ -12,6 +12,14 @@ import GallerySection from "@/components/sections/GallerySection";
 import GuestHouseSection from "@/components/sections/GuestHouseSection";
 import SavannaDivider from "@/components/ui/SavannaDivider";
 
+// Hourly, so seasonal homepage slides start and end close to their dates.
+export const revalidate = 3600;
+
+/** When this page was rendered; regenerated hourly (see revalidate). */
+function renderedAt() {
+  return Date.now();
+}
+
 export const metadata: Metadata = {
   title: {
     absolute: "ISKCON Nairobi | Sri Sri Radha Bankebihari Temple",
@@ -28,7 +36,7 @@ export default function HomePage() {
           calendar -> donation -> visual world -> guest hospitality.
           Keep this sequence unless the whole landing-page story is being
           redesigned; section spacing is tuned around this rhythm. */}
-      <HeroSection />
+      <HeroSection now={renderedAt()} />
       <SavannaDivider className="h-[7vw] min-h-6 sm:h-24" />
       <QuickNavSection />
       <FestivalHighlightSection />
