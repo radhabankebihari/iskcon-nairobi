@@ -163,6 +163,8 @@ export default function KartikPage() {
   const today = nairobiDateKey(new Date());
 
   const range = season ? `${shortDate(season.start)} – ${shortDate(season.end)} ${season.end.year}` : "October – November";
+  // Outside the month, the page keeps its guide but stops implying lamps are offered today.
+  const inSeason = season?.phase === "during";
   const lit = season?.phase === "during" ? season.dayNumber : season?.phase === "after" ? season.totalDays : 0;
   const status = !season
     ? "Dates are on the festival calendar."
@@ -221,7 +223,8 @@ export default function KartikPage() {
                 </div>
               )}
               <p className="mt-4 font-body text-sm leading-relaxed text-festival-cream/80">
-                Lamp offerings every day at <strong className="text-white">{KARTIK_LAMP_TIMES[0]}</strong> and{" "}
+                {inSeason ? "Lamp offerings every day at" : "During Kartik, lamps are offered daily at"}{" "}
+                <strong className="text-white">{KARTIK_LAMP_TIMES[0]}</strong> and{" "}
                 <strong className="text-white">{KARTIK_LAMP_TIMES[1]}</strong>. Lamps are provided at the temple.
               </p>
             </div>
@@ -327,14 +330,14 @@ export default function KartikPage() {
             <div>
               <p className="eyebrow text-gold-light">At ISKCON Nairobi</p>
               <h2 className="mt-4 font-display text-[clamp(2rem,5.5vw,3.25rem)] leading-[1.08] text-white">
-                Come and offer a lamp, twice a day
+                {inSeason ? "Come and offer a lamp, twice a day" : "During Kartik, offer a lamp twice a day"}
               </h2>
               <p className="mt-5 max-w-lg font-body leading-relaxed text-festival-cream/80">
                 Every morning and evening of Kartik, devotees gather before Lord Damodara to sing the Damodarastakam
                 together. While the eight verses are sung, everyone offers a small ghee lamp in turn.
               </p>
               <ul className="mt-6 space-y-2 font-body text-sm text-festival-cream/80">
-                <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />Lamps are provided at the temple. Just come.</li>
+                <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />{inSeason ? "Lamps are provided at the temple. Just come." : "Lamps are provided at the temple during Kartik."}</li>
                 <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />Families and first-time visitors are welcome. Children love offering a lamp.</li>
                 <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />The steps and the verses are below, so you can follow along on your phone.</li>
               </ul>

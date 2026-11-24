@@ -19,6 +19,7 @@ const HEADERS = {
   PushDeliveryLog: ['Event ID', 'Sent At', 'Attempted', 'Delivered', 'Failed', 'Pruned'],
   PushDeliveryReceipts: ['Event ID', 'Device Key', 'Sent At'],
   PushRunClaims: ['Event ID', 'Run ID', 'Claimed At'],
+  'Cron Runs': ['Ran At', 'Nairobi Date', 'Result', 'Push Keys', 'Reminder Devices', 'Due Reminders', 'Details'],
 };
 
 // Retention applies only to timestamp-first submission and analytics tabs.
@@ -29,6 +30,7 @@ const RETENTION_MONTHS = {
   'Kirtan Safari Registrations': 24,
   'Kirtan Safari 2027 Interest': 24,
   WebsiteAnalytics: 12,
+  'Cron Runs': 6,
 };
 
 function doPost(e) {
@@ -144,6 +146,7 @@ function performAction(action, data) {
     case 'push.deliveredDevices': return deliveredDevices(data);
     case 'push.recordReceipts': return recordReceipts(data);
     case 'push.claimRun': return claimRun(data);
+    case 'cron.recordRun': return recordCronRun(data);
     default: throw new Error('Unknown action');
   }
 }
@@ -345,6 +348,15 @@ function recordReceipts(data) {
 }
 
 // Runs under the script lock in doPost, so checking and claiming cannot interleave.
+// One row per morning run of the website's reminder job, so its result is
+// visible without hosting logs: what was due, whether the push keys work,
+// how many devices want reminders, and any error.
+function recordCronRun(data) {
+  sheetFor('Cron Runs').appendRow([new Date(), cell(data.nairobiDate, 10), cell(data.result, 20),
+    cell(data.pushKeys, 120), Number(data.devices) || 0, cell(data.due, 400), cell(data.details, 1000)]);
+  return { recorded: true };
+}
+
 function claimRun(data) {
   const eventId = required(plain(data.eventId, 160), 'Event ID');
   const runId = required(plain(data.runId, 64), 'Run ID');

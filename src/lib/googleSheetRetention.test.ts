@@ -9,7 +9,7 @@ function runScript<T>(expression: string, globals: Record<string, unknown> = {})
 }
 
 describe("website sheet retention", () => {
-  it("uses 24 months for submissions and 12 for analytics only", () => {
+  it("uses 24 months for submissions, 12 for analytics and 6 for reminder-job runs", () => {
     const periods = runScript<Record<string, number>>("RETENTION_MONTHS");
 
     expect(periods["Contact Us"]).toBe(24);
@@ -17,7 +17,8 @@ describe("website sheet retention", () => {
     expect(periods["Kirtan Safari Registrations"]).toBe(24);
     expect(periods["Kirtan Safari 2027 Interest"]).toBe(24);
     expect(periods.WebsiteAnalytics).toBe(12);
-    expect(Object.keys(periods)).toHaveLength(5);
+    expect(periods["Cron Runs"]).toBe(6);
+    expect(Object.keys(periods)).toHaveLength(6);
   });
 
   it("clamps month-end dates instead of rolling into the next month", () => {

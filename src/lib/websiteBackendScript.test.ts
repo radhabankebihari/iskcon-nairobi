@@ -170,6 +170,16 @@ describe("website-backend.gs push storage", () => {
     expect(post("analytics.record", { event: "page_view", path: "/" })).toMatchObject({ success: true, version: 2 });
   });
 
+  it("records each reminder-job run in its own tab, outside the push lock", () => {
+    const { post, locks } = loadBackend();
+    const result = post("cron.recordRun", {
+      nairobiDate: "2026-11-21", result: "sent", pushKeys: "OK", devices: 3,
+      due: "2026-11-21-utthana-ekadashi", details: "2026-11-21-utthana-ekadashi: sent 3/3 delivered",
+    });
+    expect(result).toMatchObject({ success: true, data: { recorded: true } });
+    expect(locks.taken).toBe(0);
+  });
+
   it("lets forms and analytics skip the lock, but not push saves", () => {
     const { post, locks } = loadBackend();
     post("analytics.record", { event: "page_view", path: "/" });
