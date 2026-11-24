@@ -58,9 +58,10 @@ const baseHeroImages: HeroImage[] = [
     ],
   },
   {
-    src: "/images/hero-radha-bankebihari-darshan.webp",
-    alt: "Daily darshan of Sri Sri Radha Bankebihari in red festival attire",
-    position: "center 22%",
+    src: "/images/hero-radha-bankebihari-official-raised-desktop.webp",
+    mobileSrc: "/images/hero-radha-bankebihari-official-mobile.webp",
+    alt: "Sri Sri Radha Bankebihari in blue and gold attire at ISKCON Nairobi",
+    position: "center center",
     mobilePosition: "center top",
     eyebrow: "Sri Sri Radha Bankebihari Temple",
     tagline: "Faith.\u2002Community.\u2002Service.",
@@ -143,7 +144,7 @@ export default function HeroSection() {
   const currentHero = heroImages[currentImage];
 
   return (
-    <section className="home-hero relative w-full h-[88svh] min-h-[620px] max-h-[1000px] overflow-hidden sm:h-screen sm:min-h-[600px]">
+    <section data-deity-slide={currentImage === 2 ? "true" : undefined} className="home-hero relative w-full h-[88svh] min-h-[620px] max-h-[1000px] overflow-hidden sm:h-screen sm:min-h-[600px]">
       {/* The visible tagline rotates with each slide, so the page heading stays
           fixed for search engines and screen readers. */}
       <h1 className="sr-only">ISKCON Nairobi: Sri Sri Radha Bankebihari Temple</h1>

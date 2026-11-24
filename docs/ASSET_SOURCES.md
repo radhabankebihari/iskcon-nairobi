@@ -5,6 +5,13 @@ during the build: ISKCON Nairobi aerial views, altar photos, Kirtan Safari
 artwork, HKTC photos, leader portraits, Thika farm images, Food For Life images,
 and community portraits.
 
+The November 2026 temple-supplied `August 11th` archive is the source for
+`/images/deities/august-11-img-*.webp`. `IMG_1965.JPG` also supplies the
+desktop and mobile homepage deity hero compositions. The temple-supplied
+`Goshala Pics` archive is the source for `/images/thika-farm/new-*.webp`.
+These published files are resized WebP derivatives; the original archives
+remain outside the public website.
+
 The following library assets remain in the repository for context-specific pages
 where final temple photography may still be added later.
 

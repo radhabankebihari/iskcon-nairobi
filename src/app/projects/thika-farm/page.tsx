@@ -60,6 +60,26 @@ export default function ThikaFarmPage() {
         </div>
       </section>
 
+      <section className="bg-temple-bg py-section">
+        <div className="content-width section-padding">
+          <SectionHeading eyebrow="Cow Care" title="Life at the" accent="Goshala" />
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {[
+              { src: "/images/thika-farm/new-cow-and-calf.webp", alt: "A cow and calf together in the goshala", caption: "Cow and calf" },
+              { src: "/images/thika-farm/new-daily-cow-care.webp", alt: "A devotee tending a calf inside the cow shelter", caption: "Daily care" },
+              { src: "/images/thika-farm/new-cow-care-visit.webp", alt: "Visitors meeting cows at the farm", caption: "Visiting the cows" },
+            ].map((photo) => (
+              <figure key={photo.src}>
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover" />
+                </div>
+                <figcaption className="mt-2 font-body text-xs text-ink/75">{photo.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Activities */}
       <section className="py-section bg-temple-cream sm:pt-[clamp(2rem,4vw,4rem)] sm:pb-[clamp(2rem,4vw,4rem)]">
         <div className="content-width section-padding">

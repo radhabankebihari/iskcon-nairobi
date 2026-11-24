@@ -31,9 +31,9 @@ const galleryImages = [
     imageClass: "h-[170px] sm:h-[240px] lg:h-full",
   },
   {
-    src: "/images/thika-farm/thika-farm-2022-102.webp",
-    caption: "Krishna Balarama Goshala at Thika Farm",
-    alt: "Krishna Balarama Goshala sign at the farm entrance",
+    src: "/images/thika-farm/new-cow-portrait.webp",
+    caption: "Cow protection at Thika Farm",
+    alt: "A brown cow looking toward the camera at the Thika Farm goshala",
     tone: "Goshala",
     className: "lg:col-span-4",
     imageClass: "h-[170px] sm:h-[240px] lg:h-full",
