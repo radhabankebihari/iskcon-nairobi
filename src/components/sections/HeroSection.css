@@ -1,3 +1,24 @@
+.home-hero[data-gita-slide="true"] {
+  background: #241713;
+}
+
+.home-hero [data-gita-image="true"] .hero-bg-image {
+  mask-image: linear-gradient(to bottom, transparent, #000 48px);
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .home-hero [data-gita-image="true"] .hero-bg-image {
+    object-position: center top !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .home-hero [data-gita-image="true"] .hero-bg-image {
+    top: 80px !important;
+    height: calc(100% - 80px) !important;
+  }
+}
+
 @media (max-width: 640px) {
   .home-hero .hero-bg-image {
     object-position: var(--hero-mobile-position) !important;

@@ -51,17 +51,32 @@ const baseHeroImages: HeroImage[] = [
     showUntil: "2026-11-24T23:59:59+03:00",
   },
   {
-    // Temporary real photograph of a temple class until a dedicated Gita image is ready.
-    src: "/images/hktc/hktc-nairobi-hero-class.jpg",
-    alt: "A full hall of students listening to a class at ISKCON Nairobi",
-    position: "center 45%",
-    mobilePosition: "38% center",
+    src: "/images/hero-radha-bankebihari-official-raised-desktop.webp",
+    mobileSrc: "/images/hero-radha-bankebihari-official-mobile.webp",
+    alt: "Sri Sri Radha Bankebihari in blue and gold attire at ISKCON Nairobi",
+    position: "center center",
+    mobilePosition: "center top",
+    eyebrow: "Sri Sri Radha Bankebihari Temple",
+    tagline: "Faith.\u2002Community.\u2002Service.",
+    description:
+      "Discover Krishna Consciousness in Nairobi through worship, kirtan, prasadam, education, and service.",
+    ctas: [
+      { href: "/visit", label: "Visit the temple", variant: "ghost" },
+      { href: "/donate", label: "Support our mission", variant: "primary" },
+    ],
+  },
+  {
+    src: "/images/book-marathon/bhagavad-gita-hero-desktop-composed.webp",
+    mobileSrc: "/images/book-marathon/bhagavad-gita-hero-mobile-composed.webp",
+    alt: "Bhagavad-gita As It Is displayed inside the temple",
+    position: "center center",
+    mobilePosition: "center center",
     eyebrow: "Gita Jayanti · Sunday 20 December",
     tagline: "The song of God, for daily life.",
     description:
-      "Celebrate the day Lord Krishna spoke the Bhagavad-gita. Join the Bhagavad-gita class every evening at 7:30 PM.",
+      "Celebrate with a complete Bhagavad-gita recitation at 10:30 AM, followed by prasadam.",
     ctas: [
-      { href: "/learn", label: "Learn the Gita", variant: "primary" },
+      { href: "/festivals/gita-jayanti", label: "Explore Gita Jayanti", variant: "primary" },
       { href: "/visit", label: "Plan your visit", variant: "ghost" },
     ],
     durationMs: 9000,
@@ -73,21 +88,6 @@ const baseHeroImages: HeroImage[] = [
     alt: "Devotees gather for Ratha Yatra in central Nairobi, with the city skyline behind them",
     position: "center 48%",
     mobilePosition: "52% center",
-    eyebrow: "Sri Sri Radha Bankebihari Temple",
-    tagline: "Faith.\u2002Community.\u2002Service.",
-    description:
-      "Discover Krishna Consciousness in Nairobi through worship, kirtan, prasadam, education, and service.",
-    ctas: [
-      { href: "/visit", label: "Visit the temple", variant: "ghost" },
-      { href: "/donate", label: "Support our mission", variant: "primary" },
-    ],
-  },
-  {
-    src: "/images/hero-radha-bankebihari-official-raised-desktop.webp",
-    mobileSrc: "/images/hero-radha-bankebihari-official-mobile.webp",
-    alt: "Sri Sri Radha Bankebihari in blue and gold attire at ISKCON Nairobi",
-    position: "center center",
-    mobilePosition: "center top",
     eyebrow: "Sri Sri Radha Bankebihari Temple",
     tagline: "Faith.\u2002Community.\u2002Service.",
     description:
@@ -169,7 +169,7 @@ export default function HeroSection({ now }: { now: number }) {
   const currentHero = heroImages[currentImage];
 
   return (
-    <section data-deity-slide={currentImage === 2 ? "true" : undefined} className="home-hero relative w-full h-[88svh] min-h-[620px] max-h-[1000px] overflow-hidden sm:h-screen sm:min-h-[600px]">
+    <section data-deity-slide={currentHero.src.includes("hero-radha-bankebihari-official") ? "true" : undefined} data-gita-slide={currentHero.src.includes("bhagavad-gita-hero") ? "true" : undefined} className="home-hero relative w-full h-[88svh] min-h-[620px] max-h-[1000px] overflow-hidden sm:h-screen sm:min-h-[600px]">
       {/* The visible tagline rotates with each slide, so the page heading stays
           fixed for search engines and screen readers. */}
       <h1 className="sr-only">ISKCON Nairobi: Sri Sri Radha Bankebihari Temple</h1>
@@ -177,6 +177,7 @@ export default function HeroSection({ now }: { now: number }) {
       {heroImages.map((image, i) => (
         <div
           key={image.src}
+          data-gita-image={image.src.includes("bhagavad-gita-hero") ? "true" : undefined}
           className={cn(
             "absolute inset-0 transition-opacity duration-2000 ease-in-out",
             i === currentImage ? "opacity-100" : "opacity-0"

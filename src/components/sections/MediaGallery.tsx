@@ -112,7 +112,6 @@ const images: GalleryImage[] = [
     ["1966", "Sri Sri Radha Bankebihari", "Sri Sri Radha Bankebihari in blue festival attire"],
     ["1967", "Sri Sri Radha Bankebihari (utsava deities)", "The smaller utsava deities of Sri Sri Radha Bankebihari on the altar"],
     ["1968", "Gaura Nitai", "Gaura Nitai in matching blue and gold attire"],
-    ["1969", "Small altar deities", "Small decorated deities beneath a temple canopy"],
     ["1970", "Sita and Ram", "Sita and Ram wearing blue attire and flower garlands"],
     ["1971", "Sita Ram, Lakshman and Hanuman", "Sita, Ram, Lakshman and Hanuman before the temple backdrop"],
   ].map(([number, caption, alt]) => ({
@@ -125,8 +124,8 @@ const images: GalleryImage[] = [
   })),
   {
     src: "/images/thika-farm/thika-farm-2022-017.webp",
-    caption: "Devotees gather for kirtan at Thika Farm",
-    alt: "Devotees raising their hands in kirtan before the farm altar",
+    caption: "Devotees gather for Bhagavatam class",
+    alt: "Devotees raising their hands during Bhagavatam class at Thika Farm",
     category: "Farm & Goshala",
     width: 2000,
     height: 1132,
@@ -175,10 +174,10 @@ const images: GalleryImage[] = [
     ["new-cow-closeup.webp", "A quiet moment at the goshala", "Close view of a brown cow at Thika Farm", 1280, 591],
     ["new-cow-and-calf.webp", "Cow and calf", "A cow standing beside her calf in the goshala", 1280, 590],
     ["new-cow-portrait.webp", "A cow at Thika Farm", "A brown cow looking toward the camera", 1280, 591],
-    ["new-cow-care-visit.webp", "Visiting the cows", "Visitors meeting cows at the farm", 1800, 1013],
+    ["new-cow-care-visit.webp", "Feeding the cows", "Devotees feeding cows at the farm", 1800, 1013],
     ["new-young-calf.webp", "Young calf", "A young brown calf at the farm", 1280, 960],
-    ["new-daily-cow-care.webp", "Daily cow care", "A devotee tending a calf inside the cow shelter", 1800, 831],
-    ["new-visitors-at-goshala.webp", "At the goshala", "Visitors gathered beside cows at the goshala", 1280, 720],
+    ["new-daily-cow-care.webp", "HH Bhakti Narasimha Swami feeds a calf at the goshala", "HH Bhakti Narasimha Swami feeding a calf inside the cow shelter", 1800, 831],
+    ["new-visitors-at-goshala.webp", "Devotees visit the cows", "Devotees gathered beside cows at the goshala", 1280, 720],
     ["new-farm-aerial.webp", "Thika Farm from above", "Aerial view of the farm buildings and surrounding grounds", 1280, 591],
   ].map(([file, caption, alt, width, height]) => ({
     src: `/images/thika-farm/${file}`,

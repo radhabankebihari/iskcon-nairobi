@@ -27,7 +27,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ preview?: string }>;
+}) {
+  const preview = process.env.NODE_ENV === "development" && (await searchParams).preview === "gita-jayanti";
   return (
     <>
       {/* Homepage narrative order:
@@ -36,7 +41,7 @@ export default function HomePage() {
           calendar -> donation -> visual world -> guest hospitality.
           Keep this sequence unless the whole landing-page story is being
           redesigned; section spacing is tuned around this rhythm. */}
-      <HeroSection now={renderedAt()} />
+      <HeroSection now={preview ? Date.parse("2026-11-25T00:05:00+03:00") : renderedAt()} />
       <SavannaDivider className="h-[7vw] min-h-6 sm:h-24" />
       <QuickNavSection />
       <FestivalHighlightSection />

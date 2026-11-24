@@ -19,7 +19,7 @@ export default function ThikaFarmPage() {
         titleAccent="& Goshala"
         subtitle="Organic Farming & Cow Protection"
         description="Forty acres of sacred land in the Kenyan highlands - where cow protection, organic farming, and devotional community life thrive together."
-        image="/images/thika-farm/thika-farm-2022-141.webp"
+        image="/images/thika-farm/farm-overview.webp"
         height="md"
         className="sm:min-h-[500px]"
       />
@@ -37,17 +37,17 @@ export default function ThikaFarmPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { src: "/images/thika-farm/thika-farm-2022-103-optimized.webp", alt: "Fruit trees growing at Thika Farm" },
-                { src: "/images/thika-farm/thika-farm-2022-135.webp", alt: "Hanging planter in the farm garden" },
+                { src: "/images/thika-farm/farm-greenhouse-visit.webp", alt: "Devotees visiting the farm greenhouse" },
+                { src: "/images/thika-farm/farm-peppers.webp", alt: "Red peppers growing at Thika Farm" },
               ].map((photo, i) => (
-                <Image width={1600} height={1200} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 33vw" key={photo.src} src={photo.src} alt={photo.alt} className={`w-full object-cover ${i === 1 ? "mt-8" : ""}`} style={{ aspectRatio: "3/4" }} />
+                <Image width={1280} height={960} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 33vw" key={photo.src} src={photo.src} alt={photo.alt} className={`w-full object-cover ${i === 1 ? "mt-8" : ""}`} style={{ aspectRatio: "4/3" }} />
               ))}
             </div>
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {[
-              { src: "/images/thika-farm/thika-farm-2022-146-optimized.webp", alt: "Devotee seated with a harmonium on the farm lawn", caption: "A quiet moment on the lawn" },
-              { src: "/images/thika-farm/thika-farm-2022-147.webp", alt: "Farm buildings and cow shelters at Thika Farm", caption: "The farm and cow shelters" },
+              { src: "/images/thika-farm/farm-pavilion.webp", alt: "Open pavilion in the farm garden", caption: "The garden pavilion" },
+              { src: "/images/thika-farm/farm-orchard.webp", alt: "Fruit trees growing in the farm orchard", caption: "The farm orchard" },
             ].map((photo) => (
               <figure key={photo.src}>
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -63,18 +63,28 @@ export default function ThikaFarmPage() {
       <section className="bg-temple-bg py-section">
         <div className="content-width section-padding">
           <SectionHeading eyebrow="Cow Care" title="Life at the" accent="Goshala" />
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <figure className="mt-8 max-w-5xl">
+            <div className="relative aspect-[16/9] overflow-hidden sm:aspect-[2/1]">
+              <Image src="/images/thika-farm/farm-cows-enclosure.webp" alt="Cows in the outdoor goshala enclosure at Thika Farm" fill sizes="(max-width: 640px) 100vw, 80vw" className="object-cover" />
+            </div>
+            <figcaption className="mt-2 font-body text-xs text-ink/75">Cows at the goshala</figcaption>
+          </figure>
+          <div className="mt-10 grid gap-2 sm:grid-cols-6 sm:gap-3 lg:grid-cols-12" aria-label="More views of the goshala and farm">
             {[
-              { src: "/images/thika-farm/new-cow-and-calf.webp", alt: "A cow and calf together in the goshala", caption: "Cow and calf" },
-              { src: "/images/thika-farm/new-daily-cow-care.webp", alt: "A devotee tending a calf inside the cow shelter", caption: "Daily care" },
-              { src: "/images/thika-farm/new-cow-care-visit.webp", alt: "Visitors meeting cows at the farm", caption: "Visiting the cows" },
+              { src: "goshala-garden-path", alt: "Garden path leading to the pavilion", span: "sm:col-span-4 lg:col-span-8", ratio: "aspect-[16/9]" },
+              { src: "goshala-gate", alt: "Krishna Balarama Farm sign at the entrance", span: "sm:col-span-2 lg:col-span-4", ratio: "aspect-[4/5] sm:aspect-auto" },
+              { src: "goshala-visitors", alt: "Families visiting the cows at the goshala", span: "sm:col-span-3 lg:col-span-6", ratio: "aspect-[16/9]" },
+              { src: "goshala-courtyard", alt: "Devotee walking between the cow shelters and garden pavilion", span: "sm:col-span-3 lg:col-span-6", ratio: "aspect-[16/9]" },
+              { src: "goshala-gathering", alt: "Devotees gathered in the farm pavilion", span: "sm:col-span-3 lg:col-span-6", ratio: "aspect-[16/9]" },
+              { src: "goshala-farm-fields", alt: "Cultivated fields and greenhouses at the farm", span: "sm:col-span-3 lg:col-span-6", ratio: "aspect-[16/9]" },
+              { src: "goshala-cultivated-fields", alt: "Rows of crops growing in the farm fields", span: "sm:col-span-3 lg:col-span-6", ratio: "aspect-[16/9]" },
+              { src: "goshala-green-space", alt: "Lawn and cow shelters at the farm", span: "sm:col-span-3 lg:col-span-6", ratio: "aspect-[16/9]" },
+              { src: "goshala-cactus-flower", alt: "White cactus flower blooming on the farm", span: "sm:col-span-2 lg:col-span-4", ratio: "aspect-[4/5] sm:aspect-auto" },
+              { src: "goshala-dragon-fruit", alt: "Dragon fruit growing on the farm", span: "sm:col-span-4 lg:col-span-8", ratio: "aspect-[16/9]" },
             ].map((photo) => (
-              <figure key={photo.src}>
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover" />
-                </div>
-                <figcaption className="mt-2 font-body text-xs text-ink/75">{photo.caption}</figcaption>
-              </figure>
+              <div key={photo.src} className={`relative overflow-hidden ${photo.span} ${photo.ratio}`}>
+                <Image src={`/images/thika-farm/${photo.src}.webp`} alt={photo.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 70vw" className="object-cover" />
+              </div>
             ))}
           </div>
         </div>
