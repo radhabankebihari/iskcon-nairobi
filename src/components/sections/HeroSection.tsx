@@ -76,7 +76,7 @@ const baseHeroImages: HeroImage[] = [
     description:
       "Celebrate with a complete Bhagavad-gita recitation at 10:30 AM, followed by prasadam.",
     ctas: [
-      { href: "/festivals/gita-jayanti", label: "Explore Gita Jayanti", variant: "primary" },
+      { href: "/learn#gita-jayanti", label: "Join Gita Jayanti", variant: "primary" },
       { href: "/visit", label: "Plan your visit", variant: "ghost" },
     ],
     durationMs: 9000,

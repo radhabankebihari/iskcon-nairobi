@@ -88,6 +88,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // Gita Jayanti lives as a seasonal section of the Learn page, not a page of its own.
+        source: "/festivals/gita-jayanti",
+        destination: "/learn#gita-jayanti",
+        permanent: false,
+      },
+      {
         source: "/calendar",
         destination: "/festivals",
         permanent: true,

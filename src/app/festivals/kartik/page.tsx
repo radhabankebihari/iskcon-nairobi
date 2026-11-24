@@ -530,7 +530,7 @@ export default function KartikPage() {
                       {items.map((item) => (
                         <div key={item.event} className="mt-1">
                           <p className={`font-display text-lg ${/^Kartik (begins|ends)$/.test(item.event) ? "text-gold-light" : "text-white"}`}>{item.event}</p>
-                          {item.fast && <p className="font-body text-sm text-festival-cream/65">{item.fast}</p>}
+                          {item.fast && <p className="font-body text-sm text-festival-cream/85">{item.fast}</p>}
                         </div>
                       ))}
                     </li>

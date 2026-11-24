@@ -1,10 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Baby, Bell, BookOpen, CalendarDays, Clock, GraduationCap, HeartHandshake, Home, LibraryBig, MessageCircle, Music, Users } from "lucide-react";
+import { ArrowRight, Baby, Bell, BookOpen, CalendarDays, Clock, Download, Gift, GraduationCap, HeartHandshake, Home, LibraryBig, MapPin, MessageCircle, Music, Users } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
+import SharePageButton from "@/components/ui/SharePageButton";
+import { gitaJayanti2026, gitaSponsorship } from "@/data/gitaJayanti";
+import { isInSeason } from "@/lib/seasonalSlides";
+
+// Hourly, so the seasonal Gita Jayanti section ends close to its date.
+export const revalidate = 3600;
+
+/** When this page was rendered; regenerated hourly (see revalidate). */
+function renderedAt() {
+  return Date.now();
+}
 
 export const metadata = withSeo({
   title: "Bhagavad Gita Classes in Nairobi",
@@ -120,7 +131,73 @@ const communityLearning: CommunityItem[] = [
   },
 ];
 
+/** Gita Jayanti: shown at the top of Learn until the celebration day ends. */
+function GitaJayantiSection() {
+  const g = gitaJayanti2026;
+  return (
+    <section id="gita-jayanti" className="relative scroll-mt-24 overflow-hidden bg-dusk text-white">
+      <Image src="/images/book-marathon/bhagavad-gita-hero-desktop-composed.webp" alt="" fill sizes="100vw" className="hidden object-cover object-right sm:block" />
+      <Image src="/images/book-marathon/bhagavad-gita-hero-mobile-composed.webp" alt="" fill sizes="100vw" className="object-cover object-top sm:hidden" />
+      <div className="absolute inset-0 bg-gradient-to-r from-dusk/95 via-dusk/75 to-dusk/10 max-sm:bg-gradient-to-b max-sm:from-dusk/10 max-sm:via-dusk/60 max-sm:to-dusk/95" />
+      <div className="content-width section-padding relative z-10 flex min-h-[560px] flex-col justify-end pb-14 pt-[22rem] sm:min-h-[520px] sm:justify-center sm:py-20">
+        <div className="max-w-xl">
+          <span className="eyebrow mb-4 block text-gold">Gita Jayanti &middot; {g.shortDate}</span>
+          <h2 className="font-display text-[clamp(2rem,6vw,3.5rem)] leading-[1.05] text-white">Hear the whole Gita, together</h2>
+          <p className="mt-5 font-body leading-relaxed text-white/85">
+            Gita Jayanti honours the day Lord Krishna spoke the Bhagavad-gita to Arjuna. Join devotees and guests at the
+            temple for a complete recitation of the Gita, followed by prasadam. Everyone is welcome.
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 font-body text-sm font-semibold text-white/90">
+            <li className="inline-flex items-center gap-2"><CalendarDays size={16} className="text-gold" aria-hidden="true" />{g.date}</li>
+            <li className="inline-flex items-center gap-2"><Clock size={16} className="text-gold" aria-hidden="true" />From {g.startTime}</li>
+            <li className="inline-flex items-center gap-2"><MapPin size={16} className="text-gold" aria-hidden="true" />ISKCON Nairobi</li>
+          </ul>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <ButtonLink variant="primary" href="#sponsor-a-gita">Sponsor a Gita</ButtonLink>
+            <a href={g.poster} download className="inline-flex min-h-11 items-center gap-2 font-body text-sm font-semibold text-gold-light underline underline-offset-4 hover:text-white">
+              <Download size={16} aria-hidden="true" /> Download the poster
+            </a>
+            <SharePageButton title="Gita Jayanti at ISKCON Nairobi" text={`${g.date}, complete Bhagavad-gita recitation from ${g.startTime}`} label="Share" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Sponsor a Bhagavad-gita: shown all year, details from the official poster. */
+function SponsorGitaSection() {
+  const s = gitaSponsorship;
+  return (
+    <section id="sponsor-a-gita" className="scroll-mt-24 bg-white py-14 sm:py-20">
+      <div className="content-width section-padding grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+        <div>
+          <span className="eyebrow mb-4 block">Give the gift of the Gita</span>
+          <h2 className="section-title max-w-xl">Sponsor a Bhagavad-gita</h2>
+          <p className="mt-5 max-w-xl font-body leading-relaxed text-ink/75">
+            Help place Bhagavad-gita As It Is in someone&apos;s hands. Each copy is {s.pricePerCopy}, and the temple&apos;s book
+            distributors share it with students, visitors, and seekers across Nairobi.
+          </p>
+          <dl className="mt-7 grid max-w-md grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-l-2 border-gold pl-5 font-body text-sm text-ink/80">
+            <dt className="font-semibold">M-Pesa Paybill</dt><dd>{s.mpesaPaybill}</dd>
+            <dt className="font-semibold">Account</dt><dd>{s.mpesaAccount}</dd>
+            <dt className="font-semibold">Per copy</dt><dd>{s.pricePerCopy}</dd>
+          </dl>
+          <p className="mt-4 font-body text-sm text-ink/70">
+            Questions about sponsoring: <a href="tel:+254753419194" className="font-semibold text-primary underline underline-offset-4">0753 419 194</a>
+          </p>
+        </div>
+        <div className="flex items-center gap-5 border-t border-gold/40 py-8 lg:border-l lg:border-t-0 lg:pl-10">
+          <Gift size={36} className="shrink-0 text-primary" aria-hidden="true" />
+          <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">One book can begin a lifelong conversation.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function LearnPage() {
+  const showGitaJayanti = isInSeason(gitaJayanti2026.season, renderedAt());
   return (
     <>
       <PageHero
@@ -133,6 +210,8 @@ export default function LearnPage() {
         imageClassName="sm:object-[center_20%]"
         className="sm:min-h-[500px]"
       />
+
+      {showGitaJayanti && <GitaJayantiSection />}
 
       <section className="bg-temple-bg pt-section-sm pb-section">
         <div className="content-width section-padding">
@@ -229,6 +308,8 @@ export default function LearnPage() {
           </div>
         </div>
       </section>
+
+      <SponsorGitaSection />
 
       <section className="bg-temple-cream pt-8 pb-16">
         <div className="content-width section-padding">

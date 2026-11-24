@@ -201,6 +201,18 @@ export const homepageFestivalPreview = [
     tag: "",
     endsAt: "2026-11-24T23:59:59+03:00",
   },
+  {
+    title: "Gita Jayanti",
+    date: "Sunday 20 December 2026",
+    month: "Dec",
+    day: "20",
+    location: "ISKCON Nairobi, Hare Krishna Temple",
+    description: "The advent of the Bhagavad-gita, celebrated with a complete recitation of the Gita from 10:30 AM, followed by prasadam.",
+    image: "/images/book-marathon/bhagavad-gita-hero-desktop.webp",
+    href: "/learn#gita-jayanti",
+    tag: "",
+    endsAt: "2026-12-20T23:59:59+03:00",
+  },
   // 2027 dates from the temple's printed Hare Krishna Calendar 2027.
   {
     title: "Gaura Purnima",

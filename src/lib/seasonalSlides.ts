@@ -9,3 +9,8 @@ export function slidesInSeason<T extends Seasonal>(slides: T[], now: number): T[
       (!slide.showUntil || now <= Date.parse(slide.showUntil))
   );
 }
+
+/** Whether one seasonal item is showing at `now`. */
+export function isInSeason(item: Seasonal, now: number) {
+  return slidesInSeason([item], now).length === 1;
+}

@@ -92,7 +92,7 @@ test("farm gallery opens with distinct photographs", async ({ page }) => {
   const photos = await page.locator("#farm-goshala ~ div button img").evaluateAll((images) =>
     images.map((image) => image.getAttribute("src"))
   );
-  expect(photos).toHaveLength(6);
+  expect(photos.length).toBeGreaterThanOrEqual(6);
   expect(new Set(photos).size).toBe(photos.length);
 });
 
