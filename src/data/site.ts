@@ -208,7 +208,7 @@ export const homepageFestivalPreview = [
     day: "20",
     location: "ISKCON Nairobi, Hare Krishna Temple",
     description: "The advent of the Bhagavad-gita, celebrated with a complete recitation of the Gita from 10:30 AM, followed by prasadam.",
-    image: "/images/book-marathon/bhagavad-gita-hero-desktop.webp",
+    image: "/images/gita-jayanti/gita-jayanti-card.webp",
     href: "/learn#gita-jayanti",
     tag: "",
     endsAt: "2026-12-20T23:59:59+03:00",
@@ -249,18 +249,6 @@ export const homepageFestivalPreview = [
     href: "/festivals/radhashtami",
     tag: "",
     endsAt: "2027-09-08T23:59:59+03:00",
-  },
-  {
-    title: "Kartik, the Month of Damodara",
-    date: "15 October - 14 November 2027",
-    month: "Oct",
-    day: "15",
-    location: "ISKCON Nairobi, Hare Krishna Temple",
-    description: "The month of Damodara returns: daily ghee-lamp offerings with the Damodarastakam, the story of Krishna bound by love, and the month's holy days.",
-    image: "/images/festivals/kartik/link-preview.jpg",
-    href: "/festivals/kartik",
-    tag: "",
-    endsAt: "2027-11-14T23:59:59+03:00",
   },
 ];
 
