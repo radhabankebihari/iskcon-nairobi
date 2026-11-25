@@ -13,6 +13,12 @@ export const gitaJayanti2026 = {
   programme: "Complete recitation of the Bhagavad-gita, followed by prasadam",
   poster: "/images/gita-jayanti/gita-jayanti-2026-poster.webp",
   season: { showUntil: "2026-12-20T23:59:59+03:00" } satisfies Seasonal,
+  /** The verse printed on the official poster (its translation's typo corrected). */
+  verse: {
+    lines: ["śata-pustaka-dānaṁ ca gītāyāḥ prakaroti yaḥ", "sa yāti brahma-sadanaṁ punar-āvṛtti-durlabham"],
+    meaning: "One who makes a gift of one hundred Gitas attains the abode of the Lord, from where rebirth never occurs.",
+    source: "Śrī Vaiṣṇavīya-tantra-sāra",
+  },
 };
 
 /** Bhagavad-gita sponsorship, as printed on the official poster. Confirm with the temple before changing. */

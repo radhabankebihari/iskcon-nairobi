@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Baby, Bell, BookOpen, CalendarDays, Clock, Download, Gift, GraduationCap, HeartHandshake, Home, LibraryBig, MapPin, MessageCircle, Music, Users } from "lucide-react";
+import { ArrowRight, Baby, Bell, BookOpen, CalendarDays, Clock, Gift, GraduationCap, HeartHandshake, Home, LibraryBig, MessageCircle, Music, Users } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import { withSeo } from "@/lib/seo";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ButtonLink from "@/components/ui/ButtonLink";
-import SharePageButton from "@/components/ui/SharePageButton";
+import GitaJayantiFeature from "@/components/learn/GitaJayantiFeature";
 import { gitaJayanti2026, gitaSponsorship } from "@/data/gitaJayanti";
 import { isInSeason } from "@/lib/seasonalSlides";
 
@@ -131,82 +131,10 @@ const communityLearning: CommunityItem[] = [
   },
 ];
 
-/** A small lotus, drawn to echo the official poster's ornament. */
-function Lotus({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 32" aria-hidden="true" className={className}>
-      <path d="M32 2c5 6 6 14 0 24C26 16 27 8 32 2Z" fill="currentColor" />
-      <path d="M32 26c-4-8-11-13-20-14 2 8 9 14 20 14Z" fill="currentColor" opacity=".8" />
-      <path d="M32 26c4-8 11-13 20-14-2 8-9 14-20 14Z" fill="currentColor" opacity=".8" />
-      <path d="M32 27c-9-2-18-2-26 2 9 2 18 2 26-2Zm0 0c9-2 18-2 26 2-9 2-18 2-26-2Z" fill="currentColor" opacity=".55" />
-    </svg>
-  );
-}
-
-/**
- * Gita Jayanti: shown at the top of Learn until the celebration day ends.
- * Colour-only design taken from the temple's official poster: deep plum,
- * gold lettering on a plum ribbon, and a soft lavender-to-rose sky.
- */
-function GitaJayantiSection() {
-  const g = gitaJayanti2026;
-  return (
-    <section
-      id="gita-jayanti"
-      className="relative scroll-mt-24 overflow-hidden bg-[linear-gradient(180deg,#efe3f8_0%,#fbf6ff_45%,#f8e6f1_100%)] py-14 text-center sm:py-20"
-    >
-      {/* Soft glows standing in for the poster's clouds */}
-      <div aria-hidden="true" className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#d9c2f0]/60 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-[#f6c9df]/70 blur-3xl" />
-
-      <div className="content-width section-padding relative">
-        <Lotus className="mx-auto h-8 w-16 text-[#b5307a]" />
-        <p className="mt-3 font-editorial text-xl italic text-[#5a1760] sm:text-2xl">Advent of the Bhagavad-gita</p>
-
-        <h2 className="mx-auto mt-4 block w-fit max-w-full rounded-full border-2 border-[#e2b04a] bg-[linear-gradient(180deg,#6d1f74,#4a1150)] px-8 py-3 font-display text-[clamp(2.2rem,8vw,4.25rem)] font-semibold uppercase leading-none tracking-wide text-[#f6cf5f] shadow-[0_10px_30px_-12px_rgba(74,17,80,0.7)] sm:px-14 sm:py-4">
-          Gita Jayanti
-        </h2>
-
-        <p className="mx-auto mt-6 flex w-fit max-w-full items-center gap-3 rounded-full border border-[#e2b04a] bg-white px-6 py-2.5 font-body text-base font-bold uppercase tracking-wide text-[#4a1150] sm:text-lg">
-          <CalendarDays size={20} className="text-[#b5307a]" aria-hidden="true" />
-          {g.date}
-        </p>
-
-        <div className="mx-auto mt-5 max-w-2xl rounded-2xl border border-[#e2b04a]/70 bg-[linear-gradient(180deg,#6d1f74,#4a1150)] px-6 py-5 text-white sm:px-10">
-          <p className="font-body text-base leading-relaxed sm:text-lg">
-            Complete recitation of the Bhagavad-gita from{" "}
-            <span className="font-bold text-[#f6cf5f]">{g.startTime}</span>, followed by prasadam
-          </p>
-          <p className="mt-1 inline-flex items-center gap-1.5 font-body text-sm text-white/85">
-            <MapPin size={14} className="text-[#f6cf5f]" aria-hidden="true" /> ISKCON Nairobi, Hare Krishna Close
-          </p>
-        </div>
-
-        <p className="mx-auto mt-6 max-w-xl font-body text-sm leading-relaxed text-[#4a1150]/85 sm:text-base">
-          Gita Jayanti honours the day Lord Krishna spoke the Bhagavad-gita to Arjuna. Everyone is welcome to hear it
-          together.
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-          <a
-            href="#sponsor-a-gita"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#5a1760] px-7 font-body text-sm font-semibold text-white transition-colors hover:bg-[#3f0f45]"
-          >
-            <Gift size={16} aria-hidden="true" /> Sponsor a Gita
-          </a>
-          <a href={g.poster} download className="inline-flex min-h-11 items-center gap-2 font-body text-sm font-semibold text-[#5a1760] underline underline-offset-4 hover:text-[#3f0f45]">
-            <Download size={16} aria-hidden="true" /> Download the poster
-          </a>
-          <SharePageButton tone="light" title="Gita Jayanti at ISKCON Nairobi" text={`${g.date}, complete Bhagavad-gita recitation from ${g.startTime}`} label="Share" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /** Sponsor a Bhagavad-gita: shown all year, details from the official poster. */
 function SponsorGitaSection() {
   const s = gitaSponsorship;
+  const v = gitaJayanti2026.verse;
   return (
     <section id="sponsor-a-gita" className="scroll-mt-24 bg-white py-14 sm:py-20">
       <div className="content-width section-padding grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
@@ -226,17 +154,26 @@ function SponsorGitaSection() {
             Questions about sponsoring: <a href="tel:+254753419194" className="font-semibold text-primary underline underline-offset-4">0753 419 194</a>
           </p>
         </div>
-        <div className="flex items-center gap-5 border-t border-gold/40 py-8 lg:border-l lg:border-t-0 lg:pl-10">
-          <Gift size={36} className="shrink-0 text-primary" aria-hidden="true" />
-          <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">One book can begin a lifelong conversation.</p>
-        </div>
+        <figure className="border-t border-gold/40 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+          <Gift size={28} className="text-gold-dark" aria-hidden="true" />
+          <blockquote className="mt-4">
+            <p lang="sa-Latn" className="font-editorial text-lg italic leading-relaxed text-ink/80">
+              {v.lines.map((line) => (
+                <span key={line} className="block">{line}</span>
+              ))}
+            </p>
+            <p className="mt-4 font-display text-xl leading-snug text-ink sm:text-2xl">&ldquo;{v.meaning}&rdquo;</p>
+          </blockquote>
+          <figcaption className="mt-4 font-body text-xs font-semibold uppercase tracking-[0.14em] text-gold-ink">{v.source}</figcaption>
+        </figure>
       </div>
     </section>
   );
 }
 
 export default function LearnPage() {
-  const showGitaJayanti = isInSeason(gitaJayanti2026.season, renderedAt());
+  const now = renderedAt();
+  const showGitaJayanti = isInSeason(gitaJayanti2026.season, now);
   return (
     <>
       <PageHero
@@ -250,7 +187,9 @@ export default function LearnPage() {
         className="sm:min-h-[500px]"
       />
 
-      {showGitaJayanti && <GitaJayantiSection />}
+      {showGitaJayanti && <GitaJayantiFeature now={now} />}
+
+      <SponsorGitaSection />
 
       <section className="bg-temple-bg pt-section-sm pb-section">
         <div className="content-width section-padding">
@@ -347,8 +286,6 @@ export default function LearnPage() {
           </div>
         </div>
       </section>
-
-      <SponsorGitaSection />
 
       <section className="bg-temple-cream pt-8 pb-16">
         <div className="content-width section-padding">
