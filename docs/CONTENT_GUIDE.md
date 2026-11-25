@@ -25,7 +25,38 @@ If it only belongs to a page, keep it in that page.
    Radhashtami intentionally share a format.
 4. Add calendar and sitemap coverage if the route should be indexed.
 5. Prefer temple images or sacred artwork with clear subject positioning.
-6. Check the route at phone, tablet, and desktop widths before promotion.
+6. Follow `docs/RENDERING_RULES.md`: declare the hero photo's subject boxes,
+   and run `npm run test:screens` before promotion.
+
+## Adding A Seasonal Homepage Slide
+
+Seasonal slides (Kartik, Gita Jayanti and future festivals) appear on a date,
+often when nobody is watching, so check them before that date.
+
+1. Add the slide to `baseHeroImages` in
+   `src/components/sections/HeroSection.tsx` with `showFrom` and `showUntil`
+   in Nairobi time (`+03:00`).
+2. Supply two crops: a desktop image at least 2,400px wide and a phone image
+   at least 1,080px wide, composed so the subject sits clear of the text area
+   (rule R6 in `docs/RENDERING_RULES.md`).
+3. Mark the subject in both crops with `subject` and `mobileSubject`: the faces
+   of Deities and people, or the featured object, as
+   `"left top right bottom"` fractions of the image (rule R5).
+4. Build the site as if it were the first day of the slide, so the homepage
+   shows it, then run the screen guard:
+
+   ```powershell
+   $env:NODE_OPTIONS="--import=./scripts/fake-time.mjs"; $env:FAKE_NOW="2027-10-15T09:00:00+03:00"; npm run build
+   ```
+
+   ```powershell
+   Remove-Item Env:NODE_OPTIONS, Env:FAKE_NOW; npm run test:screens
+   ```
+
+   The guard clicks through every slide, so the new one is checked at all 17
+   screen sizes. Fix any new R5 or R6 entry before merging.
+5. Look at the slide yourself at 390x844, 844x390 and 1366x657.
+6. Rebuild without `FAKE_NOW` before deploying.
 
 ## Adding A Blog Article
 

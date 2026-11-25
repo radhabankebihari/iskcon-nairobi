@@ -204,6 +204,9 @@ important bar until the visitor scrolls up.
   Text over a photo still needs 4.5:1 contrast; the accessibility test checks
   it.
 - Record any new external image in `docs/ASSET_SOURCES.md`.
+- Seasonal homepage slides follow the checklist in `docs/CONTENT_GUIDE.md`
+  ("Adding A Seasonal Homepage Slide"), including a screen guard run on a
+  build dated to the slide's first day.
 
 ## 6. Before you merge a layout change
 
