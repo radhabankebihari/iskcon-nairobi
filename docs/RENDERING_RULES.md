@@ -50,8 +50,9 @@ Use only these thresholds. They are defined once in `src/app/globals.css`. Do
 not invent new pixel values for a single fix.
 
 **Width** (Tailwind defaults plus the existing 900px menu switch):
-`sm` 640, `md` 768, `lg` 1024, `xl` 1280, `2xl` 1536, and `max-[900px]` for
-the phone/desktop menu and hero-image switch.
+`sm` 640, `md` 768, `lg` 1024, `xl` 1280, `2xl` 1536, `max-[900px]` for
+the phone header and the hero-image switch, and `nav-full` 1360 for the full
+desktop menu (below it the menu button shows).
 
 **Height** (visible browser height):
 

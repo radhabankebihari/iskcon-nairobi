@@ -68,6 +68,10 @@
 /* The trouble zone found in the 2026 screen audit: a desktop-width screen
    that is short. Use this before reaching for one-off pixel fixes. */
 @custom-variant desk-short (@media (min-width: 1024px) and (max-height: 799.98px));
+/* The full desktop menu needs about 1,250px of content width. Below 1360 the
+   menu button shows instead (rule R2). Re-run the screen guard after adding a
+   menu link, and raise this only if R2 fails. */
+@custom-variant nav-full (@media (min-width: 1360px));
 
 :root {
   --site-header-height: 63px;
