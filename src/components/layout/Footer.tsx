@@ -139,7 +139,8 @@ export default function Footer() {
 
       <div className="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-      <div className="content-width section-padding pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+      {/* The bottom padding keeps the last line clear of the floating WhatsApp button (rule R9). */}
+      <div className="content-width section-padding pt-5 pb-[max(5.5rem,calc(env(safe-area-inset-bottom)+4.5rem))]">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-center font-body text-white/70 text-xs sm:text-left">
             © {new Date().getFullYear()} ISKCON Nairobi. All rights reserved.

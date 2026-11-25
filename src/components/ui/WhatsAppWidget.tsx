@@ -7,11 +7,31 @@ import { socialLinks } from "@/data/site";
 const whatsappLink = socialLinks.find((link) => link.name === "WhatsApp");
 
 export default function WhatsAppWidget() {
-  const [visible, setVisible] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [roomy, setRoomy] = useState(false);
+  // Below 1440px there is no empty margin beside the content, so the button
+  // would sit on the first screen's text. There it appears once the visitor
+  // starts scrolling (rule R9).
+  const visible = ready && (roomy || scrolled);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setVisible(true), 1200);
-    return () => window.clearTimeout(timer);
+    const wide = window.matchMedia("(min-width: 1440px)");
+    const update = () => {
+      setRoomy(wide.matches);
+      setScrolled(window.scrollY > 160);
+    };
+    const timer = window.setTimeout(() => {
+      update();
+      setReady(true);
+    }, 1200);
+    window.addEventListener("scroll", update, { passive: true });
+    wide.addEventListener("change", update);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", update);
+      wide.removeEventListener("change", update);
+    };
   }, []);
 
   if (!whatsappLink) {

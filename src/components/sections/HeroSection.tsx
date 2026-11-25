@@ -281,8 +281,8 @@ export default function HeroSection({ now }: { now: number }) {
               ))}
             </div>
 
-            {/* Scroll hint */}
-            <div className="flex flex-col items-center gap-2 text-white/70">
+            {/* Scroll hint, kept left of the floating WhatsApp button (rule R9) */}
+            <div className="mr-12 flex flex-col items-center gap-2 text-white/70 lg:mr-16">
               <span className="font-body text-xs tracking-[0.15em] uppercase">Scroll</span>
               <ArrowDown size={14} className="animate-bounce" />
             </div>
