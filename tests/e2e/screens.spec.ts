@@ -131,8 +131,13 @@ function measure(touch: boolean) {
   if (touch) for (const el of document.querySelectorAll("a[href], button, input, select, textarea, [role='button']")) {
     if (!shown(el)) continue;
     const r = el.getBoundingClientRect();
+    // `.tap-target` enlarges the touch area with an invisible ::after layer.
+    const after = getComputedStyle(el, "::after");
+    const extended = after.content !== "none" && after.position === "absolute";
+    const width = extended ? Math.max(r.width, parseFloat(after.width) || 0) : r.width;
+    const height = extended ? Math.max(r.height, parseFloat(after.height) || 0) : r.height;
     const inline = getComputedStyle(el).display === "inline" && el.closest("p");
-    if (!inline && (r.width < 24 || r.height < 24)) add("R8-small-tap-target", label(el));
+    if (!inline && (width < 24 || height < 24)) add("R8-small-tap-target", label(el));
   }
 
   // R9: floating buttons do not cover text or controls on the first screen.
@@ -165,7 +170,9 @@ async function settle(page: Page) {
     const pending = [...document.images].filter((img) => !img.complete && img.getBoundingClientRect().top < innerHeight);
     await Promise.all(pending.map((img) => new Promise((done) => { img.onload = img.onerror = done; setTimeout(done, 5000); })));
   });
-  await page.waitForTimeout(300);
+  // Floating buttons fade in after the page settles; measure their final state.
+  const sinceLoad = await page.evaluate(() => performance.now());
+  await page.waitForTimeout(Math.max(300, 1800 - sinceLoad));
 }
 
 for (const screen of screens) {
@@ -202,7 +209,13 @@ for (const screen of screens) {
           merge(await page.evaluate(measure, screen.touch));
         }
 
-        const counts: Counts = Object.fromEntries(Object.entries(problems).map(([rule, list]) => [rule, list.length] as const).sort());
+        // R9 also applies at the end of the page, where the footer meets floating buttons.
+        await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
+        await page.waitForTimeout(800);
+        const atEnd = (await page.evaluate(measure, screen.touch))["R9-floating-overlap"] ?? [];
+        if (atEnd.length) merge({ "R9-floating-overlap": atEnd.map((detail) => `page end: ${detail}`) });
+
+        const counts: Counts =Object.fromEntries(Object.entries(problems).map(([rule, list]) => [rule, list.length] as const).sort());
         const key = `${screen.name} ${route}`;
         // SCREENS_VERBOSE=1 prints every problem, to see what a baseline count stands for.
         if (process.env.SCREENS_VERBOSE) console.log(key, JSON.stringify(problems, null, 1));
