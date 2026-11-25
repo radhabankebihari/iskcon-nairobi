@@ -96,8 +96,14 @@ like a second menu button.
   extend downward if the section needs more height.
 - Mobile crops are allowed to differ from desktop crops when it preserves the
   subject.
+- Hero photos declare their subject boxes so the screen guard can keep text
+  off faces. See rule R5 in `docs/RENDERING_RULES.md`.
 
 ## Page Hero Rules
+
+Every hero must also follow the height behaviour tables in
+`docs/RENDERING_RULES.md`: headlines below the header, main buttons on the
+first screen, and sizing by screen height as well as width.
 
 - Homepage hero: text stays low, CTAs close to the scroll hint, and no visible
   logo repetition inside the hero.

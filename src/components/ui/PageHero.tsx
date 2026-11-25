@@ -16,6 +16,12 @@ interface PageHeroProps {
   /** Override the standard image shade when a particular photo needs more light. */
   imageOverlayClassName?: string;
   /**
+   * Where the photo's subject (faces, Deities, Srila Prabhupada) sits, as
+   * "left top right bottom" fractions of the image, comma-separated for several.
+   * The screen guard fails if the heading covers it (docs/RENDERING_RULES.md, R5).
+   */
+  imageSubject?: string;
+  /**
    * "photo" is the full image hero. "compact" is a short band without an image,
    * for practical pages such as Contact and individual donation funds.
    */
@@ -39,6 +45,7 @@ export default function PageHero({
   imageAlt = "",
   imageClassName = "",
   imageOverlayClassName = "bg-gradient-to-b from-black/50 via-black/40 to-black/70",
+  imageSubject,
   variant = "photo",
   facts,
   height = "md",
@@ -62,7 +69,7 @@ export default function PageHero({
     >
       {!compact && image && (
         <>
-          <Image src={image} alt={imageAlt} fill sizes="100vw" loading="eager" fetchPriority="high" className={`object-cover ${imageClassName}`} />
+          <Image src={image} alt={imageAlt} fill sizes="100vw" loading="eager" fetchPriority="high" className={`object-cover ${imageClassName}`} data-subject={imageSubject} />
           <div className={`absolute inset-0 ${imageOverlayClassName}`} />
           {align === "left" && <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />}
         </>

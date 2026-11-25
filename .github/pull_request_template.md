@@ -24,10 +24,17 @@ Describe what changed and why.
 
 ## Visual review
 
-- [ ] Mobile: 360px and 390px widths
-- [ ] Tablet: 768px width
-- [ ] Desktop: 1280px and 1440px widths
+See `docs/RENDERING_RULES.md`. Sizes are the visible browser area.
+
+- [ ] `npm run test:e2e` passes (includes the screen guard at the ci sizes)
+- [ ] `npm run test:screens` passes if a hero, the header, a full-screen layout, a floating element, or global spacing changed
+- [ ] `tests/e2e/screens-baseline.json` only lost entries or lowered counts
+- [ ] Phones: 360x740 and 390x844, plus 844x390 held sideways
+- [ ] Tablet: 768x1024 and 1024x768
+- [ ] Short laptops: 1280x650 and 1366x657
+- [ ] Desktop: 1920x960
 - [ ] Text does not overlap, clip, overflow, or sit beneath fixed navigation
+- [ ] New hero photos declare their subject boxes, and text stays off faces
 - [ ] Images preserve important subjects and load without layout shift
 - [ ] Keyboard navigation, focus states, headings, labels, contrast, and alternative text were checked
 

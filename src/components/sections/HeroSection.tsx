@@ -30,6 +30,15 @@ type HeroImage = {
   showFrom?: string;
   /** ... until the end of this moment. Undated slides always show. */
   showUntil?: string;
+  /**
+   * Where the subject (Deities' faces, the book) sits in `src`, as boxes of
+   * "left top right bottom" fractions, comma-separated. Required for any photo of
+   * Deities, people or a featured object: the screen guard fails if hero text
+   * covers these boxes or the crop cuts them off (docs/RENDERING_RULES.md, R5).
+   */
+  subject?: string;
+  /** The same for `mobileSrc`. */
+  mobileSubject?: string;
 };
 
 
@@ -49,6 +58,8 @@ const baseHeroImages: HeroImage[] = [
     ],
     durationMs: 10000,
     showUntil: "2026-11-24T23:59:59+03:00",
+    subject: "0.63 0.19 0.70 0.37, 0.78 0.26 0.86 0.41",
+    mobileSubject: "0.38 0.205 0.50 0.30, 0.60 0.24 0.73 0.335",
   },
   {
     src: "/images/hero-radha-bankebihari-official-raised-desktop.webp",
@@ -56,6 +67,8 @@ const baseHeroImages: HeroImage[] = [
     alt: "Sri Sri Radha Bankebihari in blue and gold attire at ISKCON Nairobi",
     position: "center center",
     mobilePosition: "center top",
+    subject: "0.27 0.38 0.395 0.61, 0.645 0.565 0.765 0.76",
+    mobileSubject: "0.26 0.21 0.39 0.295, 0.64 0.275 0.76 0.365",
     eyebrow: "Sri Sri Radha Bankebihari Temple",
     tagline: "Faith.\u2002Community.\u2002Service.",
     description:
@@ -71,6 +84,8 @@ const baseHeroImages: HeroImage[] = [
     alt: "Bhagavad-gita As It Is displayed inside the temple",
     position: "center center",
     mobilePosition: "center center",
+    subject: "0.54 0.14 0.825 0.87",
+    mobileSubject: "0.29 0.15 0.75 0.535",
     eyebrow: "Gita Jayanti · Sunday 20 December",
     tagline: "The song of God, for daily life.",
     description:
@@ -105,9 +120,15 @@ function HeroPicture({ image, isFirst }: { image: HeroImage; isFirst: boolean })
     "--hero-mobile-position": image.mobilePosition ?? image.position,
   } as CSSProperties;
   const className = "hero-bg-image object-cover";
+  // Read by the screen guard (tests/e2e/screens.spec.ts, rule R5).
+  const subject = {
+    "data-subject": image.subject,
+    "data-subject-alt": image.mobileSrc ? image.mobileSubject : undefined,
+    "data-subject-alt-media": image.mobileSrc && image.mobileSubject ? "(max-width: 900px)" : undefined,
+  };
 
   if (!image.mobileSrc) {
-    return <Image src={image.src} alt={image.alt} fill sizes="100vw" loading={isFirst ? "eager" : "lazy"} fetchPriority={isFirst ? "high" : "auto"} className={className} style={style} />;
+    return <Image src={image.src} alt={image.alt} fill sizes="100vw" loading={isFirst ? "eager" : "lazy"} fetchPriority={isFirst ? "high" : "auto"} className={className} style={style} {...subject} />;
   }
 
   // Art direction: phones get a separately composed hero image.
@@ -118,7 +139,7 @@ function HeroPicture({ image, isFirst }: { image: HeroImage; isFirst: boolean })
   return (
     <picture className="contents">
       <source media="(max-width: 900px)" srcSet={mobile.srcSet} sizes="100vw" />
-      <img {...desktop} alt={image.alt} className={className} style={{ ...desktop.style, ...style }} />
+      <img {...desktop} alt={image.alt} className={className} style={{ ...desktop.style, ...style }} {...subject} />
     </picture>
   );
 }

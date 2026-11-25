@@ -41,6 +41,34 @@
   --color-ink: var(--color-dusk);
 }
 
+/* Screen height and shape variants. These are the only height and shape
+   thresholds the site uses; docs/RENDERING_RULES.md says when each applies.
+   In Tailwind classes: `max-ht-md:pt-24`, `desk-short:text-4xl`. In plain CSS
+   files, repeat the same numbers exactly (for example max-height: 699.98px).
+
+   Height bands (visible browser height):
+     xs  under 520   phones held sideways
+     sm  520-699     short laptops: 1280x650, 1366x657
+     md  700-859     most laptops: 1440x760, 1536x730, 1280x800
+     lg  860-1079    desktop monitors
+     xl  1080 and up very tall screens: large monitors, tablets in portrait */
+@custom-variant ht-sm (@media (min-height: 520px));
+@custom-variant ht-md (@media (min-height: 700px));
+@custom-variant ht-lg (@media (min-height: 860px));
+@custom-variant ht-xl (@media (min-height: 1080px));
+@custom-variant max-ht-sm (@media (max-height: 519.98px));
+@custom-variant max-ht-md (@media (max-height: 699.98px));
+@custom-variant max-ht-lg (@media (max-height: 859.98px));
+@custom-variant max-ht-xl (@media (max-height: 1079.98px));
+/* Shapes, by width divided by height. Laptop browsers are usually ultrawide
+   (about 2:1), which is where a photo cropped for a 16:9 monitor goes wrong. */
+@custom-variant shape-tall (@media (max-aspect-ratio: 4/5));
+@custom-variant shape-wide (@media (min-aspect-ratio: 4/3));
+@custom-variant shape-ultrawide (@media (min-aspect-ratio: 17/9));
+/* The trouble zone found in the 2026 screen audit: a desktop-width screen
+   that is short. Use this before reaching for one-off pixel fixes. */
+@custom-variant desk-short (@media (min-width: 1024px) and (max-height: 799.98px));
+
 :root {
   --site-header-height: 63px;
   --site-solid-header-height: 63px;

@@ -37,7 +37,7 @@ server.err.log
 
 # local workspace tooling
 .agents/
-CLAUDE.md
+# CLAUDE.md is tracked: it imports AGENTS.md so Claude follows the shared rules.
 .claude/
 
 # env files (can opt-in for committing if needed)

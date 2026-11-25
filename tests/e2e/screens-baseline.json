@@ -1,0 +1,1545 @@
+{
+  "desktop-fhd /": {
+    "R6-image-too-small": 5
+  },
+  "desktop-fhd /blog": {
+    "R6-image-too-small": 2
+  },
+  "desktop-fhd /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2
+  },
+  "desktop-fhd /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /festivals": {
+    "R6-image-too-small": 3
+  },
+  "desktop-fhd /festivals/gaura-purnima": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /festivals/janmashtami": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /festivals/kartik": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /festivals/radhashtami": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /leadership": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /learn": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /projects/thika-farm": {
+    "R6-image-too-small": 2
+  },
+  "desktop-fhd /serve": {
+    "R6-image-too-small": 1
+  },
+  "desktop-fhd /srila-prabhupada": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /": {
+    "R5-subject-cropped": 1,
+    "R6-image-too-small": 9
+  },
+  "desktop-qhd /about": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /blog": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /donate": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /festivals": {
+    "R6-image-too-small": 3
+  },
+  "desktop-qhd /festivals/gaura-purnima": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /festivals/janmashtami": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /festivals/kartik": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /festivals/radhashtami": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /guest-house": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /leadership": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /learn": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /media": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /projects": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /projects/food-for-life": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /projects/hktc-juja": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /projects/hktc-nairobi": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /projects/hktc-nairobi/apply": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /projects/thika-farm": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /serve": {
+    "R6-image-too-small": 1
+  },
+  "desktop-qhd /srila-prabhupada": {
+    "R6-image-too-small": 2
+  },
+  "desktop-qhd /visit": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 5
+  },
+  "laptop-125 /blog": {
+    "R6-image-too-small": 2
+  },
+  "laptop-125 /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2
+  },
+  "laptop-125 /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /festivals": {
+    "R6-image-too-small": 3
+  },
+  "laptop-125 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /festivals/janmashtami": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /festivals/kartik": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /festivals/kirtan-safari": {
+    "R3-headline-under-header": 1
+  },
+  "laptop-125 /festivals/radhashtami": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /leadership": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /learn": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /projects/thika-farm": {
+    "R6-image-too-small": 2
+  },
+  "laptop-125 /serve": {
+    "R6-image-too-small": 1
+  },
+  "laptop-125 /srila-prabhupada": {
+    "R6-image-too-small": 2
+  },
+  "laptop-1280x800 /": {
+    "R2-header-fit": 1,
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 6,
+    "R9-floating-overlap": 1
+  },
+  "laptop-1280x800 /about": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /blog": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 2
+  },
+  "laptop-1280x800 /blog/jharikhanda-forest-kirtan-safari": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 2
+  },
+  "laptop-1280x800 /blog/sri-nama-sankirtana-adhivasa": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /contact": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /donate": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /donate/general": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /festivals": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 3
+  },
+  "laptop-1280x800 /festivals/gaura-purnima": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /festivals/janmashtami": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /festivals/kartik": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /festivals/kirtan-safari": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /festivals/radhashtami": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /guest-house": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /leadership": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 4
+  },
+  "laptop-1280x800 /learn": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /media": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /offline": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /privacy": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /projects": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 4
+  },
+  "laptop-1280x800 /projects/food-for-life": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /projects/hktc-juja": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /projects/hktc-nairobi": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 3
+  },
+  "laptop-1280x800 /projects/hktc-nairobi/apply": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /projects/thika-farm": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 8
+  },
+  "laptop-1280x800 /serve": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-1280x800 /srila-prabhupada": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 2
+  },
+  "laptop-1280x800 /terms": {
+    "R2-header-fit": 1
+  },
+  "laptop-1280x800 /visit": {
+    "R2-header-fit": 1
+  },
+  "laptop-1366 /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 5,
+    "R9-floating-overlap": 1
+  },
+  "laptop-1366 /blog": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2
+  },
+  "laptop-1366 /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /festivals": {
+    "R6-image-too-small": 3
+  },
+  "laptop-1366 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /festivals/janmashtami": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /festivals/kartik": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /festivals/kirtan-safari": {
+    "R3-headline-under-header": 1
+  },
+  "laptop-1366 /festivals/radhashtami": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /leadership": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /learn": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /projects": {
+    "R6-image-too-small": 3
+  },
+  "laptop-1366 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /projects/thika-farm": {
+    "R6-image-too-small": 7
+  },
+  "laptop-1366 /serve": {
+    "R6-image-too-small": 1
+  },
+  "laptop-1366 /srila-prabhupada": {
+    "R6-image-too-small": 2
+  },
+  "laptop-150 /": {
+    "R2-header-fit": 1,
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 5,
+    "R9-floating-overlap": 1
+  },
+  "laptop-150 /about": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /blog": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 2
+  },
+  "laptop-150 /blog/jharikhanda-forest-kirtan-safari": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 2
+  },
+  "laptop-150 /blog/sri-nama-sankirtana-adhivasa": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /contact": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /donate": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /donate/general": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /festivals": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 3
+  },
+  "laptop-150 /festivals/gaura-purnima": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /festivals/janmashtami": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /festivals/kartik": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /festivals/kirtan-safari": {
+    "R2-header-fit": 1,
+    "R3-headline-under-header": 1
+  },
+  "laptop-150 /festivals/radhashtami": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /guest-house": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /leadership": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 4
+  },
+  "laptop-150 /learn": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /media": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /offline": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /privacy": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /projects": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 4
+  },
+  "laptop-150 /projects/food-for-life": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /projects/hktc-juja": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /projects/hktc-nairobi": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 3
+  },
+  "laptop-150 /projects/hktc-nairobi/apply": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /projects/thika-farm": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 8
+  },
+  "laptop-150 /serve": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 1
+  },
+  "laptop-150 /srila-prabhupada": {
+    "R2-header-fit": 1,
+    "R6-image-too-small": 2
+  },
+  "laptop-150 /terms": {
+    "R2-header-fit": 1
+  },
+  "laptop-150 /visit": {
+    "R2-header-fit": 1
+  },
+  "macbook-air /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 5
+  },
+  "macbook-air /blog": {
+    "R6-image-too-small": 2
+  },
+  "macbook-air /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2
+  },
+  "macbook-air /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /festivals": {
+    "R6-image-too-small": 3
+  },
+  "macbook-air /festivals/gaura-purnima": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /festivals/janmashtami": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /festivals/kartik": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /festivals/radhashtami": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /leadership": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /learn": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /projects/hktc-nairobi": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /projects/thika-farm": {
+    "R6-image-too-small": 2
+  },
+  "macbook-air /serve": {
+    "R6-image-too-small": 1
+  },
+  "macbook-air /srila-prabhupada": {
+    "R6-image-too-small": 2
+  },
+  "phone-360 /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 26,
+    "R9-floating-overlap": 1
+  },
+  "phone-360 /about": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 33,
+    "R9-floating-overlap": 1
+  },
+  "phone-360 /blog": {
+    "R8-small-tap-target": 22
+  },
+  "phone-360 /blog/jharikhanda-forest-kirtan-safari": {
+    "R8-small-tap-target": 31
+  },
+  "phone-360 /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-360 /contact": {
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /donate": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "phone-360 /festivals": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /festivals/janmashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /festivals/kartik": {
+    "R4-action-below-first-screen": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-360 /festivals/kirtan-safari": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-360 /festivals/radhashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /guest-house": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /leadership": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /learn": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-360 /media": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 24
+  },
+  "phone-360 /offline": {
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /privacy": {
+    "R8-small-tap-target": 35
+  },
+  "phone-360 /projects": {
+    "R6-image-too-small": 5,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /projects/food-for-life": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /projects/hktc-juja": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 27
+  },
+  "phone-360 /projects/hktc-nairobi/apply": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /projects/thika-farm": {
+    "R6-image-too-small": 6,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /serve": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-360 /terms": {
+    "R8-small-tap-target": 35
+  },
+  "phone-360 /visit": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 26,
+    "R9-floating-overlap": 2
+  },
+  "phone-390 /about": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 33,
+    "R9-floating-overlap": 2
+  },
+  "phone-390 /blog": {
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /blog/jharikhanda-forest-kirtan-safari": {
+    "R8-small-tap-target": 31
+  },
+  "phone-390 /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /contact": {
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /donate": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /festivals": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /festivals/janmashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /festivals/kartik": {
+    "R4-action-below-first-screen": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /festivals/kirtan-safari": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /festivals/radhashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /guest-house": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /leadership": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /learn": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-390 /media": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 24
+  },
+  "phone-390 /offline": {
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /privacy": {
+    "R8-small-tap-target": 36
+  },
+  "phone-390 /projects": {
+    "R6-image-too-small": 5,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /projects/food-for-life": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /projects/hktc-juja": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 27
+  },
+  "phone-390 /projects/hktc-nairobi/apply": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /projects/thika-farm": {
+    "R6-image-too-small": 6,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /serve": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-390 /terms": {
+    "R8-small-tap-target": 38
+  },
+  "phone-390 /visit": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 26,
+    "R9-floating-overlap": 2
+  },
+  "phone-430 /about": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 34,
+    "R9-floating-overlap": 1
+  },
+  "phone-430 /blog": {
+    "R8-small-tap-target": 22
+  },
+  "phone-430 /blog/jharikhanda-forest-kirtan-safari": {
+    "R8-small-tap-target": 31
+  },
+  "phone-430 /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-430 /contact": {
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /donate": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "phone-430 /festivals": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-430 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /festivals/janmashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /festivals/kartik": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 23
+  },
+  "phone-430 /festivals/kirtan-safari": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-430 /festivals/radhashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /guest-house": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /leadership": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /learn": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-430 /media": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 24
+  },
+  "phone-430 /offline": {
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /privacy": {
+    "R8-small-tap-target": 36
+  },
+  "phone-430 /projects": {
+    "R6-image-too-small": 5,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /projects/food-for-life": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /projects/hktc-juja": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 27
+  },
+  "phone-430 /projects/hktc-nairobi/apply": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /projects/thika-farm": {
+    "R6-image-too-small": 6,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /serve": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-430 /terms": {
+    "R8-small-tap-target": 44
+  },
+  "phone-430 /visit": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /": {
+    "R5-subject-cropped": 3,
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 26,
+    "R9-floating-overlap": 1
+  },
+  "phone-landscape /about": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 34,
+    "R9-floating-overlap": 1
+  },
+  "phone-landscape /blog": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 22
+  },
+  "phone-landscape /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 31
+  },
+  "phone-landscape /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-landscape /contact": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /donate": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "phone-landscape /festivals": {
+    "R8-small-tap-target": 22
+  },
+  "phone-landscape /festivals/gaura-purnima": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /festivals/janmashtami": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /festivals/kartik": {
+    "R4-action-below-first-screen": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 23
+  },
+  "phone-landscape /festivals/kirtan-safari": {
+    "R3-headline-under-header": 1,
+    "R8-small-tap-target": 22
+  },
+  "phone-landscape /festivals/radhashtami": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /guest-house": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /leadership": {
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /learn": {
+    "R8-small-tap-target": 22
+  },
+  "phone-landscape /media": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 24
+  },
+  "phone-landscape /offline": {
+    "R4-action-below-first-screen": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /privacy": {
+    "R8-small-tap-target": 36
+  },
+  "phone-landscape /projects": {
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /projects/food-for-life": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /projects/hktc-juja": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /projects/hktc-nairobi": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 27
+  },
+  "phone-landscape /projects/hktc-nairobi/apply": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /projects/thika-farm": {
+    "R6-image-too-small": 11,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /serve": {
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /srila-prabhupada": {
+    "R4-action-below-first-screen": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "phone-landscape /terms": {
+    "R8-small-tap-target": 44
+  },
+  "phone-landscape /visit": {
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /": {
+    "R5-subject-covered": 2,
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 26,
+    "R9-floating-overlap": 2
+  },
+  "reflow-320 /about": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 33,
+    "R9-floating-overlap": 2
+  },
+  "reflow-320 /blog": {
+    "R8-small-tap-target": 22
+  },
+  "reflow-320 /blog/jharikhanda-forest-kirtan-safari": {
+    "R8-small-tap-target": 31
+  },
+  "reflow-320 /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "reflow-320 /contact": {
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /donate": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "reflow-320 /festivals": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /festivals/janmashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /festivals/kartik": {
+    "R4-action-below-first-screen": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "reflow-320 /festivals/kirtan-safari": {
+    "R3-headline-under-header": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "reflow-320 /festivals/radhashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /guest-house": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /leadership": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /learn": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "reflow-320 /media": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 24
+  },
+  "reflow-320 /offline": {
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /privacy": {
+    "R8-small-tap-target": 33
+  },
+  "reflow-320 /projects": {
+    "R6-image-too-small": 5,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /projects/food-for-life": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /projects/hktc-juja": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 27
+  },
+  "reflow-320 /projects/hktc-nairobi/apply": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /projects/thika-farm": {
+    "R6-image-too-small": 6,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /serve": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /srila-prabhupada": {
+    "R4-action-below-first-screen": 1,
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "reflow-320 /terms": {
+    "R8-small-tap-target": 32
+  },
+  "reflow-320 /visit": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 26
+  },
+  "tablet-768 /about": {
+    "R8-small-tap-target": 33
+  },
+  "tablet-768 /blog": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-768 /blog/jharikhanda-forest-kirtan-safari": {
+    "R8-small-tap-target": 31
+  },
+  "tablet-768 /blog/sri-nama-sankirtana-adhivasa": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-768 /contact": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /donate": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-768 /festivals": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-768 /festivals/gaura-purnima": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /festivals/janmashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /festivals/kartik": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 23
+  },
+  "tablet-768 /festivals/kirtan-safari": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-768 /festivals/radhashtami": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /guest-house": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /leadership": {
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /learn": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-768 /media": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 24
+  },
+  "tablet-768 /offline": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /privacy": {
+    "R8-small-tap-target": 36
+  },
+  "tablet-768 /projects": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /projects/food-for-life": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /projects/hktc-juja": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /projects/hktc-nairobi": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 27
+  },
+  "tablet-768 /projects/hktc-nairobi/apply": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /projects/thika-farm": {
+    "R6-image-too-small": 12,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /serve": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-768 /terms": {
+    "R8-small-tap-target": 42
+  },
+  "tablet-768 /visit": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 7,
+    "R8-small-tap-target": 26,
+    "R9-floating-overlap": 1
+  },
+  "tablet-air-landscape /about": {
+    "R8-small-tap-target": 34
+  },
+  "tablet-air-landscape /blog": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 22
+  },
+  "tablet-air-landscape /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 31
+  },
+  "tablet-air-landscape /blog/sri-nama-sankirtana-adhivasa": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-air-landscape /contact": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /donate": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /donate/general": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-air-landscape /festivals": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 22
+  },
+  "tablet-air-landscape /festivals/gaura-purnima": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /festivals/janmashtami": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /festivals/kartik": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 23
+  },
+  "tablet-air-landscape /festivals/kirtan-safari": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-air-landscape /festivals/radhashtami": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /guest-house": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /leadership": {
+    "R6-image-too-small": 6,
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /learn": {
+    "R8-small-tap-target": 22
+  },
+  "tablet-air-landscape /media": {
+    "R6-image-too-small": 22,
+    "R8-small-tap-target": 24
+  },
+  "tablet-air-landscape /offline": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /privacy": {
+    "R8-small-tap-target": 36
+  },
+  "tablet-air-landscape /projects": {
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /projects/food-for-life": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /projects/hktc-juja": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /projects/hktc-nairobi": {
+    "R6-image-too-small": 3,
+    "R8-small-tap-target": 27
+  },
+  "tablet-air-landscape /projects/hktc-nairobi/apply": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /projects/thika-farm": {
+    "R6-image-too-small": 6,
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /serve": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 21
+  },
+  "tablet-air-landscape /terms": {
+    "R8-small-tap-target": 44
+  },
+  "tablet-air-landscape /visit": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /": {
+    "R5-subject-covered": 1,
+    "R6-image-too-small": 5,
+    "R8-small-tap-target": 25,
+    "R9-floating-overlap": 1
+  },
+  "tablet-landscape /about": {
+    "R8-small-tap-target": 32
+  },
+  "tablet-landscape /blog": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 30
+  },
+  "tablet-landscape /blog/sri-nama-sankirtana-adhivasa": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /contact": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /donate": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /donate/general": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /festivals": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /festivals/gaura-purnima": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /festivals/janmashtami": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /festivals/kartik": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "tablet-landscape /festivals/kirtan-safari": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /festivals/radhashtami": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /guest-house": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /leadership": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /learn": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-landscape /media": {
+    "R8-small-tap-target": 23
+  },
+  "tablet-landscape /offline": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /privacy": {
+    "R8-small-tap-target": 35
+  },
+  "tablet-landscape /projects": {
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /projects/food-for-life": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /projects/hktc-juja": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /projects/hktc-nairobi": {
+    "R8-small-tap-target": 26
+  },
+  "tablet-landscape /projects/hktc-nairobi/apply": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /projects/thika-farm": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /serve": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-landscape /terms": {
+    "R8-small-tap-target": 43
+  },
+  "tablet-landscape /visit": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /": {
+    "R6-image-too-small": 5,
+    "R8-small-tap-target": 25,
+    "R9-floating-overlap": 1
+  },
+  "tablet-pro /about": {
+    "R8-small-tap-target": 32
+  },
+  "tablet-pro /blog": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 21
+  },
+  "tablet-pro /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 30
+  },
+  "tablet-pro /blog/sri-nama-sankirtana-adhivasa": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-pro /contact": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /donate": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /donate/general": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-pro /festivals": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-pro /festivals/gaura-purnima": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /festivals/janmashtami": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /festivals/kartik": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 22
+  },
+  "tablet-pro /festivals/kirtan-safari": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-pro /festivals/radhashtami": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /guest-house": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /leadership": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /learn": {
+    "R8-small-tap-target": 21
+  },
+  "tablet-pro /media": {
+    "R8-small-tap-target": 23
+  },
+  "tablet-pro /offline": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /privacy": {
+    "R8-small-tap-target": 35
+  },
+  "tablet-pro /projects": {
+    "R6-image-too-small": 4,
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /projects/food-for-life": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /projects/hktc-juja": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /projects/hktc-nairobi": {
+    "R8-small-tap-target": 26
+  },
+  "tablet-pro /projects/hktc-nairobi/apply": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /projects/thika-farm": {
+    "R6-image-too-small": 2,
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /serve": {
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /srila-prabhupada": {
+    "R6-image-too-small": 1,
+    "R8-small-tap-target": 20
+  },
+  "tablet-pro /terms": {
+    "R8-small-tap-target": 43
+  },
+  "tablet-pro /visit": {
+    "R8-small-tap-target": 20
+  },
+  "ultrawide /": {
+    "R5-subject-covered": 1,
+    "R5-subject-cropped": 1,
+    "R6-image-too-small": 9
+  },
+  "ultrawide /about": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /blog": {
+    "R6-image-too-small": 2
+  },
+  "ultrawide /blog/jharikhanda-forest-kirtan-safari": {
+    "R6-image-too-small": 2
+  },
+  "ultrawide /blog/sri-nama-sankirtana-adhivasa": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /donate": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /festivals": {
+    "R6-image-too-small": 3
+  },
+  "ultrawide /festivals/gaura-purnima": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /festivals/janmashtami": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /festivals/kartik": {
+    "R6-image-too-small": 2
+  },
+  "ultrawide /festivals/radhashtami": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /guest-house": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /leadership": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /learn": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /media": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /projects": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /projects/food-for-life": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /projects/hktc-juja": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /projects/hktc-nairobi": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /projects/hktc-nairobi/apply": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /projects/thika-farm": {
+    "R6-image-too-small": 2
+  },
+  "ultrawide /serve": {
+    "R6-image-too-small": 1
+  },
+  "ultrawide /srila-prabhupada": {
+    "R6-image-too-small": 2
+  },
+  "ultrawide /visit": {
+    "R6-image-too-small": 1
+  }
+}
