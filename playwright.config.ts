@@ -47,6 +47,13 @@ export default defineConfig({
       grep: /@visual/,
       use: { viewport: { width: 812, height: 375 }, isMobile: true, hasTouch: true },
     },
+    // The most common laptop: short for its width, where layouts break first
+    // (docs/RENDERING_RULES.md).
+    {
+      name: "laptop",
+      grep: /@visual/,
+      use: { viewport: { width: 1366, height: 657 } },
+    },
   ],
   webServer: {
     // Tests run the production build, so analytics must be switched off explicitly.
