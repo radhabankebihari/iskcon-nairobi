@@ -61,7 +61,7 @@ export default function KirtanSafariFutureInterestForm() {
         label>span { color:#67544a; font:800 0.75rem/1 var(--font-body,sans-serif); letter-spacing:.12em; text-transform:uppercase; }
         input { background:#fffdf8; border:1px solid rgba(67,48,39,.22); color:#30231d; font:500 .9rem/1.3 var(--font-body,sans-serif); min-height:46px; padding:.75rem; width:100%; }
         .ks-interest-consent { align-items:flex-start; display:flex; gap:.65rem; grid-column:1/-1; }
-        .ks-interest-consent input { accent-color:var(--color-festival-red); flex:none; min-height:0; width:1rem; }
+        .ks-interest-consent input { accent-color:var(--color-festival-red); flex:none; min-height:0; width:1.5rem; height:1.5rem; }
         .ks-interest-consent span { font-size:0.75rem; line-height:1.45; text-transform:none; }
         .ks-interest-honeypot { left:-9999px; position:absolute; }
         button { background:var(--color-festival-red); border:0; color:white; cursor:pointer; font:800 0.75rem/1 var(--font-body,sans-serif); letter-spacing:.13em; margin-top:1rem; min-height:46px; padding:.9rem 1.2rem; text-transform:uppercase; }
