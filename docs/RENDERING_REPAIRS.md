@@ -12,25 +12,25 @@ when you start and when you finish.
 
 | ID | Task | Priority | Size | Status | Branch / notes |
 | --- | --- | --- | --- | --- | --- |
-| G1-G6 | Guardrails: rules, variants, screen guard, baseline, agent pointers | Done first | M | Done in `rendering/guardrails` | Not yet merged |
+| G1-G6 | Guardrails: rules, variants, screen guard, baseline, agent pointers | Done first | M | Done | `rendering/guardrails`, 26 Nov 2026; ships with Release A |
 | RR-01 | Homepage hero: text off the Deities on laptops | Critical | L | To do | Needs a wide crop, see step 1 |
-| RR-02 | Header fits at 1280 to 1359px | Critical | S | To do | |
-| RR-03 | Kirtan Safari headline below the header | Critical | S | To do | |
+| RR-02 | Header fits at 1280 to 1359px | Critical | S | Done | `rendering/release-a`, 26 Nov 2026: full menu from 1360px (`nav-full`); R2 at 0 |
+| RR-03 | Kirtan Safari headline below the header | Critical | S | Done | `rendering/release-a`, 26 Nov 2026: both heroes reserve the header; R3 at 0 |
 | RR-04 | Compact header on short desktop screens | High | M | To do | After RR-02 |
 | RR-05 | Page heroes sized by height too | High | M | To do | After RR-04 |
 | RR-06 | Festival heroes: buttons on the first screen | High | S | To do | After RR-05 |
-| RR-07 | WhatsApp button clear of content | Medium | S | To do | |
+| RR-07 | WhatsApp button clear of content | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: appears on scroll below 1440px; footer padding; R9 at 0 |
 | RR-08 | Replace or reframe low-resolution photos | High | M | Waiting on photos | Owner to request originals |
-| RR-09 | Tap targets of at least 24px | Medium | S | To do | |
+| RR-09 | Tap targets of at least 24px | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: guard counts `.tap-target`; 5 links fixed; R8 at 0 |
 | RR-10 | Subject boxes for every hero photo | High | M | To do | After RR-01 |
 | RR-11 | Shared art-directed image component | Medium | L | To do | After RR-01 and RR-10 |
 | RR-12 | Large and ultra-wide monitors | Low | M | To do | Owner reviews visually |
-| RR-13 | Safari (WebKit) in the screen guard | Medium | M | To do | |
-| RR-14 | Screenshot comparisons at laptop sizes | Medium | S | To do | |
-| RR-15 | Seasonal slide checklist | High | S | To do | Before the next seasonal slide |
+| RR-13 | Safari (WebKit) in the screen guard | Medium | M | Waiting | Needs the WebKit browser download approved |
+| RR-14 | Screenshot comparisons at laptop sizes | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: `laptop` visual project at 1366x657 |
+| RR-15 | Seasonal slide checklist | High | S | Done | `rendering/release-a`, 26 Nov 2026: CONTENT_GUIDE checklist and `scripts/fake-time.mjs` |
 | RR-16 | Cards that size to their column | Low | L | Later | |
 
-Status values: To do, In progress, In review, Done, Waiting on photos, Later.
+Status values: To do, In progress, In review, Done, Waiting, Waiting on photos, Later.
 
 ## Guardrails (done in the first change)
 

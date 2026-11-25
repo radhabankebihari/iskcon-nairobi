@@ -37,6 +37,9 @@ function measure(touch: boolean) {
 
   const shown = (el: Element) => {
     if (el.closest("[inert], [aria-hidden='true']")) return false;
+    // A closed <details> keeps its hidden content laid out, but nobody can see it.
+    const closed = el.closest("details:not([open])");
+    if (closed && !el.closest("summary") && el !== closed) return false;
     const r = el.getBoundingClientRect();
     if (r.width <= 2 || r.height <= 2) return false;
     for (let n: Element | null = el; n; n = n.parentElement) {
@@ -210,8 +213,18 @@ for (const screen of screens) {
         }
 
         // R9 also applies at the end of the page, where the footer meets floating buttons.
-        await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
-        await page.waitForTimeout(800);
+        // Pages can grow once scrolled (bars appear), so repeat until the bottom holds.
+        for (let i = 0; i < 4; i++) {
+          const atBottom = await page.evaluate(() => {
+            const end = document.documentElement.scrollHeight - innerHeight;
+            const done = Math.abs(scrollY - end) < 2;
+            window.scrollTo({ top: end, behavior: "instant" });
+            return done;
+          });
+          await page.waitForTimeout(400);
+          if (atBottom) break;
+        }
+        await page.waitForTimeout(400);
         const atEnd = (await page.evaluate(measure, screen.touch))["R9-floating-overlap"] ?? [];
         if (atEnd.length) merge({ "R9-floating-overlap": atEnd.map((detail) => `page end: ${detail}`) });
 
