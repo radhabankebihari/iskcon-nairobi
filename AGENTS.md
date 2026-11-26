@@ -41,7 +41,10 @@ These apply to people, Claude, Codex and any other AI or automated editor.
   the owner's desktop and had to be rolled back
   (`docs/RENDERING_INCIDENT_2026-11-26.md`).
 - Open rendering repairs are listed in `docs/RENDERING_REPAIRS.md`. Update its
-  status table when you start or finish one.
+  status table when you start or finish one. Codex took over this programme on
+  26 November 2026: start with `docs/RENDERING_HANDOFF.md`, which gives the
+  state of the `rendering/release-a` branch, the mistakes to avoid and the
+  next steps in order.
 - The working folder may be shared with another editor. Check the branch and
   `git status` before committing, commit only your own changes, and never push
   to `main` or deploy unless the owner explicitly asks.

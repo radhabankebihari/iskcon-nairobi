@@ -12,20 +12,20 @@ when you start and when you finish.
 
 | ID | Task | Priority | Size | Status | Branch / notes |
 | --- | --- | --- | --- | --- | --- |
-| G1-G6 | Guardrails: rules, variants, screen guard, baseline, agent pointers | Done first | M | Done | `rendering/guardrails`, 26 Nov 2026; ships with Release A |
+| G1-G6 | Guardrails: rules, variants, screen guard, baseline, agent pointers | Done first | M | Done | `rendering/release-a`, 26 Nov 2026; baseline to be re-recorded on CI (see `docs/RENDERING_HANDOFF.md`, step 0) |
 | RR-01 | Homepage hero: text off the Deities on laptops | Critical | L | To do | Needs a wide crop, see step 1 |
-| RR-02 | Header fits at 1280 to 1359px | Critical | S | Done | `rendering/release-a`, 26 Nov 2026: full menu from 1360px (`nav-full`); R2 at 0 |
-| RR-03 | Kirtan Safari headline below the header | Critical | S | Done | `rendering/release-a`, 26 Nov 2026: both heroes reserve the header; R3 at 0 |
+| RR-02 | Header fits at 1280 to 1359px | Critical | S | In review | `rendering/release-a` (`e06dfe3`): full menu from 1360px (`nav-full`); R2 at 0. Needs the visual comparison and owner approval of the menu button at 1280-1359px |
+| RR-03 | Kirtan Safari headline below the header | Critical | S | In review | `rendering/release-a` (`8f33063`): both heroes reserve the header; R3 at 0. Needs the visual comparison |
 | RR-04 | Compact header on short desktop screens | High | M | To do | After RR-02 |
 | RR-05 | Page heroes sized by height too | High | M | To do | After RR-04 |
 | RR-06 | Festival heroes: buttons on the first screen | High | S | To do | After RR-05 |
-| RR-07 | WhatsApp button clear of content | Medium | S | Reopened | First version changed every width and was rolled back on 26 Nov 2026; redo scoped below 1440px; showing the button on scroll needs owner approval |
+| RR-07 | WhatsApp button clear of content | Medium | S | Reopened | First version (`beaf272`) changed every width and was rolled back on 26 Nov 2026. Revert it, then redo below 1440px only; showing the button on scroll needs owner approval |
 | RR-08 | Replace or reframe low-resolution photos | High | M | Waiting on photos | Owner to request originals |
-| RR-09 | Tap targets of at least 24px | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: guard counts `.tap-target`; 5 links fixed; R8 at 0 |
+| RR-09 | Tap targets of at least 24px | Medium | S | In review | `rendering/release-a` (`435f176`): 5 links fixed and the checkbox made 24px; most of the R8 drop came from the guard change `062e7c2`. Needs the visual comparison and owner approval of the larger checkbox |
 | RR-10 | Subject boxes for every hero photo | High | M | To do | After RR-01 |
 | RR-11 | Shared art-directed image component | Medium | L | To do | After RR-01 and RR-10 |
 | RR-12 | Large and ultra-wide monitors | Low | M | To do | Owner reviews visually |
-| RR-13 | Safari (WebKit) in the screen guard | Medium | M | Waiting | Needs the WebKit browser download approved |
+| RR-13 | Safari (WebKit) in the screen guard | Medium | M | To do | CI can install WebKit itself; a local run needs the owner to approve the download |
 | RR-14 | Screenshot comparisons at laptop sizes | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: `laptop` visual project at 1366x657 |
 | RR-15 | Seasonal slide checklist | High | S | Done | `rendering/release-a`, 26 Nov 2026: CONTENT_GUIDE checklist and `scripts/fake-time.mjs` |
 | RR-16 | Cards that size to their column | Low | L | Later | |
