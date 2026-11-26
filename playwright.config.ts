@@ -54,6 +54,13 @@ export default defineConfig({
       grep: /@visual/,
       use: { viewport: { width: 1366, height: 657 } },
     },
+    // The owner's own desktop. Release gate RG-1: nothing may change here
+    // unless a repair task calls for it (docs/RENDERING_RULES.md).
+    {
+      name: "owner-desktop",
+      grep: /@visual/,
+      use: { viewport: { width: 1920, height: 1030 } },
+    },
   ],
   webServer: {
     // Tests run the production build, so analytics must be switched off explicitly.

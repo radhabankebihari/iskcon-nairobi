@@ -69,7 +69,9 @@ journey, not only the changed component.
 
 Required review:
 
-- Viewports at 360, 390, 768, 1280, and 1440 pixels.
+- Viewports at 360, 390, 768, 1280, and 1440 pixels, plus the short laptop
+  sizes 1280x650 and 1366x657 and the owner's 1920x1030 desktop. Layout work
+  also follows the release gates in section 7 of `docs/RENDERING_RULES.md`.
 - Chrome or Edge desktop plus a real Android browser when practical.
 - Safari or an iPhone/iPad when Apple behavior may be affected.
 - Navigation, buttons, links, forms, validation, integrations, downloads,

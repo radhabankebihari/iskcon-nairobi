@@ -19,7 +19,7 @@ when you start and when you finish.
 | RR-04 | Compact header on short desktop screens | High | M | To do | After RR-02 |
 | RR-05 | Page heroes sized by height too | High | M | To do | After RR-04 |
 | RR-06 | Festival heroes: buttons on the first screen | High | S | To do | After RR-05 |
-| RR-07 | WhatsApp button clear of content | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: appears on scroll below 1440px; footer padding; R9 at 0 |
+| RR-07 | WhatsApp button clear of content | Medium | S | Reopened | First version changed every width and was rolled back on 26 Nov 2026; redo scoped below 1440px; showing the button on scroll needs owner approval |
 | RR-08 | Replace or reframe low-resolution photos | High | M | Waiting on photos | Owner to request originals |
 | RR-09 | Tap targets of at least 24px | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: guard counts `.tap-target`; 5 links fixed; R8 at 0 |
 | RR-10 | Subject boxes for every hero photo | High | M | To do | After RR-01 |
@@ -29,8 +29,10 @@ when you start and when you finish.
 | RR-14 | Screenshot comparisons at laptop sizes | Medium | S | Done | `rendering/release-a`, 26 Nov 2026: `laptop` visual project at 1366x657 |
 | RR-15 | Seasonal slide checklist | High | S | Done | `rendering/release-a`, 26 Nov 2026: CONTENT_GUIDE checklist and `scripts/fake-time.mjs` |
 | RR-16 | Cards that size to their column | Low | L | Later | |
+| RR-17 | Hero words match the photo during slide changes | High | M | To do | Transition check first (RG-7), then fix |
+| RR-18 | Hero photo reloads before a slide change | Medium | S | To do | Seen at about 7.5s on the live homepage; confirm first |
 
-Status values: To do, In progress, In review, Done, Waiting, Waiting on photos, Later.
+Status values: To do, In progress, In review, Done, Reopened, Waiting, Waiting on photos, Later.
 
 ## Guardrails (done in the first change)
 
@@ -266,11 +268,24 @@ laptops, and the last line of body text on 360px phones (R9).
 **Files.** `src/components/ui/WhatsAppWidget.tsx`, the Scroll cue in
 `HeroSection.tsx`, `src/components/layout/Footer.tsx`.
 
-**Approach.** Move the Scroll cue left by the button's width plus a gap.
-Add bottom padding at the end of the page on phones so the last content
-clears the button.
+**Reopened on 26 November 2026.** The first version moved the Scroll cue and
+added footer padding at every width, so 1920px desktops changed although the
+button never overlapped there. It was rolled back. See
+`docs/RENDERING_INCIDENT_2026-11-26.md`.
 
-**Done when.** No R9 entries at any size.
+**Measured.** The guard found the button over the Scroll cue from 1024 to
+1366px wide and over first-screen text on phones and the About page. From
+1440px up it sits in the empty margin and covers nothing. At the end of the
+page it reaches the last footer line only below 1440px.
+
+**Approach.** Change only below 1440px (RG-3), for example with a
+`max-[1439.98px]:` variant: move the Scroll cue left of the button and add
+footer bottom padding there only. At 1440px and wider the page must look
+exactly as it does today. Showing the button only after the visitor scrolls is
+a design change: ask the owner before building it (RG-6).
+
+**Done when.** No R9 entries at any size, and `npm run test:visual:compare`
+shows no difference at `desktop` (1440x900) or `owner-desktop` (1920x1030).
 
 ### RR-09 Tap targets of at least 24px
 
@@ -348,21 +363,75 @@ projects, festivals, Serve options and blog cards.
 **Done when.** The card families use container queries and the guard is
 unchanged or better.
 
+### RR-17 Hero words match the photo during slide changes
+
+**Problem.** When the homepage slideshow changes, the words switch at once but
+the photos cross-fade for 2 seconds. Measured on the live site at 1903x1032:
+the Gita Jayanti words appeared while the photo was still 100% the Deities,
+and stayed over a mostly-Deities photo for about a second and a half. The
+screen guard waits for each slide to finish, so it cannot see this.
+
+**Files.** `src/components/sections/HeroSection.tsx`,
+`tests/e2e/screens.spec.ts`.
+
+**Approach.**
+1. First, in its own commit (RG-5, RG-7): a check that samples the hero every
+   200ms during a slide change and fails when the words on screen belong to a
+   different slide from the photo that is more than 50% visible.
+2. Then the fix: fade the words out with the old photo and in with the new
+   one, so they switch at the midpoint of the cross-fade. Keep the reduced
+   motion behaviour. This changes how the hero animates, so show the owner a
+   recording or screenshots first (RG-6).
+
+**Done when.** The transition check passes on every slide change at every ci
+size.
+
+### RR-18 Hero photo reloads before a slide change
+
+**Problem.** In the same measurement, about 7.5 seconds after loading, the
+Deities photo that was on screen briefly reported no image and loaded again,
+at the moment the next slide was being prepared. On a slow connection this
+could show as a flicker.
+
+**Files.** `src/components/sections/HeroSection.tsx` (`HeroPicture`,
+`readySlides`).
+
+**Approach.** Confirm it first (RG-4): record network requests and the
+visible photo across the first two slide changes, on a throttled connection.
+If the photo really reloads, keep each slide's `<picture>` element stable
+when the next slide is prepared.
+
+**Done when.** The current photo never reloads while it is on screen.
+
 ## Working method for every task
 
 1. Start from the latest `origin/main` on a branch named
    `rendering/rr-XX-short-name`, in your own worktree. The main folder is
    shared with other editors: check the branch and `git status` before every
    commit.
-2. Read `docs/RENDERING_RULES.md` and the task above. Set the task's status to
-   In progress in the table.
-3. Make the change. Use the shared variants (`desk-short`, `max-ht-md` and so
-   on) rather than new pixel values.
-4. Run `npm run build`, `npm run test:e2e` and `npm run test:screens`.
-5. Run `npm run test:screens:update` and read the diff of
+2. Read `docs/RENDERING_RULES.md`, including the release gates RG-1 to RG-8 in
+   section 7, and the task above. Set the task's status to In progress in the
+   table. The gates were adopted after Release A changed screens that were
+   never broken (`docs/RENDERING_INCIDENT_2026-11-26.md`).
+3. Measure first (RG-4): list the baseline entries the task will remove, using
+   `SCREENS_VERBOSE=1`. If the guard cannot see the problem, add a check in a
+   commit of its own first (RG-5).
+4. If the task would change how the site looks or behaves beyond removing the
+   measured problem, show the owner screenshots and wait for approval (RG-6).
+5. Make the change, scoped to the screen sizes where the problem was measured
+   (RG-3). Use the shared variants (`desk-short`, `max-ht-md` and so on)
+   rather than new pixel values.
+6. Run `npm run build`, `npm run test:e2e` and `npm run test:screens`.
+7. Run `npm run test:screens:update` and read the diff of
    `tests/e2e/screens-baseline.json`. It may only remove entries or lower
    counts. If anything went up, fix the page instead.
-6. Look at the changed pages at 360x740, 1366x657 and 1920x960 at least.
-7. Update the status table: status, branch, date and a one-line note.
-8. Commit your own changes on your branch. Do not push to `main` or deploy
-   unless the owner explicitly says to push, deploy or go live.
+8. Run `npm run test:visual:compare` and account for every difference (RG-1).
+   Remove anything this task did not set out to change.
+9. Look at the changed pages at 360x740, 1366x657 and 1920x1030 at least.
+10. Update the status table: status, branch, date, the baseline entries
+    removed and a one-line note.
+11. Commit your own changes on your branch, naming the baseline entries removed
+    in the commit message. Rendering work reaches `main` only through the pull
+    request path in `docs/RELEASE_WORKFLOW.md` (RG-2), and all stages ship
+    together (RG-8). Never push to `main` or deploy unless the owner explicitly
+    says to push, deploy or go live.

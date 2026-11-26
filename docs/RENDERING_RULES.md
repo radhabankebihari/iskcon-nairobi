@@ -136,7 +136,9 @@ links). Links inside running paragraphs are exempt.
 ### R9. Floating elements do not cover content
 The WhatsApp button, install banner and any future floating element must not
 sit on top of text, buttons or links on the first screen or at the end of the
-page. Give the content room (padding) or move the floating element.
+page. Give the content room (padding) or move the floating element, but only at
+the sizes where the overlap is measured (gate RG-3): a floating button that
+sits in an empty margin on wide screens needs no change there.
 
 ### R10. Text is never clipped
 No text may be cut off by its box. Shorten the copy, let it wrap, or use a
@@ -219,6 +221,7 @@ important bar until the visitor scrolls up.
 5. If you fixed something, run `npm run test:screens:update` and check that
    the diff of `tests/e2e/screens-baseline.json` only removes entries or
    lowers counts. Never raise a count to make a test pass; fix the page.
+6. Run `npm run test:visual:compare` and account for every difference (gate RG-1 in section 7).
 
 To see what a count in the baseline stands for, run the guard with
 `SCREENS_VERBOSE=1` and a filter, for example
@@ -230,7 +233,55 @@ The guard is deliberately stricter than the minimum accessibility standard in
 one place: R8 counts every target under 24px, without the standard's spacing
 exception, because the design system aims for 44px.
 
-## 7. Changing these rules
+## 7. Release gates
+
+Adopted by the owner on 26 November 2026, after Release A changed the desktop
+layout on screens that were never broken and had to be rolled back. The full
+account is in `docs/RENDERING_INCIDENT_2026-11-26.md`. Passing the screen
+guard is necessary but not enough: the guard finds breakage, not change.
+
+**RG-1. No unexplained visual change.** Before any release, run
+`npm run test:visual:compare` against the live `main`. It covers every visual
+size, including the owner's 1920 x 1030 desktop (`owner-desktop`). Every
+difference must belong to a task in `docs/RENDERING_REPAIRS.md`. An
+unexplained difference blocks the release until it is removed or the owner
+approves it.
+
+**RG-2. Use the release path.** Rendering work reaches `main` only through the
+pull request path in `docs/RELEASE_WORKFLOW.md` (`development`, `staging`,
+`release`, `main`), so the visual comparison and Vercel previews run. The
+owner reviews the preview before the final merge. Never push rendering work
+straight to `main`.
+
+**RG-3. Scope every fix to the measured problem.** A fix may only change the
+screen sizes where the guard reported the problem. If the guard reports an
+overlap below 1440px, the fix uses a variant or media query that applies
+below 1440px and nowhere else. Each fix commit names the baseline entries it
+removes.
+
+**RG-4. Measure first.** Before changing code, have a guard entry, or add a
+check that shows the problem. No fix goes in on an assumption that it will be
+needed.
+
+**RG-5. Guard changes land separately.** A change to how the guard measures,
+with its baseline update, is its own commit and pull request, merged before
+any fix that relies on it. Never report a fall in counts that comes from
+measuring differently as if it came from a repair.
+
+**RG-6. Design decisions go to the owner first.** Anything that changes how
+the site looks or behaves beyond removing the measured problem (hiding or
+moving an element, changing a breakpoint, new spacing) is shown to the owner
+with screenshots and approved before it is built.
+
+**RG-7. Test transitions, not just finished states.** Slideshows, cross-fades,
+menus and anything animated are checked while they change as well as at
+rest. In the homepage hero the words on screen must always belong to the
+photo that is mostly visible.
+
+**RG-8. Ship once.** The rendering repair stages ship together, after all of
+them are complete and pass the screen guard, the full test suite and RG-1.
+
+## 8. Changing these rules
 
 Add rules; do not loosen them. If a rule seems wrong for a page, raise it with
 the owner first and record the decision here with the date. When you add a

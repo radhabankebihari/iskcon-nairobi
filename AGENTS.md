@@ -25,6 +25,21 @@ These apply to people, Claude, Codex and any other AI or automated editor.
   `npm run test:screens` when a hero, the header or a full-screen layout
   changed. Never raise a count in `tests/e2e/screens-baseline.json` or
   `tests/e2e/a11y-baseline.json` to make a test pass; fix the page.
+- **The checks find breakage, not change.** Follow the release gates RG-1 to
+  RG-8 in section 7 of `docs/RENDERING_RULES.md`:
+  - Run `npm run test:visual:compare` before any release, and explain every
+    difference.
+  - Change only the screen sizes where a problem was measured, and measure
+    before fixing.
+  - Commit guard changes separately from fixes.
+  - Bring design decisions to the owner with screenshots first.
+  - Test transitions as well as finished states.
+  - Send rendering work through the pull request path in
+    `docs/RELEASE_WORKFLOW.md`, never straight to `main`.
+
+  These gates exist because a release that passed every check still changed
+  the owner's desktop and had to be rolled back
+  (`docs/RENDERING_INCIDENT_2026-11-26.md`).
 - Open rendering repairs are listed in `docs/RENDERING_REPAIRS.md`. Update its
   status table when you start or finish one.
 - The working folder may be shared with another editor. Check the branch and
