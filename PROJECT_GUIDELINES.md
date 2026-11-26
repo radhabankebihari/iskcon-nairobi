@@ -12,10 +12,6 @@ assets traceable, spacing intentional, and public integrations secure.
   and test boundaries for new contributors.
 - `docs/DESIGN_SYSTEM.md` records the visual language, spacing presets,
   navigation behavior, page hero rules, and mobile priorities.
-- `docs/RENDERING_RULES.md` is required reading before any layout change. It
-  lists the screens the site must support, the height and shape breakpoints,
-  and rules R1 to R10, which the screen guard enforces. Open repairs are in
-  `docs/RENDERING_REPAIRS.md`.
 - `docs/CONTENT_GUIDE.md` explains where shared content lives and how to add
   new pages, festivals, blog posts, notices, and images.
 - `docs/ASSET_SOURCES.md` records externally sourced library assets that still

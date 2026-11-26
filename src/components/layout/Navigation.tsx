@@ -190,7 +190,7 @@ export default function Navigation() {
               </span>
             </Link>
 
-            <div className="hidden nav-full:flex items-center gap-6">
+            <div className="hidden xl:flex items-center gap-6">
               {primaryNavigation.map((item) => (
                 <Link
                   key={item.href}
@@ -215,7 +215,7 @@ export default function Navigation() {
                 ref={menuToggleRef}
                 onClick={() => setIsOpen(!isOpen)}
                 className={cn(
-                  "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[3px] border border-gold/60 bg-dusk/45 p-0 text-gold shadow-[0_8px_24px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-colors hover:border-gold/80 hover:bg-dusk/65 nav-full:hidden",
+                  "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[3px] border border-gold/60 bg-dusk/45 p-0 text-gold shadow-[0_8px_24px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-colors hover:border-gold/80 hover:bg-dusk/65 xl:hidden",
                   isOpen && "bg-dusk/70"
                 )}
                 aria-expanded={isOpen}
@@ -255,7 +255,7 @@ export default function Navigation() {
         aria-modal="true"
         aria-label="Site menu"
         className={cn(
-          "nav-full:hidden fixed inset-0 z-[70] transition-all duration-500",
+          "xl:hidden fixed inset-0 z-[70] transition-all duration-500",
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >

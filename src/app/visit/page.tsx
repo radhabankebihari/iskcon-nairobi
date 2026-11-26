@@ -125,7 +125,7 @@ export default function VisitPage() {
                     <Phone size={16} className="text-gold mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-body font-medium text-ink text-sm">Phone</p>
-                      <a href={`tel:${templeInfo.phoneHref}`} className="tap-target font-body text-gold-ink text-sm hover:underline">{templeInfo.phoneDisplay}</a>
+                      <a href={`tel:${templeInfo.phoneHref}`} className="font-body text-gold-ink text-sm hover:underline">{templeInfo.phoneDisplay}</a>
                     </div>
                   </div>
                 </div>

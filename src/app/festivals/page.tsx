@@ -94,7 +94,7 @@ function CalendarMonth({ month }: { month: CalendarMonthData }) {
                       <p className="mt-1 font-body text-xs leading-relaxed text-ink/75">{item.description}</p>
                     )}
                     {/^kartika vrata/i.test(item.event) && (
-                      <Link href="/festivals/kartik" className="tap-target mt-1.5 inline-flex items-center gap-1 font-body text-xs font-semibold text-primary underline-offset-4 hover:underline">
+                      <Link href="/festivals/kartik" className="mt-1.5 inline-flex items-center gap-1 font-body text-xs font-semibold text-primary underline-offset-4 hover:underline">
                         Kartik guide and Damodarastakam <ArrowRight size={11} aria-hidden="true" />
                       </Link>
                     )}

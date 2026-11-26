@@ -345,7 +345,7 @@ export default function KartikPage() {
                 href={templeInfo.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="tap-target mt-8 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
+                className="mt-8 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
               >
                 <MapPin size={16} aria-hidden="true" /> {templeInfo.shortAddress}
               </a>
@@ -503,7 +503,7 @@ export default function KartikPage() {
                 </p>
                 <Link
                   href="/festivals"
-                  className="tap-target mt-6 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
+                  className="mt-6 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
                 >
                   Full festival calendar <ArrowRight size={15} aria-hidden="true" />
                 </Link>

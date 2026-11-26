@@ -13,8 +13,6 @@ export default function KirtanSafariHero() {
         flexDirection: "column",
         justifyContent: "flex-end",
         overflow: "hidden",
-        // Content taller than the screen grows downward, never under the header (rule R3).
-        paddingTop: "calc(var(--site-solid-header-height, 63px) + 3rem)",
       }}
     >
       {/* Background - savanna sunset */}
@@ -147,7 +145,7 @@ export default function KirtanSafariHero() {
               style={{
                 display: "block",
                 color: "#fff",
-                fontSize: "clamp(3.5rem, min(16vw, 20vh), 10rem)",
+                fontSize: "clamp(4.5rem, 16vw, 10rem)",
                 fontWeight: 900,
                 letterSpacing: "-0.03em",
                 textShadow: "0 4px 40px rgba(0,0,0,0.6)",
@@ -159,7 +157,7 @@ export default function KirtanSafariHero() {
               style={{
                 display: "block",
                 color: "var(--color-festival-gold)",
-                fontSize: "clamp(2.75rem, min(13vw, 16vh), 8rem)",
+                fontSize: "clamp(3.5rem, 13vw, 8rem)",
                 fontWeight: 700,
                 letterSpacing: "0.08em",
                 textShadow: "0 4px 40px rgba(214,156,43,0.4)",
