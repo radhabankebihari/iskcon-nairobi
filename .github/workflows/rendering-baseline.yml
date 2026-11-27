@@ -1,0 +1,36 @@
+name: Rendering baseline (Linux)
+
+on:
+  pull_request:
+    branches: [development]
+    paths: [.github/workflows/rendering-baseline.yml, tests/e2e/visual.spec.ts]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  record-baseline:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'rendering/guard-baseline'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 70f949d
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run test:screens:update
+        env:
+          ANALYTICS_DISABLED: "true"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rendering-baseline-linux
+          path: tests/e2e/screens-baseline.json
+          retention-days: 14
