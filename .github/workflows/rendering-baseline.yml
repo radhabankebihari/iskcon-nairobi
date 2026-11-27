@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: rendering/step0-baseline
+          ref: 70f949d46430f4c9b0ea76c391f55124c8ab24b2
       - uses: actions/setup-node@v4
         with:
           node-version: 24
