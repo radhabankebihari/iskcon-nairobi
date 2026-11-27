@@ -13,8 +13,6 @@ export default function KirtanSafariHero() {
         flexDirection: "column",
         justifyContent: "flex-end",
         overflow: "hidden",
-        // Content taller than the screen grows downward, never under the header (rule R3).
-        paddingTop: "calc(var(--site-solid-header-height, 63px) + 3rem)",
       }}
     >
       {/* Background - savanna sunset */}

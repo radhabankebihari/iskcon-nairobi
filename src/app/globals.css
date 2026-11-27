@@ -73,6 +73,12 @@
    menu link, and raise this only if R2 fails. */
 @custom-variant nav-full (@media (min-width: 1360px));
 
+@media (max-height: 699.98px) and (min-aspect-ratio: 4/3), (max-width: 320px) {
+  .ks-hero {
+    padding-top: calc(var(--site-solid-header-height, 63px) + 3rem);
+  }
+}
+
 :root {
   --site-header-height: 63px;
   --site-solid-header-height: 63px;
