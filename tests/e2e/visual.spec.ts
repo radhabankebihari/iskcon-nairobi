@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { blockApiWrites, fixedTime, routeLabel, visualRoutes } from "./helpers";
 
+test.use({ reducedMotion: "reduce" });
+
 // The visual comparison script builds the base and candidate in one environment.
 // Reference images stay out of git because browser rendering varies by OS.
 for (const route of visualRoutes) {
