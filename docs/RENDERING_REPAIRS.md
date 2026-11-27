@@ -14,12 +14,12 @@ when you start and when you finish.
 | --- | --- | --- | --- | --- | --- |
 | G1-G6 | Guardrails: rules, variants, screen guard, baseline, agent pointers | Done first | M | Done | `rendering/release-a`, 26 Nov 2026; baseline to be re-recorded on CI (see `docs/RENDERING_HANDOFF.md`, step 0) |
 | RR-01 | Homepage hero: text off the Deities on laptops | Critical | L | To do | Needs a wide crop, see step 1 |
-| RR-02 | Header fits at 1280 to 1359px | Critical | S | In review | `rendering/release-a` (`e06dfe3`): full menu from 1360px (`nav-full`); R2 at 0. Needs the visual comparison and owner approval of the menu button at 1280-1359px |
+| RR-02 | Header fits at 1280 to 1359px | Critical | S | In review | `rendering/release-a` (`e06dfe3`): full menu from 1360px (`nav-full`); R2 at 0. Owner approved the menu button at 1280-1359px on 27 Nov 2026 after seeing before/after screenshots. Visual comparison remains to be signed off. |
 | RR-03 | Kirtan Safari headline below the header | Critical | S | In review | `rendering/release-a` (`8f33063`): both heroes reserve the header; R3 at 0. Needs the visual comparison |
 | RR-04 | Compact header on short desktop screens | High | M | To do | After RR-02 |
 | RR-05 | Page heroes sized by height too | High | M | To do | After RR-04 |
 | RR-06 | Festival heroes: buttons on the first screen | High | S | To do | After RR-05 |
-| RR-07 | WhatsApp button clear of content | Medium | S | Reopened | First version (`beaf272`) changed every width and was rolled back on 26 Nov 2026. Revert it, then redo below 1440px only; showing the button on scroll needs owner approval |
+| RR-07 | WhatsApp button clear of content | Medium | S | Reopened | First version (`beaf272`) changed every width and was rolled back on 26 Nov 2026. Reverted on `rendering/step0-baseline` (`068603d`); Windows re-measurement returned 328 R9 page/screen entries (483 overlaps), pending Linux baseline. Redo below 1440px only; showing the button on scroll needs owner approval. |
 | RR-08 | Replace or reframe low-resolution photos | High | M | Waiting on photos | Owner to request originals |
 | RR-09 | Tap targets of at least 24px | Medium | S | In review | `rendering/release-a` (`435f176`): 5 links fixed and the checkbox made 24px; most of the R8 drop came from the guard change `062e7c2`. Needs the visual comparison and owner approval of the larger checkbox |
 | RR-10 | Subject boxes for every hero photo | High | M | To do | After RR-01 |
